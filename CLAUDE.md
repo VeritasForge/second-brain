@@ -66,8 +66,10 @@ Uses Conventional Commits with vault-specific scopes:
 - TBD practice monorepo guide
 - Database: cardinality, SQLite deep dive
 - Modern web architecture: BFF, SSR, SPA, Vite, SEO, React hydration, Googlebot crawling
+- React Server Components (RSC) deep dive
 - Claude Code: rules vs CLAUDE.md, skill/EDD/TDD best practices
 - Slack: Socket Mode vs HTTP comparison
+- Kubernetes: tutorial with app, Dockerfile, Helm chart
 - General: greenfield project concepts
 
 ### algorithm/
@@ -90,6 +92,8 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Add develop/k8s/: Kubernetes tutorial with app, Dockerfile, Helm chart
+- Add root: React Server Components (RSC) deep dive note
 - Add develop/: Googlebot crawling mechanism SEO, React hydration SSR deep dive
 - Add ai-engineering/: Claude Code hooks, Ralph Loop playbook, superpowers integration
 - Add develop/claude-code/: rules vs CLAUDE.md, skill/EDD/TDD practices

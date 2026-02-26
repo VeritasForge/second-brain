@@ -1,0 +1,139 @@
+# ============================================================
+# Hello World Helm Chart - 기본 설정값
+# ============================================================
+# 이 파일은 Helm 차트의 모든 설정 가능한 값을 정의합니다.
+# helm install 또는 helm upgrade 시 --set 또는 -f 플래그로
+# 이 값들을 오버라이드할 수 있습니다.
+# ============================================================
+
+# ------------------------------------------------------------
+# 레플리카 수 (Pod 복제본 개수)
+# ------------------------------------------------------------
+# 가용성을 위해 최소 2개 이상 권장합니다.
+# HPA(Horizontal Pod Autoscaler)를 사용할 경우 이 값은
+# 초기값으로만 동작합니다.
+replicaCount: 2
+
+# ------------------------------------------------------------
+# 컨테이너 이미지 설정
+# ------------------------------------------------------------
+# repository: 이미지 이름 (레지스트리 포함 가능, 예: ghcr.io/myorg/hello-world)
+# tag: 이미지 태그 (버전). Chart의 appVersion과 맞추는 것을 권장합니다.
+# pullPolicy: 이미지 풀 정책
+#   - Always: 항상 레지스트리에서 새로 pull
+#   - IfNotPresent: 로컬에 없을 때만 pull (권장)
+#   - Never: 로컬 이미지만 사용
+image:
+  repository: hello-world
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+# ------------------------------------------------------------
+# 네임스페이스 설정
+# ------------------------------------------------------------
+# 리소스가 배포될 Kubernetes 네임스페이스입니다.
+# 네임스페이스가 없으면 차트가 자동으로 생성합니다.
+namespace: hello
+
+# ------------------------------------------------------------
+# 서비스 설정
+# ------------------------------------------------------------
+# type: 서비스 타입
+#   - ClusterIP: 클러스터 내부에서만 접근 가능 (기본값)
+#   - NodePort: 노드의 고정 포트로 외부 접근 허용
+#   - LoadBalancer: 클라우드 제공자의 로드밸런서 사용
+# port: 서비스가 노출하는 포트 (클라이언트가 접근하는 포트)
+# targetPort: 컨테이너 내부에서 앱이 리스닝하는 포트
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+# ------------------------------------------------------------
+# 인그레스 설정
+# ------------------------------------------------------------
+# 클러스터 외부에서 HTTP(S)로 접근할 수 있도록 라우팅 규칙을 정의합니다.
+# enabled: false로 설정하면 인그레스 리소스가 생성되지 않습니다.
+# className: 사용할 Ingress Controller (nginx, traefik 등)
+# host: 라우팅할 도메인 (로컬 테스트 시 /etc/hosts에 등록 필요)
+ingress:
+  enabled: true
+  className: nginx
+  host: hello.local
+
+# ------------------------------------------------------------
+# 리소스 제한 설정
+# ------------------------------------------------------------
+# requests: Pod 스케줄링 시 보장받는 최소 리소스
+# limits: Pod가 사용할 수 있는 최대 리소스
+#
+# CPU 단위: 1000m = 1 CPU 코어
+# 메모리 단위: Mi (메비바이트), Gi (기비바이트)
+#
+# requests와 limits의 차이가 클수록 노드 과잉 할당 위험이 있으므로
+# 적절한 비율(보통 1:2 ~ 1:3)을 유지하는 것이 좋습니다.
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+# ------------------------------------------------------------
+# 헬스체크 프로브 설정
+# ------------------------------------------------------------
+# liveness: 컨테이너가 살아있는지 확인합니다.
+#   실패 시 kubelet이 컨테이너를 재시작합니다.
+#   initialDelaySeconds: 앱 기동 시간을 고려하여 충분히 설정합니다.
+#
+# readiness: 컨테이너가 트래픽을 받을 준비가 되었는지 확인합니다.
+#   실패 시 Service 엔드포인트에서 제외됩니다. (재시작 X)
+#   initialDelaySeconds: liveness보다 짧게 설정하여 빠르게 트래픽을 받습니다.
+probes:
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    failureThreshold: 3
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    failureThreshold: 3
+
+# ------------------------------------------------------------
+# Graceful Shutdown 설정
+# ------------------------------------------------------------
+# terminationGracePeriodSeconds:
+#   SIGTERM 수신 후 SIGKILL까지의 유예 시간(초)입니다.
+#   앱이 진행 중인 요청을 모두 처리할 수 있는 충분한 시간을 줍니다.
+#
+# preStopSleepSeconds:
+#   preStop hook에서 sleep하는 시간(초)입니다.
+#   Kubernetes가 Service 엔드포인트를 업데이트하는 동안
+#   기존 요청이 유실되지 않도록 잠시 대기합니다.
+#   (iptables/IPVS 규칙 전파 시간을 고려한 값)
+#
+# 주의: preStopSleepSeconds < terminationGracePeriodSeconds 여야 합니다.
+gracefulShutdown:
+  terminationGracePeriodSeconds: 45
+  preStopSleepSeconds: 10
+
+# ------------------------------------------------------------
+# 애플리케이션 환경 설정
+# ------------------------------------------------------------
+# ConfigMap으로 주입되는 환경변수 값들입니다.
+# appEnv: 실행 환경 (development, staging, production)
+# logLevel: 로그 레벨 (debug, info, warning, error)
+config:
+  appEnv: production
+  logLevel: info
+
+# ------------------------------------------------------------
+# 앱 버전
+# ------------------------------------------------------------
+# ConfigMap의 APP_VERSION에 사용됩니다.
+# 이미지 태그와 별도로 관리할 수 있습니다.
+app:
+  version: "1.0.0"

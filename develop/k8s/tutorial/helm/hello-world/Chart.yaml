@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hello-world
+description: K8s Hello World Tutorial - FastAPI App
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
