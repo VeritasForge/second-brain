@@ -65,7 +65,7 @@ Uses Conventional Commits with vault-specific scopes:
 - Git workflows: trunk-based development, rebase, backport, branch diff, rebase --onto
 - TBD practice monorepo guide
 - Database: cardinality, SQLite deep dive
-- Modern web architecture: BFF, SSR, SPA, Vite, SEO
+- Modern web architecture: BFF, SSR, SPA, Vite, SEO, React hydration, Googlebot crawling
 - Claude Code: rules vs CLAUDE.md, skill/EDD/TDD best practices
 - Slack: Socket Mode vs HTTP comparison
 - General: greenfield project concepts
@@ -90,6 +90,7 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Add develop/: Googlebot crawling mechanism SEO, React hydration SSR deep dive
 - Add ai-engineering/: Claude Code hooks, Ralph Loop playbook, superpowers integration
 - Add develop/claude-code/: rules vs CLAUDE.md, skill/EDD/TDD practices
 - Add develop/database/sqlite/: SQLite deep dive
