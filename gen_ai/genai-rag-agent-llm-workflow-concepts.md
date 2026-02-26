@@ -1,7 +1,12 @@
 ---
 created: 2026-02-01
 source: claude-code
-tags: []
+tags:
+  - gen-ai
+  - rag
+  - agent
+  - llm
+  - workflow
 ---
 
 # 🧠 GenAI 핵심 개념 Deep Research 리포트

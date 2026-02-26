@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "7b53022ff8572c7c",
+        "id": "be11d247aaf1cf83",
         "type": "tabs",
         "children": [
           {
-            "id": "d27d332a300d0414",
+            "id": "675612068eb40ace",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "gen_ai/claude-code-core-components-deep-research.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "claude-code-core-components-deep-research"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "backport",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -87,7 +87,6 @@
       {
         "id": "3afb3b229304db9b",
         "type": "tabs",
-        "dimension": 41.32420091324201,
         "children": [
           {
             "id": "ab7b660c4fdb5e20",
@@ -142,16 +141,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": false,
-                "showSearch": false,
+                "file": "backport/tbd-practice-vitalcare-monorepo.md",
+                "followCursor": true,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of tbd-practice-vitalcare-monorepo"
             }
           },
           {
-            "id": "9725a10497f8c7c2",
+            "id": "a9d255054ef29bd7",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -162,7 +162,7 @@
                   "focus": false,
                   "profile": {
                     "args": [],
-                    "executable": "/opt/homebrew/bin/fish",
+                    "executable": "/bin/zsh",
                     "name": "",
                     "platforms": {
                       "darwin": true
@@ -186,59 +186,16 @@
               },
               "pinned": true,
               "icon": "terminal",
-              "title": "Terminal: ⠂ README 작성"
+              "title": "Terminal: zsh"
             }
           }
         ],
         "currentTab": 4
-      },
-      {
-        "id": "17542a4f64d633d1",
-        "type": "tabs",
-        "dimension": 58.675799086758,
-        "children": [
-          {
-            "id": "3b3623b24d4578e4",
-            "type": "leaf",
-            "state": {
-              "type": "terminal:terminal",
-              "state": {
-                "terminal:terminal": {
-                  "cwd": "/Users/cjynim/den/Den",
-                  "focus": false,
-                  "profile": {
-                    "args": [],
-                    "executable": "/opt/homebrew/bin/fish",
-                    "name": "",
-                    "platforms": {
-                      "darwin": true
-                    },
-                    "pythonExecutable": "python3",
-                    "restoreHistory": false,
-                    "rightClickAction": "copyPaste",
-                    "successExitCodes": [
-                      "0",
-                      "SIGINT",
-                      "SIGTERM"
-                    ],
-                    "terminalOptions": {
-                      "documentOverride": null
-                    },
-                    "type": "integrated",
-                    "useWin32Conhost": true
-                  },
-                  "serial": null
-                }
-              },
-              "icon": "terminal",
-              "title": "Terminal: ~/d/Den"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 1165.5
+    "width": 949.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -252,26 +209,45 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "9725a10497f8c7c2",
+  "active": "675612068eb40ace",
   "lastOpenFiles": [
-    "README.md",
-    "CLAUDE.md",
-    "gen_ai/genai-rag-agent-llm-workflow-concepts.md",
-    "gen_ai/llm-token-system-and-transformer-architecture.md",
-    "Welcome.md",
+    "develop/modern-web-architecture-bff-ssr-spa-vite-seo.md",
+    "develop/greenfield-project.md",
+    "algorithm/backtracking-pattern.md",
+    "develop/claude-code/skill-edd-tdd-best-practices.md",
+    "ai-engineering/ralph-superpowers-compund.md",
+    "research/4th-5th-industrial-revolution-deep-research.md",
+    "research/kick-quality-focus/00-synthesis.md",
+    "algorithm/subarray-vs-subsequence-vs-subset.md",
+    "gen_ai/google-ai-studio-to-claude-code-migration.md",
+    "research/kick-quality-focus/01-vc-investor.md",
+    "research/kick-quality-focus/09-pivot-mvp-design.md",
+    "security/solo-developer-financial-api-security.md",
+    "research/kick-quality-focus/08-deep-research-differentiation.md",
+    "research/kick-quality-focus/07-competitive-intel.md",
+    "research/kick-quality-focus/06-solution-evaluator.md",
+    "research/kick-quality-focus/05-market-skeptic.md",
+    "research/kick-quality-focus/03-quality-owner.md",
+    "research/kick-quality-focus/04-franchise-ceo.md",
+    "research/kick-quality-focus/02-coffee-maniac.md",
+    "research/kick-market-factcheck-report.md",
+    "research/kick-cafe-research-detail.md",
+    "algorithm/coding-test-preparation-strategy.md",
+    "research/ralph-loop-deep-research.md",
+    "research/kick-quality-focus/reports/07-competitive-intel.md",
+    "research/kick-quality-focus/reports/06-solution-evaluator.md",
+    "research/kick-quality-focus/reports/05-market-skeptic.md",
+    "research/kick-quality-focus/synthesis",
+    "research/kick-quality-focus/reports",
+    "research/kick-quality-focus",
+    "research",
+    "develop/database",
+    "security",
+    "blockchaion",
+    "Untitled 1.canvas",
+    "Untitled 1.base",
     "Untitled.base",
-    "work/idea.md",
-    "develop/design/DDD(Domain Driven Development).md",
-    "genai-rag-agent-llm-workflow-concepts.md",
-    "gen_ai/save-obsi-command-setup.md",
-    "gen_ai",
-    "Untitled.md",
-    "work",
     "Untitled.canvas",
-    "develop/design",
-    "develop/python",
-    "develop/kotlin",
-    "develop/go",
-    "develop"
+    "backport"
   ]
 }

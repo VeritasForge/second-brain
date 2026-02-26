@@ -8,8 +8,13 @@ A second brain for organizing and connecting ideas across topics I'm studying an
 
 ## Topics
 
-- **Generative AI** — RAG, agents, LLM workflows, transformer architecture
-- **Development** — Software engineering notes (growing)
+- **Generative AI** — RAG, agents, LLM workflows, transformer architecture, multi-agent orchestration
+- **AI Engineering** — Claude Code hooks, Ralph Loop playbook, superpowers integration
+- **Development** — Git workflows, database concepts, web architecture, Slack integration
+- **Algorithm** — Coding test strategies, backtracking, subarray/subsequence patterns
+- **Research** — Market research, industry analysis, deep research reports
+- **Security** — Security auditing, TPM deep dives, financial API security
+- **Mac OS** — macOS configuration and tips
 
 ## Usage
 
