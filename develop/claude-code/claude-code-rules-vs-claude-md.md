@@ -206,6 +206,42 @@ paths:
 
 ---
 
+## 메모리 시스템 관점에서의 비교
+
+> 심화 Q&A: [[claude-code-memory-system-qa]], Deep Dive: [[claude-code-memory-system-deep-dive]]
+
+### Memory Loading Pipeline에서의 차이
+
+```
+세션 시작 시 로드 순서:
+
+①  Managed Policy CLAUDE.md     ─ 항상 전체 로드 (제외 불가 🔒)
+②  ~/.claude/CLAUDE.md          ─ 항상 전체 로드
+    └─ ~/.claude/rules/*.md     ─ 항상 전체 로드 (globs 무시됨)
+③  ./CLAUDE.md                  ─ 항상 전체 로드
+    └─ ./.claude/rules/*.md     ─ 무조건 또는 조건부 로드
+④  ./CLAUDE.local.md            ─ 항상 전체 로드
+⑤  @import 해석                 ─ 최대 5단계 깊이
+⑥  MEMORY.md (200줄만)          ─ 항상 자동 주입
+
+세션 중:
+⑦  하위 디렉토리 CLAUDE.md      ─ 해당 파일 작업 시 로드
+⑧  토픽 파일                    ─ Claude가 Read 도구로 직접 참조
+```
+
+### 컨텍스트 윈도우 비용 비교
+
+| 구성 요소 | 로드 방식 | 비용 특성 |
+|-----------|-----------|-----------|
+| CLAUDE.md | 항상 전체 | 고정 비용 — 줄 수에 비례하여 매 세션 소비 |
+| rules (globs 없음) | 항상 전체 | CLAUDE.md와 동일한 고정 비용 |
+| rules (globs 있음) | 조건부 | **변동 비용** — 해당 경로 작업 시에만 소비 |
+| @import 파일 | 항상 전체 삽입 | 고정 비용 — import하는 모든 파일 내용 포함 |
+
+**핵심 인사이트**: CLAUDE.md에서 rules로 분리하는 최대 이유는 **globs 조건부 로딩으로 토큰을 절약**하는 것이다. CLAUDE.md 400줄 → 공통 100줄(CLAUDE.md) + 조건부 300줄(rules)로 분리하면, 특정 도메인 작업 시에만 해당 규칙이 로드되어 평균 컨텍스트 비용이 줄어든다.
+
+---
+
 ## Sources
 
 1. [Manage Claude's memory - Claude Code Docs](https://code.claude.com/docs/en/memory) — 공식 문서

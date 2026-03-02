@@ -1,7 +1,7 @@
 ---
 created: 2026-02-26
 source: claude-code
-tags: [web-architecture, bff, ssr, spa, vite, seo, next-js]
+tags: [web-architecture, bff, ssr, spa, vite, seo, next-js, frontend, rendering]
 ---
 
 # 📖 현대 웹 아키텍처 핵심 개념 — BFF · SPA · SSR · Vite · SEO

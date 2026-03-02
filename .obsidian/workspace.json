@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "be11d247aaf1cf83",
+        "id": "6e5f57340dfb8573",
         "type": "tabs",
         "children": [
           {
-            "id": "675612068eb40ace",
+            "id": "08c71924b33f9cdf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "gen_ai/claude-code-core-components-deep-research.md",
+                "file": "develop/claude-code/claude-code-memory-system-qa.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "claude-code-core-components-deep-research"
+              "title": "claude-code-memory-system-qa"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "backport",
+                "query": "tag:#slack",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -209,8 +209,23 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "675612068eb40ace",
+  "active": "08c71924b33f9cdf",
   "lastOpenFiles": [
+    "develop/glob-pattern-matching-deep-dive.md",
+    "develop/fe/sse-event-design-strategy-snapshot-vs-delta.md",
+    "develop/claude-code/ai-harness/compound-engineering-pluing/docs-solutions-usage-and-design.md",
+    "develop/claude-code/ai-harness/compound-engineering-pluing",
+    "develop/claude-code/ai-harness",
+    "develop/claude-code/claude-code-rules-vs-claude-md.md",
+    "develop/claude-code/claude-code-memory-system-qa.md",
+    "develop/claude-code/claude-code-memory-system-deep-dive.md",
+    "develop/slack/slack-socket-mode-vs-http.md",
+    "develop/fe/react-server-components-rsc-deep-dive.md",
+    "gen_ai/claude-code-core-components-deep-research.md",
+    "develop/fe/react-hydration-ssr-deep-dive.md",
+    "develop/fe/modern-web-architecture-bff-ssr-spa-vite-seo.md",
+    "develop/fe/googlebot-crawling-mechanism-seo.md",
+    "develop/fe",
     "develop/k8s/tutorial/CLAUDE.md",
     "develop/k8s/tutorial/tutorial.md",
     "react-server-components-rsc-deep-dive.md",
@@ -221,9 +236,6 @@
     "develop/k8s/tutorial/helm/hello-world/templates/namespace.yaml",
     "develop/k8s/tutorial/helm/hello-world/templates/_helpers.tpl",
     "develop/k8s/tutorial/helm/hello-world/values.yaml",
-    "develop/k8s/tutorial/helm/hello-world/Chart.yaml",
-    "develop/k8s/tutorial/Dockerfile",
-    "develop/k8s/tutorial/app/main.py",
     "develop/googlebot-crawling-mechanism-seo.md",
     "develop/react-hydration-ssr-deep-dive.md",
     "develop/modern-web-architecture-bff-ssr-spa-vite-seo.md",
@@ -235,18 +247,6 @@
     "research/kick-quality-focus/00-synthesis.md",
     "algorithm/subarray-vs-subsequence-vs-subset.md",
     "gen_ai/google-ai-studio-to-claude-code-migration.md",
-    "research/kick-quality-focus/01-vc-investor.md",
-    "research/kick-quality-focus/09-pivot-mvp-design.md",
-    "security/solo-developer-financial-api-security.md",
-    "research/kick-quality-focus/08-deep-research-differentiation.md",
-    "research/kick-quality-focus/07-competitive-intel.md",
-    "research/kick-quality-focus/06-solution-evaluator.md",
-    "research/kick-quality-focus/05-market-skeptic.md",
-    "research/kick-quality-focus/03-quality-owner.md",
-    "research/kick-quality-focus/04-franchise-ceo.md",
-    "research/kick-quality-focus/02-coffee-maniac.md",
-    "research/kick-market-factcheck-report.md",
-    "research/kick-cafe-research-detail.md",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]

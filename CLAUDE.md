@@ -13,9 +13,11 @@ Den/
 ├── gen_ai/          # Generative AI notes (RAG, agents, LLM, transformers)
 ├── ai-engineering/  # AI engineering practices (Claude Code, Ralph Loop, hooks)
 ├── develop/         # Software development (git, database, web, slack, claude-code)
+│   ├── fe/          # Frontend: React, Next.js, RSC, SSR, web architecture, SEO
 │   ├── git/         # Git workflows and branching strategies
 │   ├── database/    # Database concepts (cardinality, SQLite)
-│   ├── claude-code/ # Claude Code rules, skill practices
+│   ├── claude-code/ # Claude Code memory system, rules, skill practices
+│   ├── k8s/         # Kubernetes tutorials
 │   └── slack/       # Slack integration patterns
 ├── algorithm/       # Coding test prep, algorithm patterns
 ├── research/        # Market research, industry analysis
@@ -65,12 +67,17 @@ Uses Conventional Commits with vault-specific scopes:
 - Git workflows: trunk-based development, rebase, backport, branch diff, rebase --onto
 - TBD practice monorepo guide
 - Database: cardinality, SQLite deep dive
-- Modern web architecture: BFF, SSR, SPA, Vite, SEO, React hydration, Googlebot crawling
-- React Server Components (RSC) deep dive
-- Claude Code: rules vs CLAUDE.md, skill/EDD/TDD best practices
+- Claude Code: memory system deep dive + Q&A, rules vs CLAUDE.md, skill/EDD/TDD best practices
 - Slack: Socket Mode vs HTTP comparison
 - Kubernetes: tutorial with app, Dockerfile, Helm chart
 - General: greenfield project concepts
+
+### develop/fe/
+- React Server Components (RSC) deep dive
+- React hydration & SSR deep dive
+- Modern web architecture: BFF, SSR, SPA, Vite, SEO
+- Googlebot crawling mechanism & SEO
+- Kakao Maps viewport control deep dive
 
 ### algorithm/
 - Coding test preparation strategies
@@ -92,9 +99,12 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Add develop/claude-code/: memory system Q&A deep dive (25+ questions, unverified claims tracked)
+- Update develop/claude-code/: rules-vs-claude-md with memory loading pipeline comparison
+- Add develop/fe/: Kakao Maps viewport control deep dive
+- Reorganize develop/fe/: move React/Next.js/frontend notes into new fe/ subfolder with updated tags
 - Add develop/k8s/: Kubernetes tutorial with app, Dockerfile, Helm chart
-- Add root: React Server Components (RSC) deep dive note
-- Add develop/: Googlebot crawling mechanism SEO, React hydration SSR deep dive
+- Add develop/fe/: RSC deep dive, React hydration SSR, modern web architecture, Googlebot crawling SEO
 - Add ai-engineering/: Claude Code hooks, Ralph Loop playbook, superpowers integration
 - Add develop/claude-code/: rules vs CLAUDE.md, skill/EDD/TDD practices
 - Add develop/database/sqlite/: SQLite deep dive

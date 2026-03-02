@@ -1,7 +1,7 @@
 ---
 created: 2026-02-26
 source: claude-code
-tags: []
+tags: [react, next-js, rsc, server-components, ssr, hydration, frontend, web-performance, bundle-optimization]
 ---
 
 # 📖 React Server Components (RSC) — Concept Deep Dive (보강판)

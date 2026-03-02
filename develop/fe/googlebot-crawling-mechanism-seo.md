@@ -1,7 +1,7 @@
 ---
 created: 2026-02-26
 source: claude-code
-tags: [seo, googlebot, crawling, robots-txt, sitemap, web, dns]
+tags: [seo, googlebot, crawling, robots-txt, sitemap, web, dns, frontend]
 ---
 
 # 📖 Googlebot 크롤링 메커니즘 — Concept Deep Dive
