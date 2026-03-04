@@ -82,6 +82,7 @@ Uses Conventional Commits with vault-specific scopes:
 ### algorithm/
 - Coding test preparation strategies
 - Backtracking patterns, subarray/subsequence/subset distinctions
+- Power of two/four bit manipulation tricks
 
 ### research/
 - Market research and fact-checking reports
@@ -99,6 +100,7 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Add algorithm/: power of two/four bit manipulation trick note
 - Add develop/claude-code/: memory system Q&A deep dive (25+ questions, unverified claims tracked)
 - Update develop/claude-code/: rules-vs-claude-md with memory loading pipeline comparison
 - Add develop/fe/: Kakao Maps viewport control deep dive
