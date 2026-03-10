@@ -100,6 +100,7 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Update develop/database/: TIMESTAMP vs DATETIME에 실무 판단 기준, DST 사례, 문제 시나리오 통합
 - Add algorithm/: power of two/four bit manipulation trick note
 - Add develop/claude-code/: memory system Q&A deep dive (25+ questions, unverified claims tracked)
 - Update develop/claude-code/: rules-vs-claude-md with memory loading pipeline comparison
