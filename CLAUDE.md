@@ -18,6 +18,7 @@ Den/
 │   ├── database/    # Database concepts (cardinality, SQLite)
 │   ├── claude-code/ # Claude Code memory system, rules, skill practices
 │   ├── k8s/         # Kubernetes tutorials
+│   ├── os/          # OS concepts (concurrency primitives, Unix internals)
 │   └── slack/       # Slack integration patterns
 ├── algorithm/       # Coding test prep, algorithm patterns
 ├── research/        # Market research, industry analysis
@@ -100,6 +101,7 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Add develop/os/: Unix Atomic, Mutex, Semaphore deep dive (개념 8관점 분석 + 실제 커널 구현)
 - Add gen_ai/: AI-ML-DL-Transformer-LLM 입문 노트 (Self-Attention 정의, Prefill 분기점, 토큰 선택 출력 전용, Decoder-Only 보강)
 - Update develop/database/: TIMESTAMP vs DATETIME에 실무 판단 기준, DST 사례, 문제 시나리오 통합
 - Add algorithm/: power of two/four bit manipulation trick note
