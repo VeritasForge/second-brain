@@ -101,6 +101,7 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Add develop/python/: Python dict key ordering deep dive (insertion order 보장, CPython 구현)
 - Add develop/os/: Unix Atomic, Mutex, Semaphore deep dive (개념 8관점 분석 + 실제 커널 구현)
 - Add gen_ai/: AI-ML-DL-Transformer-LLM 입문 노트 (Self-Attention 정의, Prefill 분기점, 토큰 선택 출력 전용, Decoder-Only 보강)
 - Update develop/database/: TIMESTAMP vs DATETIME에 실무 판단 기준, DST 사례, 문제 시나리오 통합
