@@ -101,6 +101,7 @@ Uses Conventional Commits with vault-specific scopes:
 - macOS system configuration (lid close behavior)
 
 ## Recent Changes
+- Update ai-engineering/: Skill 호출 확률 + AGENTS.md 효과 + 기술 스택별 분석 전체 통합 (Deep Research 3회 + 수렴 검증 + Q&A 2회, 검증 리포트 포함)
 - Add develop/python/: Python dict key ordering deep dive (insertion order 보장, CPython 구현)
 - Add develop/os/: Unix Atomic, Mutex, Semaphore deep dive (개념 8관점 분석 + 실제 커널 구현)
 - Add gen_ai/: AI-ML-DL-Transformer-LLM 입문 노트 (Self-Attention 정의, Prefill 분기점, 토큰 선택 출력 전용, Decoder-Only 보강)
