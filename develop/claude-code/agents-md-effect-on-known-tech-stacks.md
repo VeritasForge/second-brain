@@ -10,6 +10,8 @@ tags:
   - evaluation
   - context-files
   - coding-agents
+  - optimization
+  - hooks
 ---
 
 # Deep Research: Claude Code Skill 호출 확률, AGENTS.md 효과, 기술 스택별 분석 — 전체 통합
@@ -125,6 +127,26 @@ description: REST API design conventions for this codebase.
 
 **공식 권장 패턴**: WHEN + WHEN NOT, 3인칭, 구체적 키워드, 1024자 이내, 동명사(gerund) 형태 네이밍
 
+#### 공식 권장 description 작성법 `[Confirmed]`
+
+| 원칙 | 설명 | 예시 |
+|------|------|------|
+| **3인칭으로 작성** | 시스템 프롬프트에 삽입되므로 관점 일관성 필요 | "Processes Excel files" O / "I can help you" X |
+| **"Use when..." 포함** | 명시적 트리거 조건 기술 | "Use when working with PDF files or when user mentions PDFs" |
+| **구체적 키워드** | 파일 확장자, 도구명, 동작 포함 | ".xlsx files, spreadsheets, tabular data, pivot tables" |
+| **WHEN NOT 경계** | 불필요한 호출 방지 | "Do NOT load for general data discussions" |
+| **1024자 이내** | 공식 최대 길이 | 간결하되 충분한 트리거 포함 |
+
+#### 네이밍 컨벤션 `[Confirmed]`
+
+Anthropic은 **동명사(gerund) 형태**를 공식 권장합니다:
+
+```
+GOOD: processing-pdfs, analyzing-spreadsheets, managing-databases
+OK:   pdf-processing, process-pdfs
+BAD:  helper, utils, tools, documents
+```
+
 #### Level 2: CLAUDE.md에 스킬 참조 추가 (→ 60-70%)
 
 ```markdown
@@ -182,6 +204,32 @@ SLASH_COMMAND_TOOL_CHAR_BUDGET=30000 claude
 ```
 
 진단: `/context` 명령으로 제외된 스킬 확인
+
+### 1.6 Boris Cherny의 관련 인사이트
+
+Boris Cherny는 Skills 호출률에 대해 직접적으로 다루지는 않았지만, 관련된 핵심 원칙을 제시했습니다:
+
+| 원칙 | Skills 호출률과의 관계 | 확신도 |
+|------|------------------------|--------|
+| **"하루에 한 번 이상 하는 건 스킬로"** | 자주 쓰는 워크플로우를 스킬로 만들되, `/skill-name`으로 명시적 호출 권장 | `[Confirmed]` |
+| **"slash command는 inner loop에"** | 자동 호출에 의존하지 말고, 반복 작업은 `/command`로 명시 호출 | `[Confirmed]` |
+| **"CLAUDE.md 2.5k 토큰"** | 팀의 CLAUDE.md는 간결하게 → 스킬 description에 더 많은 예산 확보 | `[Confirmed]` |
+| **검증 루프** | 스킬이 올바르게 호출되었는지도 검증 대상 | `[Likely]` |
+
+> Boris의 접근: 자동 호출에 과도하게 의존하지 않고, **명시적 호출(`/skill-name`)을 기본으로** 사용. 자동 호출은 "보너스"로 취급.
+
+> **모순 참고**: Forced Eval Hook "최선" vs Boris의 "명시 호출" — 두 접근 모두 유효하다. Boris는 단순함을 선호(명시 호출), Scott Spence는 자동화를 선호(Hook). 팀 규모와 워크플로우에 따라 선택.
+
+### 1.7 Edge Cases & Caveats
+
+| 상황 | 영향 | 권고 |
+|------|------|------|
+| Forced Eval Hook + 단순 질문 | 불필요한 평가 오버헤드 | 조건부 실행 (특정 키워드 감지 시만) |
+| LLM Eval Hook + Form/Route 패턴 | 완전 실패 (0/10) | 특정 도메인에서는 Forced Eval로 |
+| 15,000자 예산 초과 | 스킬이 아예 보이지 않음 | `/context`로 진단, 예산 확장 |
+| description에 XML 태그 | 유효성 검증 실패 | 순수 텍스트만 사용 |
+| Background 서브에이전트에서 Skill | Skill 도구 사용 불가 | Foreground에서 실행 |
+| 파일 경로 Hook + 계획 단계 | Hook 미작동 (파일 없음) | semantic 매칭과 병행 |
 
 ---
 
@@ -435,6 +483,24 @@ Augment Code의 분석에 따르면, 삭제해야 할 항목들:
 
 Skills 2.0에서 eval이 추가되었다는 블로그 기사가 있으나, Vercel 비판 대응인지 자연적 제품 진화인지는 판별 불가(`[UNLIKELY]`).
 
+#### 평가 기반 개발 (Evaluation-Driven Development)
+
+공식 문서가 강력히 권장하는 접근:
+
+```
+1. 스킬 없이 작업 수행 → 실패 지점 기록
+2. 평가 시나리오 3개 생성
+3. 기준선 측정 (스킬 없이)
+4. 최소한의 내용으로 스킬 작성
+5. 평가 실행 → 비교 → 반복
+```
+
+#### "Claude A/Claude B" 패턴
+
+- **Claude A**: 스킬을 설계하고 개선하는 "전문가" 인스턴스
+- **Claude B**: 실제 작업에서 스킬을 사용하는 "사용자" 인스턴스
+- Claude B의 행동을 관찰 → Claude A에게 피드백 → 반복
+
 ---
 
 ## Part 5: 전략 가이드 — 언제 무엇을 선택하는가?
@@ -501,6 +567,26 @@ Q0: Context file이 정말 필요한가?
 
 대규모 팀이나 자동화된 CI/CD가 아닌 경우, 체계적 eval보다 **반응적 작성**(에이전트 실수 시 추가)만으로 충분할 수 있다. "아무것도 안 하기"도 유효한 선택지이다.
 
+### Skill 호출 실전 적용 조합
+
+대부분의 팀에 가장 효과적인 **실용적 조합**:
+
+```yaml
+# 1단계: Description 최적화 (기본)
+# 모든 스킬에 WHEN + WHEN NOT 패턴 적용
+
+# 2단계: CLAUDE.md에 스킬 참조 추가
+# "API 작업 시 /api-conventions 활용"
+
+# 3단계: 핵심 스킬은 disable-model-invocation: true
+# 중요한 워크플로우는 명시적 호출로 100% 보장
+
+# 4단계: (선택) Forced Eval Hook
+# 자동 호출이 중요한 팀 환경에서만
+```
+
+**현실적 권장**: 자동 호출률 100%를 목표로 하지 마세요. Boris Cherny처럼 **핵심 워크플로우는 `/skill-name`으로 명시 호출**하고, 자동 호출은 편의 기능으로 활용하는 것이 가장 안정적입니다.
+
 ---
 
 ## Sources
@@ -534,13 +620,14 @@ Q0: Context file이 정말 필요한가?
 16. [InfoQ — New Research Reassesses the Value of AGENTS.md](https://www.infoq.com/news/2026/03/agents-context-file-value-review/)
 17. [HN Discussion — Evaluating AGENTS.md](https://news.ycombinator.com/item?id=47034087)
 18. [HN Discussion — AGENTS.md outperforms skills](https://news.ycombinator.com/item?id=46809708)
+19. [Claude Code Skills Not Triggering — blog.fsck.com](https://blog.fsck.com/2025/12/17/claude-code-skills-not-triggering/) — character budget 문제
+20. [Claude Agent Skills: A First Principles Deep Dive — leehanchung](https://leehanchung.github.io/blogs/2025/10/26/claude-skills-deep-dive/)
 
 ### Vault 참조
 
-19. `gen_ai/claude-code-skills-invocation-rate-optimization.md` — Skill 호출률 최적화 Deep Research
-20. `develop/claude-code/skill-edd-tdd-best-practices.md` — EDD/TDD 방법론
-21. `develop/claude-code/claude-code-rules-vs-claude-md.md` — Rules vs CLAUDE.md
-22. `verify-skill-invocation-agents-md/report.md` — 수렴 검증 리포트
+21. `develop/claude-code/skill-edd-tdd-best-practices.md` — EDD/TDD 방법론
+22. `develop/claude-code/claude-code-rules-vs-claude-md.md` — Rules vs CLAUDE.md
+23. `verify-skill-invocation-agents-md/report.md` — 수렴 검증 리포트
 
 ---
 
@@ -548,8 +635,9 @@ Q0: Context file이 정말 필요한가?
 
 - **총 연구 기간**: Deep Research 3회 + 수렴 검증 + Q&A 2회
 - **검색 쿼리 수**: 15+ (일반 12 + SNS 3)
-- **수집 출처 수**: 22
-- **출처 유형 분포**: 공식 3, 1차 자료 4, 학술 3, 블로그 4, 커뮤니티 4, Vault 4
+- **수집 출처 수**: 23
+- **출처 유형 분포**: 공식 3, 1차 자료 4, 학술 3, 블로그 6, 커뮤니티 4, Vault 3
+- **Part 1 기초 조사**: WebSearch ×6, WebFetch ×6 (scottspence.com, paddo.dev, gist/mellanon, platform.claude.com, blog.fsck.com)
 - **수렴 검증**: Tier 3, 5개 관점, 5 iterations, 8/8 항목 수렴
 - **확신도 분포**: Confirmed 8, Likely 4, Overstated 1, Debunked 2, Unlikely 1, Uncertain 3, Ungrounded 1
 

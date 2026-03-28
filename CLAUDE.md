@@ -57,11 +57,12 @@ Uses Conventional Commits with vault-specific scopes:
 - Token systems, transformer architecture deep dives
 - Claude Code internals, multi-agent orchestration
 - Evaluator-optimizer patterns, project architecture analysis
-- Google AI Studio to Claude Code migration, skills invocation optimization
+- Google AI Studio to Claude Code migration
 
 ### ai-engineering/
 - Claude Code plugin hooks system deep dive
 - Ralph Loop playbook (Korean translation)
+- Skills invocation rate optimization + AGENTS.md effect + tech stack analysis (통합 문서)
 - Ralph + Superpowers + Compound integration guide
 
 ### develop/
