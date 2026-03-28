@@ -4,21 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "c933b8638e72e204",
+        "id": "8db7c95361325c2c",
         "type": "tabs",
         "children": [
           {
-            "id": "22a8ebeb0ec9cf1d",
+            "id": "8828e6200c412bea",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "develop/spring-di-deep-dive-followup-q1-q11.md",
-                "mode": "preview",
-                "source": false
+                "file": "Untitled.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
               },
-              "icon": "lucide-file",
-              "title": "spring-di-deep-dive-followup-q1-q11"
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled"
             }
           }
         ]
@@ -53,7 +56,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "enhance",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 377.50390243530273
   },
   "right": {
     "id": "2e328bc383c57e2e",
@@ -211,43 +214,42 @@
   },
   "active": "90b6c8fbfd2fd1ff",
   "lastOpenFiles": [
-    "develop/python/python-dict-key-ordering.md",
-    "develop/python",
-    "algorithm/32bit-signed-integer-range.md",
-    "algorithm/power-of-three-326-modulo-trick.md",
-    "docs/superpowers/specs/2026-03-18-cognix-ai-knowledge-platform-design.md",
-    "docs/superpowers/specs",
-    "docs/superpowers",
-    "docs",
-    "develop/go/monkey-patching-and-uber-fx-deep-dive.md",
-    "develop/spring-di-deep-dive-followup-q1-q11.md",
-    "develop/go/goroutine-gmp-scheduler-deep-dive.md",
-    "develop/os/atomic-mutex-semaphore-qa-deep-dive.md",
-    "develop/os/unix-atomic-mutex-semaphore-deep-dive.md",
-    "develop/os/mutex-deep-qa.md",
-    "develop/os/unix-atomic-mutex-semaphore-qa.md",
-    "CLAUDE.md",
-    "README.md",
-    "ai-engineering/vllm-triton-inference-pipeline.md",
-    "gen_ai/ai-ml-dl-transformer-llm-introduction.md",
-    "ai-engineering/ouroboros-vs-compound-superpowers-comparison.md",
-    "develop/claude-code/claude-code-memory-system-qa.md",
-    "develop/claude-code/claude-code-memory-system-deep-dive.md",
-    "Untitled.base",
-    "2026-03-12.md",
     "Untitled.canvas",
-    "develop/database/timestamp-vs-datetime-deep-dive.md",
-    "algorithm/prime-power-divisibility-trick.md",
-    "develop/slack/slack-socket-mode-vs-http.md",
-    "develop/k8s/tutorial/tutorial.md",
-    "develop/glob-pattern-matching-deep-dive.md",
-    "algorithm/power-of-two-bit-trick.md",
-    "ai-engineering/study-ouroboros.md",
-    "develop/claude-code/ai-harness/compound-engineering-pluing",
-    "develop/claude-code/ai-harness",
-    "develop/fe",
-    "develop/k8s/tutorial/helm/hello-world/templates/ingress.yaml",
-    "develop/k8s/tutorial/helm/hello-world/templates/service.yaml",
+    "career/sokind-senior-backend-engineer-interview-100qa.md",
+    "Untitled 1.base",
+    "Untitled.base",
+    "ai-engineering/lost-in-the-middle-deep-dive-verified.md",
+    "ai-engineering/ML Engineering with video.md",
+    "gen_ai/ml-engineering-for-video.md",
+    "career/inshorts-ai-platform-lead-analysis.md",
+    "develop/performance/network-bandwidth-unit-conversion-deep-dive.md",
+    "docs/verify-network-bandwidth-units/plan.md",
+    "docs/verify-network-bandwidth-units/report.md",
+    "docs/verify-network-bandwidth-units",
+    "docs/verify-inshorts-interview-prep/report.md",
+    "docs/verify-inshorts-interview-prep/plan.md",
+    "docs/verify-inshorts-interview-prep",
+    "career/sokind-senior-backend-engineer-interview-qa-integrated.md",
+    "career/sokind-senior-backend-engineer-analysis.md",
+    "career/sokind-interview-qa-deep-dive-q1-q14.md",
+    "develop/architecture/restful-architecture-concept-deep-dive.md",
+    "docs/verify-jwt-auth-token-lifecycle/plan.md",
+    "docs/verify-jwt-auth-token-lifecycle/report.md",
+    "docs/verify-jwt-auth-token-lifecycle",
+    "develop/performance/python-go-java-performance-myth-deep-dive.md",
+    "docs/verify-python-go-java-perf/report.md",
+    "docs/verify-python-go-java-perf",
+    "develop/performance/python-go-java-performance-myth-draft.md",
+    "develop/performance",
+    "docs/verify-restful-architecture-deep-dive/verification-report.md",
+    "docs/verify-restful-architecture-deep-dive",
+    "docs/verify-architecture-integrated-comparison/report.md",
+    "docs/verify-architecture-integrated-comparison/plan.md",
+    "docs/verify-architecture-integrated-comparison",
+    "develop/architecture/architecture-integrated-comparison.md",
+    "docs/verify-clean-architecture-deep-dive/report.md",
+    "docs/verify-clean-architecture-deep-dive/plan.md",
+    "docs/verify-clean-architecture-deep-dive",
     "Untitled 1.canvas"
   ]
 }
