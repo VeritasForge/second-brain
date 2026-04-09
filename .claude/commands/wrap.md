@@ -79,7 +79,6 @@ cat CLAUDE.md
 - [ ] Vault 구조: 디렉토리 구조가 최신인가?
 - [ ] 콘텐츠 카테고리: 각 카테고리별 설명이 정확한가?
 - [ ] 노트 목록: 각 카테고리별 노트 목록이 최신인가?
-- [ ] Recent Changes: 최신 변경사항이 추가되었는가?
 - [ ] 중복 체크: README.md와 내용이 중복되지 않는가?
 
 ### Step 4: Update Documents
@@ -107,9 +106,6 @@ cat CLAUDE.md
 ## Content Categories (카테고리 변경 시)
 - 새 카테고리 추가
 - 카테고리별 노트 목록 업데이트
-
-## Recent Changes (최상단에 추가)
-- [New Entry]: [Description]
 ```
 
 **수정하지 않음:**
@@ -138,7 +134,6 @@ No changes needed
 Updated:
 - Vault Structure: Added develop/ directory
 - Content Categories: Updated gen_ai note list
-- Recent Changes: Added latest entries
 
 No changes needed
 
@@ -207,9 +202,6 @@ Consistent sections:
 Inconsistencies found:
 - Vault Structure: New directory "develop/" not documented
 - Content Categories: 3 new notes not listed
-
-Consistent sections:
-- Recent Changes
 
 ### Action Required
 Run `/wrap` to update documents automatically.
