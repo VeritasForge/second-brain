@@ -39,12 +39,11 @@ Analyze the most recent substantive output (the last assistant response before t
 
 Take the most recent substantive assistant output and format it as a clean markdown file.
 
-Add YAML front matter at the top (tags will be filled in after Step 4):
+Add YAML front matter at the top (raw 원본이므로 태그 불필요 — /ingest 시 LLM이 자동 부여):
 
 ---
 created: <current date in YYYY-MM-DD format>
 source: claude-code
-tags: []
 ---
 
 Then include the full content of the last assistant response with the following formatting rules applied:
@@ -69,28 +68,12 @@ Tables MUST be valid, well-formed markdown tables for Obsidian to render them co
 - Ensure there is a blank line before and after headings, code blocks, tables, and blockquotes for proper Obsidian rendering.
 - Horizontal rules: use `---` on its own line with blank lines before and after.
 
-## Step 4: Suggest Tags
-
-Analyze the content and suggest 3-6 relevant tags.
-
-Present suggestion to user:
-
-```
-Tag 제안: tag1, tag2, tag3, ...
-(수정하려면 원하는 태그 입력, Enter로 제안 수락)
-```
-
-- If user presses Enter: use suggested tags.
-- If user provides input: use user's tags.
-- Replace `tags: []` in the prepared front matter with the confirmed tag list:
-  tags: [tag1, tag2, tag3]
-
-## Step 5: Ensure Directory Exists
+## Step 4: Ensure Directory Exists
 
 Create the target directory if it doesn't exist:
   mkdir -p <vault_root>/raw/sources
 
-## Step 6: Check Duplicate & Save File
+## Step 5: Check Duplicate & Save File
 
 저장 경로: `<vault_root>/raw/sources/<YYYY-MM-DD>-<slug>.md`
 
@@ -105,7 +88,7 @@ Use Bash to check:
 
 CRITICAL: NEVER overwrite an existing file. Always verify before writing.
 
-## Step 7: Report & Ingest 확인
+## Step 6: Report & Ingest 확인
 
 Report the result:
 
