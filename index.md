@@ -6,24 +6,20 @@
 ## Wiki 페이지
 
 ### Sources
-
-(아직 없음)
+- [[karpathy-llm-wiki]] — LLM Wiki 패턴 원문 요약 (2026-04-09)
 
 ### Entities
-
-(아직 없음)
+- [[obsidian]] — 마크다운 기반 로컬 지식 관리 도구
 
 ### Concepts
-
-(아직 없음)
+- [[llm-wiki-pattern]] — LLM이 관리하는 축적형 위키 패턴
+- [[rag]] — Retrieval-Augmented Generation 패턴
 
 ### Synthesis
-
-(아직 없음)
+- [[rag-vs-llm-wiki]] — RAG와 LLM Wiki 패턴 비교 분석
 
 ### MOC
-
-(아직 없음)
+- [[knowledge-management]] — 지식 관리 허브
 
 ## 기존 노트 (old_wiki/)
 
