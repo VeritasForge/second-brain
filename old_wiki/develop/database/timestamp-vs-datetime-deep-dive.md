@@ -1,7 +1,14 @@
 ---
 created: 2026-03-06
 source: claude-code
-tags: [database, mysql, postgresql, timestamp, datetime, unix-epoch, dst]
+tags:
+  - database
+  - mysql
+  - postgresql
+  - timestamp
+  - datetime
+  - unix-epoch
+  - dst
 ---
 
 # TIMESTAMP vs DATETIME Deep Dive
