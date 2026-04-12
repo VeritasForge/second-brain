@@ -14,12 +14,20 @@ Den/
 │   ├── articles/    # 웹 클리핑
 │   ├── papers/      # 논문, PDF
 │   ├── transcripts/ # 팟캐스트, 영상 스크립트
+│   ├── sources/     # /save_obsi 원본 보관
 │   └── assets/      # 이미지, 첨부파일
-├── wiki/            # LLM 관리 위키 — 규칙은 wiki/WIKI-SCHEMA.md 참조
-├── old_wiki/        # 기존 노트 (수정 금지, shortest-path wikilink로 참조)
-├── index.md         # 전체 위키 카탈로그 (LLM 자동 관리)
-├── log.md           # 시간순 작업 이력 (append-only)
-└── CLAUDE.md        # wiki/WIKI-SCHEMA.md 참조
+├── wiki/            # 모든 노트 (자유 형식)
+│   ├── security/
+│   ├── gen_ai/
+│   ├── develop/
+│   ├── ai-engineering/
+│   ├── algorithm/
+│   ├── career/
+│   ├── research/
+│   └── mac-os/
+├── index.md         # 전체 문서 카탈로그
+├── log.md           # 시간순 변경 이력 (append-only)
+└── CLAUDE.md
 ```
 
 ## Custom Commands
@@ -55,8 +63,10 @@ Uses Conventional Commits with vault-specific scopes:
 - **career/**: job analysis, interview Q&A
 - **mac-os/**: macOS configuration
 
-## Wiki 운영
+## Vault 운영
 
-wiki 관련 작업 시 반드시 `wiki/WIKI-SCHEMA.md`를 먼저 읽어라. 이 파일에 frontmatter 규격, 태그 규칙, wikilink 규칙, 워크플로가 정의되어 있다.
-
-새 세션 시작 시 `log.md`의 최근 5-10개 항목을 확인하여 직전 작업 맥락을 파악한다.
+- 문서는 자유 형식으로 wiki/ 하위 카테고리에 저장
+- index.md: 전체 문서 카탈로그 (문서 추가/삭제 시 갱신)
+- log.md: 변경 이력 (append-only, 형식: ## [YYYY-MM-DD] action | 제목)
+- raw/: 원본 소스 (PDF, 웹 스크랩 등) 보관. LLM은 읽기만
+- 새 세션 시작 시 log.md의 최근 5-10개 항목을 확인하여 직전 작업 맥락을 파악한다

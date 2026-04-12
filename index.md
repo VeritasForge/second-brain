@@ -1,27 +1,9 @@
-# Den Wiki Index
+# Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-04-09
+> 최종 갱신: 2026-04-13
 
-## Wiki 페이지
-
-### Sources
-- [[karpathy-llm-wiki]] — LLM Wiki 패턴 원문 요약 (2026-04-09)
-
-### Entities
-- [[obsidian]] — 마크다운 기반 로컬 지식 관리 도구
-
-### Concepts
-- [[llm-wiki-pattern]] — LLM이 관리하는 축적형 위키 패턴
-- [[rag]] — Retrieval-Augmented Generation 패턴
-
-### Synthesis
-- [[rag-vs-llm-wiki]] — RAG와 LLM Wiki 패턴 비교 분석
-
-### MOC
-- [[knowledge-management]] — 지식 관리 허브
-
-## 기존 노트 (old_wiki/)
+## 문서 목록
 
 ### ai-engineering
 - [[claude-code-plugin-hooks-system]] — Claude Code Plugin Hooks System Deep Dive
@@ -174,6 +156,7 @@
 - [[security-audit-nginx]] — Nginx 보안 검토
 - [[solo-developer-financial-api-security]] — 1인 개발자 금융 API 보안 전략
 - [[sso-concept-explainer]] — SSO (Single Sign-On) Deep Dive
+- [[sso-concept-explainer-src]] — SSO 8관점 분석 Source Card
 - [[sso-oauth-comparison-and-architecture]] — SSO-OAuth 비교 + Google SSO 아키텍처
 - [[tpm-deep-research-guide]] — TPM 종합 가이드
 - [[tpm-userwithauth-vs-pcr-deep-research]] — TPM UserWithAuth vs PCR Deep Research
@@ -186,4 +169,4 @@
 ai-engineering, develop, gen-ai, algorithm, security, research, career
 
 ### 세부주제
-claude-code, rag, agent, llm, transformer, token, git, database, frontend, architecture, go, python, k8s, obsidian, knowledge-management, oauth, sso, testing, performance, docker, react, nextjs, deep-learning, video, tpm, ddd, clean-architecture, hexagonal, interview
+claude-code, rag, agent, llm, transformer, token, git, database, frontend, architecture, go, python, k8s, obsidian, knowledge-management, oauth, sso, oidc, saml, auth0, okta, keycloak, testing, performance, docker, react, nextjs, deep-learning, video, tpm, ddd, clean-architecture, hexagonal, interview
