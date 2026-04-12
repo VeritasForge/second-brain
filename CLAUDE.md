@@ -65,8 +65,18 @@ Uses Conventional Commits with vault-specific scopes:
 
 ## Vault 운영
 
-- 문서는 자유 형식으로 wiki/ 하위 카테고리에 저장
-- index.md: 전체 문서 카탈로그 (문서 추가/삭제 시 갱신)
-- log.md: 변경 이력 (append-only, 형식: ## [YYYY-MM-DD] action | 제목)
-- raw/: 원본 소스 (PDF, 웹 스크랩 등) 보관. LLM은 읽기만
-- 새 세션 시작 시 log.md의 최근 5-10개 항목을 확인하여 직전 작업 맥락을 파악한다
+문서는 자유 형식으로 wiki/ 하위 카테고리에 저장한다. raw/는 원본 소스(PDF, 웹 스크랩 등) 보관용이며 LLM은 읽기만 한다.
+
+### index.md (문서 카탈로그)
+- wiki/ 전체 문서 목록을 카테고리별로 관리
+- **읽기**: 사용자가 문서를 찾거나, 관련 노트를 탐색할 때 먼저 index.md를 읽어 위치를 파악
+- **쓰기**: 문서를 추가/삭제/이동할 때 반드시 index.md도 함께 갱신
+- 형식: `- [[파일명]] — 한줄 설명` (카테고리 섹션 내 알파벳순)
+- **경로 규칙**: 섹션 헤더가 곧 wiki/ 하위 경로. 예: `### develop/claude-code` 섹션의 `[[foo]]` → `wiki/develop/claude-code/foo.md`
+
+### log.md (변경 이력)
+- 문서 변경사항을 시간순으로 기록 (append-only, 최신이 위)
+- **읽기**: 새 세션 시작 시 최근 5-10개 항목을 읽어 직전 작업 맥락을 파악
+- **쓰기**: 문서를 추가/수정/삭제할 때 맨 위에 항목 추가
+- 형식: `## [YYYY-MM-DD] action | 제목` (action: create, update, delete, restructure)
+- 하위에 `- created: [[파일명]]` 또는 `- updated: [[파일명]]` 등 상세 기록
