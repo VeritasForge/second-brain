@@ -1,0 +1,6 @@
+.superpowers
+docs
+
+# Obsidian - local session state
+.obsidian/workspace.json
+.obsidian/graph.json
