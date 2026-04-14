@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-04-13
+> 최종 갱신: 2026-04-15
 
 ## 문서 목록
 
@@ -32,14 +32,23 @@
 - [[sokind-senior-backend-engineer-interview-qa-integrated]] — Senior Backend Engineer 면접 Q&A 통합본
 
 ### develop
-- [[greenfield-project]] — 그린필드 프로젝트 개념
 - [[glob-pattern-matching-deep-dive]] — Glob 패턴 매칭 Deep Dive
+- [[greenfield-project]] — 그린필드 프로젝트 개념
+- [[kotlin-vs-go]] — Kotlin vs Go 언어 비교 + Kotlin 핵심 기능 (null safety, data class, JDSL)
+- [[nvim-buffer-concept]] — Neovim 버퍼 개념 (버퍼 vs 윈도우 vs 탭)
+- [[spring-aop-complete-guide]] — Spring AOP 완전 가이드 (프록시, AspectJ, 위빙, 면접 Q&A)
+- [[spring-di-bean-test-deep-dive]] — Spring 핵심 완전 정복 (IoC, DI, Bean, 테스트, TDD)
 - [[spring-di-deep-dive-followup-q1-q11]] — Spring DI Deep Dive 후속 Q&A (Q1~Q11)
+- [[verification-corrections-summary]] — 기술 내용 검증 정정 사항 요약 (JVM, Go, epoll, HikariCP)
 
 ### develop/architecture
 - [[architecture-comprehensive-comparison]] — 4대 아키텍처 종합 비교
+- [[aws-sns-sqs-dlq-comparison]] — AWS SNS vs SQS DLQ 비교 (EDA 기반 MSA 메시지 전달 보장)
+- [[sli-slo-sla-guide]] — SLI, SLO, SLA 서비스 신뢰성 지표 체계
+- [[solid-principles-complete-guide]] — SOLID 원칙 완전 정복 (정의, 예제, 관계, 실무 적용)
 - [[architecture-integrated-comparison]] — 4대 아키텍처 통합 비교 (DDD, Layered, Clean, Hexagonal)
 - [[clean-architecture-comprehensive]] — Clean Architecture Comprehensive
+- [[flash-sale-coupon-system]] — 선착순 쿠폰 발급 시스템 설계 (INCR vs Token Bucket, Redis Lua Script)
 - [[clean-architecture-concept-deep-dive]] — Clean Architecture Deep Dive
 - [[ddd-comprehensive]] — DDD Comprehensive
 - [[ddd-concept-deep-dive]] — DDD Deep Dive
@@ -92,10 +101,13 @@
 
 ### develop/interview-prep
 - [[ai-software-engineer]] — AI Software Engineer Interview Q&A
+- [[cache-strategy-guide]] — 캐시 전략 완전 가이드 (Cache-Aside, Write-Through, Stampede, Hibernate L2)
 - [[cross-cutting-staff-engineer]] — Cross-cutting Staff Engineer Interview Q&A
 - [[golang]] — Golang Staff Engineer Interview Q&A
 - [[kotlin-spring]] — Kotlin/Spring Staff Engineer Interview Q&A
+- [[msa-saga-pattern-guide]] — MSA SAGA 패턴 완전 가이드 (Orchestration, Choreography, Temporal, 토스뱅크)
 - [[python-fastapi-sqlalchemy]] — Python/FastAPI/SQLAlchemy Staff Engineer Interview Q&A
+- [[throttling-kill-switch-blameless-rca]] — Throttling, Kill Switch, Blameless RCA 기술 피드백
 
 ### develop/k8s
 - [[tutorial]] — K8s Hello World 실무형 튜토리얼
@@ -106,9 +118,13 @@
 - [[unix-atomic-mutex-semaphore-deep-dive]] — Atomic Operations (원자적 연산) Deep Dive
 
 ### develop/performance
+- [[async-io-epoll-pgbouncer]] — 비동기 IO 전체 (epoll, kqueue, IOCP, 이벤트 루프, Pgbouncer)
+- [[coroutine-gmp-vthread]] — Coroutine + Go GMP + Virtual Thread 동시성 비교
+- [[gc-g1-zgc]] — GC 전체 (Python RC, JVM G1/ZGC, Go GC 비교)
 - [[network-bandwidth-unit-conversion-deep-dive]] — 네트워크 대역폭 단위 변환 (Gbit, GB, GiB)
 - [[python-go-java-performance-myth-deep-dive]] — Python vs Go/Java 성능 신화 Deep Dive
 - [[python-go-java-performance-myth-draft]] — Python vs Go/Java 성능 신화 Draft
+- [[spring-tuning-hikaricp]] — Spring Boot 튜닝 (Tomcat Thread Pool, HikariCP 커넥션 풀)
 
 ### develop/python
 - [[python-dict-key-ordering]] — Python Dictionary Key 순서 보장 원리

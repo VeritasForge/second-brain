@@ -2,6 +2,44 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-15] create | 서버 개발 핵심 기술 6편 (Kotlin, 동시성, IO, Spring 튜닝, GC, 검증)
+- created: [[kotlin-vs-go]]
+- created: [[coroutine-gmp-vthread]]
+- created: [[async-io-epoll-pgbouncer]]
+- created: [[spring-tuning-hikaricp]]
+- created: [[gc-g1-zgc]]
+- created: [[verification-corrections-summary]]
+
+## [2026-04-14] create | 선착순 쿠폰 발급 시스템 설계
+- created: [[flash-sale-coupon-system]]
+
+## [2026-04-14] create | 캐시 전략 완전 가이드
+- created: [[cache-strategy-guide]]
+
+## [2026-04-14] create | MSA SAGA 패턴 완전 가이드
+- created: [[msa-saga-pattern-guide]]
+
+## [2026-04-14] create | AWS SNS vs SQS DLQ 비교
+- created: [[aws-sns-sqs-dlq-comparison]]
+
+## [2026-04-14] create | Throttling, Kill Switch, Blameless RCA 기술 피드백
+- created: [[throttling-kill-switch-blameless-rca]]
+
+## [2026-04-14] create | Spring AOP 완전 가이드
+- created: [[spring-aop-complete-guide]]
+
+## [2026-04-14] create | Spring 핵심 완전 정복 (IoC, DI, Bean, 테스트, TDD)
+- created: [[spring-di-bean-test-deep-dive]]
+
+## [2026-04-14] create | SOLID 원칙 완전 정복
+- created: [[solid-principles-complete-guide]]
+
+## [2026-04-14] create | SLI, SLO, SLA 서비스 신뢰성 지표 체계
+- created: [[sli-slo-sla-guide]]
+
+## [2026-04-13] create | Neovim 버퍼 개념
+- created: [[nvim-buffer-concept]]
+
 ## [2026-04-13] restructure | LLM Wiki 레이어 제거, old_wiki → wiki rename
 - wiki/ (concepts, entities, sources, synthesis, moc, WIKI-SCHEMA.md) 삭제
 - old_wiki/ → wiki/ rename (git mv)

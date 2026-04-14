@@ -1,5 +1,6 @@
 .superpowers
 docs
+.DS_Store
 
 # Obsidian - local session state
 .obsidian/workspace.json
