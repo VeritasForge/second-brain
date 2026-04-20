@@ -2,6 +2,12 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-20] create | HTTP Status Code 429 & 303 완전 가이드
+- created: [[http-status-code-429-303]]
+
+## [2026-04-20] create | AutoML Deep Research 2025
+- created: [[automl-deep-research-2025]]
+
 ## [2026-04-15] create | 서버 개발 핵심 기술 6편 (Kotlin, 동시성, IO, Spring 튜닝, GC, 검증)
 - created: [[kotlin-vs-go]]
 - created: [[coroutine-gmp-vthread]]

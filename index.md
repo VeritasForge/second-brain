@@ -1,11 +1,12 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-04-15
+> 최종 갱신: 2026-04-20
 
 ## 문서 목록
 
 ### ai-engineering
+- [[automl-deep-research-2025]] — AutoML Deep Research: 2022 블로그 vs 2025 최신 동향 (Agentic AutoML, LLM 통합, 벤치마크)
 - [[claude-code-plugin-hooks-system]] — Claude Code Plugin Hooks System Deep Dive
 - [[feature-engineering-overview]] — Feature Engineering 개요
 - [[lost-in-the-middle-deep-dive-verified]] — Lost in the Middle 검증 완료판
@@ -33,6 +34,7 @@
 
 ### develop
 - [[glob-pattern-matching-deep-dive]] — Glob 패턴 매칭 Deep Dive
+- [[http-status-code-429-303]] — HTTP Status Code 429 & 303 완전 가이드 (Rate Limiting, PRG, Nginx, Retry-After)
 - [[greenfield-project]] — 그린필드 프로젝트 개념
 - [[kotlin-vs-go]] — Kotlin vs Go 언어 비교 + Kotlin 핵심 기능 (null safety, data class, JDSL)
 - [[nvim-buffer-concept]] — Neovim 버퍼 개념 (버퍼 vs 윈도우 vs 탭)
