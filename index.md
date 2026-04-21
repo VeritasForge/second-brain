@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-04-20
+> 최종 갱신: 2026-04-21
 
 ## 문서 목록
 
@@ -33,7 +33,6 @@
 - [[sokind-senior-backend-engineer-interview-qa-integrated]] — Senior Backend Engineer 면접 Q&A 통합본
 
 ### develop
-- [[glob-pattern-matching-deep-dive]] — Glob 패턴 매칭 Deep Dive
 - [[http-status-code-429-303]] — HTTP Status Code 429 & 303 완전 가이드 (Rate Limiting, PRG, Nginx, Retry-After)
 - [[greenfield-project]] — 그린필드 프로젝트 개념
 - [[kotlin-vs-go]] — Kotlin vs Go 언어 비교 + Kotlin 핵심 기능 (null safety, data class, JDSL)
@@ -42,6 +41,10 @@
 - [[spring-di-bean-test-deep-dive]] — Spring 핵심 완전 정복 (IoC, DI, Bean, 테스트, TDD)
 - [[spring-di-deep-dive-followup-q1-q11]] — Spring DI Deep Dive 후속 Q&A (Q1~Q11)
 - [[verification-corrections-summary]] — 기술 내용 검증 정정 사항 요약 (JVM, Go, epoll, HikariCP)
+
+### develop/cli
+- [[file-search-find-rg-grep]] — 파일 검색 도구 가이드 (find, grep, rg/ripgrep, 다중 키워드 검색)
+- [[glob-pattern-matching-deep-dive]] — Glob 패턴 매칭 Deep Dive
 
 ### develop/architecture
 - [[architecture-comprehensive-comparison]] — 4대 아키텍처 종합 비교
@@ -224,4 +227,4 @@
 ai-engineering, develop, gen-ai, algorithm, security, research, career
 
 ### 세부주제
-claude-code, rag, agent, llm, transformer, token, git, database, frontend, architecture, go, python, k8s, obsidian, knowledge-management, oauth, sso, oidc, saml, auth0, okta, keycloak, testing, performance, docker, react, nextjs, deep-learning, video, tpm, ddd, clean-architecture, hexagonal, interview
+claude-code, cli, rag, agent, llm, transformer, token, git, database, frontend, architecture, go, python, k8s, obsidian, knowledge-management, oauth, sso, oidc, saml, auth0, okta, keycloak, testing, performance, docker, react, nextjs, deep-learning, video, tpm, ddd, clean-architecture, hexagonal, interview

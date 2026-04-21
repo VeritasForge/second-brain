@@ -2,6 +2,10 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-21] create | 파일 검색 도구 가이드 + develop/cli 카테고리 신설
+- created: [[file-search-find-rg-grep]] — 파일 검색 도구 가이드 (find, grep, rg)
+- moved: [[glob-pattern-matching-deep-dive]] — develop/ → develop/cli/로 이동
+
 ## [2026-04-21] create | JS/TS 학습자료 시리즈 (8개 문서)
 - created: [[00-js-ts-study-guide]] — JS/TS 학습 가이드 (시리즈 허브)
 - created: [[01-js-ts-philosophy-and-differentiation]] — JS/TS 철학과 차별점
