@@ -2,6 +2,19 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-21] create | POSIX 파일 끝 Newline 원칙
+- created: [[posix-newline-at-end-of-file]]
+
+## [2026-04-21] create | Go 학습자료 시리즈 (8개 문서)
+- created: [[00-go-study-guide]] — Go 학습 가이드 (시리즈 허브)
+- created: [[01-go-philosophy-and-differentiation]] — Go 철학과 차별점
+- created: [[02-go-architecture-and-runtime]] — Go 아키텍처와 런타임
+- created: [[03-go-basic-syntax]] — Go 기본 문법
+- created: [[04-go-advanced-syntax-and-patterns]] — Go 고급 문법과 패턴
+- created: [[05-go-developer-essentials-by-seniority]] — Go 개발자 필수 지식 (레벨별)
+- created: [[06-go-testing-patterns]] — Go 테스팅 패턴
+- created: [[07-go-project-structure-and-tooling]] — Go 프로젝트 구조와 도구
+
 ## [2026-04-20] create | HTTP Status Code 429 & 303 완전 가이드
 - created: [[http-status-code-429-303]]
 

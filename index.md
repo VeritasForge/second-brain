@@ -97,6 +97,14 @@
 - [[tbd-practice-monorepo-guide]] — TBD Practice Monorepo Guide
 
 ### develop/go
+- [[00-go-study-guide]] — Go 학습 가이드 (시리즈 허브 페이지)
+- [[01-go-philosophy-and-differentiation]] — Go 철학과 차별점
+- [[02-go-architecture-and-runtime]] — Go 아키텍처와 런타임
+- [[03-go-basic-syntax]] — Go 기본 문법
+- [[04-go-advanced-syntax-and-patterns]] — Go 고급 문법과 패턴
+- [[05-go-developer-essentials-by-seniority]] — Go 개발자 필수 지식 (레벨별)
+- [[06-go-testing-patterns]] — Go 테스팅 패턴
+- [[07-go-project-structure-and-tooling]] — Go 프로젝트 구조와 도구
 - [[go-channel-deep-dive]] — Go Channel Deep Dive
 - [[goroutine-gmp-scheduler-deep-dive]] — Goroutine GMP Scheduler Deep Dive
 - [[monkey-patching-and-uber-fx-deep-dive]] — Monkey Patching in Static Languages & uber-go/fx
@@ -117,6 +125,7 @@
 ### develop/os
 - [[atomic-mutex-semaphore-qa-deep-dive]] — Atomic/Mutex/Semaphore 심화 Q&A Deep Dive
 - [[gnu-stow-concept-deep-dive]] — GNU Stow Deep Dive
+- [[posix-newline-at-end-of-file]] — POSIX 파일 끝 Newline 원칙
 - [[unix-atomic-mutex-semaphore-deep-dive]] — Atomic Operations (원자적 연산) Deep Dive
 
 ### develop/performance
