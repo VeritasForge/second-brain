@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-21] create | gRPC Concept Deep Dive (Go 중심, rl-verify 검증 완료)
+- created: [[grpc-concept-deep-dive]] — gRPC 8관점 분석 + Go 코드 예시 + 수렴 검증 반영
+
 ## [2026-04-21] create | Git Tag/Plumbing/Reflog + Shell Heredoc (4개 문서 일괄)
 - created: [[git-tag-annotated-lightweight]] — Git Tag 완전 가이드 (Annotated vs Lightweight, GPG, push, 삭제)
 - created: [[git-cat-file-for-each-ref]] — Git 내부 명령어 가이드 (cat-file, for-each-ref)

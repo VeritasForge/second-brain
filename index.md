@@ -124,6 +124,7 @@
 - [[07-go-project-structure-and-tooling]] — Go 프로젝트 구조와 도구
 - [[go-channel-deep-dive]] — Go Channel Deep Dive
 - [[goroutine-gmp-scheduler-deep-dive]] — Goroutine GMP Scheduler Deep Dive
+- [[grpc-concept-deep-dive]] — gRPC (Google Remote Procedure Call) Concept Deep Dive (Go 중심, 검증 완료)
 - [[monkey-patching-and-uber-fx-deep-dive]] — Monkey Patching in Static Languages & uber-go/fx
 
 ### develop/interview-prep
