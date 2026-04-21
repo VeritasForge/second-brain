@@ -45,6 +45,7 @@
 ### develop/cli
 - [[file-search-find-rg-grep]] — 파일 검색 도구 가이드 (find, grep, rg/ripgrep, 다중 키워드 검색)
 - [[glob-pattern-matching-deep-dive]] — Glob 패턴 매칭 Deep Dive
+- [[shell-command-substitution-heredoc]] — Shell Command Substitution + Here Document 패턴 가이드
 
 ### develop/architecture
 - [[architecture-comprehensive-comparison]] — 4대 아키텍처 종합 비교
@@ -104,8 +105,11 @@
 
 ### develop/git
 - [[backport-concept-deep-dive]] — Backport Deep Dive
+- [[git-cat-file-for-each-ref]] — Git 내부 명령어 가이드 (cat-file, for-each-ref)
 - [[git-log-branch-diff]] — Git Log Branch Diff
 - [[git-rebase-onto]] — git rebase --onto 설명
+- [[git-reflog-recovery-guide]] — Git Reflog 개념과 실수 복구 활용법
+- [[git-tag-annotated-lightweight]] — Git Tag 완전 가이드 (Annotated vs Lightweight, GPG 서명, push, 삭제)
 - [[scaled-trunk-based-development]] — Scaled Trunk-Based Development 종합 정리
 - [[tbd-practice-monorepo-guide]] — TBD Practice Monorepo Guide
 

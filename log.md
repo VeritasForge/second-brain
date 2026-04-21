@@ -2,6 +2,12 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-21] create | Git Tag/Plumbing/Reflog + Shell Heredoc (4개 문서 일괄)
+- created: [[git-tag-annotated-lightweight]] — Git Tag 완전 가이드 (Annotated vs Lightweight, GPG, push, 삭제)
+- created: [[git-cat-file-for-each-ref]] — Git 내부 명령어 가이드 (cat-file, for-each-ref)
+- created: [[git-reflog-recovery-guide]] — Git Reflog 개념과 실수 복구 활용법
+- created: [[shell-command-substitution-heredoc]] — Shell Command Substitution + Here Document 패턴 가이드
+
 ## [2026-04-21] create | 파일 검색 도구 가이드 + develop/cli 카테고리 신설
 - created: [[file-search-find-rg-grep]] — 파일 검색 도구 가이드 (find, grep, rg)
 - moved: [[glob-pattern-matching-deep-dive]] — develop/ → develop/cli/로 이동
