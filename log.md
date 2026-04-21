@@ -2,6 +2,36 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-21] create | JS/TS 학습자료 시리즈 (8개 문서)
+- created: [[00-js-ts-study-guide]] — JS/TS 학습 가이드 (시리즈 허브)
+- created: [[01-js-ts-philosophy-and-differentiation]] — JS/TS 철학과 차별점
+- created: [[02-js-ts-architecture-and-runtime]] — JS/TS 아키텍처와 런타임
+- created: [[03-js-ts-basic-syntax]] — JS/TS 기본 문법
+- created: [[04-js-ts-advanced-syntax-and-patterns]] — JS/TS 고급 문법과 패턴
+- created: [[05-js-ts-developer-essentials-by-seniority]] — JS/TS 개발자 필수 지식 (레벨별)
+- created: [[06-js-ts-testing-patterns]] — JS/TS 테스팅 패턴
+- created: [[07-js-ts-project-structure-and-tooling]] — JS/TS 프로젝트 구조와 도구
+
+## [2026-04-21] create | Kotlin+Spring 학습자료 시리즈 (8개 문서)
+- created: [[00-kotlin-study-guide]] — Kotlin+Spring 학습 가이드 (시리즈 허브)
+- created: [[01-kotlin-philosophy-and-differentiation]] — Kotlin 철학과 차별점
+- created: [[02-kotlin-architecture-and-runtime]] — Kotlin 아키텍처와 런타임
+- created: [[03-kotlin-basic-syntax]] — Kotlin 기본 문법
+- created: [[04-kotlin-advanced-syntax-and-patterns]] — Kotlin 고급 문법과 패턴
+- created: [[05-kotlin-developer-essentials-by-seniority]] — Kotlin 개발자 필수 지식 (레벨별)
+- created: [[06-kotlin-testing-patterns]] — Kotlin 테스팅 패턴
+- created: [[07-kotlin-project-structure-and-tooling]] — Kotlin 프로젝트 구조와 도구
+
+## [2026-04-21] create | Python 학습자료 시리즈 (8개 문서)
+- created: [[00-python-study-guide]] — Python 학습 가이드 (시리즈 허브)
+- created: [[01-python-philosophy-and-differentiation]] — Python 철학과 차별점
+- created: [[02-python-architecture-and-runtime]] — Python 아키텍처와 런타임
+- created: [[03-python-basic-syntax]] — Python 기본 문법
+- created: [[04-python-advanced-syntax-and-patterns]] — Python 고급 문법과 패턴
+- created: [[05-python-developer-essentials-by-seniority]] — Python 개발자 필수 지식 (레벨별)
+- created: [[06-python-testing-patterns]] — Python 테스팅 패턴
+- created: [[07-python-project-structure-and-tooling]] — Python 프로젝트 구조와 도구
+
 ## [2026-04-21] create | POSIX 파일 끝 Newline 원칙
 - created: [[posix-newline-at-end-of-file]]
 

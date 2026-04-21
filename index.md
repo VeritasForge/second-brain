@@ -89,6 +89,16 @@
 - [[react-server-components-rsc-deep-dive]] — React Server Components (RSC) Deep Dive
 - [[sse-event-design-strategy-snapshot-vs-delta]] — SSE 이벤트 설계 전략 Snapshot vs Delta
 
+### develop/js-ts
+- [[00-js-ts-study-guide]] — JS/TS 학습 가이드 (시리즈 허브 페이지)
+- [[01-js-ts-philosophy-and-differentiation]] — JS/TS 철학과 차별점
+- [[02-js-ts-architecture-and-runtime]] — JS/TS 아키텍처와 런타임
+- [[03-js-ts-basic-syntax]] — JS/TS 기본 문법
+- [[04-js-ts-advanced-syntax-and-patterns]] — JS/TS 고급 문법과 패턴
+- [[05-js-ts-developer-essentials-by-seniority]] — JS/TS 개발자 필수 지식 (레벨별)
+- [[06-js-ts-testing-patterns]] — JS/TS 테스팅 패턴
+- [[07-js-ts-project-structure-and-tooling]] — JS/TS 프로젝트 구조와 도구
+
 ### develop/git
 - [[backport-concept-deep-dive]] — Backport Deep Dive
 - [[git-log-branch-diff]] — Git Log Branch Diff
@@ -119,6 +129,16 @@
 - [[python-fastapi-sqlalchemy]] — Python/FastAPI/SQLAlchemy Staff Engineer Interview Q&A
 - [[throttling-kill-switch-blameless-rca]] — Throttling, Kill Switch, Blameless RCA 기술 피드백
 
+### develop/kotlin
+- [[00-kotlin-study-guide]] — Kotlin+Spring 학습 가이드 (시리즈 허브 페이지)
+- [[01-kotlin-philosophy-and-differentiation]] — Kotlin 철학과 차별점
+- [[02-kotlin-architecture-and-runtime]] — Kotlin 아키텍처와 런타임
+- [[03-kotlin-basic-syntax]] — Kotlin 기본 문법
+- [[04-kotlin-advanced-syntax-and-patterns]] — Kotlin 고급 문법과 패턴
+- [[05-kotlin-developer-essentials-by-seniority]] — Kotlin 개발자 필수 지식 (레벨별)
+- [[06-kotlin-testing-patterns]] — Kotlin 테스팅 패턴
+- [[07-kotlin-project-structure-and-tooling]] — Kotlin 프로젝트 구조와 도구
+
 ### develop/k8s
 - [[tutorial]] — K8s Hello World 실무형 튜토리얼
 
@@ -138,6 +158,14 @@
 - [[spring-tuning-hikaricp]] — Spring Boot 튜닝 (Tomcat Thread Pool, HikariCP 커넥션 풀)
 
 ### develop/python
+- [[00-python-study-guide]] — Python 학습 가이드 (시리즈 허브 페이지)
+- [[01-python-philosophy-and-differentiation]] — Python 철학과 차별점
+- [[02-python-architecture-and-runtime]] — Python 아키텍처와 런타임
+- [[03-python-basic-syntax]] — Python 기본 문법
+- [[04-python-advanced-syntax-and-patterns]] — Python 고급 문법과 패턴
+- [[05-python-developer-essentials-by-seniority]] — Python 개발자 필수 지식 (레벨별)
+- [[06-python-testing-patterns]] — Python 테스팅 패턴
+- [[07-python-project-structure-and-tooling]] — Python 프로젝트 구조와 도구
 - [[python-dict-key-ordering]] — Python Dictionary Key 순서 보장 원리
 - [[uv-lock-conflict-resolution-best-practice]] — uv.lock 충돌 해결 Best Practice
 - [[uv-uvx-python-package-manager]] — uv와 uvx Python 패키지 관리
