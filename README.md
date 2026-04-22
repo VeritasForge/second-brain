@@ -13,7 +13,7 @@ A second brain for organizing and connecting ideas across topics I'm studying an
 - **Development** — Git workflows, database concepts, web architecture, Slack integration
 - **Algorithm** — Coding test strategies, backtracking, subarray/subsequence patterns
 - **Research** — Market research, industry analysis, deep research reports
-- **Security** — Security auditing, TPM deep dives, financial API security
+- **Security** — AWS IAM, OAuth/SSO, security auditing, TPM deep dives, financial API security
 - **Mac OS** — macOS configuration and tips
 
 ## Usage

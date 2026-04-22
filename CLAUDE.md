@@ -59,7 +59,7 @@ Uses Conventional Commits with vault-specific scopes:
 - **develop/**: git, database, frontend (fe/), claude-code, k8s, os, slack, python, go, architecture, performance
 - **algorithm/**: coding test strategies, backtracking, bit manipulation
 - **research/**: market research, industry analysis, deep research reports
-- **security/**: Nginx audit, TPM, OAuth, SSO, financial API security
+- **security/**: AWS IAM (User, Group, Policy, Role), Nginx audit, TPM, OAuth, SSO, financial API security
 - **career/**: job analysis, interview Q&A
 - **mac-os/**: macOS configuration
 

@@ -34,6 +34,7 @@
 
 ### develop
 - [[http-status-code-429-303]] — HTTP Status Code 429 & 303 완전 가이드 (Rate Limiting, PRG, Nginx, Retry-After)
+- [[long-polling-http-realtime-communication]] — Long Polling: HTTP 실시간 통신의 이해 (Short Polling, SSE, WebSocket 비교)
 - [[greenfield-project]] — 그린필드 프로젝트 개념
 - [[kotlin-vs-go]] — Kotlin vs Go 언어 비교 + Kotlin 핵심 기능 (null safety, data class, JDSL)
 - [[nvim-buffer-concept]] — Neovim 버퍼 개념 (버퍼 vs 윈도우 vs 탭)
@@ -158,6 +159,7 @@
 
 ### develop/performance
 - [[async-io-epoll-pgbouncer]] — 비동기 IO 전체 (epoll, kqueue, IOCP, 이벤트 루프, Pgbouncer)
+- [[connection-pool-eviction-lazy-idle]] — Connection Pool Eviction 전략 (Lazy vs Idle/Proactive, 타이머 리셋, 라이브러리 비교)
 - [[coroutine-gmp-vthread]] — Coroutine + Go GMP + Virtual Thread 동시성 비교
 - [[gc-g1-zgc]] — GC 전체 (Python RC, JVM G1/ZGC, Go GC 비교)
 - [[network-bandwidth-unit-conversion-deep-dive]] — 네트워크 대역폭 단위 변환 (Gbit, GB, GiB)
@@ -176,6 +178,7 @@
 - [[07-python-project-structure-and-tooling]] — Python 프로젝트 구조와 도구
 - [[python-dict-key-ordering]] — Python Dictionary Key 순서 보장 원리
 - [[uv-lock-conflict-resolution-best-practice]] — uv.lock 충돌 해결 Best Practice
+- [[python-requests-connection-pool-keepalive]] — Python requests Connection Pool, Keep-Alive, Stale Connection, Timeout 설계
 - [[uv-uvx-python-package-manager]] — uv와 uvx Python 패키지 관리
 
 ### develop/slack
@@ -214,6 +217,12 @@
 - [[ralph-loop-deep-research]] — Ralph Loop Deep Research
 
 ### security
+- [[aws-iam-architecture-and-integration]] — AWS IAM 4요소 유기적 결합 Deep Research
+- [[aws-iam-concept-explainer]] — AWS IAM (Identity and Access Management) Deep Dive
+- [[aws-iam-group-concept-explainer]] — AWS IAM Group Deep Dive
+- [[aws-iam-policy-concept-explainer]] — AWS IAM Policy Deep Dive
+- [[aws-iam-role-concept-explainer]] — AWS IAM Role Deep Dive
+- [[aws-iam-user-concept-explainer]] — AWS IAM User Deep Dive
 - [[oauth1-concept-explainer]] — OAuth 1.0 Deep Dive
 - [[oauth2-concept-explainer]] — OAuth 2.0 Deep Dive
 - [[security-audit-nginx]] — Nginx 보안 검토

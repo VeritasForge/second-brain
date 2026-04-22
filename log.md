@@ -2,6 +2,21 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-22] create | AWS IAM 개념 시리즈 (6개 문��)
+- created: [[aws-iam-user-concept-explainer]] — AWS IAM User 8관점 분석
+- created: [[aws-iam-group-concept-explainer]] — AWS IAM Group 8관점 분석
+- created: [[aws-iam-policy-concept-explainer]] — AWS IAM Policy 8관점 분석
+- created: [[aws-iam-role-concept-explainer]] — AWS IAM Role 8관점 분석
+- created: [[aws-iam-concept-explainer]] — AWS IAM 전체 개념 8관점 분석
+- created: [[aws-iam-architecture-and-integration]] — AWS IAM 4요소 유기적 결합 Deep Research
+
+## [2026-04-22] create | Connection Pool Eviction 전략 Deep Research
+- created: [[connection-pool-eviction-lazy-idle]] — Lazy vs Idle/Proactive Eviction, 타이머 리셋 동작, 라이브러리별 비교
+
+## [2026-04-22] create | HTTP Connection Pool, Keep-Alive, Long Polling (2개 문서)
+- created: [[python-requests-connection-pool-keepalive]] — Python requests Connection Pool, Keep-Alive, Stale Connection, Timeout 설계
+- created: [[long-polling-http-realtime-communication]] — Long Polling: HTTP 실시간 통신의 이해 (Short Polling, SSE, WebSocket 비교)
+
 ## [2026-04-21] create | gRPC Concept Deep Dive (Go 중심, rl-verify 검증 완료)
 - created: [[grpc-concept-deep-dive]] — gRPC 8관점 분석 + Go 코드 예시 + 수렴 검증 반영
 
