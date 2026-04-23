@@ -1,6 +1,7 @@
 ---
-tags: [security, aws, iam, iam-role, concept-explainer]
+tags: [security, aws, iam, iam-role, iam-sts, concept-explainer]
 created: 2026-04-22
+updated: 2026-04-23
 ---
 
 # 📖 AWS IAM Role — Concept Deep Dive
@@ -9,7 +10,7 @@ created: 2026-04-22
 
 ---
 
-## 1️�� 무엇인가? (What is it?)
+## 1️⃣ 무엇인가? (What is it?)
 
 **IAM Role**은 AWS 계정 내의 Identity로, **특정 권한을 가지되 장기 자격증명(Password, Access Key)이 없다**. 대신 Role을 **"Assume(맡다)"**하면 AWS STS(Security Token Service)가 **임시 자격증명**(Access Key + Secret Key + Session Token)을 발급해준다.
 
@@ -72,6 +73,50 @@ IAM Role은 **두 개의 Policy**로 구성된다: **"누가 이 Role을 맡을 
 | **Instance Profile** | EC2용 래퍼 | Role을 EC2 인스턴스에 전달하는 컨테이너 |
 | **External ID** | 혼동된 대리인 방지 | 서드파티 위임 시 추가 보안 식별자 |
 
+### 🏢 AWS STS (Security Token Service) 상세
+
+STS는 IAM과 별개의 **독립 AWS 서비스**로, **"임시 출입증 발급소"** 역할을 한다. IAM이 "권한을 정의"하는 서비스라면, STS는 "임시 자격증명을 발급"하는 서비스이다.
+
+> 💡 비유: 학교 방문자 명찰 발급 데스크. 신분 확인 후 "임시 명찰"을 주고, 시간이 지나면 자동 만료된다.
+
+| STS API | 용도 |
+|---------|------|
+| `AssumeRole` | Role을 맡아서 임시 자격증명 받기 |
+| `AssumeRoleWithWebIdentity` | OIDC IdP(Google, GitHub)로 Role Assume |
+| `AssumeRoleWithSAML` | SAML IdP(Okta, AD)로 Role Assume |
+| `GetSessionToken` | IAM User가 MFA 포함 임시 토큰 받기 |
+| `GetCallerIdentity` | "나 지금 누구로 인증됐지?" 확인 |
+
+STS가 발급하는 **임시 자격증명 구성**:
+
+```
+┌──────────────────────────────────────┐
+│  STS 임시 자격증명                    │
+│  ├── AccessKeyId     (ASIA... 시작)  │  ← IAM User의 AKIA...와 구별됨
+│  ├── SecretAccessKey (임시)          │
+│  ├── SessionToken    (필수 첨부)     │
+│  └── Expiration      (자동 만료)     │
+└──────────────────────────────────────┘
+```
+
+### 🔤 `sts:AssumeRole`의 `sts:`와 ARN의 `iam:`은 다르다
+
+Policy의 **Action 접두사**와 ARN의 **서비스 접두사**는 서로 다른 맥락에서 쓰인다.
+
+```
+Action 접두사:   서비스명:API명           ← "어떤 서비스의 어떤 동작?"
+                 s3:GetObject             ← S3의 GetObject API
+                 sts:AssumeRole           ← STS의 AssumeRole API
+                 iam:CreateUser           ← IAM의 CreateUser API
+
+ARN 접두사:      arn:aws:서비스명:리전:계정:리소스   ← "어떤 서비스에 존재하는 리소스?"
+                 arn:aws:s3:::my-bucket
+                 arn:aws:iam::123456:role/MyRole
+                 arn:aws:iam::123456:user/Alice
+```
+
+> 💡 비유: 도서관(IAM)에 책(Role)이 보관되어 있지만, 빌리는 행위(AssumeRole)는 사서 데스크(STS)가 처리한다. Role이라는 "리소스"는 IAM 서비스에 있지만, Role을 "맡는 동작"은 STS 서비스가 처리한다.
+
 ### 🎭 Role의 5가지 유형
 
 | 유형 | Trust Principal | 용도 |
@@ -81,6 +126,8 @@ IAM Role은 **두 개의 Policy**로 구성된다: **"누가 이 Role을 맡을 
 | **Cross-Account Role** | 다른 AWS 계정 | 계정 간 리소스 공유 |
 | **Web Identity Role** | OIDC IdP (Google, GitHub) | 외부 IdP 인증 사용자에게 AWS 접근 |
 | **SAML 2.0 Role** | SAML IdP (AD, Okta) | 기업 IdP 연동 |
+
+> 💡 **Trust Policy ≠ Cross-Account 전용**. Trust Policy는 "누가 이 Role을 Assume할 수 있는가"를 정의하는 것으로, cross-account는 여러 용도 중 하나일 뿐이다. AWS 서비스 연동(Lambda → SQS 등)이 가장 흔한 사용 사례이며, 같은 계정 내 권한 전환이나 외부 IdP(OIDC/SAML) 연동에도 모두 사용된다.
 
 ---
 
@@ -159,6 +206,52 @@ aws sts assume-role \
 #   }
 # }
 ```
+
+**시나리오: Lambda + SQS Trigger (Access Key 완전 불필요)**
+
+Lambda에서 SQS 트리거를 사용할 때, 개발자가 Access Key를 관리할 필요가 전혀 없다. AWS 런타임이 모든 자격증명을 자동으로 처리한다.
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  Lambda + SQS + IAM Role 동작 흐름                        │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ① 관리자가 Lambda Execution Role 생성                    │
+│     Trust Policy: lambda.amazonaws.com이 Assume 가능      │
+│     Permission Policy: sqs:ReceiveMessage 등 허용         │
+│                                                          │
+│  ② Lambda 함수에 이 Role을 연결                           │
+│                                                          │
+│  ③ SQS에 메시지 도착 → Lambda 트리거                      │
+│                                                          │
+│  ④ Lambda 런타임이 자동으로:                               │
+│     ├── STS에서 임시 자격증명 발급 (개발자 모름)             │
+│     ├── 환경변수에 임시 Key 주입                           │
+│     │   AWS_ACCESS_KEY_ID=ASIA...    (임시!)              │
+│     │   AWS_SECRET_ACCESS_KEY=...    (임시!)              │
+│     │   AWS_SESSION_TOKEN=...                            │
+│     └── AWS SDK가 자동으로 이 자격증명 사용                 │
+│                                                          │
+│  ⑤ 개발자 코드에서는 그냥:                                │
+│     import boto3                                         │
+│     sqs = boto3.client('sqs')  ← Key 안 넣어도 됨!       │
+│     sqs.receive_message(...)   ← 자동으로 Role 권한 사용  │
+│                                                          │
+│  ⑥ 임시 자격증명은 Lambda 실행 종료 후 자동 만료            │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+이 패턴은 Lambda뿐 아니라 거의 모든 AWS 서비스에 적용된다:
+
+| 서비스 | Role 연결 방식 | 자격증명 자동 관리 |
+|--------|---------------|-----------------|
+| **Lambda** | Execution Role | ✅ 환경변수 자동 주입 |
+| **EC2** | Instance Profile | ✅ IMDS에서 자동 갱신 |
+| **ECS** | Task Role | ✅ 컨테이너 자격증명 엔드포인트 |
+| **EKS** | IRSA (OIDC) | ✅ Pod 단위 Role 매핑 |
+
+> 💡 **핵심 원칙**: AWS 서비스 위에서 돌아가는 코드는 **항상 Role을 사용**하고, **절대 Access Key를 하드코딩하지 않는다**. 이것이 AWS 보안의 기본 중의 기본이다.
 
 ### 💻 Trust Policy 예시
 
@@ -262,6 +355,40 @@ IAM Role                         IAM User
 Key 유출 위험 최소                Key 유출 시 즉시 위험
 ```
 
+### 🔑 "Access Key가 필요한 게 아니라 인증이 필요한 것"
+
+모든 AWS API 호출에는 서명(Signature V4)이 필요하고, 서명에는 Key가 필요하다. **하지만 그 Key가 반드시 IAM User의 "장기" Access Key여야 하는 것은 아니다.**
+
+```
+모든 AWS API 호출
+    │
+    └── 서명(Signature V4) 필요
+         │
+         └── Key가 필요
+              │
+              ├── 장기 Key (IAM User)     ⚠️ 영구, 유출 위험 (AKIA... 시작)
+              │
+              └── 임시 Key (STS/Role)     ✅ 자동 만료, 자동 갱신 (ASIA... 시작)
+                   │
+                   └── 누가 발급?
+                        ├── SSO 로그인 → STS 발급
+                        ├── Role Assume → STS 발급
+                        ├── OIDC → STS 발급
+                        └── Instance Profile → STS 자동 발급
+```
+
+> 💡 비유: **집 열쇠(IAM User Access Key)** vs **호텔 카드키(STS 임시 자격증명)**. 둘 다 "문을 연다"는 기능은 같지만, 유출 시 위험도가 완전히 다르다. 집 열쇠를 잃어버리면 자물쇠를 교체해야 하지만, 호텔 카드키는 체크아웃하면 자동 비활성화된다.
+
+### 📊 실행 환경별 권장 인증 방식
+
+| 실행 환경 | 권장 인증 방식 | 장기 Access Key 필요? |
+|-----------|--------------|---------------------|
+| AWS 서비스 위 (Lambda, EC2, ECS) | IAM Role (자동 Assume) | ❌ 불필요 |
+| 개발자 로컬 PC (aws cli) | IAM Identity Center (SSO 로그인) | ❌ 불필요 |
+| CI/CD 파이프라인 (GitHub Actions) | OIDC Federation (Web Identity Role) | ❌ 불필요 |
+| 온프레미스 서버 | IAM Roles Anywhere (X.509 인증서) | ❌ 불필요 |
+| 레거시 도구 🦕 (Role 미지원) | IAM User Access Key (최소 권한 + 교체) | ⚠️ 어쩔수없음 |
+
 ### 🤔 언제 무엇을 선택?
 
 - **IAM Role을 선택하세요** → EC2/Lambda/ECS에서 AWS 서비스 접근, cross-account 접근, CI/CD OIDC 연동, 서드파티 SaaS 연동
@@ -280,6 +407,7 @@ Key 유출 위험 최소                Key 유출 시 즉시 위험
 | 3 | Permission Policy에 `"*"` 과도 사용 | Role을 Assume한 주체가 모든 리소스 접근 가능 | 최소 권한 원칙 적용 |
 | 4 | MaxSessionDuration을 12시간으로 설정 | 자격증명 유출 시 피해 시간이 길어짐 | 작업에 필요한 최소 시간 설정 |
 | 5 | Cross-Account Role에 MFA 미요구 | 탈취된 자격증명으로 다른 계정까지 침투 | Trust Policy에 MFA Condition 추가 |
+| 6 | "Role = Organizations/SSO 필수"라는 오해 | Role 도입을 불필요하게 지연 | **Organizations 없이도 IAM Role은 독립적으로 사용 가능**. SSO(IAM Identity Center)만 Organizations가 필요하다 |
 
 ### 🚫 Anti-Patterns
 
@@ -295,7 +423,80 @@ Key 유출 위험 최소                Key 유출 시 즉시 위험
 
 ---
 
-## 8️�� 개발자가 알아둬야 할 것들 (Developer's Toolkit)
+## 8️⃣ 개발자가 알아둬야 할 것들 (Developer's Toolkit)
+
+### 💻 로컬 AWS CLI에서 Role 사용하기
+
+#### 방법 1: IAM Identity Center (SSO) — AWS 최고 권장 ✅
+
+> ⚠️ **전제조건**: AWS Organizations 활성화 + IAM Identity Center 활성화 필요
+
+```bash
+# SSO 프로필 설정
+$ aws configure sso
+SSO session name: my-sso
+SSO start URL: https://my-org.awsapps.com/start
+SSO region: ap-northeast-2
+
+# 매일 로그인 (브라우저 열림 → 회사 계정으로 로그인)
+$ aws sso login --profile my-profile
+
+# 사용 — 장기 Access Key 없이 임시 자격증명 자동 사용
+$ aws s3 ls --profile my-profile
+$ aws ssm start-session --target i-xxx --profile my-profile
+```
+
+설정 후 `~/.aws/config`:
+
+```ini
+[profile my-profile]
+sso_session = my-sso
+sso_account_id = 123456789012
+sso_role_name = AdministratorAccess
+region = ap-northeast-2
+
+[sso-session my-sso]
+sso_start_url = https://my-org.awsapps.com/start
+sso_region = ap-northeast-2
+sso_registration_scopes = sso:account:access
+```
+
+#### 방법 2: Profile Chaining (Organizations 없이 사용 가능) ✅
+
+IAM User에 `sts:AssumeRole` 권한만 부여하고, 실제 작업은 항상 Role의 임시 자격증명으로 수행하는 방식이다.
+
+```ini
+# ~/.aws/config
+
+# 기본 프로필 (User의 장기 Key - sts:AssumeRole만 가능)
+[profile base]
+region = ap-northeast-2
+
+# Role 프로필 (실제 작업용 - base를 통해 자동 AssumeRole)
+[profile dev]
+role_arn = arn:aws:iam::123456789012:role/DevRole
+source_profile = base
+region = ap-northeast-2
+# mfa_serial = arn:aws:iam::123456789012:mfa/cjynim  ← MFA 사용 시
+```
+
+```bash
+# 사용 — 내부적으로 자동 AssumeRole 처리
+$ aws s3 ls --profile dev
+```
+
+> 💡 장기 Key는 남아있지만, `sts:AssumeRole` 외에는 아무 권한이 없으므로 유출 피해가 극히 제한된다.
+
+#### 두 방식 비교
+
+| 항목 | SSO (Identity Center) | Profile Chaining |
+|------|----------------------|-----------------|
+| Organizations 필요 | ✅ 필요 | ❌ 불필요 |
+| 장기 Key 존재 | ❌ 없음 | ✅ 있음 (최소 권한) |
+| 실제 작업 자격증명 | 임시 토큰 ✅ | 임시 토큰 ✅ |
+| Key 유출 시 피해 | 🎉 Key 없음 | ⚡ AssumeRole 권한만 노출 |
+| 설정 난이도 | ⭐⭐⭐ | ⭐⭐ |
+| 보안 수준 | ⭐⭐⭐⭐ | ⭐⭐⭐ |
 
 ### 📚 학습 리소스
 
@@ -304,6 +505,7 @@ Key 유출 위험 최소                Key 유출 시 즉시 위험
 | 📖 공식 문서 | IAM Roles | [AWS IAM Roles Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) |
 | 📖 공식 문서 | Confused Deputy Problem | [Confused Deputy Prevention](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html) |
 | 📖 공식 문서 | Common Scenarios for Roles | [Common Role Scenarios](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios.html) |
+| 📖 공식 문서 | IAM Identity Center | [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html) |
 | 📘 블로그 | Trust Policy 가이드 | [AWS Security Blog](https://aws.amazon.com/blogs/security/how-to-use-trust-policies-with-iam-roles/) |
 | 📘 블로그 | External ID 사용법 | [AWS Security Blog](https://aws.amazon.com/blogs/security/how-to-use-external-id-when-granting-access-to-your-aws-resources/) |
 
@@ -341,11 +543,13 @@ Key 유출 위험 최소                Key 유출 시 즉시 위험
 6. [AWS Trust Policy Complete Guide - DEV Community](https://dev.to/aws-builders/aws-trust-policy-complete-guide-how-to-control-iam-role-access-in-2025-cfi) — 블로그
 7. [AWS IAM Assume Role Vulnerabilities - Praetorian](https://www.praetorian.com/blog/aws-iam-assume-role-vulnerabilities/) — 보안 연구
 8. [IAM Roles Types & Use Cases - QloudX](https://www.qloudx.com/aws-iam-roles-types-use-cases/) — 블로그
+9. [AWS IAM Identity Center - AWS Official Docs](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html) — 공식 문서
+10. [AWS STS - AWS Official Docs](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) — 공식 문서
 
 ---
 
 > 🔬 **Research Metadata**
 > - 검색 쿼리 수: 4
-> - 수집 출처 수: 8
-> - 출처 유형: 공식 5, 블로그 2, 보안 연구 1, SNS 0
+> - 수집 출처 수: 10
+> - 출처 유형: 공식 7, 블로그 2, 보안 연구 1, SNS 0
 > - 관련 문서: [[05-aws-iam-concept-explainer]], [[01-aws-iam-user-concept-explainer]], [[02-aws-iam-group-concept-explainer]], [[03-aws-iam-policy-concept-explainer]]

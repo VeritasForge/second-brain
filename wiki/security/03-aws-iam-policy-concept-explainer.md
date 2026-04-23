@@ -244,6 +244,89 @@ Managed Policy                  Inline Policy
 권장됨 ✅                        특수 경우만 ⚠️
 ```
 
+> 💡 **Managed Policy의 두 종류 — 누가 만들었느냐의 차이**
+>
+> | 종류 | 만든 주체 | 예시 | 수정 가능? |
+> |------|----------|------|-----------|
+> | **AWS Managed Policy** | AWS가 미리 만들어둔 것 | `AmazonS3ReadOnlyAccess`, `AdministratorAccess` | ❌ 내가 수정 불가 (AWS가 업데이트) |
+> | **Customer Managed Policy** | 내가 직접 만든 것 | `MyCompany-DevS3Access` | ✅ 자유롭게 수정 가능 |
+>
+> ARN에서 구분 가능: AWS Managed는 계정 ID 자리에 `aws`가 들어간다:
+> - `arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess` ← AWS Managed
+> - `arn:aws:iam::123456789012:policy/MyS3ReadPolicy` ← Customer Managed
+
+> 💡 **실제 정의 & 사용 흐름 — "별도 생성 후 연결" vs "엔터티에 직접 작성"**
+>
+> ```
+> 📋 Managed Policy                          📋 Inline Policy
+> ━━━━━━━━━━━━━━━━━━                         ━━━━━━━━━━━━━━━━━━
+>
+> Step 1: Policy를 먼저 만든다               Step 1: 바로 엔터티에 작성한다
+>         (독립 존재)                                 (엔터티 안에 내장)
+>
+> Step 2: 여러 엔터티에 연결(Attach)          (끝! 해당 엔터티 전용)
+>         User A ──┐
+>         User B ──┼── 같은 Policy
+>         Role C ──┘
+> ```
+>
+> **Managed Policy 흐름 (2단계)**:
+>
+> ```bash
+> # Step 1: Policy를 독립적으로 생성 → ARN이 부여됨
+> aws iam create-policy \
+>     --policy-name MyS3ReadPolicy \
+>     --policy-document file://s3-read-policy.json
+> # → arn:aws:iam::123456789012:policy/MyS3ReadPolicy 생성
+>
+> # Step 2: 여러 엔터티에 같은 ARN을 연결(Attach)
+> aws iam attach-user-policy \
+>     --user-name cjynim \
+>     --policy-arn arn:aws:iam::123456789012:policy/MyS3ReadPolicy
+>
+> aws iam attach-group-policy \
+>     --group-name Developers \
+>     --policy-arn arn:aws:iam::123456789012:policy/MyS3ReadPolicy
+>
+> # AWS Managed Policy는 create 없이 ARN으로 바로 attach
+> aws iam attach-group-policy \
+>     --group-name Developers \
+>     --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+> ```
+>
+> **Inline Policy 흐름 (1단계 — 별도 생성 없이 직접 내장)**:
+>
+> ```bash
+> # 엔터티에 직접 작성 (put) — 이 User 안에 내장됨
+> aws iam put-user-policy \
+>     --user-name cjynim \
+>     --policy-name CjynimOnlyDynamoDB \
+>     --policy-document '{
+>       "Version": "2012-10-17",
+>       "Statement": [{
+>         "Effect": "Allow",
+>         "Action": "dynamodb:GetItem",
+>         "Resource": "arn:aws:dynamodb:ap-northeast-2:123456789012:table/UserProfile"
+>       }]
+>     }'
+> # ⚠️ 다른 User/Group에 공유 불가, cjynim 삭제 시 함께 삭제
+> ```
+>
+> **CLI 명령어 비교** — 명령어 이름 자체가 차이를 드러낸다:
+>
+> | 작업 | Managed (외부 연결) | Inline (내부 작성) |
+> |------|--------------------|--------------------|
+> | **User에 연결** | `attach-user-policy --policy-arn` | `put-user-policy --policy-document` |
+> | **Group에 연결** | `attach-group-policy --policy-arn` | `put-group-policy --policy-document` |
+> | **Role에 연결** | `attach-role-policy --policy-arn` | `put-role-policy --policy-document` |
+> | **조회** | `list-attached-user-policies` | `list-user-policies` + `get-user-policy` |
+> | **제거** | `detach-user-policy` | `delete-user-policy` |
+>
+> 📌 Managed: **attach**(연결) / **detach**(분리) — 외부의 것을 가져다 붙이는 느낌
+> 📌 Inline: **put**(넣기) / **delete**(삭제) — 안에 직접 집어넣는 느낌
+>
+> 💡 **핵심**: JSON 문서(정책 내용) 자체는 Managed든 Inline이든 **동일**하다. 차이는 **저장 위치와 관리 방식** — Managed는 독립 ARN으로 존재하여 여러 곳에 attach, Inline은 엔터티 내부에 직접 저장되어 1:1 관계.
+
 ### 🤔 언제 무엇을 선택?
 
 - **Managed Policy** → 여러 User/Group/Role에 동일한 권한을 부여할 때 (대부분의 경우)

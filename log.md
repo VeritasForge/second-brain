@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-23] update | AWS IAM Role — STS 상세, CLI 인증 방식, FAQ 보충
+- updated: [[04-aws-iam-role-concept-explainer]] — STS API 상세, Action vs ARN 접두사 차이, Lambda+SQS 시나리오, 로컬 CLI에서 Role 사용법 (SSO/Profile Chaining), Organizations 불필요 오해 교정
+
 ## [2026-04-23] restructure | AWS IAM 시리즈 번호 체계 + 허브 페이지
 - created: [[00-aws-iam-study-guide]] — AWS IAM 학습 가이드 (시리즈 허브 페이지)
 - restructured: 01~06 번호 접두어 추가, 읽기 순서 및 레벨별 추천 경로 안내
