@@ -230,6 +230,7 @@
 - [[solo-developer-financial-api-security]] — 1인 개발자 금융 API 보안 전략
 - [[sso-concept-explainer]] — SSO (Single Sign-On) Deep Dive
 - [[sso-concept-explainer-src]] — SSO 8관점 분석 Source Card
+- [[ssh-vs-ssm-session-manager]] — SSH vs SSM Session Manager: 프로토콜, 아키텍처, 통신 구조, TOFU/PKI/MITM 비교
 - [[sso-oauth-comparison-and-architecture]] — SSO-OAuth 비교 + Google SSO 아키텍처
 - [[tpm-deep-research-guide]] — TPM 종합 가이드
 - [[tpm-userwithauth-vs-pcr-deep-research]] — TPM UserWithAuth vs PCR Deep Research
