@@ -5,7 +5,7 @@ created: 2026-04-22
 
 # 🔬 AWS IAM 4요소 유기적 결합 — Deep Research
 
-> **관련 문서**: [[aws-iam-concept-explainer]], [[aws-iam-user-concept-explainer]], [[aws-iam-group-concept-explainer]], [[aws-iam-policy-concept-explainer]], [[aws-iam-role-concept-explainer]]
+> **관련 문서**: [[05-aws-iam-concept-explainer]], [[01-aws-iam-user-concept-explainer]], [[02-aws-iam-group-concept-explainer]], [[03-aws-iam-policy-concept-explainer]], [[04-aws-iam-role-concept-explainer]]
 
 ---
 

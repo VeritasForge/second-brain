@@ -310,4 +310,4 @@ IAM User                        IAM Identity Center User
 > - 검색 쿼리 수: 6
 > - 수집 출처 수: 8
 > - 출처 유형: 공식 4, 블로그 4, 커뮤니티 2, SNS 0
-> - 관련 문서: [[aws-iam-concept-explainer]], [[aws-iam-group-concept-explainer]], [[aws-iam-policy-concept-explainer]], [[aws-iam-role-concept-explainer]]
+> - 관련 문서: [[05-aws-iam-concept-explainer]], [[02-aws-iam-group-concept-explainer]], [[03-aws-iam-policy-concept-explainer]], [[04-aws-iam-role-concept-explainer]]

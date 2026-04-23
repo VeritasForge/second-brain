@@ -301,4 +301,4 @@ Principal 아님                     Principal임
 > - 검색 쿼리 수: 5
 > - 수집 출처 수: 7
 > - 출처 유형: 공식 2, 블로그 5, 커뮤니티 1, SNS 0
-> - 관련 문서: [[aws-iam-concept-explainer]], [[aws-iam-user-concept-explainer]], [[aws-iam-policy-concept-explainer]], [[aws-iam-role-concept-explainer]]
+> - 관련 문서: [[05-aws-iam-concept-explainer]], [[01-aws-iam-user-concept-explainer]], [[03-aws-iam-policy-concept-explainer]], [[04-aws-iam-role-concept-explainer]]

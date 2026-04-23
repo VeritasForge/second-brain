@@ -2,6 +2,10 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-23] restructure | AWS IAM 시리즈 번호 체계 + 허브 페이지
+- created: [[00-aws-iam-study-guide]] — AWS IAM 학습 가이드 (시리즈 허브 페이지)
+- restructured: 01~06 번호 접두어 추가, 읽기 순서 및 레벨별 추천 경로 안내
+
 ## [2026-04-22] create | AWS IAM 개념 시리즈 (6개 문��)
 - created: [[aws-iam-user-concept-explainer]] — AWS IAM User 8관점 분석
 - created: [[aws-iam-group-concept-explainer]] — AWS IAM Group 8관점 분석

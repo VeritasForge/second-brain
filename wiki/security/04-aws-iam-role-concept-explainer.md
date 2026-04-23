@@ -348,4 +348,4 @@ Key 유출 위험 최소                Key 유출 시 즉시 위험
 > - 검색 쿼리 수: 4
 > - 수집 출처 수: 8
 > - 출처 유형: 공식 5, 블로그 2, 보안 연구 1, SNS 0
-> - 관련 문서: [[aws-iam-concept-explainer]], [[aws-iam-user-concept-explainer]], [[aws-iam-group-concept-explainer]], [[aws-iam-policy-concept-explainer]]
+> - 관련 문서: [[05-aws-iam-concept-explainer]], [[01-aws-iam-user-concept-explainer]], [[02-aws-iam-group-concept-explainer]], [[03-aws-iam-policy-concept-explainer]]
