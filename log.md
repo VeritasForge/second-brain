@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-04-24] create | Computer-Use MCP Server Deep Dive
+- created: [[computer-use-mcp-server]] — Claude Code 빌트인 MCP 서버로 macOS GUI 앱 직접 조작 (스크린샷, 클릭, 타이핑), 동작 원리, 보안 모델, 4가지 도구 비교
+
 ## [2026-04-23] create | SSH vs SSM Session Manager Deep Dive
 - created: [[ssh-vs-ssm-session-manager]] — SSH vs SSM 프로토콜 차이, TOFU/PKI 신뢰 모델, MITM 공격, 공격 표면, SSM 통신 구조(폴링/WebSocket), 셸 릴레이 메커니즘, SSM Agent 기본 정보
 

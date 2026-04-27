@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-04-21
+> 최종 갱신: 2026-04-24
 
 ## 문서 목록
 
@@ -79,6 +79,7 @@
 - [[docs-solutions-usage-and-design]] — Compound Engineering Plugin 문서/솔루션 설계
 - [[gstack-skills-catalog]] — GStack Skills Catalog
 - [[ouroboros-workflow-overview]] — Ouroboros 워크플로우 전체 흐름
+- [[computer-use-mcp-server]] — Computer-Use MCP Server Deep Dive (Claude Code 빌트인 GUI 자동화)
 - [[skill-edd-tdd-best-practices]] — Skill 검증/리뷰 TDD/EDD Best Practice
 
 ### develop/database
