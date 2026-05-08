@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-04-24
+> 최종 갱신: 2026-05-08
 
 ## 문서 목록
 
@@ -19,6 +19,7 @@
 ### algorithm
 - [[32bit-signed-integer-range]] — 32비트 부호 있는 정수 범위
 - [[backtracking-pattern]] — 백트래킹 패턴
+- [[bloom-filter]] — Bloom Filter Concept Deep Dive (확률적 자료구조, FPR, 9.6bit/원소, Cassandra/Redis/Bitcoin 사례, vs Cuckoo/HyperLogLog)
 - [[coding-test-preparation-strategy]] — 코딩 테스트 준비 전략
 - [[power-of-three-326-modulo-trick]] — Power of Three 모듈로 트릭
 - [[power-of-two-bit-trick]] — 2의 거듭제곱 비트 판별
@@ -110,6 +111,7 @@
 - [[git-cat-file-for-each-ref]] — Git 내부 명령어 가이드 (cat-file, for-each-ref)
 - [[git-log-branch-diff]] — Git Log Branch Diff
 - [[git-rebase-onto]] — git rebase --onto 설명
+- [[git-ref-version-sort-guide]] — Git Ref 버전/자연 정렬 가이드 (sort -V, --sort=v:refname, refname 컨텍스트별 의미)
 - [[git-reflog-recovery-guide]] — Git Reflog 개념과 실수 복구 활용법
 - [[git-tag-annotated-lightweight]] — Git Tag 완전 가이드 (Annotated vs Lightweight, GPG 서명, push, 삭제)
 - [[scaled-trunk-based-development]] — Scaled Trunk-Based Development 종합 정리
@@ -152,6 +154,15 @@
 ### develop/k8s
 - [[tutorial]] — K8s Hello World 실무형 튜토리얼
 
+### develop/network
+- [[http-protocol-interview-qa]] — HTTP/1.1·2·3 면접 대비 Q&A 30+ (함정 질문, 시스템 디자인, QUIC 포함)
+- [[http1-1-concept-explainer]] — HTTP/1.1 Concept Deep Dive (persistent connection, pipelining, chunked, caching)
+- [[http1-1-problems-and-http2-evolution]] — HTTP/1.1 문제 → HTTP/2 진화 매핑 (도메인 샤딩 안티패턴, server push 실패)
+- [[http2-concept-explainer]] — HTTP/2 Concept Deep Dive (binary frame, multiplexing, HPACK, Rapid Reset)
+- [[http2-perspective-grpc-and-ecosystem]] — HTTP/2 관점 gRPC + 생태계 (APNs, Web Push, K8s, Envoy xDS)
+- [[http3-quic-concept-explainer]] — HTTP/3 + QUIC Concept Deep Dive (UDP+TLS1.3, 0-RTT, connection migration, QPACK)
+- [[why-http1-1-still-dominates]] — 왜 HTTP/1.1이 여전히 주류인가 (CDN edge↔origin, L4 LB, 디버깅, 기업망)
+
 ### develop/os
 - [[atomic-mutex-semaphore-qa-deep-dive]] — Atomic/Mutex/Semaphore 심화 Q&A Deep Dive
 - [[gnu-stow-concept-deep-dive]] — GNU Stow Deep Dive
@@ -163,6 +174,7 @@
 - [[connection-pool-eviction-lazy-idle]] — Connection Pool Eviction 전략 (Lazy vs Idle/Proactive, 타이머 리셋, 라이브러리 비교)
 - [[coroutine-gmp-vthread]] — Coroutine + Go GMP + Virtual Thread 동시성 비교
 - [[gc-g1-zgc]] — GC 전체 (Python RC, JVM G1/ZGC, Go GC 비교)
+- [[kotlin-coroutine-vs-java-thread-vthread]] — Kotlin Coroutine vs Java Thread/Virtual Thread Deep Dive (JEP 491/505, 면접 Q&A 10선, JDK 25 LTS 기준)
 - [[network-bandwidth-unit-conversion-deep-dive]] — 네트워크 대역폭 단위 변환 (Gbit, GB, GiB)
 - [[python-go-java-performance-myth-deep-dive]] — Python vs Go/Java 성능 신화 Deep Dive
 - [[python-go-java-performance-myth-draft]] — Python vs Go/Java 성능 신화 Draft

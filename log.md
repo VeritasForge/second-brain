@@ -2,6 +2,24 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-05-08] create | Git Ref 버전/자연 정렬 가이드
+- created: [[git-ref-version-sort-guide]] — 5섹션 정리. (1) 자연 정렬 vs 사전식 정렬 비교 + GNU sort -V/ls -v/git --sort=v:refname/Python natsort/JS localeCompare 도구 매트릭스, (2) `--sort=v:refname` 문법 분해 (v: 접두어 = version 정렬, refname = 정렬 대상) + git sort 키 표 (refname/v:refname/creatordate/committerdate/taggerdate), (3) refname의 컨텍스트별 의미 (refs/tags vs refs/heads vs refs/remotes), (4) er-* 태그 오름/내림차순/최신 추출 실전 예시, (5) macOS BSD sort 한계, SemVer prerelease 정렬 한계, refname:short 별칭, 전체 경로 정렬 주의
+
+## [2026-05-06] create | Bloom Filter Concept Deep Dive
+- created: [[bloom-filter]] — concept-explainer 8섹션 리포트. Burton Bloom 1970, m·k·n·p 수식 (k* = (m/n)·ln2, m = -n·ln(p)/(ln2)², 1% FPR ≈ 9.6 bit/원소), Insert/Query ASCII 흐름, Cassandra/RocksDB/Redis/Bitcoin SPV 유즈케이스, Cuckoo/HyperLogLog/Count-Min Sketch 비교 매트릭스, Cloudflare 메모리 무작위 접근 함정, Learned Bloom Filter 트렌드. Sources 12 (Wikipedia, Cloudflare, Redis, AWS, InfoQ, Berkeley CS170 등)
+
+## [2026-05-01] create | Kotlin Coroutine vs Java Thread/Virtual Thread Deep Dive
+- created: [[kotlin-coroutine-vs-java-thread-vthread]] — concept-explainer 8섹션 + 면접 Q&A 10선. JEP 444/491/505 반영 (JDK 24 synchronized pinning 해소, JDK 25 Structured Concurrency 5th Preview), CPS 변환·상태머신, mount/unmount, Dispatchers.IO work-stealing, 메모리/컨텍스트 스위치 비용 3-way 매트릭스, 선택 결정 트리, 안티패턴 8개, JFR 모니터링 가이드. Sources 15+ (공식 JEP 3, Oracle/JetBrains 공식, Inside Java, Rock the JVM, Medium 벤치마크)
+
+## [2026-04-28] create | HTTP 프로토콜 시리즈 (1.1/2/3·QUIC)
+- created: [[http1-1-concept-explainer]] — HTTP/1.1 8관점 분석 (persistent connection, pipelining, chunked, caching, RFC 9110~9112)
+- created: [[http2-concept-explainer]] — HTTP/2 8관점 분석 (binary frame, multiplexing, HPACK, server push deprecated, Rapid Reset CVE-2023-44487)
+- created: [[http1-1-problems-and-http2-evolution]] — HTTP/1.1 6대 문제 → HTTP/2 해결 매핑, 도메인 샤딩 안티패턴, 103 Early Hints
+- created: [[why-http1-1-still-dominates]] — HTTP/1.1 잔존 8가지 이유 (CDN edge↔origin, L4 LB, 기업망, 디버깅, REST 생태계)
+- created: [[http2-perspective-grpc-and-ecosystem]] — HTTP/2 관점 gRPC 매핑표 (Stream/HEADERS/Trailers/Flow control), APNs, Web Push, K8s API, Envoy xDS
+- created: [[http3-quic-concept-explainer]] — HTTP/3 + QUIC 8관점 분석 (UDP+TLS1.3, 0-RTT, connection migration, QPACK, Multipath/MASQUE)
+- created: [[http-protocol-interview-qa]] — 면접 Q&A 33문항 (기본/함정/성능/시스템디자인/HTTP3 카테고리)
+
 ## [2026-04-24] create | Computer-Use MCP Server Deep Dive
 - created: [[computer-use-mcp-server]] — Claude Code 빌트인 MCP 서버로 macOS GUI 앱 직접 조작 (스크린샷, 클릭, 타이핑), 동작 원리, 보안 모델, 4가지 도구 비교
 
