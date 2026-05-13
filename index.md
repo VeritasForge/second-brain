@@ -78,6 +78,7 @@
 - [[claude-code-memory-system-deep-dive]] — Claude Code Memory System Deep Dive
 - [[claude-code-memory-system-qa]] — Claude Code Memory System Q&A Deep Dive
 - [[claude-code-rules-vs-claude-md]] — CLAUDE.md vs .claude/rules/ 차이점
+- [[claude-context-assets-4-scope-model]] — Claude Code 컨텍스트 자산 4-Scope 모델 (CLAUDE.md/Rules/Skills 로딩 메커니즘 + 토큰 절약 진짜 그림)
 - [[codex-plugin-cc-analysis]] — Codex Plugin for Claude Code 종합 분석
 - [[docs-solutions-usage-and-design]] — Compound Engineering Plugin 문서/솔루션 설계
 - [[gstack-skills-catalog]] — GStack Skills Catalog
@@ -249,6 +250,7 @@
 - [[sso-oauth-comparison-and-architecture]] — SSO-OAuth 비교 + Google SSO 아키텍처
 - [[tpm-deep-research-guide]] — TPM 종합 가이드
 - [[tpm-userwithauth-vs-pcr-deep-research]] — TPM UserWithAuth vs PCR Deep Research
+- [[trivy-auto-patch-cron-vs-ci-design]] — Trivy 자동 보안 패치 운영 모델 — Cron 배치 vs CI 트리거 (Trunk-only 모델 + KEV fast-path)
 
 ## 태그 마스터 목록
 
