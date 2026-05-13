@@ -14,6 +14,7 @@
 - [[ralph-playbook-korean-translation]] — The Ralph Playbook 한국어 번역 및 정리
 - [[ralph-superpowers-compund]] — Ralph Loop + Superpowers + Compound Engineering 조합 가이드
 - [[rl-verify-vs-ouroboros-analysis]] — rl-verify vs Ouroboros 비교 분석 및 온톨로지 심층 탐구
+- [[simultaneous-interpretation-service]] — 동시통역 서비스 Deep Research (ASR/NMT/TTS 파이프라인, Cascaded vs E2E, 한국어 SOV 어순 이슈)
 - [[study-ouroboros]] — Ouroboros: 명세 우선 AI 개발 엔진 스터디
 
 ### algorithm
@@ -51,6 +52,7 @@
 
 ### develop/architecture
 - [[architecture-comprehensive-comparison]] — 4대 아키텍처 종합 비교
+- [[aws-eventbridge-lambda-batch-stack]] — Python + EventBridge + Lambda + AWS Batch 스택 의사결정 트리 (Scheduler vs Rules, Lambda 생략 옵션, Fargate vs EC2 Spot, CDK/SAM/Terraform 비교)
 - [[aws-sns-sqs-dlq-comparison]] — AWS SNS vs SQS DLQ 비교 (EDA 기반 MSA 메시지 전달 보장)
 - [[sli-slo-sla-guide]] — SLI, SLO, SLA 서비스 신뢰성 지표 체계
 - [[solid-principles-complete-guide]] — SOLID 원칙 완전 정복 (정의, 예제, 관계, 실무 적용)

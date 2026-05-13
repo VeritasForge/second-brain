@@ -2,6 +2,12 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-05-13] create | 동시통역 (Simultaneous Interpretation) 서비스 Deep Research
+- created: [[simultaneous-interpretation-service]] — deep-research 3-phase 결과. (1) 표준 Cascaded 파이프라인 (ASR→NMT→TTS) 아키텍처 + Silero VAD 16kHz/32ms chunk 사양, (2) TTS가 RTF의 62% 차지 → streaming TTS 적용 시 4200ms→475ms 단축 (Deepgram 검증), (3) 총 latency 목표 500ms(대화)/2-3s(강의), (4) Meta SeamlessM4T v2 + EMMA (Efficient Monotonic Multihead Attention) E2E 아키텍처 + UnitY2 framework (arXiv 2312.05187), (5) Cascaded vs E2E BLEU 비교 (many-to-many 21.6 vs 15.8, into-English 22.0 vs 26.6), (6) 한국어 SOV↔SVO 어순 이슈 + CWMT(Chunk-wise Monotonic Translation) 해결 전략 (arXiv 2404.12299), (7) Samsung Galaxy AI Live Translate 18+ 언어 (Korean 포함, dialer+WhatsApp/KakaoTalk) vs iOS 26 Live Translation (한국어 미지원, ES/PT/DE/FR만), (8) 컴포넌트 벤더 매트릭스 (Deepgram Nova-3 200-300ms / Cartesia Sonic 3 <200ms / ElevenLabs Turbo v3 300-400ms), (9) 한국어 production stack 권고 [Synthesized]: Deepgram/Whisper KR + LLM MT(register prompt) + Cartesia/ElevenLabs streaming TTS. Sources 11 (arXiv 4, 공식 3, 기술 블로그 4). 확신도 분포: ✅Confirmed 13 / 🟡Likely 9 / 🔄Synthesized 3 / ❓Uncertain 1
+
+## [2026-05-08] create | Python + EventBridge + Lambda + AWS Batch 스택 조사
+- created: [[aws-eventbridge-lambda-batch-stack]] — deep-research 3-phase 결과. EventBridge Scheduler vs Rules 매트릭스 (IANA TZ/one-time/DLQ/계정당 수백만 한도), Lambda → Batch 트리거 3경로 (boto3.submit_job / Step Functions submitJob.sync / EventBridge → Batch 직접), IaC 5종 비교 (CDK/SAM/Serverless/Terraform/CFN), Fargate(500 launches/min) vs EC2 Spot 권장 매트릭스, Lambda Python 3.13/3.14 런타임 (Deprecation 2029-06-30), Powertools v3.21+ Pydantic 통합, X-Ray maintenance(2026-02-25) → ADOT 권장, EventBridge DLQ 자가치유 패턴, GitHub Actions OIDC, 의사결정 트리(STACK A 미니멀/B 표준/C 워크플로우). Sources 13 (AWS 공식 9, primary 1, blog 3)
+
 ## [2026-05-08] create | Git Ref 버전/자연 정렬 가이드
 - created: [[git-ref-version-sort-guide]] — 5섹션 정리. (1) 자연 정렬 vs 사전식 정렬 비교 + GNU sort -V/ls -v/git --sort=v:refname/Python natsort/JS localeCompare 도구 매트릭스, (2) `--sort=v:refname` 문법 분해 (v: 접두어 = version 정렬, refname = 정렬 대상) + git sort 키 표 (refname/v:refname/creatordate/committerdate/taggerdate), (3) refname의 컨텍스트별 의미 (refs/tags vs refs/heads vs refs/remotes), (4) er-* 태그 오름/내림차순/최신 추출 실전 예시, (5) macOS BSD sort 한계, SemVer prerelease 정렬 한계, refname:short 별칭, 전체 경로 정렬 주의
 
