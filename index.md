@@ -68,6 +68,7 @@
 - [[layered-architecture-comprehensive]] — Layered Architecture Comprehensive
 - [[layered-architecture-concept-deep-dive]] — Layered Architecture Deep Dive
 - [[restful-architecture-concept-deep-dive]] — RESTful Architecture Deep Dive
+- [[url-mention-unfurling]] — URL Mention (Unfurling) Concept Deep Dive — OGP/Twitter Card/oEmbed 비교, SSRF 가드, Python 구현 4종 (BeautifulSoup/safe-sync/async+Redis/linkpreview)
 - [[video-upscaling-service-architecture]] — Video Upscaling Service Architecture
 
 ### develop/claude-code
