@@ -231,6 +231,7 @@
 - [[07-competitive-intel]] — 경쟁 정보원 조사 리포트
 - [[08-deep-research-differentiation]] — KICK 차별화 Deep Research
 - [[09-pivot-mvp-design]] — KICK 피봇 MVP 설계
+- [[hong-gildong-service-design]] — 홍길동(Hong Gildong) 사회 부조리 폭로 SNS 종합 디자인 v3 (시장/법/서비스/아키텍처/수익/로드맵, 한국 단일시장 + 보수적 위험정책 + Web-first PWA + 뉴스타파형 후원 + OCCRP형 데이터 라이선스 복합 모델, 6 페르소나 document-review + rl-verify 사실 검증 합의 완료)
 - [[ralph-loop-deep-research]] — Ralph Loop Deep Research
 
 ### security

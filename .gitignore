@@ -1,7 +1,10 @@
 .superpowers
 docs
 .DS_Store
+career
 
 # Obsidian - local session state
 .obsidian/workspace.json
 .obsidian/graph.json
+
+
