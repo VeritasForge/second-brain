@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-05-08
+> 최종 갱신: 2026-05-21
 
 ## 문서 목록
 
@@ -22,6 +22,7 @@
 - [[backtracking-pattern]] — 백트래킹 패턴
 - [[bloom-filter]] — Bloom Filter Concept Deep Dive (확률적 자료구조, FPR, 9.6bit/원소, Cassandra/Redis/Bitcoin 사례, vs Cuckoo/HyperLogLog)
 - [[coding-test-preparation-strategy]] — 코딩 테스트 준비 전략
+- [[dutch-national-flag]] — Dutch National Flag (DNF) Concept Deep Dive (Dijkstra 1976, 3-way partitioning, 포인터 초기값과 invariant 사고법, LeetCode 75)
 - [[power-of-three-326-modulo-trick]] — Power of Three 모듈로 트릭
 - [[power-of-two-bit-trick]] — 2의 거듭제곱 비트 판별
 - [[prime-power-divisibility-trick]] — 소수 거듭제곱 나눗셈 트릭
@@ -218,6 +219,10 @@
 - [[macbook-lid-close-sleep-prevention]] — MacBook 덮개 닫기 수면 방지
 
 ### research
+- **AX(AI Transformation) 시리즈 3-노트** (`wiki/research/ax/`)
+  - [[01-ax-concept-vs-dx]] — AX 개념과 DX와의 관계 (양론 병기 + 회색지대 부록표 + 산업·정책 배경, 16 출처)
+  - [[02-ax-success-cases]] — JPMorgan/Maersk/Siemens/Microsoft 4사례 카테고리 (b)/(b)/(c)/(a) 분리, JPMorgan deep dive, induced 패턴 5건
+  - [[03-ax-process-framework]] — 6단계 framework + 백엔드 엔지니어 횡단 부록(DevOps→LLMOps→AI Platform Engineer) + RAND/Acemoglu/Evans/Marcus Anti-Pattern
 - [[4th-5th-industrial-revolution-deep-research]] — 4/5차 산업혁명 Deep Research
 - [[kick-cafe-research-detail]] — KICK 카페 리서치 상세 보고서
 - [[kick-market-factcheck-report]] — KICK 시장 팩트체크 리포트
