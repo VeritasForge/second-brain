@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-05-21
+> 최종 갱신: 2026-05-22
 
 ## 문서 목록
 
@@ -27,6 +27,7 @@
 - [[power-of-two-bit-trick]] — 2의 거듭제곱 비트 판별
 - [[prime-power-divisibility-trick]] — 소수 거듭제곱 나눗셈 트릭
 - [[subarray-vs-subsequence-vs-subset]] — Subarray vs Subsequence vs Subset
+- [[two-pointer-read-write-pattern]] — Two Pointer Read/Write 패턴 완벽 가이드 (in-place 배열 필터링, 불변량, LeetCode 26/27/80/283/905/1089 매핑)
 
 ### career
 - [[inshorts-ai-platform-lead-analysis]] — Inshorts AI 플랫폼 리드 분석
@@ -87,6 +88,7 @@
 - [[ouroboros-workflow-overview]] — Ouroboros 워크플로우 전체 흐름
 - [[computer-use-mcp-server]] — Computer-Use MCP Server Deep Dive (Claude Code 빌트인 GUI 자동화)
 - [[skill-edd-tdd-best-practices]] — Skill 검증/리뷰 TDD/EDD Best Practice
+- [[vercel-skills-and-workflow-integration]] — Vercel 스킬 3종(react-best-practices/composition-patterns/react-native) + Superpowers·Plan Mode 워크플로우 연계 가이드
 
 ### develop/database
 - [[database-cardinality-deep-dive]] — 카디널리티 (Cardinality) Deep Dive
@@ -97,8 +99,10 @@
 - [[googlebot-crawling-mechanism-seo]] — Googlebot 크롤링 메커니즘 & SEO
 - [[kakao-maps-viewport-control-deep-dive]] — Kakao Maps Viewport (isPanto/center/panTo) Deep Dive
 - [[modern-web-architecture-bff-ssr-spa-vite-seo]] — 현대 웹 아키텍처 BFF/SSR/SPA/Vite/SEO
+- [[nextjs-performance-and-swr-concepts]] — Next.js 페이지가 느린 이유와 핵심 개념 정리 (use client, fetch waterfall, SWR, Server Component, Event Loop, 처방 매트릭스 + Vercel 룰 매핑)
 - [[react-hydration-ssr-deep-dive]] — React Hydration & SSR Deep Dive
 - [[react-server-components-rsc-deep-dive]] — React Server Components (RSC) Deep Dive
+- [[react-transition]] — React Transition (useTransition / startTransition) — 비긴급 상태 업데이트 우선순위 조절, 폴링 깜빡임 방지 패턴
 - [[sse-event-design-strategy-snapshot-vs-delta]] — SSE 이벤트 설계 전략 Snapshot vs Delta
 
 ### develop/js-ts
