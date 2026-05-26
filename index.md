@@ -39,6 +39,7 @@
 ### develop
 - [[http-status-code-429-303]] — HTTP Status Code 429 & 303 완전 가이드 (Rate Limiting, PRG, Nginx, Retry-After)
 - [[long-polling-http-realtime-communication]] — Long Polling: HTTP 실시간 통신의 이해 (Short Polling, SSE, WebSocket 비교)
+- [[engineering-taste-concept]] — "Taste" 엔지니어링 심미안/판단력의 정체 (Jobs 1995→Graham 2002→Karpathy AI시대 계보, taste≠skill, 트레이드오프 판단, product/outcome taste, 훈련법, 8 출처)
 - [[greenfield-project]] — 그린필드 프로젝트 개념
 - [[kotlin-vs-go]] — Kotlin vs Go 언어 비교 + Kotlin 핵심 기능 (null safety, data class, JDSL)
 - [[nvim-buffer-concept]] — Neovim 버퍼 개념 (버퍼 vs 윈도우 vs 탭)
@@ -223,6 +224,8 @@
 - [[macbook-lid-close-sleep-prevention]] — MacBook 덮개 닫기 수면 방지
 
 ### research
+- [[ai-era-confluence-jira-alternatives]] — AI 시대 Confluence/JIRA 대체 도구 조사·검증 종합 (대체재 지형, Plane/Huly/Forgejo/Docmost/Backlog.md 비교, 라이선스 리스크, Forgejo 도입+MCP 기여 정정 추천, rl-verify 2회)
+- [[ai-native-engineer-role]] — AI Native Engineer 직군 완전 해부 (정의·6대 역량·Agent Wrangler 업무·기존 SWE/ML/AI Engineer 비교·한국 시장 무신사·그루우·연봉 프리미엄 20-30%, 11 출처 교차 검증)
 - **AX(AI Transformation) 시리즈 3-노트** (`wiki/research/ax/`)
   - [[01-ax-concept-vs-dx]] — AX 개념과 DX와의 관계 (양론 병기 + 회색지대 부록표 + 산업·정책 배경, 16 출처)
   - [[02-ax-success-cases]] — JPMorgan/Maersk/Siemens/Microsoft 4사례 카테고리 (b)/(b)/(c)/(a) 분리, JPMorgan deep dive, induced 패턴 5건
