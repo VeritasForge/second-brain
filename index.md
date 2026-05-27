@@ -226,6 +226,7 @@
 ### research
 - [[ai-era-confluence-jira-alternatives]] — AI 시대 Confluence/JIRA 대체 도구 조사·검증 종합 (대체재 지형, Plane/Huly/Forgejo/Docmost/Backlog.md 비교, 라이선스 리스크, Forgejo 도입+MCP 기여 정정 추천, rl-verify 2회)
 - [[ai-native-engineer-role]] — AI Native Engineer 직군 완전 해부 (정의·6대 역량·Agent Wrangler 업무·기존 SWE/ML/AI Engineer 비교·한국 시장 무신사·그루우·연봉 프리미엄 20-30%, 11 출처 교차 검증)
+- [[ai-native-engineer-talk-outline]] — AI Native Engineer 발표 골격 (개발자 청중 20-30분 교육, 8슬롯 메시지+근거+화면+시간, 자가진단 10항목, 벤더/비-벤더 출처 규칙)
 - **AX(AI Transformation) 시리즈 3-노트** (`wiki/research/ax/`)
   - [[01-ax-concept-vs-dx]] — AX 개념과 DX와의 관계 (양론 병기 + 회색지대 부록표 + 산업·정책 배경, 16 출처)
   - [[02-ax-success-cases]] — JPMorgan/Maersk/Siemens/Microsoft 4사례 카테고리 (b)/(b)/(c)/(a) 분리, JPMorgan deep dive, induced 패턴 5건
