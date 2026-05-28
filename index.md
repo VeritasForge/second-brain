@@ -97,6 +97,7 @@
 - [[timestamp-vs-datetime-deep-dive]] — TIMESTAMP vs DATETIME Deep Dive
 
 ### develop/fe
+- [[aria-activedescendant-vs-roving-focus]] — aria-activedescendant vs Roving Focus (Roving Tabindex) 키보드 네비게이션 패턴 비교
 - [[googlebot-crawling-mechanism-seo]] — Googlebot 크롤링 메커니즘 & SEO
 - [[kakao-maps-viewport-control-deep-dive]] — Kakao Maps Viewport (isPanto/center/panTo) Deep Dive
 - [[modern-web-architecture-bff-ssr-spa-vite-seo]] — 현대 웹 아키텍처 BFF/SSR/SPA/Vite/SEO

@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-05-28] create | aria-activedescendant vs Roving Focus 키보드 네비게이션 패턴
+- created: [[aria-activedescendant-vs-roving-focus]] — WAI-ARIA 공식 속성 aria-activedescendant(DOM focus 고정 + 시각 하이라이트) vs Roving Focus/Roving Tabindex(실제 DOM focus 이동) 두 패턴 비교. activeIndex 용어 설명(React 관용 변수명), tabindex 동적 관리 원리, 구현 코드 스케치
+
 ## [2026-05-27] create+update | AI Native Engineer 발표용 조사·보강 (brainstorming→plan→4조사관 실행)
 - created: [[ai-native-engineer-talk-outline]] — 개발자 청중 20-30분 교육 발표 골격. 8슬롯(훅→정의→실제업무★→자격요건→도구→냉정한현실→자가진단→Q&A), 콘텐츠 22분+Q&A 5-8분 재배분. 각 슬롯 [메시지/근거(노트 링크)/출처/화면/전달팁]. 자가진단 10항목. 벤더/비-벤더 출처 규칙 + Q&A 핵심 반론 5개(재브랜딩/일자리/도구/신입진입/19% 역설).
 - updated: [[ai-native-engineer-role]] — 4-조사관 병렬 deep-research 결과 통합 보강. (1) §1 정의에 **인접 용어 4형제 지도**(Vibe Coder/AI Native/Agentic/AI Engineer, 책임구조 축, Karpathy 출처) (2) §4 업무에 **실제 워크플로 루프**(spec→agent→verify, Harper Reed/Addy Osmani/Sakasegawa — 비-벤더 독립 실무자 수렴 강조, "70/30" 같은 미측정 수치 배제) (3) §5에 **해외 실제 JD 3건**(Libra/Ramp/Legion $140-220K) 추가 → 국내외 1차 공고 6건, 공통요건은 "표본6·경향" 명시(비율% 금지) (4) **§7 도구 생태계 지도 신규**(Claude Code/Cursor/Copilot/Codex/Augment/Windsurf + MCP/하네스5계층, 벤더 벤치마크 라벨 필수) (5) §⚖️ 비-벤더 검증 대폭 보강: METR 후속(머지가능 PR 0%, 고품질OSS 한정)·2026-02 재참여자+18%(선택편향)·Stanford -20%(전체) vs -16%(AI노출직무) 분리+금리/팬데믹 교란·MIT 95% zero-value(기업ROI≠개인코딩)·Gartner Hype Cycle 재브랜딩 비판(단 [미결]) (6) 자가진단 부록 10항목. **검증**: T2 ce-adversarial-document-reviewer(P0 3건: 미근거 수치·선택편향·벤더라벨 + P1 5건 전량 반영) → T6 ce-doc-review(coherence+feasibility, P0 2건 "숙련"표본불일치·시간예산초과 + P1 4건 반영). 출처 21→다수 비-벤더 추가(METR arXiv·Stanford DEL·BLS·MIT). spec/plan: ~/.claude/plans/2026-05-27-ai-native-engineer-research-{design,plan}.md.
