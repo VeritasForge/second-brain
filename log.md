@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-05-28] create | Rate-Limit 설계 & 클라이언트 IP 추출 종합
+- created: [[rate-limit-and-client-ip]] — 회원가입 OTP 선검증에 적용할 rate-limit 정책(재전송 쿨다운 60초·이메일당 일 한도 10~20통·IP /64 한도·Resend 응답 fallback·timing equalization) + 클라이언트 IP 추출(TCP 소켓 vs HTTP 헤더, XFF 위조 가능성·CWE-348, "오른쪽에서 신뢰 hop N번째" 규칙, 호스팅 검증 헤더 — **Vercel `x-real-ip` 우선** (`@vercel/functions` SDK 일치), **Cloudflare `TRUST_CLOUDFLARE` 환경변수 게이트**, IPv6 /64 prefix·IPv4-mapped 정규화, Next.js 16 base-server.js XFF socket fallback 함정) 종합 정리. brainstorming 토론과 rl-verify 다관점 검증(ce-web-researcher/adversarial-document-reviewer/security-sentinel/feasibility-reviewer)으로 정정된 결론 반영 — 초안의 "이메일당 한도 제거 가능"은 NIST §5.2.2와 충돌해 REFUTED → 일 한도 복원, "Vercel `x-vercel-forwarded-for` 우선"은 공식 SDK 코드 확인으로 `x-real-ip`로 정정. 보강 헬퍼 함수 `lib/get-client-ip.ts` 패턴 포함 (`ipaddr.js@1.9.1` 이미 transitive 설치 — 추가 의존성 0). Sources 13건(RFC 7239/4291/4862, MDN, NIST 800-63B, OWASP Auth/API Top10, CWE-348, Cloudflare WAF/CF-Connecting-IP, Vercel docs, in-tree Next.js base-server.js:511 + @vercel/functions headers.js:36).
+
 ## [2026-05-28] create | aria-activedescendant vs Roving Focus 키보드 네비게이션 패턴
 - created: [[aria-activedescendant-vs-roving-focus]] — WAI-ARIA 공식 속성 aria-activedescendant(DOM focus 고정 + 시각 하이라이트) vs Roving Focus/Roving Tabindex(실제 DOM focus 이동) 두 패턴 비교. activeIndex 용어 설명(React 관용 변수명), tabindex 동적 관리 원리, 구현 코드 스케치
 

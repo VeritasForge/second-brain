@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-05-22
+> 최종 갱신: 2026-05-28
 
 ## 문서 목록
 
@@ -70,6 +70,7 @@
 - [[hexagonal-architecture-concept-deep-dive]] — Hexagonal Architecture (Ports & Adapters) Deep Dive
 - [[layered-architecture-comprehensive]] — Layered Architecture Comprehensive
 - [[layered-architecture-concept-deep-dive]] — Layered Architecture Deep Dive
+- [[rate-limit-and-client-ip]] — Rate-Limit 설계 & 클라이언트 IP 추출 종합 (재전송 쿨다운·이메일/IP 한도·Resend fallback, XFF 위조 방어·"오른쪽에서 N번째" 규칙·Vercel x-real-ip 우선·IPv6 /64·헬퍼 함수)
 - [[restful-architecture-concept-deep-dive]] — RESTful Architecture Deep Dive
 - [[url-mention-unfurling]] — URL Mention (Unfurling) Concept Deep Dive — OGP/Twitter Card/oEmbed 비교, SSRF 가드, Python 구현 4종 (BeautifulSoup/safe-sync/async+Redis/linkpreview)
 - [[video-upscaling-service-architecture]] — Video Upscaling Service Architecture
