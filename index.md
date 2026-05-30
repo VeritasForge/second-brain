@@ -54,6 +54,7 @@
 - [[shell-command-substitution-heredoc]] — Shell Command Substitution + Here Document 패턴 가이드
 
 ### develop/architecture
+- [[api-rate-limiting-practical-guide]] — API Rate Limiting 실무 가이드 (slowapi/nginx 계층 비교, key_func 안티패턴, balls-into-bins 멀티워커 정확도, JWT 4가지 옵션, 인증 API 필요성, 흔한 신화 정정)
 - [[architecture-comprehensive-comparison]] — 4대 아키텍처 종합 비교
 - [[aws-eventbridge-lambda-batch-stack]] — Python + EventBridge + Lambda + AWS Batch 스택 의사결정 트리 (Scheduler vs Rules, Lambda 생략 옵션, Fargate vs EC2 Spot, CDK/SAM/Terraform 비교)
 - [[aws-sns-sqs-dlq-comparison]] — AWS SNS vs SQS DLQ 비교 (EDA 기반 MSA 메시지 전달 보장)
