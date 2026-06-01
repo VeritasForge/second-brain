@@ -96,6 +96,7 @@
 ### develop/database
 - [[advisory-lock-vs-for-update-vs-redlock]] — Advisory Lock · SELECT FOR UPDATE · Redis Redlock 동시성 제어 비교
 - [[database-cardinality-deep-dive]] — 카디널리티 (Cardinality) Deep Dive
+- [[postgresql-row-level-security]] — PostgreSQL RLS (Row-Level Security) Concept Deep Dive (암시적 WHERE·USING vs WITH CHECK·멀티테넌트 SET LOCAL·FORCE/BYPASSRLS 함정·SELECT wrapper 성능, 8섹션 14출처)
 - [[sqlite-concept-deep-dive]] — SQLite Deep Dive
 - [[timestamp-vs-datetime-deep-dive]] — TIMESTAMP vs DATETIME Deep Dive
 
