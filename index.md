@@ -94,6 +94,7 @@
 - [[vercel-skills-and-workflow-integration]] — Vercel 스킬 3종(react-best-practices/composition-patterns/react-native) + Superpowers·Plan Mode 워크플로우 연계 가이드
 
 ### develop/database
+- [[advisory-lock-vs-for-update-vs-redlock]] — Advisory Lock · SELECT FOR UPDATE · Redis Redlock 동시성 제어 비교
 - [[database-cardinality-deep-dive]] — 카디널리티 (Cardinality) Deep Dive
 - [[sqlite-concept-deep-dive]] — SQLite Deep Dive
 - [[timestamp-vs-datetime-deep-dive]] — TIMESTAMP vs DATETIME Deep Dive
@@ -101,6 +102,7 @@
 ### develop/fe
 - [[aria-activedescendant-vs-roving-focus]] — aria-activedescendant vs Roving Focus (Roving Tabindex) 키보드 네비게이션 패턴 비교
 - [[googlebot-crawling-mechanism-seo]] — Googlebot 크롤링 메커니즘 & SEO
+- [[http-cookie-security-concept-explainer]] — Set-Cookie & 쿠키 보안 속성 Deep Dive (HttpOnly/Secure/SameSite, XSS↔HttpOnly·CSRF↔SameSite 매핑, localStorage vs Cookie 토큰 저장)
 - [[kakao-maps-viewport-control-deep-dive]] — Kakao Maps Viewport (isPanto/center/panTo) Deep Dive
 - [[modern-web-architecture-bff-ssr-spa-vite-seo]] — 현대 웹 아키텍처 BFF/SSR/SPA/Vite/SEO
 - [[nextjs-performance-and-swr-concepts]] — Next.js 페이지가 느린 이유와 핵심 개념 정리 (use client, fetch waterfall, SWR, Server Component, Event Loop, 처방 매트릭스 + Vercel 룰 매핑)
