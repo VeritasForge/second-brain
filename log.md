@@ -2,6 +2,17 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-06-02] restructure | AX 시리즈 재제작 — 개념·회의론 → 실천 Playbook
+사용자 피드백("문서들이 AX 성공 사례·실천 위주가 아니다")으로 AX 시리즈 완전 재제작. 개념·DX비교·회의론 중심을 폐기하고 "성공 회사가 어떻게 했는가" 실천 Playbook으로 전환.
+- deleted: 01-ax-concept-vs-dx, 02-ax-success-cases, 03-ax-process-framework — 개념·회의론(falsification gate·Acemoglu/RAND 등) 중심 3-노트 폐기 (사용자 명시 삭제).
+- Phase 0 재선별: 렌즈를 "markdown 사용"→"AX 성공 자체"로 전환. 4축 스코어링(측정성과·외부평가·transformation 깊이·자료충분성) 재발굴 → DBS(⭐⭐⭐⭐⭐ Forrester 검증)·Moderna·John Deere·Duolingo·Klarna(반면교사) 선정. 기존 Spotify/GitLab/Microsoft(markdown 렌즈)·JPMorgan/Maersk/Siemens(전환중·자료부족)는 탈락/미선정.
+- created: [[00-ax-practice-guide]] — 통합 실천 가이드(허브, 20.3KB). 5개 기업 cross-case 7대 공통패턴(①데이터기반 선행 ②CEO 정량목표 공개선언 ③증강>대체 ④플랫폼 사고 ⑤스킬링 병행 ⑥거버넌스 선행 ⑦측정 절제) + AX 4단계 로드맵(진단→설계→실행→측정확산) + 백엔드 엔지니어의 자리 + 우리회사 적용 체크리스트 + 회색지대 분류 부록표 8케이스.
+- created: [[dbs-bank]] — 금융·장기체계(21.8KB). PURE 윤리(2019)→Data Chapter 700명→ADA(5.3PB)+ALAN→배포 12~15개월→2~3개월, AI 경제가치 SGD 1B(2025 조기달성, Forrester 독립검증). NAV Planner 넛지(저축 83%↑·투자 4.3배·보험 2.3배). 출처 10건.
+- created: [[moderna]] — 바이오·AI-first 문화(22.6KB). HR+IT "People & Digital Technology" 통합, 2개월 750→2025년 3000+ GPT 플랫폼, 역할별 6트랙 교육(NPS 50→71), 챔피언 네트워크, 고위험 Human-in-the-loop. AI 채택률→사업성과 인과 미입증 [Uncertain] 명시. 출처 12건.
+- created: [[john-deere]] — 전통제조·BM전환(23.6KB). Blue River $305M 인수(2017)→See&Spray 성과기반 과금(에이커당 $1/$5)·2025 500만에이커·3,100만갤런 절감, Iowa State 독립연구 76% 절감, 제품판매→데이터·자율주행 구독 전환, Leap Ambitions 2030 10% 반복수익. 출처 12건.
+- created: [[duolingo]] — AI-first 스타트업(18.6KB). "AI-first" 선언→콘텐츠 레버리지(12년치→1년 148코스), Duolingo Max BM, CEO 메모 논란 양면, Birdbrain, Q3 2025 매출 $271.7M +41% YoY(SEC 공시). 출처 15건.
+- created: [[klarna-lessons]] — ⚠️ 반면교사(19KB). "AI로 700 FTE 대체"→고객만족 하락→2025 재고용 역전. 안티패턴 8가지(비용1차KPI·볼륨지표·fallback제거·L1확대해석·자체수치과장·감정채널AI전담·채용동결인과혼동·브랜드어조부재). 출처 11건.
+
 ## [2026-06-01] create | PostgreSQL RLS (Row-Level Security) Concept Deep Dive
 - created: [[postgresql-row-level-security]] — concept-explainer 8섹션 리포트. PostgreSQL 9.5(2016) 도입 RLS를 deep-research(7쿼리/14출처)로 정리. (1) **정의**: 모든 쿼리에 자동으로 "보이지 않는 `WHERE` 절"을 주입해 행 단위 접근을 DB 엔진 차원에서 강제 — 정책은 **테이블에 묶임(쿼리 아님)**, default-deny. (2) **핵심 구성**: `ENABLE ROW LEVEL SECURITY`(스위치) + `CREATE POLICY`의 `USING`(읽기 필터) vs `WITH CHECK`(쓰기 검증) + `TO role` — `WITH CHECK` 생략 시 `USING` 자동 복사, 둘이 다르면 "못 보는데 INSERT 되는" 구멍. (3) **동작**: 쿼리 플래너가 사용자 WHERE보다 **먼저** 정책 주입. 기본/멀티테넌트 SQL 예시 2종. (4) **멀티테넌트 베스트 프랙티스**: 테넌트별 DB 유저 ❌ → **런타임 변수 + 트랜잭션 내 `SET LOCAL`**(`SET` 금지 — 커넥션 풀에서 다음 사용자가 컨텍스트 상속 → 테넌트 누수), 모든 테넌트 테이블에 RLS, 정책 컬럼 인덱싱, 통합 테스트. (5) **장단점**: ✅ DB 강제·코드 단순화·단일 진실·Defense in Depth / ❌ 성능 오버헤드·디버깅 난이도·정책 code drift(pg_policies에 살아 Git 추적 누락)·ABAC 등 복잡 권한 한계. (6) **vs App-Level 인가**: RLS는 접근 경로 무관 강제(누수 위험 ↓)·복잡 로직 약함·디버깅 어려움 vs 앱 인가는 유연·누수 위험 ↑ → **정답은 "둘 다"**(Supabase 권고, RLS=최후 방어선). (7) **🚨 함정**: ① 테이블 소유자 접속 시 RLS **우회**(→ `FORCE ROW LEVEL SECURITY` 필수, 실무 1순위 사고) ② `SET` vs `SET LOCAL` ③ `BYPASSRLS`/superuser 절대 금지 ④ `WITH CHECK` 오설계 ⑤ VIEW는 기본 SECURITY DEFINER로 우회(PG15 `security_invoker=true`). Anti-pattern: 행마다 함수 호출(N행=N콜)·non-LEAKPROOF 함수(인덱스 차단·풀스캔)·rate limit 부재(쿼리 자체는 계속 실행 → CPU 낭비). **성능 최적화 SELECT wrapper**: STABLE SECURITY DEFINER 함수를 `IN (SELECT fn())`로 감싸 쿼리당 1회 평가(~450ms→~45ms, 10x). (8) 도구: Supabase/PostGREST/Bytebase. 출처: PostgreSQL 공식 docs, Supabase, AWS, Crunchy Data, Bytebase, PlanetScale(비판적 관점), SupaExplorer, The Nile. develop/database. 관련: [[advisory-lock-vs-for-update-vs-redlock]].
 

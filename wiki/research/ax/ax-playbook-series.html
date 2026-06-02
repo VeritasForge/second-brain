@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AX 실천 Playbook — 5개 기업에서 배우는 "어떻게"</title>
+<style>
+/* md-to-html theme — system fonts only, self-contained. Inline this whole file into <style>. */
+:root{
+  --bg:#f7f5ef; --surface:#fff; --surface-2:#fbfaf6;
+  --ink:#1c1b18; --ink-soft:#3d3b36; --muted:#7a766c; --faint:#a8a499;
+  --line:#e7e3d8; --line-soft:#f0ede4; --code-bg:#efece3;
+  --accent:#0f766e; --accent-deep:#0b5750; --accent-soft:#e4f1ef;
+  --hero:#0d1513; --hero-ink:#eef2f0; --hero-muted:#8aa39d;
+  --ok:#15803d; --ok-bg:#e8f3ea; --warn:#b45309; --warn-bg:#f7ecd9;
+  --bad:#b3261e; --bad-bg:#f7e6e4; --neutral:#475569; --neutral-bg:#eceef1;
+  --synth:#5b54c9; --synth-bg:#eceaf8;
+  --shadow:0 1px 2px rgba(20,18,12,.04),0 8px 24px -12px rgba(20,18,12,.12);
+  --shadow-lg:0 2px 4px rgba(20,18,12,.05),0 24px 48px -20px rgba(20,18,12,.22);
+  --radius:16px; --radius-sm:10px;
+  /* system fonts only — no webfonts. Distinctiveness comes from scale/weight/color, not exotic faces. */
+  --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",Pretendard,Roboto,sans-serif;
+  --font-display:var(--font-body);
+  --font-mono:ui-monospace,"SF Mono",Menlo,"Cascadia Mono",Consolas,monospace;
+}
+[data-theme="dark"]{
+  --bg:#0d0f10; --surface:#15181a; --surface-2:#1a1e20;
+  --ink:#e9e7e1; --ink-soft:#cfccc4; --muted:#9a978d; --faint:#6c6a62;
+  --line:#272b2d; --line-soft:#1f2325; --code-bg:#21262b;
+  --accent:#2dd4bf; --accent-deep:#5eead4; --accent-soft:#10302c;
+  --hero:#070a09; --hero-ink:#eef2f0; --hero-muted:#7f968f;
+  --ok:#4ade80; --ok-bg:#10241a; --warn:#fbbf24; --warn-bg:#2a2110;
+  --bad:#f87171; --bad-bg:#2a1413; --neutral:#94a3b8; --neutral-bg:#1c2127;
+  --synth:#a5a0f0; --synth-bg:#1c1a2e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.4),0 24px 48px -18px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.8;font-size:17px;-webkit-font-smoothing:antialiased;letter-spacing:-.003em;transition:background .4s,color .4s;}
+::selection{background:var(--accent);color:#fff;}
+a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;text-underline-offset:3px;}
+strong{font-weight:600;color:var(--ink);}
+
+/* base prose — plain docs (README/notes): code/pre/lists/quote/img/hr. All theme-variable based -> auto dark-adaptive. */
+main :where(p,li){color:var(--ink-soft);}
+main ul,main ol{padding-left:1.45em;margin:.9em 0;}
+main li{margin:.4em 0;}
+main li::marker{color:var(--accent);}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--code-bg);padding:.12em .42em;border-radius:5px;}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;overflow-x:auto;line-height:1.5;font-size:.84rem;margin:1.1em 0;}
+pre code{background:none;padding:0;font-size:inherit;white-space:pre;}
+main blockquote:not(.callout):not(.verdict){margin:1.1em 0;padding:.5em 1.1em;border-left:3px solid var(--line);color:var(--muted);}
+main img{max-width:100%;height:auto;border-radius:var(--radius-sm);}
+hr{border:0;border-top:1px solid var(--line);margin:2em 0;}
+
+.theme-toggle{position:fixed;top:18px;right:18px;z-index:50;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow);transition:transform .2s,background .3s;}
+.theme-toggle:hover{transform:scale(1.08);} .theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+.hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden;padding:clamp(64px,11vw,140px) 24px clamp(56px,8vw,96px);}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 82% -10%,rgba(45,212,191,.22),transparent 55%),radial-gradient(80% 70% at 6% 110%,rgba(15,118,110,.18),transparent 60%);pointer-events:none;}
+.hero-inner{max-width:980px;margin:0 auto;position:relative;}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--hero-muted);display:flex;align-items:center;gap:10px;margin-bottom:26px;}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--hero-muted);display:inline-block;}
+.hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(2.1rem,5.6vw,4rem);line-height:1.14;margin:0 0 .5em;letter-spacing:-.03em;}
+.hero h1 em{font-style:normal;color:var(--accent-deep);}
+.hero-thesis{font-size:clamp(1.05rem,2.1vw,1.32rem);line-height:1.7;color:#cdd8d4;max-width:46ch;font-weight:300;margin:0 0 36px;}
+.hero-thesis b{color:#fff;font-weight:600;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;font-size:.86rem;color:var(--hero-muted);}
+.hero-meta .dot{width:4px;height:4px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:9px;vertical-align:middle;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;}
+.tag{font-family:var(--font-mono);font-size:.72rem;color:#bfe9e2;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);padding:5px 12px;border-radius:999px;}
+
+.shell{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:236px minmax(0,1fr);gap:56px;align-items:start;}
+.toc{position:sticky;top:28px;padding:40px 0;font-size:.85rem;align-self:start;}
+.toc-title{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}
+.toc ol{list-style:none;margin:0;padding:0;} .toc li{margin:1px 0;}
+.toc a{display:flex;gap:10px;align-items:baseline;color:var(--muted);padding:7px 12px;border-radius:8px;border-left:2px solid transparent;transition:.18s;line-height:1.4;}
+.toc a .n{font-family:var(--font-mono);font-size:.72rem;color:var(--faint);min-width:16px;}
+.toc a:hover{color:var(--ink);background:var(--surface-2);text-decoration:none;}
+.toc a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+.toc a.active .n{color:var(--accent);}
+
+main{padding:48px 0 96px;min-width:0;}
+section{margin-bottom:72px;scroll-margin-top:24px;}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:26px;}
+.sec-num{font-family:var(--font-mono);font-size:.8rem;font-weight:500;color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:4px 9px;flex-shrink:0;}
+h2.sec-title{font-family:var(--font-display);font-weight:800;font-size:clamp(1.5rem,3vw,2rem);margin:0;line-height:1.25;letter-spacing:-.02em;}
+h3{font-size:1.12rem;font-weight:600;margin:2em 0 .7em;letter-spacing:-.01em;}
+h4{font-size:.98rem;font-weight:600;margin:1.6em 0 .5em;letter-spacing:-.01em;color:var(--ink);}
+p{margin:.9em 0;color:var(--ink-soft);} .lead{font-size:1.06rem;color:var(--ink);}
+
+.verdict{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px 34px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.verdict::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--accent),var(--accent-deep));}
+.verdict .label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.verdict ol{margin:0;padding-left:0;list-style:none;counter-reset:v;}
+.verdict li{counter-increment:v;position:relative;padding:11px 0 11px 44px;border-bottom:1px dashed var(--line-soft);font-size:1.02rem;color:var(--ink-soft);}
+.verdict li:last-child{border-bottom:0;}
+.verdict li::before{content:counter(v);position:absolute;left:0;top:11px;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--font-mono);font-size:.82rem;font-weight:600;display:grid;place-items:center;}
+
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:600;font-family:var(--font-mono);padding:3px 9px;border-radius:7px;white-space:nowrap;line-height:1.5;}
+.b-ok{color:var(--ok);background:var(--ok-bg);} .b-warn{color:var(--warn);background:var(--warn-bg);}
+.b-bad{color:var(--bad);background:var(--bad-bg);} .b-neutral{color:var(--neutral);background:var(--neutral-bg);} .b-synth{color:var(--synth);background:var(--synth-bg);}
+
+.vrow{display:grid;grid-template-columns:1fr auto;gap:8px 18px;align-items:start;padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);margin:12px 0;border-left-width:4px;}
+.vrow.ok{border-left-color:var(--ok);} .vrow.warn{border-left-color:var(--warn);} .vrow.bad{border-left-color:var(--bad);}
+.vrow .claim{font-weight:600;color:var(--ink);} .vrow .detail{grid-column:1/-1;color:var(--muted);font-size:.95rem;margin-top:2px;}
+
+.matrix{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:8px 0;font-size:.92rem;}
+.matrix>div{background:var(--surface);padding:16px;}
+.matrix .mh{background:var(--surface-2);font-family:var(--font-mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;}
+.matrix .rh{background:var(--surface-2);font-weight:600;color:var(--ink);display:flex;align-items:center;font-size:.86rem;}
+.matrix .tool{font-weight:600;color:var(--ink);} .matrix .sub{color:var(--faint);font-size:.82rem;}
+
+.callout{display:flex;gap:14px;padding:18px 20px;border-radius:var(--radius-sm);margin:18px 0;font-size:.96rem;line-height:1.7;}
+.callout .ico{font-size:1.15rem;flex-shrink:0;line-height:1.6;} .callout p{margin:.2em 0;color:inherit;}
+.callout.tip{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);color:var(--ink-soft);}
+.callout.warn{background:var(--warn-bg);border:1px solid color-mix(in srgb,var(--warn) 30%,transparent);color:var(--ink-soft);}
+.callout.key{background:var(--surface);border:1px dashed var(--accent);color:var(--ink-soft);}
+
+.tree{font-family:var(--font-mono);font-size:.88rem;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:22px 24px;margin:14px 0;line-height:2;}
+.tree .q{color:var(--ink);font-weight:600;font-family:var(--font-body);}
+.tree .yes{color:var(--ok);} .tree .no{color:var(--muted);}
+.tree .pick{background:var(--ok-bg);color:var(--ok);padding:1px 7px;border-radius:6px;font-weight:600;}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:8px 0;}
+table.cmp{border-collapse:collapse;width:100%;min-width:680px;font-size:.9rem;background:var(--surface);}
+table.cmp th,table.cmp td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:middle;}
+table.cmp thead th{background:var(--surface-2);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500;position:sticky;top:0;}
+table.cmp tbody tr:last-child td{border-bottom:0;} table.cmp tbody tr:hover{background:var(--surface-2);}
+table.cmp .tool{font-weight:600;color:var(--ink);white-space:nowrap;} table.cmp .star{font-family:var(--font-mono);color:var(--muted);text-align:right;white-space:nowrap;}
+td.center{text-align:center;}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:2px;}
+.d-ok{background:var(--ok);} .d-warn{background:var(--warn);} .d-bad{background:var(--bad);}
+
+.risk{display:grid;grid-template-columns:auto 1fr auto;gap:6px 18px;align-items:center;padding:16px 20px;border:1px solid var(--line);border-radius:var(--radius-sm);margin:10px 0;background:var(--surface);border-left-width:4px;}
+.risk.low{border-left-color:var(--ok);} .risk.mid{border-left-color:var(--warn);} .risk.high{border-left-color:var(--bad);}
+.risk .rank{font-size:1.3rem;} .risk .who{font-weight:600;color:var(--ink);} .risk .lic{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);}
+.risk .why{grid-column:2/-1;color:var(--muted);font-size:.92rem;margin-top:2px;}
+
+.rec-hero{background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;border-radius:var(--radius);padding:34px 36px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;}
+.rec-hero .crown{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;opacity:.85;}
+.rec-hero h3{color:#fff;font-family:var(--font-display);font-size:2rem;margin:.15em 0 .35em;}
+.rec-hero p{color:rgba(255,255,255,.92);margin:.4em 0;}
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+.rec-grid .cell{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:13px 15px;font-size:.9rem;}
+.rec-grid .cell b{display:block;font-size:.72rem;font-family:var(--font-mono);letter-spacing:.06em;text-transform:uppercase;opacity:.8;margin-bottom:3px;}
+/* BAKED-IN FIX: bright teal gradient is harsh in dark mode -> deep muted teal surface */
+[data-theme="dark"] .rec-hero{background:linear-gradient(140deg,#10403a,#0a2826);border:1px solid rgba(45,212,191,.28);color:var(--ink);box-shadow:0 2px 4px rgba(0,0,0,.4),0 24px 48px -20px rgba(0,0,0,.7),inset 0 1px 0 rgba(94,234,212,.12);}
+[data-theme="dark"] .rec-hero .crown{color:var(--accent-deep);opacity:1;}
+[data-theme="dark"] .rec-hero h3{color:#eafdf9;}
+[data-theme="dark"] .rec-hero p{color:var(--ink-soft);}
+[data-theme="dark"] .rec-grid .cell{background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.2);}
+[data-theme="dark"] .rec-grid .cell b{color:var(--accent-deep);opacity:1;}
+
+.alt-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px;}
+.alt{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;}
+.alt:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.alt .cond{font-size:.78rem;color:var(--accent);font-weight:600;margin-bottom:6px;}
+.alt .name{font-weight:700;color:var(--ink);font-size:1.05rem;} .alt .note{color:var(--muted);font-size:.88rem;margin-top:5px;}
+
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;}
+.steps li{counter-increment:s;position:relative;padding:0 0 26px 52px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--font-mono);font-weight:600;display:grid;place-items:center;z-index:1;}
+.steps li::after{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--line);}
+.steps li:last-child{padding-bottom:0;} .steps li:last-child::after{display:none;}
+.steps .st{font-weight:600;color:var(--ink);} .steps .sd{color:var(--muted);font-size:.94rem;}
+.steps li.hot::before{background:var(--bad);}
+
+.corr{display:grid;grid-template-columns:1fr auto 1.2fr;gap:14px;align-items:center;padding:14px 18px;border:1px solid var(--line);border-radius:var(--radius-sm);margin:9px 0;background:var(--surface);font-size:.92rem;}
+.corr .was{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint);}
+.corr .arr{color:var(--accent);font-weight:700;} .corr .now{color:var(--ink);font-weight:500;}
+.corr .stage{font-family:var(--font-mono);font-size:.66rem;color:var(--faint);grid-column:1/-1;}
+
+.src-group{margin:14px 0;} .src-group h4{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;}
+.src-list{display:flex;flex-wrap:wrap;gap:8px;}
+.src-list a{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:.85rem;color:var(--ink-soft);transition:.18s;}
+.src-list a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none;transform:translateY(-1px);}
+.conf-line{font-size:.88rem;color:var(--muted);margin-top:16px;line-height:2;}
+
+footer{border-top:1px solid var(--line);padding:36px 0 0;margin-top:40px;color:var(--faint);font-size:.84rem;}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+.hero h1,.hero-thesis,.hero-meta,.tags{opacity:0;transform:translateY(18px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;}
+.hero-thesis{animation-delay:.12s;} .hero-meta{animation-delay:.24s;} .tags{animation-delay:.34s;}
+@keyframes rise{to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;} .reveal{opacity:1;transform:none;}}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0;}
+  .toc{position:static;padding:24px 0 0;border-bottom:1px solid var(--line);}
+  .toc ol{display:flex;flex-wrap:wrap;gap:4px;}
+  .toc a{border-left:0;border-bottom:2px solid transparent;padding:6px 10px;}
+  .toc a.active{border-left:0;border-bottom-color:var(--accent);}
+  main{padding:32px 0 64px;} .rec-grid{grid-template-columns:1fr;}
+  .corr{grid-template-columns:1fr;gap:4px;} .corr .arr{display:none;}
+  body{font-size:16px;}
+}
+/* matrix column count is set inline per build, e.g. style="grid-template-columns:auto 1fr 1fr 1fr" */
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="themeBtn" aria-label="테마 전환">🌙</button>
+
+<header class="hero"><div class="hero-inner">
+  <div class="eyebrow">AX Practice Playbook · 2026-06-02 · 6-Part Series</div>
+  <h1>AX 실천 Playbook — <em>5개 기업에서 배우는 "어떻게"</em></h1>
+  <p class="hero-thesis">데이터 기반 선행, CEO 정량 목표, 증강&gt;대체, 플랫폼 사고 — <b>DBS·Moderna·John Deere·Duolingo가 실제로 한 것</b>과, <b>Klarna가 하지 말아야 했던 것</b>.</p>
+  <div class="hero-meta">
+    <span><span class="dot"></span>6개 노트 통합</span>
+    <span>60+ 출처</span>
+    <span>회색지대 라벨 검증</span>
+  </div>
+  <div class="tags">
+    <span class="tag">#ax</span><span class="tag">#practice-guide</span><span class="tag">#playbook</span><span class="tag">#hub</span>
+    <span class="tag">#finance</span><span class="tag">#biotech</span><span class="tag">#manufacturing</span><span class="tag">#consumer-app</span>
+    <span class="tag">#case-study</span><span class="tag">#anti-pattern</span><span class="tag">#lessons-learned</span>
+  </div>
+</div></header>
+
+<div class="shell">
+  <nav class="toc" aria-label="목차"><div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#part-a"><span class="n">A</span>통합 가이드 허브</a></li>
+      <li><a href="#a-patterns" style="padding-left:26px">공통 성공 패턴 7</a></li>
+      <li><a href="#a-roadmap" style="padding-left:26px">실천 4단계 로드맵</a></li>
+      <li><a href="#part-b"><span class="n">B</span>DBS Bank — 금융</a></li>
+      <li><a href="#b-timeline" style="padding-left:26px">타임라인·경제가치</a></li>
+      <li><a href="#b-lessons" style="padding-left:26px">핵심 실천 교훈</a></li>
+      <li><a href="#part-c"><span class="n">C</span>Moderna — 바이오</a></li>
+      <li><a href="#c-org" style="padding-left:26px">HR·IT 통합 조직</a></li>
+      <li><a href="#c-lessons" style="padding-left:26px">핵심 실천 교훈</a></li>
+      <li><a href="#part-d"><span class="n">D</span>John Deere — 제조</a></li>
+      <li><a href="#d-results" style="padding-left:26px">See&amp;Spray 측정</a></li>
+      <li><a href="#d-lessons" style="padding-left:26px">핵심 실천 교훈</a></li>
+      <li><a href="#part-e"><span class="n">E</span>Duolingo — 앱</a></li>
+      <li><a href="#e-results" style="padding-left:26px">SEC 측정 지표</a></li>
+      <li><a href="#e-lessons" style="padding-left:26px">핵심 실천 교훈</a></li>
+      <li><a href="#part-f"><span class="n">F</span>Klarna — 반면교사</a></li>
+      <li><a href="#f-antipatterns" style="padding-left:26px">안티패턴 8가지</a></li>
+    </ol>
+  </nav>
+  <main>
+
+    <!-- ============ PART A ============ -->
+    <section id="part-a" class="reveal">
+      <div class="sec-head"><span class="sec-num">A</span><h2 class="sec-title">AX 실천 통합 가이드 — 5개 기업에서 배우는 "어떻게" (시리즈 허브)</h2></div>
+
+      <div class="callout key"><span class="ico">🔖</span><div>
+        <p>📅 작성일 2026-06-02 · 측정치·동향은 시점 의존적, 6~12개월 후 재검토 권장</p>
+        <p>AX 실천 Playbook 시리즈 <b>허브</b> — 아래 5개 케이스의 cross-case 합성.</p>
+      </div></div>
+
+      <p class="lead">이 가이드는 "AX(AI Transformation)란 무엇인가"가 아니라 <strong>"실제로 성공한 회사가 어떻게 했는가, 그래서 우리는 무엇을 해야 하는가"</strong>에 답한다. 5개 기업 Playbook에서 공통 패턴을 추출하고, 한 줄 한 줄 따라 할 수 있는 체크리스트로 정리했다.</p>
+
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>Playbook</th><th>카테고리</th><th>한 줄 정체성</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS Bank</td><td>금융 · 장기 체계</td><td>5년 체계로 SGD 1B를 만든 은행 (감사 연차보고서 공시)</td></tr>
+          <tr><td class="tool">Moderna</td><td>바이오 · AI-first 문화</td><td>HR과 IT를 합친 AI-first 조직</td></tr>
+          <tr><td class="tool">John Deere</td><td>전통 제조 · BM 전환</td><td>트랙터 제조사가 플랫폼 기업이 되기까지</td></tr>
+          <tr><td class="tool">Duolingo</td><td>AI-first 앱 · BM 레버리지</td><td>"AI-first" 선언을 성장으로 연결한 법</td></tr>
+          <tr><td class="tool">Klarna ⚠️</td><td>반면교사</td><td>"AI로 700명 대체" 그 후 (실패·역전)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>0. 이 가이드의 사용법 — AX 여정 지도</h3>
+      <p>사용자(독자)의 원래 질문은 <strong>"AX의 이해부터 적용까지의 여정"</strong>이었다. 이 가이드는 그 여정을 4단계로 본다:</p>
+      <pre><code>이해(Why)        설계(How to start)     실행(Do)            측정·확산(Scale)
+   │                   │                   │                    │
+ § 1·2             § 3 (1~2단계)        § 3 (3단계)         § 3 (4단계)
+ 5개 사례 +        거버넌스·목표·       플랫폼·스킬링·       ROI 측정·
+ 공통 패턴          조직 설계            가드레일             데이터 플라이휠
+                                          │
+                                       § 4 반면교사 (하지 말 것)
+                                       § 5 백엔드 엔지니어의 자리
+                                       § 6 우리 회사 적용 체크리스트</code></pre>
+      <p>읽는 순서 추천:</p>
+      <ol>
+        <li><strong>§1·2</strong> — 5개 기업이 뭘 했고 공통점이 뭔지 (이해)</li>
+        <li><strong>§3</strong> — 단계별 로드맵으로 "어디부터 시작하나" (설계·실행)</li>
+        <li><strong>§4</strong> — Klarna에서 "하지 말 것" (가드레일)</li>
+        <li><strong>§5·6</strong> — 백엔드 엔지니어로서·우리 회사에서 무엇을 (적용)</li>
+      </ol>
+
+      <h3>1. 5개 기업 한눈에 비교</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>출발점</th><th>핵심 전략</th><th>대표 성과 (라벨)</th><th>결정적 한 수</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS Bank</td><td>디지털 뱅킹 경쟁 위기(2014~)</td><td>데이터 플랫폼 선행 + 5년 체계 + 윤리 거버넌스</td><td>AI 경제가치 SGD 1B (2025, 2년 조기) <span class="badge b-ok">Independently-Audited · 감사 연차보고서</span></td><td>ADA(5.3PB) → ALAN(재사용) → 배포 12~15개월→2~3개월</td></tr>
+          <tr><td class="tool">Moderna</td><td>코로나 이후 효율화 압박</td><td>AI-first 문화 + HR·IT 통합 + 플랫폼 배포</td><td>2개월 750 GPT → 2025년 3,000+ GPT <span class="badge b-warn">Self-Reported · 채택 지표(성과 아님)</span></td><td>"모두가 GPT를 만드는 플랫폼" + 역할별 교육 + 챔피언 네트워크</td></tr>
+          <tr><td class="tool">John Deere</td><td>트랙터 하드웨어 마진 한계</td><td>핵심 AI 인수 + 데이터 플랫폼 자체 구축 + 성과 과금</td><td>2025 See&amp;Spray 500만 에이커·3,100만 갤런 절감 <span class="badge b-warn">Self-Reported</span>, Iowa State 76% 절감 <span class="badge b-warn">Sponsored-Study · Deere 후원</span></td><td>제품 판매 → 에이커당 $1/$5 "성과 구독" BM 전환</td></tr>
+          <tr><td class="tool">Duolingo</td><td>콘텐츠 생산 12년 병목</td><td>AI-first 선언 + 콘텐츠 레버리지 + 프리미엄 BM</td><td>Q3 2025 매출 $271.7M +41% YoY <span class="badge b-ok">Independently-Audited · SEC</span> / 1년에 148개 코스 <span class="badge b-warn">Self-Reported</span></td><td>"AI로 불가능했던 규모 생산" (정규직 해고 0, 단 계약직 일부 감축) + Duolingo Max</td></tr>
+          <tr><td class="tool">Klarna ⚠️</td><td>비용 절감·IPO 준비</td><td>AI로 인력 대체 (700 FTE 주장)</td><td>240만 건 처리·응답 2분 <span class="badge b-warn">Self-Reported</span> → <strong>고객 만족 하락 → 재고용 역전</strong> (IPO 2025-09 후에도 품질 회귀)</td><td>비용 1차 KPI의 함정 — 반면교사</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="callout tip"><span class="ico">💡</span><div>
+        <p><strong>읽는 법</strong>: 신뢰도는 라벨로 가른다. <span class="badge b-ok">Independently-Audited</span>(DBS 감사 연차보고서·Duolingo SEC 재무)가 가장 높지만, 그조차 <strong>재무 지표일 뿐 "AI 기여 인과"는 검증 대상이 아니다.</strong> John Deere의 Iowa State 76%는 Deere 후원 연구(<span class="badge b-warn">Sponsored-Study</span>), Forrester의 DBS 케이스는 방법론 기술이지 수치 독립 재계산이 아니다. Moderna·Klarna 핵심 수치는 자기 보고(<span class="badge b-warn">Self-Reported</span>). 모든 수치는 "그렇게 주장했다 / 그 범위까지 검증됐다"로 정확히 읽고, <strong>실천 패턴</strong>에서 배운다.</p>
+      </div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>
+        <p><strong>표본 한계(생존자 편향)</strong>: 5개 기업은 모두 <em>AX 성공 서사를 적극 공개·홍보한 영미권 대기업</em>이다. "조용히 실패·중단한 다수"와 한국·비영어권 기업은 구조적으로 관측되지 않는다. 패턴을 "성공 보장 공식"이 아니라 "관측된 성공 사례의 공통 조건"으로 읽어야 한다.</p>
+      </div></div>
+    </section>
+
+    <section id="a-patterns" class="reveal">
+      <div class="sec-head"><span class="sec-num">A·2</span><h2 class="sec-title">Cross-Case 공통 성공 패턴 7가지</h2></div>
+      <p>5개 기업(반면교사 Klarna 제외 4개 + Klarna의 반대 증거)에서 반복적으로 나타난 패턴.</p>
+
+      <h3>패턴 1 — 데이터·인프라 기반을 AI보다 먼저 다진다 🏗️</h3>
+      <p>4개 성공 기업 모두 AI 배포 <em>이전에</em> 데이터/인프라 기반을 갖췄다. 단 <strong>층위는 다르다</strong> — 전사 데이터 거버넌스 플랫폼(DBS ADA·John Deere Operations Center, 2건)이 가장 강한 근거이고, Duolingo Birdbrain은 <em>개인화 모델</em>, Moderna AWS 표준화는 <em>인프라 선택</em>으로 결이 다르다. 셋을 같은 "데이터 기반"으로 묶지 말 것.</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>선행 기반</th><th>효과</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS</td><td>ADA 데이터 플랫폼 (5.3PB, 단일 진실 공급원)</td><td>모델 배포 가속</td></tr>
+          <tr><td class="tool">Moderna</td><td>AWS 단일 클라우드 10년 표준화</td><td>mChat 14일 내 구동</td></tr>
+          <tr><td class="tool">Duolingo</td><td>Birdbrain 개인화 모델 (2013~ 학습 데이터)</td><td>외부 GPT-4 + 내부 모델 결합으로 차별화</td></tr>
+          <tr><td class="tool">John Deere</td><td>Operations Center (3억3천만 engaged acres)</td><td>데이터 플라이휠의 토대</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">🛠️</span><div><p><strong>실천</strong>: "데이터가 준비되면 AI를 한다"는 순서를 지켜라. 레거시 인프라 위의 GenAI는 속도가 10배 느리다 (Moderna). 첫 AI 유스케이스 전에 데이터 플랫폼 로드맵을 수립하라.</p></div></div>
+
+      <h3>패턴 2 — CEO가 측정 가능한 목표를 공개 선언한다 (강제 함수) 🎯</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>공개 선언</th><th>효과</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS</td><td>CIO "5년 내 SGD 1B" (2022)</td><td>내부 우선순위 고정, CEO 교체 후에도 계승</td></tr>
+          <tr><td class="tool">Moderna</td><td>CEO "6개월 내 100% 채택·숙련도"</td><td>AI를 선택지 아닌 기본값으로 인식</td></tr>
+          <tr><td class="tool">John Deere</td><td>"2030년 완전 자율 생산 주기"</td><td>R&amp;D·엔지니어링·제품 팀 방향 수렴</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">🛠️</span><div><p><strong>실천</strong>: AI 목표를 수치·기한으로 공개 설정하고 CEO 직보 대시보드로 추적하라. "AI를 장려합니다" 같은 방향 제시는 문화를 바꾸지 못한다(Moderna). 측정 없는 목표는 무력하다.</p></div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>단 필수 조건은 아님</strong>: Duolingo는 von Ahn의 <em>정성적</em> "AI-first" 선언만으로 성장했다(정량 목표 없음). 이 패턴은 3/5 사례 근거 — 정량 목표는 강력한 촉진제이지 성공의 필요조건은 아니다.</p></div></div>
+
+      <h3>패턴 3 — 증강(Augmentation) &gt; 대체(Replacement) ⚖️</h3>
+      <p>성공 기업과 Klarna(반면교사)를 가르는 <strong>가장 결정적 분기점</strong>.</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th></th><th>성공 패턴</th><th>Klarna 실패</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">AI 포지셔닝</td><td>인간 증강</td><td>인간 대체</td></tr>
+          <tr><td class="tool">Duolingo</td><td>"AI로 불가능했던 규모 생산" (정규직 해고 0, 단 계약직 일부 감축)</td><td>—</td></tr>
+          <tr><td class="tool">John Deere</td><td>농가 가치 증대 (절감액을 고객·회사가 공유)</td><td>—</td></tr>
+          <tr><td class="tool">Moderna</td><td>고위험 영역은 Human-in-the-loop (AI가 용량 직접 결정 안 함)</td><td>고객지원 700명 AI 전담 → 품질 하락</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">🛠️</span><div><p><strong>실천</strong>: AI를 "사람을 줄이는 도구"가 아니라 "사람이 못 하던 규모·속도를 여는 도구"로 포지셔닝하라. 고위험·감정 영역은 반드시 인간 최종 결정/fallback을 남겨라.</p></div></div>
+
+      <h3>패턴 4 — 플랫폼 사고: 중앙이 다 만들지 않는다 🔁</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>플랫폼 메커니즘</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">Moderna</td><td>"모두가 GPT를 만드는 플랫폼" — 중앙이 모든 GPT 개발하면 혁신 병목</td></tr>
+          <tr><td class="tool">DBS</td><td>ALAN — 과거 유스케이스의 데이터·기법·모델을 검색 가능하게 보존 → 재사용</td></tr>
+          <tr><td class="tool">John Deere</td><td>데이터 플라이휠 — Operations Center 무료 제공 → 데이터 유입 → 모델 개선</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout key"><span class="ico">🔁</span><div>
+        <p><strong>공통분모는 "중앙이 단일 생산 병목이 되지 않게 한다"는 추상 원칙 하나뿐이고, 구현은 셋으로 갈린다</strong>: ① 재사용 자산화(DBS ALAN — 엔지니어용 레지스트리), ② 사용자 self-serve 생성(Moderna — 일반 직원이 GPT 제작), ③ 데이터 플라이휠(John Deere — 데이터 유입 메커니즘). "사용자가 직접 도구를 만든다"는 <strong>Moderna 전용</strong> 패턴이지 셋의 공통이 아니다.</p>
+        <p><strong>실천</strong>: 우리 맥락에 맞는 메커니즘을 고르라 — 재사용 레지스트리(엔지니어 多) / self-serve 생성(현업 多) / 데이터 플라이휠(데이터 자산 핵심).</p>
+      </div></div>
+
+      <h3>패턴 5 — 스킬링·문화를 기술 도입과 동시에 설계한다 🎓</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>스킬링</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS</td><td>9,000명+ 업스킬링, iGrow AI 커리어 어드바이저 → 내부 공석 30% 내부 충원</td></tr>
+          <tr><td class="tool">Moderna</td><td>역할별 6트랙 교육 (단일 트랙은 "효과 없음" 발견 후 재설계, NPS 50→71) + 챔피언 네트워크</td></tr>
+          <tr><td class="tool">John Deere</td><td>General Assembly 파트너십, 100명+ 재훈련 (도메인 지식 + 코딩 = 외부 채용보다 빠름)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">🛠️</span><div><p><strong>실천</strong>: AI 도입 로드맵에 스킬링을 동시에 포함하라. <strong>역할별로 분리된 커리큘럼</strong>을 운영하고 NPS를 측정하라. ⚠️ 교육을 "비용 절감 수단"으로 프레이밍하지 마라(Moderna CHRO 명시 경고).</p></div></div>
+
+      <h3>패턴 6 — 거버넌스·윤리를 스케일보다 먼저 내재화한다 🛡️ (부분 근거 2/5)</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>거버넌스 선행</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS</td><td>PURE 윤리 프레임워크(2019) — 경제가치 측정(2022)보다 3년 앞섬 → 빠른 배포에도 규제 문제 없음</td></tr>
+          <tr><td class="tool">Moderna</td><td>"AI 민주화 영역" vs "AI 지원 + 인간 최종 결정 영역" 명시 분리</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>
+        <p><strong>근거 강도</strong>: 명시적 거버넌스 선행은 DBS·Moderna <strong>2개 사례</strong>에서만 확인된다(John Deere·Duolingo는 공개 자료 없음, Klarna는 거버넌스 부재가 반례). 패턴 1~3(4~5/5 수렴)보다 약한 "부분 근거" 패턴으로 읽어라.</p>
+        <p><strong>실천</strong>: "법적으로 가능한가"가 아니라 "해야 하는가"를 묻는 윤리 체크리스트를 AI 유스케이스 승인 게이트에 삽입하라. 거버넌스가 스케일을 앞서야 사고 없이 빠르게 간다.</p>
+      </div></div>
+
+      <h3>패턴 7 — 측정을 구조화하고 투명하게 공개하되, 인과를 과장하지 않는다 📊</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기업</th><th>측정 체계</th><th>절제</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS</td><td>3범주(매출·비용·리스크) + 컨트롤 그룹 A/B + <strong>연간보고서 공시</strong> <span class="badge b-ok">Independently-Audited</span></td><td>—</td></tr>
+          <tr><td class="tool">Duolingo</td><td>DAU·구독·매출 SEC 공시 <span class="badge b-ok">Independently-Audited</span></td><td>"AI가 성장을 이끌었다"는 인과는 <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">Moderna</td><td>주간 활성 사용자·GPT 수·부서별 채택률</td><td>채택률 ≠ 사업 성과, 인과 미입증 <span class="badge b-neutral">Uncertain</span> 명시</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">🛠️</span><div><p><strong>실천</strong>: AI ROI를 매출·비용·리스크 3범주로 표준화하고 컨트롤 그룹과 비교하라. <strong>단, "AI 채택률"과 "사업 성과"를 인과로 연결하지 마라</strong> — 가장 흔한 과장이다. 채택은 입력 지표, 성과는 별도 측정.</p></div></div>
+    </section>
+
+    <section id="a-roadmap" class="reveal">
+      <div class="sec-head"><span class="sec-num">A·3</span><h2 class="sec-title">AX 실천 4단계 로드맵</h2></div>
+      <p>위 7개 패턴을 "어디부터 시작하나" 순서로 재배열한 실행 로드맵. 각 단계에 체크리스트 + 근거 기업.</p>
+      <ol class="steps">
+        <li><span class="st">1단계 — 진단 (이해) 🔍</span>
+          <p class="sd">현재 상태를 객관적으로 측정하고 "우리는 어느 모델인가"를 정한다.</p>
+          <ul>
+            <li><strong>데이터·인프라 성숙도 진단</strong>: 단일 진실 공급원이 있는가? 데이터 거버넌스·접근제어는? (DBS ADA, Moderna AWS)</li>
+            <li><strong>카테고리 식별</strong>: 우리는 어느 사례에 가까운가? — 장기 체계 구축형(DBS) / 문화 전환형(Moderna) / BM 전환형(John Deere) / 콘텐츠 레버리지형(Duolingo)</li>
+            <li><strong>AI 적합 영역 vs 인간 필수 영역 분류</strong>: 고위험·감정 영역은 처음부터 제외 (Moderna Human-in-the-loop)</li>
+            <li><strong>현 인력 스킬 갭 측정</strong></li>
+          </ul>
+        </li>
+        <li class="hot"><span class="st">2단계 — 설계 (How to start) 📐</span>
+          <p class="sd">거버넌스·목표·조직을 먼저 세운다. <strong>여기서 서두르면 Klarna가 된다.</strong></p>
+          <ul>
+            <li><strong>윤리·거버넌스 프레임워크 수립</strong> (스케일 이전, DBS PURE): "해야 하는가" 승인 게이트</li>
+            <li><strong>CEO 정량 목표 공개 선언</strong> (DBS "SGD 1B", Moderna "6개월 100%"): 수치 + 기한 + 대시보드</li>
+            <li><strong>조직 구조 결정</strong>: 중앙 CoE + 현장 임베딩 이중 소속 (DBS Data Chapter) / HR+IT 통합은 <em>역량 조건 충족 시에만</em> (Moderna — 그냥 박스 합치기 금지)</li>
+            <li><strong>측정 체계 사전 설계</strong>: 3범주(매출·비용·리스크) + 컨트롤 그룹 A/B (DBS)</li>
+            <li><strong>KPI 1순위를 "고객가치·품질"로</strong> (비용 절감은 부산물 — Klarna 반면교사)</li>
+          </ul>
+        </li>
+        <li><span class="st">3단계 — 실행 (Do) 🚀</span>
+          <ul>
+            <li><strong>플랫폼으로 배포</strong> (단일 챗봇 아님, Moderna): 사용자가 직접 도구 만드는 환경</li>
+            <li><strong>AI 모델 레지스트리 구축</strong> (DBS ALAN): 재사용 가능한 파이프라인 → 배포 속도 표준화</li>
+            <li><strong>외부 LLM + 내부 도메인 데이터 결합</strong> (Duolingo Birdbrain): 차별화의 핵심</li>
+            <li><strong>스킬링 병행</strong> (역할별 커리큘럼 + 챔피언 네트워크, Moderna)</li>
+            <li><strong>가드레일 설치</strong>: 모든 AI 채널에 인간 에스컬레이션 경로 노출, 감정 케이스 자동 라우팅 (Klarna AP-3·AP-6)</li>
+            <li><strong>성과 기반 가치 포착</strong> (John Deere): AI가 만든 절감/증가분을 측정 단위로 과금/평가</li>
+          </ul>
+        </li>
+        <li><span class="st">4단계 — 측정·확산 (Scale) 📈</span>
+          <ul>
+            <li><strong>데이터 플라이휠 설계</strong> (John Deere): 낮은 진입장벽 → 데이터 축적 → 모델 개선 → 프리미엄 전환</li>
+            <li><strong>3범주 ROI 측정 + 투명 공개</strong> (DBS 연간보고서)</li>
+            <li><strong>인과 분리</strong>: AI 효과를 "AI 없이도 일어났을 변화(자연 감소·시장 성장)"와 분리 (Klarna AP-7)</li>
+            <li><strong>챔피언 네트워크로 바이럴 확산</strong> (Moderna): 사용 데이터로 챔피언 발굴</li>
+            <li><strong>목표 재선언·리더십 인수인계</strong> (DBS CEO 교체 후 계승)</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>4. 반면교사 — Klarna 안티패턴 8가지</h3>
+      <p>성공 패턴의 "할 것"과 <strong>반대 쌍</strong>으로 읽는다. 각각 Klarna(파트 F)에서 도출.</p>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>근거 강도 구분</strong>: <strong>AP-1·3·5·7</strong>은 CEO 직접 발언·Pragmatic Engineer 독립 분석 기반(강). <strong>AP-2·4·6·8</strong>은 CX 벤더 블로그(Poly.ai 등) 분석 기반(약 — 이해관계자 가능성). 약한 근거 항목은 "Klarna에서 입증된 사실"보다 "Klarna 맥락에서 제기된 합리적 가설"로 읽어라.</p></div></div>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>#</th><th>안티패턴</th><th>대신 할 것</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">AP-1</td><td>비용 절감을 1차 KPI로 설정</td><td>1차 KPI = 고객 해결률·CSAT·재문의율 (비용은 부산물)</td></tr>
+          <tr><td class="tool">AP-2</td><td>볼륨 지표로 품질 대리 측정 (처리 건수↑=성공)</td><td>완전 해결률(FCR)·에스컬레이션 비율·복잡 케이스 CSAT 동시 추적</td></tr>
+          <tr><td class="tool">AP-3</td><td>인간 fallback 옵션 제거·숨김</td><td>모든 AI 채널에 인간 에스컬레이션 경로 노출</td></tr>
+          <tr><td class="tool">AP-4</td><td>L1 자동화 성공을 전체 대체 신호로 오해</td><td>복잡도 티어(L1/L2/L3)별 AI 적합성 독립 검증</td></tr>
+          <tr><td class="tool">AP-5</td><td>자체 수치를 독립 검증 없이 홍보 ("700명 분량")</td><td>임팩트 수치는 제3자 감사·방법론 공개 병행</td></tr>
+          <tr><td class="tool">AP-6</td><td>감정·공감 채널을 AI 전담 전환</td><td>감정 분류(sentiment tagging)로 고강도 케이스 인간 라우팅</td></tr>
+          <tr><td class="tool">AP-7</td><td>채용 동결을 AI 성공의 증거로 제시</td><td>AI 효과를 자연 감소·사업 축소와 분리 (인과≠상관)</td></tr>
+          <tr><td class="tool">AP-8</td><td>브랜드 아이덴티티 없는 generic AI 응답</td><td>브랜드 페르소나·톤을 시스템 프롬프트에 명시</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout key"><span class="ico">⚠️</span><div><p><strong>핵심</strong>: Klarna는 CEO가 직접 "비용이 너무 지배적인 평가 기준이었다", "인간이 항상 옵션이어야 한다"고 인정하고 재고용으로 역전했다. AX의 가장 큰 위험은 기술 실패가 아니라 <strong>"왜 하는가"를 비용으로 잘못 잡는 것</strong>이다.</p></div></div>
+
+      <h3>5. 백엔드 엔지니어의 자리 — "나는 무엇을 하는가"</h3>
+      <p>5개 사례에서 반복 등장하는 기술 레이어를 백엔드 엔지니어 관점으로 정리. (이 가이드의 독자는 백엔드 엔지니어)</p>
+      <h4>5-1. 사례에서 관찰된 엔지니어링 레이어 (각 레이어별 근거 사례 표기 — "5개 공통"이 아니라 합집합)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>레이어</th><th>사례 근거</th><th>엔지니어 과제</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">데이터 플랫폼</td><td>DBS ADA(5.3PB), John Deere Operations Center</td><td>단일 진실 공급원, 데이터 카탈로그, 접근제어</td></tr>
+          <tr><td class="tool">모델 레지스트리·재사용</td><td>DBS ALAN</td><td>모델·데이터·기법·정확도를 검색 가능하게 보존</td></tr>
+          <tr><td class="tool">외부 LLM + 내부 모델 결합</td><td>Duolingo (GPT-4 + Birdbrain)</td><td>LLM 게이트웨이(벤더 추상화) + 도메인 모델</td></tr>
+          <tr><td class="tool">측정·observability</td><td>DBS 3범주 + 컨트롤 그룹, Moderna 주간 활성 추적</td><td>cost attribution(부서·앱별 토큰), KPI 대시보드</td></tr>
+          <tr><td class="tool">가드레일·라우팅</td><td>Klarna AP-3·AP-6 (실패에서 도출)</td><td>인간 에스컬레이션 경로, 감정 분류 라우팅 (※ 프롬프트 인젝션 방어는 본 5개 사례에 근거 없음 — 일반 권장 사항)</td></tr>
+        </tbody>
+      </table></div>
+      <h4>5-2. "AX 조직에서 백엔드 엔지니어가 제공하는 가치" framing</h4>
+      <div class="callout key"><span class="ico">💬</span><div><p>"저는 AI 모델 자체보다, <strong>모델을 신뢰 가능하고 비용 효율적으로 프로덕션에 도달</strong>시키는 레이어를 만듭니다. DBS의 ALAN(재사용 파이프라인), Duolingo의 Birdbrain(내부 도메인 모델), Klarna가 빠뜨린 가드레일(인간 fallback·감정 라우팅) — 이 모든 게 백엔드 엔지니어의 자리입니다. AI 채택률이 아니라 <strong>실제 비즈니스 KPI로 이어지는 측정 체계</strong>를 설계하는 것도 제 역할입니다."</p></div></div>
+      <h4>5-3. 학습 우선순위 (사례 기반)</h4>
+      <ol>
+        <li><strong>데이터 플랫폼·거버넌스</strong> (모든 사례의 전제 — 패턴 1)</li>
+        <li><strong>LLM 게이트웨이 + RAG</strong> (외부 LLM + 내부 데이터 — Duolingo)</li>
+        <li><strong>Evals·observability·cost attribution</strong> (측정 — DBS·Moderna)</li>
+        <li><strong>가드레일·Human-in-the-loop 라우팅</strong> (Klarna 반면교사)</li>
+        <li><strong>모델 레지스트리</strong> (재사용 — DBS ALAN)</li>
+      </ol>
+
+      <h3>6. 우리 회사 적용 체크리스트</h3>
+      <p>백엔드 엔지니어가 회사에 AX를 제안·추진할 때 쓰는 실행 체크리스트.</p>
+      <h4>진단</h4>
+      <ul>
+        <li>우리 회사 데이터는 단일 진실 공급원이 있는가? (없으면 그것부터 — 패턴 1)</li>
+        <li>문서·의사결정이 <strong>구조화되어 있는가</strong>? (⚠️ <em>본 5개 사례 외부 인사이트</em> — 이전 markdown×AX 정합성 검증에서 도출했으며 본 시리즈 케이스로 직접 입증된 항목은 아니다. "에이전트가 파싱 가능한 구조"가 Markdown 도구 자체보다 핵심이라는 참고 가설로 활용)</li>
+        <li>우리는 어느 카테고리인가? (체계형/문화형/BM전환형/레버리지형)</li>
+      </ul>
+      <h4>설계</h4>
+      <ul>
+        <li>윤리·거버넌스 체크리스트를 유스케이스 승인 게이트에 넣었는가? (DBS PURE)</li>
+        <li>경영진이 정량 목표를 공개 선언했는가?</li>
+        <li>KPI 1순위가 비용이 아니라 고객가치·품질인가? (Klarna AP-1 회피)</li>
+      </ul>
+      <h4>실행</h4>
+      <ul>
+        <li>단일 도구가 아닌 플랫폼으로 배포하는가? (Moderna)</li>
+        <li>스킬링을 동시에 설계했는가? (역할별 — DBS·Moderna)</li>
+        <li>모든 AI 채널에 인간 fallback이 있는가? (Klarna AP-3)</li>
+        <li>외부 LLM + 우리 도메인 데이터를 결합하는가? (Duolingo)</li>
+      </ul>
+      <h4>측정·확산</h4>
+      <ul>
+        <li>ROI를 3범주(매출·비용·리스크)로 측정하는가? (DBS)</li>
+        <li>AI 효과를 자연 변화와 분리했는가? (Klarna AP-7)</li>
+        <li>채택률과 사업 성과를 인과로 혼동하지 않는가? (Moderna 절제)</li>
+      </ul>
+
+      <h3>7. 회색지대 분류 부록표 (출처 신뢰도)</h3>
+      <p>본 시리즈 전체에서 측정 수치·주장에 부착한 라벨의 분류 기준. 6개 노트 공통.</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>#</th><th>케이스</th><th>분류</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>기업 공식 발표·IR·보도자료</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td>2</td><td>컨설팅·벤더가 기업과 공저한 case study</td><td><span class="badge b-warn">Self-Reported</span> (수익 이해관계자 포함 시)</td></tr>
+          <tr><td>3</td><td>분석가가 vendor 비공개 데이터를 인용한 리포트</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td>4</td><td>매체가 IR 자료를 paraphrase한 기사</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td>5</td><td>기업 자체 측정(채택률·절감액 등)</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td>6</td><td>학계(<strong>비-vendor 데이터</strong>)·완전 독립 연구</td><td><span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td>7</td><td>규제자·감사받은 공시 (SEC 8-K, 감사 연차보고서) — <strong>단 재무 지표 한정, "AI 기여 인과"는 비검증</strong></td><td><span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td>8</td><td>저널리즘 자체취재 (소스 다수, CEO 직접 발언 교차)</td><td><span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td>—</td><td>기업이 <strong>후원</strong>한 학술·제3자 연구 (Iowa State John Deere 76%)</td><td><span class="badge b-warn">Sponsored-Study</span> (독립성 부분 제한)</td></tr>
+          <tr><td>—</td><td>애널리스트가 기업 방법론을 <em>기술</em>(수치 독립 재계산 아님) (Forrester DBS)</td><td>방법론 출처만 독립, 수치는 <span class="badge b-warn">Self-Reported</span> 수준</td></tr>
+          <tr><td>—</td><td>단일·빈약 출처, 검증 어려운 주장 ("700명 대체")</td><td><span class="badge b-neutral">Uncertain</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">💡</span><div><p>본 시리즈의 핵심 원칙: <strong>수치는 라벨과 함께 읽는다.</strong> <span class="badge b-warn">Self-Reported</span>가 거짓이라는 뜻은 아니지만, 독립 검증이 없으므로 "그렇게 주장했다"로 받아들이고 <strong>실천 패턴</strong>에서 배운다.</p></div></div>
+
+      <h3>8. 출처 (Sources)</h3>
+      <p>각 기업의 1차 출처는 해당 Playbook 노트 하단을 참조. 본 가이드는 5개 Playbook의 cross-case 합성이다.</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>Playbook</th><th>출처 수</th><th>대표 Independently-Audited</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DBS Bank</td><td>10건</td><td>감사 연차보고서 공시 (Forrester는 방법론 기술, 수치 독립 재계산 아님)</td></tr>
+          <tr><td class="tool">Moderna</td><td>12건</td><td>HBS 케이스, CIO.com 독립 분석</td></tr>
+          <tr><td class="tool">John Deere</td><td>12건</td><td>Iowa State 연구(Deere 후원, <span class="badge b-warn">Sponsored-Study</span>)</td></tr>
+          <tr><td class="tool">Duolingo</td><td>15건</td><td>SEC 8-K 공시</td></tr>
+          <tr><td class="tool">Klarna</td><td>11건</td><td>Bloomberg·CNBC·Pragmatic Engineer 자체취재</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>합계</strong>: 60건 (5개 Playbook), 그 중 <span class="badge b-ok">Independently-Audited</span> 다수 포함.</p>
+      <div class="callout key"><span class="ico">🔖</span><div>
+        <p>이 가이드는 AX 실천 Playbook 시리즈의 허브입니다. 각 기업의 상세 "How they did it"은 개별 Playbook(파트 B~F)을 참조하세요.</p>
+        <p>다음 단계: 우리 회사의 데이터·문서 구조 진단(§6) → 카테고리 식별 → 2단계 설계 착수.</p>
+      </div></div>
+    </section>
+
+    <!-- ============ PART B ============ -->
+    <section id="part-b" class="reveal">
+      <div class="sec-head"><span class="sec-num">B</span><h2 class="sec-title">DBS Bank AX Playbook — 5년 체계로 SGD 1B를 만든 은행</h2></div>
+      <div class="callout key"><span class="ico">🔖</span><div>
+        <p>📅 작성일 2026-06-02 · 측정치·동향은 시점 의존적, 6~12개월 후 재검토 권장 · AX 실천 Playbook 시리즈 (파트 A 허브 참조)</p>
+      </div></div>
+
+      <h3>0. Executive Summary</h3>
+      <p class="lead">DBS Bank는 2014년 디지털 전환을 시작으로, 2019년 PURE 윤리 프레임워크 수립, 2021년 9,000명+ AI 업스킬링, 2023년 700명 규모 Data Chapter 조직화라는 단계적 체계를 쌓았다. 이 기반 위에서 2022년 공식 선언한 "5년 내 SGD 1B" 목표를 2025년에 조기 달성했으며 <span class="badge b-warn">Self-Reported</span>, Harvard Business School은 아시아 은행 최초의 AI 케이스스터디로, Global Finance는 세계 최고 AI 은행(2025)으로 선정했다 <span class="badge b-ok">Independently-Audited</span>. 핵심 교훈은 기술보다 먼저 데이터 거버넌스·윤리 기반을 다지고, 중앙 지식 공유와 현장 임베딩을 동시에 달성하는 조직 구조를 만든 것이다.</p>
+
+      <h3>1. 출발점 — 왜 AX를 시작했나</h3>
+      <h4>1-1. 출발 시점의 문제 인식 (2014년 전후)</h4>
+      <ul>
+        <li>CEO 피유시 굽타(Piyush Gupta)는 2014년을 전후해 "전통 은행보다 기술 스타트업처럼 운영해야 한다"는 방향을 제시했다 <span class="badge b-warn">Self-Reported</span>.</li>
+        <li>싱가포르 최대 은행으로서 데이터는 풍부했지만, 사일로화된 시스템과 레거시 인프라로 인해 데이터 활용이 단절되어 있었다.</li>
+        <li>규제 압박(싱가포르 MAS 지도), 핀테크·빅테크의 금융 진입, 동남아시아 고성장 시장에서의 경쟁 격화가 변화의 외부 촉발 요인이었다.</li>
+      </ul>
+      <h4>1-2. 전략 선택의 근거</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>선택지</th><th>DBS가 선택한 이유</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">외부 AI 솔루션 구매</td><td><span class="dot d-bad"></span>도메인 맥락 없는 블랙박스로 현장 적용 어려움</td></tr>
+          <tr><td class="tool">내부 역량 자체 구축</td><td><span class="dot d-ok"></span>컨텍스트·문화·규제 이해 내재화</td></tr>
+          <tr><td class="tool">PoC 중심 실험</td><td><span class="dot d-bad"></span>개별 성공이 전사 스케일로 이어지지 않음</td></tr>
+          <tr><td class="tool">산업화(Industrialisation)</td><td><span class="dot d-ok"></span>반복 가능한 AI 배포 파이프라인 표준화</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout key"><span class="ico">💬</span><div><p>Nimish Panchmatia(최고 데이터 전환 책임자, CDTO): "PhD 데이터 과학자를 영입해도 우리의 맥락과 문화를 이해하지 못하면 AI를 적용하기 어렵다." <span class="badge b-warn">Self-Reported</span></p></div></div>
+    </section>
+
+    <section id="b-timeline" class="reveal">
+      <div class="sec-head"><span class="sec-num">B·2</span><h2 class="sec-title">DBS — 타임라인·조직·거버넌스·경제가치</h2></div>
+      <h3>2. 타임라인 — 어떻게 수행했나 (연도별 단계표)</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>연도</th><th>단계</th><th>주요 이벤트</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">2014</td><td>기반 구축</td><td>디지털 전환 선언, 기술 인프라 현대화 착수 (레거시 → 오픈소스·클라우드)</td></tr>
+          <tr><td class="tool">2017</td><td>인재 전환 선제</td><td>싱가포르 최초 은행 전문직 전환 프로그램(데이터·AI) 도입 <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2018–2019</td><td>거버넌스 확립</td><td>PURE 윤리 프레임워크 수립 (DBS 공식 페이지: "2019년부터 사용") <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2021</td><td>전사 업스킬링</td><td>9,000명+ 임직원 데이터·AI 업스킬링 시작 (이후 누적) <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2022</td><td>목표 공식화 + 가치 측정 시작</td><td>CIO 지미 응(Jimmy Ng): "5년 내 SGD 1B" 목표 공개 선언; 해당 연도 SGD 1억 8,000만 달성 (매출 SGD 1억 5,000만 + 비용 절감 SGD 3,000만) <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2022</td><td>GenAI 실험 착수</td><td>생성형 AI 실험 시작, 거버넌스 프레임워크 확장 검토</td></tr>
+          <tr><td class="tool">2023</td><td>조직 재편</td><td>Data Chapter 공식 출범 (700명 데이터 전문가 통합), DBS-GPT 내부 도구 출시 <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2023</td><td>외부 검증 시작</td><td>Global Evident AI Index: AI 전략 리더십 세계 1위, 종합 10위 (아시아 은행 유일 Top 10) <span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td class="tool">FY2023 말</td><td>누적 가치 공개</td><td>경제가치 SGD 3억 7,000만 달성 <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2024</td><td>스케일 가속</td><td>1,500개+ AI 모델, 370개+ 유스케이스 배포; SGD 7억 5,000만~7억 8,000만 달성 <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2024</td><td>학술 인정</td><td>Harvard Business School: 아시아 은행 최초 AI 케이스스터디 "DBS' AI Journey" 발간 (저자: Feng Zhu 교수) <span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td class="tool">2024~25</td><td>CEO 승계</td><td>탄 수 샨(Tan Su Shan) 2024-08 Deputy CEO → 2025-03 CEO 취임 (굽타 2025-03-28 퇴임), AI 전략 연속성 유지</td></tr>
+          <tr><td class="tool">2025</td><td>목표 조기 달성</td><td>SGD 1B 달성 (2년 조기 달성), Global Finance: 세계 최고 AI 은행 선정 <span class="badge b-ok">Independently-Audited</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>경제가치 누적 성장 추이</h4>
+      <pre><code>SGD (단위: 억)
+10 ┤                                    ★ 10B (2025)
+ 9 ┤
+ 8 ┤
+ 7 ┤                           ■ 7.5–7.8B (2024)
+ 6 ┤
+ 5 ┤
+ 4 ┤                  ◆ 3.7B (FY2023)
+ 3 ┤
+ 2 ┤         ● 1.8B (2022)
+ 1 ┤
+ 0 ┤────────────────────────────────────
+    2022     2023      2024      2025</code></pre>
+
+      <h3>3. 조직 변화 — 신설 부서·역할·보고체계</h3>
+      <h4>3-1. Data Chapter (2023년 출범)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">규모</td><td>700명 데이터 전문가 (데이터 과학자 약 200명 + 번역가·엔지니어 등)</td></tr>
+          <tr><td class="tool">구조</td><td>하이브리드 임베딩: 각자의 사업·지원 부서에 소속되어 일상 업무 수행 + 중앙 Data Chapter에 소속되어 스킬링·리소싱 관리</td></tr>
+          <tr><td class="tool">목적</td><td>지식 공유, AI 산업화 촉진, 도메인 전문성과 데이터 역량의 융합</td></tr>
+          <tr><td class="tool">보고체계</td><td>현장 업무는 각 사업부 보고 / 스킬링·리소싱은 중앙 CDTO(최고 데이터 전환 책임자) 산하</td></tr>
+        </tbody>
+      </table></div>
+      <p><span class="badge b-warn">Self-Reported</span> — DBS Bank 공식 발표 및 EDB Singapore 인터뷰 종합</p>
+      <h4>3-2. 핵심 리더십</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>역할</th><th>인물</th><th>역할 핵심</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">CEO (전임)</td><td>피유시 굽타 (2009–2024)</td><td>AX 비전 제시, "기술 스타트업처럼 운영" 문화 정착</td></tr>
+          <tr><td class="tool">CEO (현)</td><td>탄 수 샨 (2024–)</td><td>GenAI 시대 전략 계승, "AI with a heart" 철학 강조</td></tr>
+          <tr><td class="tool">CDTO</td><td>Nimish Panchmatia</td><td>AI·데이터 전략 실행, SGD 1B 달성 주도</td></tr>
+          <tr><td class="tool">CIO (전)</td><td>지미 응(Jimmy Ng)</td><td>2022년 SGD 1B 목표 공개 선언</td></tr>
+        </tbody>
+      </table></div>
+      <h4>3-3. 조직 구조 변화 핵심</h4>
+      <pre><code>[기존 구조]                      [AX 이후 구조]
+─────────────────                ──────────────────────────────
+각 사업부별 분산된                CDTO (Nimish Panchmatia)
+데이터 팀 (사일로)    →              │
+                                 ├── Data Chapter (700명, 중앙 스킬링)
+                                 │    └── 각 사업부 임베딩 데이터 전문가
+                                 ├── ADA 플랫폼 팀 (데이터 거버넌스)
+                                 └── Responsible AI Taskforce (GenAI 거버넌스)</code></pre>
+
+      <h3>4. 의사결정·거버넌스 — 어떤 프로세스로 결정했나</h3>
+      <h4>4-1. PURE 윤리 프레임워크</h4>
+      <p>DBS가 2019년부터 시행한 AI·데이터 사용의 윤리 기준으로, "법적으로 허용되는가"가 아니라 "사용해야 하는가"를 판별하는 도구다 <span class="badge b-warn">Self-Reported</span>.</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>원칙</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">Purposeful (목적성)</td><td>데이터 사용에 명확하고 정당한 목적이 있어야 한다</td></tr>
+          <tr><td class="tool">Unsurprising (예측 가능성)</td><td>데이터 사용이 개인·법인의 합리적 기대에 부합해야 한다</td></tr>
+          <tr><td class="tool">Respectful (존중)</td><td>사회 규범을 준수하고 개인 프라이버시·존엄성을 존중해야 한다</td></tr>
+          <tr><td class="tool">Explainable (설명 가능성)</td><td>데이터 사용이 투명하고 모델 근거를 명확히 설명할 수 있어야 한다</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>운영 방식</strong>: 각 AI 유스케이스 오너가 PURE 체크리스트를 적용해 자기 평가 수행 → 리스크 레벨에 따라 상위 거버넌스 검토 (3단계 거버넌스: 데이터 기반 → PURE 적용 → 모델 거버넌스).</p>
+      <p><strong>GenAI 확장</strong>: 2022년 생성형 AI 실험 착수 시, 크로스펑셔널 Responsible AI Taskforce를 구성해 GenAI 유스케이스 평가 및 리스크 완화 지침 수립 <span class="badge b-warn">Self-Reported</span>.</p>
+      <h4>4-2. AI 모델 거버넌스 3단계</h4>
+      <pre><code>1단계: 데이터 거버넌스 기반
+  ├── 보안, 프라이버시, 접근 제어, 데이터 품질
+  └── ADA 플랫폼으로 단일 진실 공급원(Single Source of Truth) 확보
+
+2단계: PURE 프레임워크 적용
+  ├── 유스케이스별 PURE 자기 평가
+  └── 규제 변화에 따른 정기 업데이트
+
+3단계: 모델 거버넌스
+  ├── 중요도 평가(Materiality Assessment)
+  ├── 의무 거버넌스 요건
+  ├── ALAN 프로토콜 등록 (AI 모델 레지스트리)
+  └── 시니어 경영진 책임 체계</code></pre>
+      <h4>4-3. 리스크 기반 접근</h4>
+      <ul>
+        <li>고객 대면 애플리케이션: 보수적 배포 (95%+ 정확도 요건 필수)</li>
+        <li>내부 직원 대면 도구: 더 빠른 반복 허용</li>
+        <li>금융거래·투자 어드바이저리: 엄격한 Human-in-the-loop 요건</li>
+      </ul>
+    </section>
+
+    <section id="b-lessons" class="reveal">
+      <div class="sec-head"><span class="sec-num">B·3</span><h2 class="sec-title">DBS — 실행 디테일·측정 결과·핵심 교훈</h2></div>
+      <h3>5. 실행 디테일 — 기술 스택·데이터 플랫폼·롤아웃</h3>
+      <h4>5-1. 핵심 기술 인프라</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>플랫폼/도구</th><th>역할</th><th>주요 특징</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">ADA (Advancing DBS with AI)</td><td>데이터 거버넌스 플랫폼</td><td>5.3PB 데이터 보유; 데이터 검색성·품질·보안의 단일 진실 공급원; 셀프서비스 UI</td></tr>
+          <tr><td class="tool">ALAN (Alan Turing 이름에서 유래)</td><td>AI 프로토콜·지식 저장소</td><td>과거 유스케이스 탐색, 사용 데이터·ML 기법·최종 모델·정확도를 표준화 형태로 보존; 반복 배포 가속</td></tr>
+          <tr><td class="tool">Vertex AI (Google Cloud)</td><td>모델 서빙·API</td><td>플랫폼 중립적 API 레이어; 모델 버전 유연성 확보</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout tip"><span class="ico">⚡</span><div><p>ADA + ALAN 조합으로 AI 유스케이스 배포 기간이 12–15개월 → 2–3개월으로 단축됨 <span class="badge b-warn">Self-Reported</span>.</p></div></div>
+      <h4>5-2. 인프라 현대화 경로</h4>
+      <pre><code>레거시 시스템
+    │
+    ▼  (2014~2017)
+오픈소스 기술 스택 전환 + 하이브리드 멀티클라우드 도입
+    │
+    ▼  (2019~2021)
+ADA 플랫폼 구축 (데이터 거버넌스 + 피처 마트)
+    │
+    ▼  (2021~2022)
+ALAN 프로토콜 완성 (AI 모델 레지스트리 + 재사용 파이프라인)
+    │
+    ▼  (2022~2024)
+GenAI 레이어 추가 (Vertex AI + LLM + RAG)
+    │
+    ▼  (2024~)
+에이전틱(Agentic) AI 워크플로우 통합 실험</code></pre>
+      <h4>5-3. 주요 유스케이스 롤아웃</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>유스케이스</th><th>적용 영역</th><th>성과</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">NAV Planner AI 넛지</td><td>소비자 금융</td><td>30M건/월 초개인화 인사이트 발송 (싱가포르 3.5M 고객)</td></tr>
+          <tr><td class="tool">CSO 어시스턴트 (고객 서비스)</td><td>콜센터</td><td>통화 처리 시간 20% 단축, 솔루션 추천 정확도 95%+</td></tr>
+          <tr><td class="tool">세일즈 퍼슨 증강</td><td>기업금융</td><td>통화 준비 시간 30–40% 절감 → 영업 기회 30–40% 증가</td></tr>
+          <tr><td class="tool">중소기업 융자</td><td>SME 뱅킹</td><td>즉시 융자 최대 SGD 30만, 부실채권 3개월+ 조기 식별 95%</td></tr>
+          <tr><td class="tool">부실 차주 감지</td><td>리스크 관리</td><td>리스크 차주 80% 사전 아웃리치 성공</td></tr>
+          <tr><td class="tool">GenAI 고객서비스</td><td>콜센터 자동화</td><td>월 25만 건 루틴 쿼리 자동화 (RAG 기반), 루틴 업무 80% 처리</td></tr>
+          <tr><td class="tool">iGrow / iCoach</td><td>인사·채용</td><td>AI 기반 커리어 어드바이저; 내부 공석의 30% 내부 충원 기여</td></tr>
+        </tbody>
+      </table></div>
+      <h4>5-4. 소프트웨어 개발 가속</h4>
+      <ul>
+        <li>DBS-GPT: 5,000명+ 싱가포르 직원 사용</li>
+        <li>개발자 코드 지원 도구: 시장 출시 속도 향상, 버그 감지, 소프트웨어 품질 개선 (엔지니어 대체가 아닌 증강)</li>
+      </ul>
+
+      <h3>6. 측정 결과 — 어떻게 성공을 측정했나</h3>
+      <h4>6-1. 경제가치 측정 방법론</h4>
+      <p>DBS는 AI 경제가치를 <strong>3가지 범주의 합산</strong>으로 산출한다 <span class="badge b-warn">Self-Reported</span>:</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>범주</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">매출 증대</td><td>소비자·기업금융 이자수익, 수수료, 커미션 증가분</td></tr>
+          <tr><td class="tool">비용 절감</td><td>운영 효율화로 인한 비용 절감액</td></tr>
+          <tr><td class="tool">리스크 회피</td><td>리스크 가중 손실 감소분</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>컨트롤 그룹 비교법</strong>: AI 솔루션 적용 고객군 vs. 비적용 고객군(컨트롤 그룹)의 행동·결과 차이를 측정해, 이론적 추정이 아닌 실측 효과만을 반영한다 <span class="badge b-warn">Self-Reported</span>.</p>
+      <p><strong>연간 보고서 공시</strong>: DBS는 전 세계 소수의 금융기관 중 하나로, 감사받은 연간 보고서에 AI 경제가치를 공개적으로 공시한다 <span class="badge b-ok">Independently-Audited — 회계감사를 받은 연간보고서 기재</span>.</p>
+      <div class="callout key"><span class="ico">💬</span><div><p>Nimish Panchmatia: "지난해(2024년) SGD 7억 5,000만, 2025년에는 10억 달러를 넘을 것으로 예상한다." <span class="badge b-warn">Self-Reported</span></p></div></div>
+      <h4>6-2. Forrester 독립 검증</h4>
+      <ul>
+        <li>Tom Mouhsian(Forrester 애널리스트)이 DBS AI 여정 케이스스터디 보고서 발간 <span class="badge b-ok">Independently-Audited</span></li>
+        <li>보고서 제목: "DBS Bank's Billion-Dollar AI Dream — Realized" (2026년 1월 발간)</li>
+        <li>검증 내용: Forrester는 DBS의 AI 역량 구축 방식, 고객·사업·임직원·주주에 대한 혜택을 분석; DBS의 <strong>방법론</strong> (컨트롤 그룹 비교, 3범주 가치 산출)을 케이스로 기술했으나, Forrester 자체의 독립 재계산은 공개 문서에서 확인되지 않음 <span class="badge b-neutral">Uncertain — 방법론 설명 vs 독립 재산 여부 불명확</span>.</li>
+      </ul>
+      <h4>6-3. 정량 성과 (주요 수치)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">AI 경제가치 (2022)</td><td>SGD 1억 8,000만</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">AI 경제가치 (FY2023)</td><td>SGD 3억 7,000만</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">AI 경제가치 (2024)</td><td>SGD 7억 5,000만~7억 8,000만</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">AI 경제가치 (2025)</td><td>SGD 약 10억</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">배포 AI 모델 수 (2025년 초)</td><td>1,500개+</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">AI 유스케이스 수 (2025년 초)</td><td>370개+</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">AI 배포 기간 단축</td><td>12–15개월 → 2–3개월</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">업스킬링 임직원 수 (2021~)</td><td>9,000명+</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">디지털 고객 서비스 비용</td><td>전통 채널 대비 50% 절감</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>6-4. 고객 행동 변화 (NAV Planner AI 넛지)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>비교 기준</th><th>라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">저축 증가율</td><td>83%</td><td>AI 넛지 수신 vs. 비수신 고객</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">투자 증가</td><td>4.3배</td><td>동일 비교</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">보험 가입 증가</td><td>2.3배</td><td>동일 비교</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">NAV Planner 설문 완료 후 투자 시작</td><td>3배 가능성</td><td>설문 완료 vs. 미완료 고객</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">월간 발송 넛지 수 (싱가포르)</td><td>3,000만 건</td><td>3.5M 고객 대상</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">분석 고객 데이터 포인트</td><td>1만 5,000개/고객</td><td>100개 이상 AI/ML 알고리즘 활용</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>측정 방법</strong>: A/B 테스트(AI 처리군 vs. 컨트롤군) + 고객 행동 종단 추적. 다만 실험 설계 세부(무작위 배정 방법, 추적 기간, 혼재 변수 통제)는 공개 문서에서 확인 불가 <span class="badge b-neutral">Uncertain</span>.</p></div></div>
+      <h4>6-5. 외부 인정 (독립 검증 성격)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기관</th><th>수상/인정</th><th>연도</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">Global Evident AI Index</td><td>AI 전략 리더십 세계 1위; 종합 Top 10 (아시아 은행 유일)</td><td>2023</td></tr>
+          <tr><td class="tool">Celent</td><td>Global Model Bank Award — AI Industrialisation</td><td>2024</td></tr>
+          <tr><td class="tool">Harvard Business School</td><td>아시아 은행 최초 AI 케이스스터디 ("DBS' AI Journey")</td><td>2024</td></tr>
+          <tr><td class="tool">Global Finance</td><td>세계 최고 AI 은행 (Best Corporate/Institutional AI Bank, Best Enhanced Customer Experience 포함)</td><td>2025</td></tr>
+          <tr><td class="tool">Euromoney</td><td>World's Best Bank (2019, 2022, 2025 — AI 포함 전반적 탁월성)</td><td>2025</td></tr>
+          <tr><td class="tool">The Banker</td><td>Global Bank of the Year</td><td>2025</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>7. 핵심 실천 교훈 — 따라 할 수 있는 것</h3>
+      <div class="verdict"><div class="label">DBS 7대 실천 교훈</div><ol>
+        <li><strong>기술보다 데이터 기반을 먼저 다진다.</strong> ADA 플랫폼(5.3PB, 단일 진실 공급원)을 AI 배포보다 먼저 완성. 첫 AI 유스케이스 전에 데이터 플랫폼 로드맵을 수립하고 "데이터가 준비되면 AI를 한다"는 순서를 지켜라.</li>
+        <li><strong>윤리 프레임워크를 성과 측정 이전에 내재화한다.</strong> PURE(2019)가 경제가치 측정(2022)보다 앞섰기에 빠른 배포에도 규제 문제 없음. "법적으로 가능한가"가 아니라 "해야 하는가"를 묻는 체크리스트를 승인 게이트에 삽입.</li>
+        <li><strong>중앙화와 분산화를 동시에 설계한다 (Data Chapter 모델).</strong> 중앙 스킬링·리소싱 + 현장 임베딩의 "중앙 CoE + 현장 임베딩" 이중 소속 구조로 사일로 재형성도 지식 단절도 피한다.</li>
+        <li><strong>재사용 가능한 AI 파이프라인(ALAN)으로 배포 속도를 표준화한다.</strong> 과거 유스케이스의 데이터·기법·모델·정확도를 검색 가능하게 보존 → 배포 12~15개월 → 2~3개월. "발견 가능성"이 재사용의 전제조건.</li>
+        <li><strong>경제가치를 3범주(매출·비용·리스크)로 구조화하고 연간 보고서에 공시한다.</strong> 감사받은 보고서 공개 기재가 이사회·투자자 신뢰를 높이고 내부 투자 지속의 근거가 된다. 컨트롤 그룹 A/B 방식을 초기부터 설계.</li>
+        <li><strong>목표를 공개 선언하고 리더십 연속성을 유지한다.</strong> 2022년 "5년 내 SGD 1B" 선언이 내부 우선순위 고정. 2025-03 CEO 승계(탄 수 샨) 후에도 "AI with a heart"로 전략 계승. 리더십 변화 시 인수인계를 공식화.</li>
+        <li><strong>스킬링을 기술 도입과 동시에, 전 계층에 걸쳐 설계한다.</strong> 9,000명+ 업스킬링·iGrow·DBS-GPT가 AI를 두려워하지 않는 문화를 만들고 내부 공석 30% 내부 충원. "기술 우선, 교육 나중"은 저항과 공백을 낳는다.</li>
+      </ol></div>
+
+      <h3>출처 (Sources)</h3>
+      <div class="src-group"><h4>DBS — 10건</h4><div class="src-list">
+        <a href="https://www.forrester.com/blogs/dbs-banks-billion-dollar-ai-dream-realized/" target="_blank" rel="noopener">Forrester: Billion-Dollar AI Dream (2026-01) · Independently-Audited</a>
+        <a href="https://www.edb.gov.sg/en/business-insights/insights/how-dbs-southeast-asias-largest-bank-is-capturing-the-full-value-of-ai-and-machine-learning-in-singapore.html" target="_blank" rel="noopener">Singapore EDB: Capturing the full value of AI</a>
+        <a href="https://www.mckinsey.com/featured-insights/future-of-asia/dbs-ceo-tan-su-shan-on-building-a-gen-ai-enabled-bank-with-a-heart" target="_blank" rel="noopener">McKinsey: Tan Su Shan on gen AI bank</a>
+        <a href="https://www.dbs.com/artificial-intelligence-machine-learning/artificial-intelligence/ethical-and-responsible-ai-in-banking.html" target="_blank" rel="noopener">DBS: Ethical &amp; Responsible AI (PURE)</a>
+        <a href="https://www.dbs.com/artificial-intelligence-machine-learning/artificial-intelligence/dbs-ai-powered-digital-transformation.html" target="_blank" rel="noopener">DBS: AI-Powered Digital Transformation (ADA·ALAN)</a>
+        <a href="https://cloud.google.com/transform/how-dbs-singapores-largest-bank-builds-ai-with-confidence" target="_blank" rel="noopener">Google Cloud: How DBS builds AI with confidence</a>
+        <a href="https://www.prnewswire.com/news-releases/harvard-business-school-examines-dbs-ai-strategy-and-implementation-in-its-first-case-study-focusing-on-ai-in-an-asian-bank-302248738.html" target="_blank" rel="noopener">HBS 케이스 발표 (PR Newswire, 2024-09) · Independently-Audited</a>
+        <a href="https://www.dbs.com/newsroom/DBS_named_Worlds_Best_AI_Bank_2025" target="_blank" rel="noopener">DBS: World's Best AI Bank (Global Finance, 2025) · Independently-Audited</a>
+        <a href="https://gfmag.com/award/winner-insights/dbs-nimish-panchmatia-ai-banking/" target="_blank" rel="noopener">Global Finance: Panchmatia "AI With A Heart"</a>
+        <a href="https://www.computerweekly.com/news/366569993/How-DBS-is-industrialising-AI-across-its-business" target="_blank" rel="noopener">Computer Weekly: How DBS is industrialising AI</a>
+      </div></div>
+      <div class="callout warn"><span class="ico">⚪</span><div><p><strong>회색지대 참고</strong>: Forrester가 검증한 것은 DBS의 방법론(컨트롤 그룹 비교·3범주 산출) 프레임이며, SGD 수치 자체를 Forrester가 독립 재계산한 증거는 공개 문서에서 확인되지 않는다 <span class="badge b-neutral">Uncertain</span>. DBS는 감사받은 연간 보고서에 수치를 공시하므로 회계 감사 수준의 검증은 이루어진 것으로 볼 수 있다.</p></div></div>
+    </section>
+
+    <!-- ============ PART C ============ -->
+    <section id="part-c" class="reveal">
+      <div class="sec-head"><span class="sec-num">C</span><h2 class="sec-title">Moderna AX Playbook — HR과 IT를 합친 AI-first 조직</h2></div>
+      <div class="callout key"><span class="ico">🔖</span><div><p>📅 작성일 2026-06-02 · 측정치·동향은 시점 의존적, 6~12개월 후 재검토 권장 · AX 실천 Playbook 시리즈 (파트 A 허브 참조)</p></div></div>
+
+      <h3>0. Executive Summary</h3>
+      <p class="lead">Moderna는 mRNA 플랫폼 기반 바이오테크 기업(직원 약 5,800명, 2025년 매출 약 30억 달러)으로, 2021년부터 조직 전체를 체계적으로 AI-first 기업으로 전환한 사례다. 핵심 구조는 세 층위로 요약된다.</p>
+      <ul>
+        <li><strong>기술 레이어</strong>: 10년 AWS 단일 클라우드 선행 → 2023년 자체 챗봇 mChat 2주 내 개발 → 2024년 ChatGPT Enterprise 전사 도입 → 2개월 내 750+ 맞춤 GPT 배포.</li>
+        <li><strong>조직 레이어</strong>: 2025년 2월 CIO Brad Miller 퇴임 후 HR과 IT를 "People &amp; Digital Technology" 단일 부서로 통합. Chief People and Digital Technology Officer (CPDTO) Tracey Franklin이 3,000+ AI 에이전트와 5,800명 인력을 단일 보고체계로 관리.</li>
+        <li><strong>문화 레이어</strong>: CEO Stéphane Bancel의 "6개월 내 전 직원 AI 채택·숙련도 100%" 공개 목표 → AI 챔피언 네트워크(100명) → 주 2,000명 규모 슬랙 AI 포럼 → 6트랙 AI 아카데미.</li>
+      </ul>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>주의</strong>: 생산성 수치(하루 40~60분 절감 등)는 Moderna·OpenAI 자체 보고 기반이며 제3자 감사 없음. AI 채택이 신약 개발 가속화 등 실제 사업 성과로 이어졌다는 인과는 현재 미입증 상태 <span class="badge b-neutral">Uncertain</span>.</p></div></div>
+
+      <h3>1. 출발점 — 왜 AX를 시작했나</h3>
+      <h4>1-1. 조직 맥락</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">창립</td><td>2010년</td></tr>
+          <tr><td class="tool">직원 수</td><td>2019년 800명 → 2025년 5,800명 (+625%)</td></tr>
+          <tr><td class="tool">본사</td><td>케임브리지, 매사추세츠</td></tr>
+          <tr><td class="tool">핵심 사업</td><td>mRNA 플랫폼 기반 백신·치료제</td></tr>
+          <tr><td class="tool">재무 맥락</td><td>2024년 매출 약 30억 달러(코로나 특수 종료 후 급감)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Moderna는 COVID-19 이전부터 "디지털 우선, 데이터 기반" 철학을 표방했다. 백신 특수로 급성장했으나 2023~2024년 수요 급감으로 비용 절감 압박이 커졌고, 이는 AI로 소수 인력이 대규모 조직처럼 성과를 내야 한다는 실존적 필요를 만들었다.</p>
+      <h4>1-2. 전략적 동인</h4>
+      <p><strong>레버리지 필요성</strong>: CEO Bancel은 "수천 명으로 10만 명의 성과를 내야 한다"고 공개 천명. 자원 제약이 전사 AI 채택을 선택이 아닌 생존 조건으로 만들었다 <span class="badge b-warn">Self-Reported</span>.</p>
+      <p><strong>기술 부채 부재</strong>: 경쟁사 대부분이 레거시 인프라와 씨름하는 동안, Moderna는 창사 초기부터 AWS 단일 클라우드를 선택해 10년간 데이터 거버넌스를 성숙시켰다. 이 선행 투자가 AI 도구를 14일 만에 배포하는 속도를 가능하게 했다 <span class="badge b-warn">Self-Reported</span>.</p>
+      <p><strong>규제 환경 인식</strong>: 임상시험 데이터와 FDA 대응 등 고위험 프로세스에 AI를 적용하는 거버넌스 미비는 규제 리스크로 직결된다. Moderna가 GPT 거버넌스를 신중하게 설계한 이유다.</p>
+
+      <h3>2. 타임라인 — 어떻게 수행했나</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>시기</th><th>이벤트</th><th>핵심 수치·세부</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">2010년</td><td>Moderna 창립</td><td>AWS 단일 클라우드 철학 도입</td></tr>
+          <tr><td class="tool">2019년</td><td>전사 클라우드 표준화 완료</td><td>멀티클라우드 시도 중단, AWS 단일 베팅 결정</td></tr>
+          <tr><td class="tool">2021년 12월</td><td>AI Academy 출범</td><td>Carnegie Mellon University (CMU) 파트너십, 전 직원 AI 기초 교육 의무화</td></tr>
+          <tr><td class="tool">2022년 초</td><td>AI Academy 1기 교육 시작</td><td>90분 단기강좌·주간 세미나·다주간 인증 트랙 3종 제공</td></tr>
+          <tr><td class="tool">2023년 초</td><td>mChat 개발·배포</td><td>CIO Brad Miller + AI 엔지니어링 책임자 Andrew Giessel, OpenAI API 기반 알파 개발 → 보안 검토 완료 후 전사 배포 (알파~전사 배포: 약 6주)</td></tr>
+          <tr><td class="tool">2023년</td><td>AI Academy 기업 내재화</td><td>CMU 외부 의존 탈피, 6트랙 맞춤 교육 체계로 재설계; mChat 채택률 80% <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2023년 11월</td><td>Moderna 디지털 인베스터 데이</td><td>AI 전략 투자자 공개 설명, Brice Challamel 등 AI 리더십 소개</td></tr>
+          <tr><td class="tool">2024년 초</td><td>ChatGPT Enterprise 전사 배포</td><td>mChat·Copilot·ChatGPT Enterprise 비교 평가 후 OpenAI 선택(NPS 우위); ChatGPT Enterprise는 기업 데이터를 OpenAI 학습에 사용 불가</td></tr>
+          <tr><td class="tool">2024년 (2개월 내)</td><td>750+ GPT 배포</td><td>초기 500명 온보딩 사용자가 700+ 맞춤 GPT 생성; 법무·연구·제조·상업 전 부문 임베딩</td></tr>
+          <tr><td class="tool">2024년 4월</td><td>OpenAI 파트너십 공식 확대</td><td>mRNA 연구 가속화 목적 협업 발표</td></tr>
+          <tr><td class="tool">2024년</td><td>LinkedIn 'Top Companies' 9위</td><td>AI 인력 적응 기준 평가 <span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td class="tool">2024년 말~2025년 초</td><td>HR·IT 통합 시작</td><td>Brad Miller CIO 퇴임 검토</td></tr>
+          <tr><td class="tool">2025년 2월</td><td>Brad Miller CIO 퇴임</td><td>Tracey Franklin이 IT 책임 흡수, CPDTO 직책 신설</td></tr>
+          <tr><td class="tool">2025년 중</td><td>디지털팀 10% 감축</td><td>약 50명 감원, "digital for business"·"digital core" 기능 재편</td></tr>
+          <tr><td class="tool">2025년 말 기준</td><td>GPT 3,000+ 운영</td><td>People &amp; Digital Technology 부서가 3,000 AI + 5,800인 통합 관리</td></tr>
+          <tr><td class="tool">2025년 1월</td><td>HBS 케이스 625-070 출판</td><td>"Democratizing Artificial Intelligence", Bojinov·Lakhani 외 저술</td></tr>
+        </tbody>
+      </table></div>
+      <p>출처: OpenAI case study, Fortune (2024.04, 2024.03, 2025.05), Fierce Pharma, CIO.com, UNLEASH, IntuitionLabs <span class="badge b-warn">Self-Reported</span> / LinkedIn Top Companies <span class="badge b-ok">Independently-Audited</span></p>
+    </section>
+
+    <section id="c-org" class="reveal">
+      <div class="sec-head"><span class="sec-num">C·2</span><h2 class="sec-title">Moderna — 조직 통합·GPT 거버넌스·기술 스택</h2></div>
+      <h3>3. 조직 변화 — 신설 부서·역할·보고체계</h3>
+      <h4>3-1. 통합 이전 구조 (2023~2025년 초)</h4>
+      <pre><code>CEO Stéphane Bancel
+├── CIO Brad Miller          ─── IT·디지털 인프라
+│   └── VP AI Products &amp; Platforms: Brice Challamel
+│       └── Head of AI Engineering: Andrew Giessel
+└── CHRO Tracey Franklin     ─── HR·인재 관리</code></pre>
+      <h4>3-2. 통합 이후 구조 (2025년 2월~)</h4>
+      <pre><code>CEO Stéphane Bancel
+└── Chief People &amp; Digital Technology Officer (CPDTO): Tracey Franklin
+    ├── People (HR) 기능      ─── 인재·문화·보상·온보딩
+    ├── Digital Technology    ─── 인프라·엔지니어링·AI 플랫폼
+    └── AI 거버넌스 통합       ─── 3,000+ GPT 관리 + 5,800명 인력</code></pre>
+      <h4>3-3. 핵심 인물 프로필</h4>
+      <p><strong>Tracey Franklin (CPDTO)</strong></p>
+      <ul>
+        <li>2019년 Moderna 합류 (당시 직원 800명)</li>
+        <li>Merck &amp; Co. 15년 경력: VP HR Chief Talent &amp; Strategy Officer</li>
+        <li>통합 철학: "나는 workforce planning에서 work planning으로 이동했다" — 역할 단위가 아닌 흐름(work flow) 단위로 인간·AI 배치를 설계</li>
+        <li>특기: AI를 활용한 경영진 갈등 예측 모델(GPT로 경영진 성격 프로파일 구성 후 시나리오 시뮬레이션)</li>
+      </ul>
+      <p><strong>Brice Challamel (전 VP AI Products &amp; Platforms)</strong></p>
+      <ul>
+        <li>Moderna 재직 중 ChatGPT Enterprise 도입 설계·실행 주도</li>
+        <li>HBS MBA 케이스 및 저서 "AI First: The Playbook for a Future-Proof Business and Brand" 소재</li>
+        <li>2026년 초 OpenAI로 이직, Head of AI Strategy and Adoption 역임 → 핵심 인물의 이탈 리스크 실증</li>
+      </ul>
+      <p><strong>Brad Miller (전 CIO, 2023~2025년 초)</strong></p>
+      <ul>
+        <li>Amazon·Microsoft·Capital One·Mastercard 출신 엔지니어링 원칙 적용</li>
+        <li>AWS 단일 클라우드 표준화, mChat 개발 진두지휘</li>
+        <li>2025년 2월 퇴임 → HR+IT 통합의 직접 계기</li>
+      </ul>
+      <h4>3-4. 통합 의사결정 배경</h4>
+      <p>CIO.com 분석가 Ken Knapton 박사에 따르면 Moderna의 HR·IT 통합은 "대담하고 전례 없는" 결정이나 업계 전반 트렌드는 아님. 성공 조건은 Tracey Franklin이 HR 전문성과 디지털 전환 이해를 동시에 보유한 비전형적 CHRO라는 사실 <span class="badge b-ok">Independently-Audited: CIO.com 독립 분석</span>.</p>
+      <p>통합 배경의 공식적 논리: "인간과 기계 중 누가 각 태스크를 수행해야 최선의 결과를 내는가?"를 단일 리더십이 결정할 수 있어야 한다. 분리된 HR·IT 체계에서는 이 질문 자체를 조직적으로 소유하는 주체가 없다.</p>
+
+      <h3>4. 의사결정·거버넌스 — GPT 생성·관리 프로세스</h3>
+      <h4>4-1. GPT 생성 파이프라인</h4>
+      <p>Moderna는 "민주화(democratize)"와 "거버넌스" 사이의 긴장을 핵심 운영 과제로 인식한다 (HBS 케이스 625-070의 핵심 논제).</p>
+      <p><strong>GPT 생성 흐름 (추론 가능한 운영 방식):</strong></p>
+      <pre><code>아이디어 → AI 챔피언 검토 → 보안·콘텐츠 필터 설정 →
+Human-in-the-loop 검증 (임상 관련) → 전사 배포 → 사용 모니터링</code></pre>
+      <p><strong>임상 관련 GPT 특별 요건:</strong></p>
+      <ul>
+        <li>Dose ID GPT: AI 출력물은 임상팀의 인간 주도 검토를 위한 입력으로만 사용, AI가 직접 의사결정하지 않음</li>
+        <li>규제 기관 통보 여부는 2025년 기준 여전히 미결 상태 (HBS 케이스가 이를 열린 질문으로 제시)</li>
+      </ul>
+      <p><strong>데이터 보안 기반:</strong></p>
+      <ul>
+        <li>ChatGPT Enterprise: 기업 데이터를 OpenAI 학습에 활용하지 않음 계약 체결</li>
+        <li>HIPAA Business Associate Agreement 이행</li>
+        <li>SSO(Single Sign-On) + 감사 로그</li>
+        <li>콘텐츠 필터 + 민감 GPT 대상 검토위원회</li>
+      </ul>
+      <h4>4-2. 거버넌스 긴장 구조 (HBS 케이스 핵심 논제)</h4>
+      <div class="matrix" style="grid-template-columns:1fr 1fr">
+        <div class="mh">민주화 모델</div><div class="mh">중앙화 모델</div>
+        <div>혁신 속도 최대화</div><div>위험 통제 강화</div>
+        <div>40% 사용자가 직접 GPT 생성</div><div>전문 팀만 GPT 생성</div>
+        <div>부서별 자율성</div><div>일관성·규정 준수</div>
+        <div>환각(hallucination) 리스크 분산</div><div>규제 리스크 집중 관리</div>
+      </div>
+      <p><strong>Moderna의 실제 선택</strong>: 현재까지 민주화 모델 유지. 단, 임상·규제 관련 GPT는 Human-in-the-loop 강제화로 절충.</p>
+      <h4>4-3. AI 챔피언 네트워크 (거버넌스 인프라)</h4>
+      <ul>
+        <li>발굴 방식: 전사 AI 프롬프트 콘테스트에서 상위 100명 선발</li>
+        <li>기능: 부서별 AI 복음 전파자 (evangelists) + GPT 품질 검토 1차 게이트</li>
+        <li>지원 구조: 부서별 AI 오피스 아워(office hours) + 월간 AI 앰배서더 쇼케이스</li>
+      </ul>
+
+      <h3>5. 실행 디테일 — 기술 스택·도구·롤아웃</h3>
+      <h4>5-1. 기술 스택</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>레이어</th><th>기술·도구</th><th>역할</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">클라우드</td><td>AWS (단일 클라우드)</td><td>인프라 기반, 10년 표준화</td></tr>
+          <tr><td class="tool">AI 플랫폼</td><td>ChatGPT Enterprise (OpenAI)</td><td>전사 GenAI 허브</td></tr>
+          <tr><td class="tool">내부 챗봇</td><td>mChat (OpenAI API 기반)</td><td>초기 내부 인스턴스, 현재 ChatGPT Enterprise로 전환 중</td></tr>
+          <tr><td class="tool">데이터 플랫폼</td><td>Best-of-breed + Data Mesh</td><td>AI 레디 데이터 아키텍처</td></tr>
+          <tr><td class="tool">ML 학습 플랫폼</td><td>Dataiku</td><td>AI Applied 교육 트랙에서 활용</td></tr>
+          <tr><td class="tool">연구 플랫폼</td><td>Benchling (2025년 확장 파트너십)</td><td>실험실 AI 통합</td></tr>
+          <tr><td class="tool">학습 플랫폼</td><td>ISLE (CMU 개발 인터랙티브 교육 환경)</td><td>AI Academy 초기 사용</td></tr>
+          <tr><td class="tool">협업</td><td>Slack</td><td>AI 포럼 (주 활성 사용자 2,000명)</td></tr>
+        </tbody>
+      </table></div>
+      <h4>5-2. 부서별 GPT 사례</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>부서</th><th>GPT 이름</th><th>기능</th><th>효과</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">임상개발</td><td>Dose ID</td><td>임상시험 데이터 분석 → 최적 백신 용량 평가, 근거·차트 자동 생성</td><td>임상팀 검토 시간 단축 (수치 미공개)</td></tr>
+          <tr><td class="tool">법무</td><td>Contract Companion</td><td>계약서 검토·핵심 조항 요약</td><td>계약 초안 작업 90~95% 시간 절감 <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">법무</td><td>Policy Bot</td><td>HR·안전 정책 Q&amp;A 자동화</td><td>법무팀 100% 채택</td></tr>
+          <tr><td class="tool">규제</td><td>Regulator Response</td><td>FDA 대응 초안 작성</td><td>대응 시간: 수주 → 수분 (내부 주장) <span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">커뮤니케이션</td><td>Brand GPT</td><td>바이오테크 전문용어를 투자자 언어로 변환</td><td>분기 실적 발표 등 활용</td></tr>
+          <tr><td class="tool">HR</td><td>Ask HR</td><td>성과·경력·복리후생 Q&amp;A → 전문 리소스 라우팅</td><td>반복 문의 자동화</td></tr>
+          <tr><td class="tool">HR</td><td>Benefits Assistant</td><td>연간 복리후생 선택 안내</td><td>신입 온보딩 연계</td></tr>
+        </tbody>
+      </table></div>
+      <h4>5-3. ChatGPT Enterprise 롤아웃 방법론</h4>
+      <ol class="steps">
+        <li><span class="st">평가 단계</span><p class="sd">mChat·Microsoft Copilot·ChatGPT Enterprise 3종 비교 (NPS 기준 ChatGPT Enterprise 우위)</p></li>
+        <li><span class="st">파일럿</span><p class="sd">초기 500명 온보딩</p></li>
+        <li><span class="st">확산</span><p class="sd">GPT Kickstart Live 필수 교육 → 부서별 오피스 아워 → 챔피언 네트워크 지원</p></li>
+        <li><span class="st">측정</span><p class="sd">주간 활성 사용자·생성 GPT 수·부서별 채택률 추적 (CEO 직보)</p></li>
+      </ol>
+      <h4>5-4. AI Academy 6트랙 (2023년 재설계)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>트랙</th><th>대상</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">AI Awareness</td><td>전 직원</td><td>AI 기초, 윤리 모듈 포함</td></tr>
+          <tr><td class="tool">GPT Kickstart</td><td>ChatGPT 사용자</td><td>기본 활용법</td></tr>
+          <tr><td class="tool">AI Applied</td><td>중급자</td><td>Dataiku 플랫폼 활용</td></tr>
+          <tr><td class="tool">Data Visualization</td><td>데이터 실무자</td><td>인사이트 추출·시각화</td></tr>
+          <tr><td class="tool">AI Champions</td><td>상위 100명</td><td>GPT 개발·거버넌스</td></tr>
+          <tr><td class="tool">AI for Leaders</td><td>경영진</td><td>전략적 AI 활용</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="c-lessons" class="reveal">
+      <div class="sec-head"><span class="sec-num">C·3</span><h2 class="sec-title">Moderna — 측정 결과·핵심 교훈·경고</h2></div>
+      <h3>6. 측정 결과 — 어떻게 성공을 측정했나</h3>
+      <h4>6-1. 핵심 채택 지표 (측정 방법: ChatGPT Enterprise 플랫폼 내장 분석)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>측정 시점</th><th>라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">ChatGPT Enterprise 전사 채택률</td><td>80% (mChat 포함)</td><td>2024년 배포 후</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">법무팀 채택률</td><td>100%</td><td>2024년</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">사용자당 주간 대화 수</td><td>120회</td><td>2024년 평균</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">GPT 생성 참여율</td><td>주간 활성 사용자의 40%</td><td>2개월 내</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">배포된 맞춤 GPT 수</td><td>750+ (초기) → 3,000+ (2025년)</td><td>단계별</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">Slack AI 포럼 주간 참여자</td><td>약 2,000명</td><td>2024년</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>6-2. AI 교육 지표 (측정 방법: AI Academy 수료 기록 + NPS 설문)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">AI Academy 누적 등록 (20개월)</td><td>2,000명+</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">총 학습 시간</td><td>14,700시간+</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">평균 지식 향상률 (교육 전후 비교)</td><td>약 30%</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2023년 전사 참여율</td><td>25%</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">AI Academy NPS</td><td>71 (50↑ = 긍정)</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">LinkedIn Top Companies AI 순위</td><td>9위 (2024년)</td><td><span class="badge b-ok">Independently-Audited</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>6-3. 생산성·비용 주장 (측정 방법 미공개, 주의 요망)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>주장</th><th>수치</th><th>라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">Enterprise GPT 사용자 일일 시간 절감</td><td>40~60분</td><td><span class="badge b-warn">Self-Reported — 측정 방법 미공개</span></td></tr>
+          <tr><td class="tool">Contract Companion 계약 초안 시간 절감</td><td>90~95%</td><td><span class="badge b-warn">Self-Reported — 단일 발화 인용</span></td></tr>
+          <tr><td class="tool">규제 대응 처리 시간</td><td>수주 → 수분</td><td><span class="badge b-warn">Self-Reported — 검증 불가</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>6-4. 비즈니스 성과와의 인과 (현재 미입증)</h4>
+      <p>AI 채택이 mRNA 신약 개발 가속, 임상 성공률 향상, 매출 회복 등 실제 사업 성과로 이어졌다는 인과관계는 현재 공개된 자료에서 입증되지 않는다 <span class="badge b-neutral">Uncertain</span>.</p>
+      <ul>
+        <li>2024년 매출: 약 30억 달러 (전년 대비 급감, 코로나 특수 종료 효과)</li>
+        <li>2025년 R&amp;D 투자: 33~34억 달러 (매출보다 R&amp;D가 더 큼)</li>
+        <li>AI가 비용 절감과 파이프라인 가속에 기여했다는 주장: Moderna 자체 주장에 그침</li>
+      </ul>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p>HBS 케이스(625-070)도 이 거버넌스 딜레마와 리스크를 중심으로 서술하며, AI 도입이 사업 성과로 직결된다는 전제를 검증 과제로 제시한다.</p></div></div>
+
+      <h3>7. 핵심 실천 교훈 — 따라 할 수 있는 것</h3>
+      <div class="verdict"><div class="label">Moderna 7대 실천 교훈</div><ol>
+        <li><strong>클라우드 인프라가 먼저다.</strong> 10년 AWS 단일 클라우드 표준화 → mChat 14일 내 구동. GenAI 도입 전 데이터 플랫폼·API 접근성·보안 거버넌스를 정비하라 — 레거시 위 GenAI는 속도가 10배 느리다. "AI 우선, 기반 나중" 금지.</li>
+        <li><strong>CEO가 측정 가능한 목표를 공개 선언해야 한다.</strong> Bancel "6개월 내 100% 채택·숙련도" → AI가 기본값. 수치·기한으로 설정하고 CEO 직보 대시보드로 주간 추적. "AI를 장려합니다"식 방향 제시는 문화를 못 바꾼다.</li>
+        <li><strong>단일 챗봇이 아닌 플랫폼을 배포하라.</strong> ChatGPT Enterprise를 "모든 사람이 GPT를 만드는 플랫폼"으로 포지셔닝 → 2개월 750+, 2025년 3,000+. 중앙팀이 모든 GPT를 개발·승인하면 혁신이 병목된다.</li>
+        <li><strong>교육은 단일 트랙이 아닌 역할별 커리큘럼으로.</strong> CMU 단일 필수 과정 → "효과 없음" → 6트랙 맞춤, NPS 50↓→71. 초기 NPS를 측정하고 역할(관리자/개발자/현업/경영진)별 분리. 교육을 "비용 절감 수단"으로 프레이밍하지 말 것(Franklin 경고).</li>
+        <li><strong>챔피언 네트워크가 바이럴 확산의 핵심이다.</strong> AI 프롬프트 콘테스트 → 상위 100명 → 부서별 배치 → 주 2,000명 슬랙 포럼. 탑다운 의무화 + 바텀업 챔피언 병행, 챔피언은 사용 데이터로 발굴.</li>
+        <li><strong>HR+IT 통합은 전제 조건이 충족될 때만 시도하라.</strong> Franklin이 HR 전문성 + 디지털 이해를 동시 보유해서 가능. CIO.com은 "대부분 기업은 이 조건을 못 갖춘다"고 평가. 박스만 합치면 두 기능 모두 약화.</li>
+        <li><strong>고위험 영역은 민주화가 아닌 Human-in-the-loop로.</strong> Dose ID GPT는 임상팀 최종 검토용 입력 자료 생성 용도, AI가 용량 직접 결정 안 함. "AI 민주화 영역"과 "AI 지원 + 인간 최종 결정 영역"을 명시 분리.</li>
+      </ol></div>
+      <h4>경고 사항 (따라 하면 안 되는 것)</h4>
+      <div class="vrow bad"><div class="claim">핵심 인물 의존</div><div class="detail">Brice Challamel → OpenAI 이직. AI 전략 설계자 이탈 시 실행 공백 발생. 역할이 사람이 아닌 프로세스·거버넌스에 내재화되어야 한다.</div></div>
+      <div class="vrow bad"><div class="claim">인과 과장</div><div class="detail">채택률·사용량 수치가 사업 성과(신약 개발 속도, 매출)와 인과적으로 연결됐다고 주장하지 말 것. Moderna 자신도 이를 입증하지 못했다.</div></div>
+      <div class="vrow bad"><div class="claim">비용 절감 명목의 구조조정</div><div class="detail">디지털팀 10% 감축은 AI 도입이 아닌 매출 급감(비용 10억 달러 절감 목표)에 의한 결정. AI 효율화와 인력 감축을 동일시하면 문화 저항을 초래한다.</div></div>
+
+      <h3>출처 (Sources)</h3>
+      <div class="src-group"><h4>Moderna — 12건</h4><div class="src-list">
+        <a href="https://openai.com/index/moderna/" target="_blank" rel="noopener">OpenAI — Moderna case study (Self-Reported, 공급업체)</a>
+        <a href="https://store.hbr.org/product/moderna-democratizing-artificial-intelligence/625070" target="_blank" rel="noopener">HBS Case 625-070 "Democratizing AI" (2025.01)</a>
+        <a href="https://fortune.com/2024/04/17/moderna-cio-brad-miller-covid-drugs-ai-cloud/" target="_blank" rel="noopener">Fortune — CIO Brad Miller (2024.04.17)</a>
+        <a href="https://fortune.com/2024/03/18/moderna-ai-upskilling-program-chro-tracey-franklin/" target="_blank" rel="noopener">Fortune — AI upskilling (2024.03.18)</a>
+        <a href="https://fortune.com/2025/05/19/moderna-leader-ai-resolve-conflictexecutive-teamall-before-it-happens/" target="_blank" rel="noopener">Fortune — leader AI conflict (2025.05.19)</a>
+        <a href="https://www.cio.com/article/4002321/modernas-hr-it-merger-trend-or-exception-to-the-rule.html" target="_blank" rel="noopener">CIO.com — HR-IT merger (Independently-Audited)</a>
+        <a href="https://www.unleash.ai/artificial-intelligence/why-moderna-merged-hr-and-it-to-better-architect-the-flow-of-work/" target="_blank" rel="noopener">UNLEASH — Why Moderna merged HR and IT</a>
+        <a href="https://www.flexos.work/learn/moderna-merges-hr-it-new-chief-manages-3000-ai-and-5800-humans" target="_blank" rel="noopener">FlexOS — 3,000 AI + 5,800인 통합</a>
+        <a href="https://intuitionlabs.ai/articles/moderna-ai-adoption-case-study" target="_blank" rel="noopener">IntuitionLabs — Moderna AI Adoption Case Study</a>
+        <a href="https://www.cmu.edu/news/stories/archives/2021/december/moderna-ai-academy.html" target="_blank" rel="noopener">CMU News — Moderna AI Academy (2021.12, Independently-Audited)</a>
+        <a href="https://www.pharmexec.com/view/moderna-implementing-ai-chatgpt" target="_blank" rel="noopener">PharmExec — How Moderna is Implementing AI (2024.06)</a>
+        <a href="https://ainativefoundation.org/ai-native-case-study-8-moderna/" target="_blank" rel="noopener">AI Native Foundation — Moderna Case Study 8</a>
+      </div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>면책 고지</strong>: 이 노트는 2026년 6월 기준 공개 자료를 종합한 것이다. 750개·3,000개 GPT, 120회/주 대화 수, 40~95% 절감 수치는 모두 Moderna 또는 OpenAI 자체 보고 기반이며 독립 감사를 거치지 않았다. AI 채택이 임상·사업 성과로 이어졌다는 인과는 미입증 상태다. valid_until 기준(2027-Q2) 이전에 독립 연구·감사 자료가 나올 경우 업데이트 필요.</p></div></div>
+    </section>
+
+    <!-- ============ PART D ============ -->
+    <section id="part-d" class="reveal">
+      <div class="sec-head"><span class="sec-num">D</span><h2 class="sec-title">John Deere AX Playbook — 트랙터 제조사가 플랫폼 기업이 되기까지</h2></div>
+      <div class="callout key"><span class="ico">🔖</span><div><p>📅 작성일 2026-06-02 · 측정치·동향은 시점 의존적, 6~12개월 후 재검토 권장 · AX 실천 Playbook 시리즈 (파트 A 허브 참조)</p></div></div>
+
+      <h3>0. Executive Summary</h3>
+      <p class="lead">John Deere는 188년 역사의 농기계 제조사에서 데이터·자율주행 플랫폼 기업으로 전환하는 과정에 있다. 핵심 전환점은 2017년 AI 스타트업 Blue River Technology($305M 인수)와 2021년 자율주행 스타트업 Bear Flag Robotics($250M 인수)다. 이 두 건의 인수는 단순한 기술 확보가 아니라 <strong>비즈니스 모델 전환의 전략적 내기</strong>였다.</p>
+      <p>결과: See&amp;Spray 기술은 2024년 시즌 100만 에이커에서 제초제 800만 갤런을 절감했으며 평균 59% 비용 절감을 달성했다 <span class="badge b-warn">Self-Reported</span>. 2025년에는 500만 에이커로 확대되고 제초제 절감은 3,100만 갤런에 달했다 <span class="badge b-warn">Self-Reported</span>. Autonomy Ready 트랙터는 2024년부터 공장 출하 중이며, 기존 8R/9R 기종에는 retrofit 키트가 판매되고 있다.</p>
+      <p><strong>BM 전환 핵심</strong>: 일회성 하드웨어 판매 → 에이커당 소프트웨어 라이선스 + 구독 수익. Deere의 Leap Ambitions 전략에서 명시한 목표는 <strong>2030년까지 전체 매출의 10%를 구독·라이선스 형태의 반복 수익(Recurring Revenue)으로 전환</strong>하는 것이다 <span class="badge b-warn">Self-Reported</span>.</p>
+      <p>전통 제조업이 AI 전환(AX)을 추진할 때 Deere는 세 가지를 보여준다: (1) 인수로 기술 속도를 확보하고, (2) 기존 장비 인프라에 소프트웨어 레이어를 올려 해자를 구축하며, (3) 농민이 실제로 얻는 가치(절감액)를 수익 단위로 삼는다.</p>
+
+      <h3>1. 출발점 — 왜 AX를 시작했나</h3>
+      <h4>1-1. 농업 노동력 위기</h4>
+      <p>미국 농가의 평균 연령은 58세를 넘었다 <span class="badge b-warn">Self-Reported, Deere CTO Jahmy Hindman 인터뷰</span>. 수확 시즌에는 하루 12~18시간 노동이 일상이지만 젊은 농업 인력 유입은 정체되고 있다. CTO Hindman은 이를 "더 적은 사람으로 더 많은 일을 해야 하는" 구조적 문제로 규정했다. 자율화는 선택지가 아닌 생존 조건이다.</p>
+      <h4>1-2. 화학 비용·환경 규제 압박</h4>
+      <p>비선택적 제초제 살포는 작물 피해와 화학 낭비를 동시에 유발한다. EU 및 미국의 농약 사용 규제가 강화되면서 정밀 살포에 대한 시장 수요가 증가했다. 제초제 가격 상승은 농가의 화학 비용을 압박하고, 절감 기술의 ROI(투자수익률)를 즉각적으로 만든다.</p>
+      <h4>1-3. 농기계 하드웨어 시장의 한계</h4>
+      <p>전통 농기계는 7~10년 교체 주기의 일회성 판매 구조다. 마진 개선 여지가 제한적이며, 대형 경쟁사(CNH Industrial, AGCO)와 가격 경쟁이 심화되었다. Deere는 하드웨어에서 소프트웨어·데이터 플랫폼으로 수익 중심을 이동하지 않으면 장기 성장이 어렵다는 내부 판단을 내렸다.</p>
+      <h4>1-4. 기술 기회창</h4>
+      <p>2015~2017년 컴퓨터 비전(Computer Vision)과 엣지 AI의 실용화 속도가 가속되었다. 특히 NVIDIA Jetson Xavier 계열 Edge Processing Unit이 고속·고해상도 이미지 처리를 현장 장비에서 가능하게 만들었다. Deere는 이 기술 창이 스타트업 생태계에 먼저 열렸음을 인지하고 인수 전략을 택했다.</p>
+
+      <h3>2. 타임라인 — 어떻게 수행했나</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>연도</th><th>이벤트</th><th>의미</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">2011</td><td>Blue River Technology 창업 (Stanford 출신, Sunnyvale)</td><td>컴퓨터 비전 농업 적용 연구</td></tr>
+          <tr><td class="tool">2017</td><td>Deere, Blue River Technology 인수 ($305M)</td><td>AI 기술 확보; 60명 팀 Sunnyvale 독립 운영 유지</td></tr>
+          <tr><td class="tool">2019</td><td>Deere, Bear Flag Robotics와 Startup Collaborator 파트너십 시작</td><td>자율주행 파이프라인 사전 검증</td></tr>
+          <tr><td class="tool">2021</td><td>Deere, Bear Flag Robotics 인수 ($250M)</td><td>자율주행 트랙터 기술 확보</td></tr>
+          <tr><td class="tool">2021 Q2</td><td>See&amp;Spray 상업 판매 계획 발표</td><td>필드 테스트 종료, 상용화 전환</td></tr>
+          <tr><td class="tool">2022</td><td>See&amp;Spray Ultimate 상용 출하 시작</td><td>현장 적용 및 데이터 수집 본격화</td></tr>
+          <tr><td class="tool">2022 Q1</td><td>Leap Ambitions 공식화 — 2030년 10% 반복 수익 목표</td><td>구독 BM 전환 전략 공표</td></tr>
+          <tr><td class="tool">2023 말</td><td>Blue River 공동창업자 Jorge Heraud 퇴임; Sunnyvale 랩 Deere 전사 통합</td><td>독립 스타트업 단계 종료</td></tr>
+          <tr><td class="tool">2024</td><td>Model Year 2024부터 8R/9R "Autonomy Ready" 패키지 공장 출하</td><td>자율화 하드웨어 표준화</td></tr>
+          <tr><td class="tool">2024</td><td>See&amp;Spray 2024 시즌 — 100만 에이커, 800만 갤런 절감, 59% 평균 절감 <span class="badge b-warn">Self-Reported</span></td><td>상용 규모 검증</td></tr>
+          <tr><td class="tool">2024</td><td>기존 2020년 이후 8R/8RX, 2022년 이후 9R/9RX용 retrofit 자율화 키트 출시</td><td>설치 기반(installed base) 확장</td></tr>
+          <tr><td class="tool">2025 Q3</td><td>Operations Center PRO 구독 서비스 출시 (기계당 $195/년~)</td><td>소프트웨어 구독 수익 공식화</td></tr>
+          <tr><td class="tool">2025</td><td>See&amp;Spray 2025 시즌 — 500만 에이커, 3,100만 갤런 절감, 평균 50% 절감 <span class="badge b-warn">Self-Reported</span></td><td>전년 대비 5배 규모 성장</td></tr>
+          <tr><td class="tool">2025</td><td>Application Savings Guarantee 도입 — 절감 없으면 무료</td><td>성과 기반 가격 모델 공식화</td></tr>
+          <tr><td class="tool">2026~</td><td>Unlimited Annual License 옵션 도입 예정</td><td>고사용량 농가 대상 구독 전환</td></tr>
+          <tr><td class="tool">2030 (목표)</td><td>전체 곡물·대두 농가 대상 완전 자율 생산 주기 달성 목표 <span class="badge b-warn">Self-Reported</span></td><td></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>3. 조직 변화 — 신설 부서·역할·소프트웨어 인력</h3>
+      <h4>3-1. Intelligent Solutions Group (ISG)</h4>
+      <p>ISG는 Deere 내부의 기술·AI 전담 부서로 25년 이상 운영되어 왔다. 2024년 기준 아이오와주 Urbandale에 $33M 규모의 134,000 sq ft 전용 시설을 운영하며 약 800명의 엔지니어를 수용한다. 데이터 과학자, 소프트웨어 엔지니어, 컴퓨터 비전 연구자로 구성되며, 센서 기술·머신러닝·연결 시스템·로보틱스가 핵심 역량이다.</p>
+      <p>ISG는 독립적인 P&amp;L(손익 책임) 구조를 가지며 Deere 전사 평균보다 높은 R&amp;D 지출 비율을 유지한다.</p>
+      <p><strong>핵심 리더십</strong>: CTO Jahmy Hindman (ISG 총괄, 기술 스택 전반 책임), Senior VP John Stone (ISG 운영 총괄), Senior Group PM Mike Moeller (연결성·자율 시스템·가이던스 기술).</p>
+      <h4>3-2. Blue River Technology 통합 경로</h4>
+      <p>인수 직후(2017): Sunnyvale 독립 운영. 60명 팀 유지, 스타트업 문화 보존.</p>
+      <p>통합 가속기(2022~2023): See&amp;Spray 상용화에 따라 Deere 전사 제품 라인과 통합 심화. 기술 인력이 Deere 글로벌 기술 조직에 흡수.</p>
+      <p>통합 완료(2023 말): 공동창업자 Jorge Heraud 퇴임, Sunnyvale 랩이 Deere 공식 기술 조직으로 편입. 독립 스타트업 단계 공식 종료.</p>
+      <div class="callout tip"><span class="ico">💡</span><div><p><strong>시사점</strong>: 인수 후 6년간 독립성을 유지하며 상용화 검증을 완료한 뒤 전사 통합. "인수 후 즉시 흡수" 모델이 아닌 단계적 통합으로 스타트업 혁신 속도를 보존했다.</p></div></div>
+      <h4>3-3. 소프트웨어 인력 전환</h4>
+      <p>Deere는 General Assembly와 파트너십을 통해 부트캠프 졸업생을 소프트웨어 엔지니어로 채용했으며, 100명 이상의 기존 임직원을 소프트웨어 엔지니어로 재훈련하는 업스킬링 프로그램을 운영했다. 구체적인 총 소프트웨어 엔지니어 수는 공개 자료에서 확인되지 않는다 <span class="badge b-neutral">Uncertain</span>.</p>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>주의</strong>: Deere는 2024년 전체 인력 2,000명을 감축하면서 동시에 AI·소프트웨어 인력을 채용하는 구조 전환을 병행했다. 전통 제조직 감소와 기술직 증가가 동시에 일어난 전형적인 AX 인력 재구성 패턴이다.</p></div></div>
+
+      <h3>4. 의사결정·거버넌스 — 인수·BM 전환 의사결정</h3>
+      <h4>4-1. 인수 의사결정 로직</h4>
+      <p><strong>Blue River ($305M, 2017)</strong></p>
+      <ul>
+        <li>판단 근거: 자체 컴퓨터 비전 개발 vs. 6년 선행 투자를 가진 스타트업 인수. 스탠퍼드 기원의 기술 깊이와 농업 도메인 특화 데이터셋을 높이 평가.</li>
+        <li>인수 조건 설계: 팀 독립성 보장, Sunnyvale 유지 → 혁신 속도 보존 우선.</li>
+        <li>리스크: $305M은 당시 Deere의 단일 기술 인수로서 이례적 규모. 농업 AI 시장 자체가 검증 전 단계.</li>
+      </ul>
+      <p><strong>Bear Flag Robotics ($250M, 2021)</strong></p>
+      <ul>
+        <li>판단 근거: 2019년 Startup Collaborator 프로그램을 통한 2년 선행 파트너십으로 기술 검증 완료. 완전 자율 주행이 Blue River의 정밀 살포와 시너지를 낸다는 판단.</li>
+        <li>인수 조건: 역시 Silicon Valley 독립 운영 유지.</li>
+      </ul>
+      <p><strong>핵심 의사결정 원칙</strong>: Deere는 핵심 AI 역량을 외부 파트너십으로 해결하지 않고 인수(소유)를 택했다. 이유는 데이터 주권 — 농가 데이터가 Operations Center로 독점 유입되어야 AI 플라이휠이 작동하기 때문이다.</p>
+      <h4>4-2. BM 전환 거버넌스</h4>
+      <p>Leap Ambitions 프레임워크(2021~ 공식화)는 전략 목표를 두 가지로 수렴한다:</p>
+      <ol>
+        <li>영업이익률 20% (미드사이클 기준)</li>
+        <li>반복 수익(Recurring Revenue) 10% (2030년 목표)</li>
+      </ol>
+      <p>2022년 Q1 투자자 컨퍼런스콜에서 CFO Ryan Campbell은 "자율 주행이 반복 수익 목표 달성에 중요한 역할을 할 것"이라고 명시했다. 이는 자율화 투자를 단순 R&amp;D가 아닌 <strong>BM 전환 수단</strong>으로 공식 정의한 것이다 <span class="badge b-warn">Self-Reported</span>.</p>
+    </section>
+
+    <section id="d-results" class="reveal">
+      <div class="sec-head"><span class="sec-num">D·2</span><h2 class="sec-title">John Deere — See&amp;Spray·Operations Center·구독 모델·측정</h2></div>
+      <h3>5. 실행 디테일 — See&amp;Spray 기술·Operations Center·구독 모델</h3>
+      <h4>5-1. See&amp;Spray 기술 스택</h4>
+      <p><strong>컴퓨터 비전 레이어</strong><br>붐(boom)에 장착된 고속 카메라가 초당 2,500 sq ft 이상 (2025년 기준)의 작물 구역을 스캔한다. 각 이미지는 작물·잡초 DB를 학습한 심층 신경망(Deep Neural Network, DNN)을 통해 픽셀 단위로 분류된다. 처리 결과는 밀리초(ms) 단위로 노즐 액추에이터에 전달된다.</p>
+      <p><strong>엣지 컴퓨팅 구현</strong><br>클라우드 연결 없이 장비 탑재 컴퓨터가 실시간 처리를 수행한다. 야외 농업 환경(조도 변화, 먼지, 진동)을 견디는 엣지 처리 설계. NVIDIA Jetson Xavier 계열 VPU(Vision Processing Unit)가 핵심 처리 칩셋이다.</p>
+      <p><strong>모델 학습 데이터</strong><br>Operations Center에 축적된 누적 현장 데이터가 모델 재훈련에 사용된다. 330만 이상의 "engaged acres"(연결 에이커)에서 수집된 실제 현장 데이터가 데이터셋의 근간이다 <span class="badge b-warn">Self-Reported</span>.</p>
+      <p><strong>제품 라인업 (2024~2025)</strong></p>
+      <ul>
+        <li>See&amp;Spray Select: 기본 타겟 살포</li>
+        <li>See&amp;Spray Premium: 고급 분류 + 비용 절감 최적화</li>
+        <li>See&amp;Spray Ultimate: 최고 정밀도 + 작물별 최적화</li>
+      </ul>
+      <h4>5-2. Operations Center 데이터 플랫폼</h4>
+      <p>Operations Center는 John Deere의 클라우드 기반 농장 관리 플랫폼으로, AX 전환의 데이터 기반 인프라다.</p>
+      <p><strong>핵심 기능</strong>:</p>
+      <ul>
+        <li>330만 이상 engaged acres의 실시간 데이터 수집 <span class="badge b-warn">Self-Reported</span></li>
+        <li>수확량 지도, 살포 지도(정확한 잡초 위치 포함), 토양 조건, 장비 성능 데이터 통합</li>
+        <li>Digital Farm Twin(디지털 농장 쌍둥이)으로 작업 사전 계획 수립 가능</li>
+        <li>기계 상태(DTC), 소프트웨어 업데이트, 유지보수 계획 통합 관리</li>
+      </ul>
+      <p><strong>Operations Center PRO (2025년 7월 출시)</strong></p>
+      <ul>
+        <li>연간 구독: 기계당 $195~</li>
+        <li>제공 기능: 기계 건강 인사이트, 진단 코드(DTC), 부품별 콘텐츠, ECU 소프트웨어 리프로그래밍, 인터랙티브 진단 테스트</li>
+        <li>딜러 및 농가 모두 대상 (사업체용 별도 라이선스 존재)</li>
+      </ul>
+      <div class="callout key"><span class="ico">🔁</span><div><p><strong>전략적 의미</strong>: Operations Center는 Deere 장비에서만 발생하는 독점 데이터셋을 구축한다. 이 데이터는 AI 모델 개선에 재투입되고, 개선된 모델은 더 높은 절감 효과를 내며, 이는 더 많은 농가를 유인하는 <strong>AI 플라이휠(Flywheel)</strong>을 형성한다.</p></div></div>
+      <h4>5-3. 구독·라이선스 수익 모델</h4>
+      <p><strong>See&amp;Spray 과금 구조 (2025 기준)</strong></p>
+      <ul>
+        <li>휴경지(Fallow) 살포: 에이커당 $1</li>
+        <li>재배 중(In-Crop) 살포: 에이커당 $5 (절감이 발생한 경우에만 과금)</li>
+        <li>Application Savings Guarantee: 절감이 발생하지 않으면 무료</li>
+        <li>2026 신규: Unlimited Annual License (고사용 농가 대상, 정액 연간 구독)</li>
+      </ul>
+      <p><strong>하드웨어 진입 비용</strong></p>
+      <ul>
+        <li>See&amp;Spray Premium 업그레이드: 약 $25,000~$100,000 (기존 분무기 종류에 따라 차이)</li>
+        <li>고정 라이선스 옵션: $28,000 USD (Premium 시스템)</li>
+        <li>Autonomy retrofit 키트: 기존 8R/9R에 장착 가능 (가격 미공개 <span class="badge b-neutral">Uncertain</span>)</li>
+      </ul>
+      <p><strong>전략</strong>: CTO Hindman은 "업프론트 비용을 낮추고 사용량에 비례한 라이선스 모델로 배분한다"고 설명했다. 농가는 절감 가치를 먼저 경험하고, Deere는 성과 기반으로 과금하는 구조다.</p>
+      <p><strong>Operations Center PRO 구독</strong>: 기계당 연간 $195~. 반복 수익의 첫 번째 공식 레이어.</p>
+
+      <h3>6. 측정 결과 — 어떻게 성공을 측정했나</h3>
+      <h4>6-1. See&amp;Spray 2024 시즌 성과</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>출처 라벨</th><th>측정 방법</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">적용 면적</td><td>100만 에이커 이상</td><td><span class="badge b-warn">Self-Reported</span></td><td>Deere 2024 Impact Report 집계</td></tr>
+          <tr><td class="tool">제초제 절감 (갤런)</td><td>800만 갤런 (혼합액 기준)</td><td><span class="badge b-warn">Self-Reported</span></td><td>에이커당 평균 15갤런 비선택 제초제 기준 전통 광역살포 대비 계산</td></tr>
+          <tr><td class="tool">평균 비용 절감</td><td>59%</td><td><span class="badge b-warn">Self-Reported</span></td><td>옥수수·대두·목화 밭 평균; Premium 및 Ultimate 모델 기준; 광역살포 대비</td></tr>
+          <tr><td class="tool">독립 연구 절감율</td><td>76% 평균 (415에이커, 5개 대두밭)</td><td><span class="badge b-warn">Sponsored-Study · Deere 후원</span></td><td>Iowa State University 현장 연구, 제3자 진행이나 Deere 후원</td></tr>
+          <tr><td class="tool">경제적 절감</td><td>에이커당 $15.7</td><td><span class="badge b-warn">Sponsored-Study · Deere 후원</span></td><td>Iowa State University 동일 연구</td></tr>
+          <tr><td class="tool">필드별 절감 범위</td><td>43.9%~90.6%</td><td><span class="badge b-warn">Sponsored-Study · Deere 후원</span></td><td>Iowa State 5개 밭 각각 측정</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>
+        <p><strong>측정 방법 세부 주의사항</strong>:</p>
+        <p>"800만 갤런" 산정: 에이커당 15갤런 광역살포를 기준으로 절감 비율 적용. 실제 농가별 살포량이 다를 경우 수치가 달라진다. · 59% 수치는 Premium·Ultimate 모델에 한정되며, 잡초 밀도·밭 조건에 따라 개별 편차가 크다 (일부 35~40%, 일부 73%+). · Iowa State 연구는 John Deere가 후원했으나 제3자가 진행했다. 완전 독립 감사가 아닌 "스폰서드 독립 연구"에 해당한다.</p>
+      </div></div>
+      <h4>6-2. See&amp;Spray 2025 시즌 성과 (초기 데이터)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>출처 라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">적용 면적</td><td>500만 에이커 이상</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">제초제 절감 (갤런)</td><td>3,100만 갤런 (혼합액 기준)</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">평균 절감율</td><td>약 50%</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">수확량 효과</td><td>대두 평균 +2부셸/에이커 (최대 4.8)</td><td><span class="badge b-warn">Self-Reported, 제3자 연구 기반</span></td></tr>
+          <tr><td class="tool">스캔 속도</td><td>초당 2,500 sq ft 이상</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>2024→2025 성장</strong>: 적용 면적 5배 증가. 절감율은 59%→50%로 소폭 하락 (잡초 조건·적용 지역 확대에 따른 자연스러운 평균 하락으로 해석 가능).</p>
+      <h4>6-3. 자율주행 트랙터 성과</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>출처 라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">파일럿 자율 경작 면적</td><td>50,000에이커 이상</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">생산성 향상</td><td>15~20%</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">연료·노동 절감</td><td>6%</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">카메라 수 (9RX)</td><td>16개 스테레오 카메라 배열</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">GPS 정밀도</td><td>1인치 미만</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>6-4. Operations Center 플랫폼 규모</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>출처 라벨</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">연결된 총 에이커</td><td>3억 3천만 에이커 이상</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p><strong>주의</strong>: 3억 3천만 "engaged acres"는 Deere가 공개한 수치로, 어떤 기준으로 "연결됨"을 정의하는지(장비 연결 기준인지, 데이터 전송 기준인지)는 공개 자료에서 명확하지 않다 <span class="badge b-neutral">Uncertain</span>.</p></div></div>
+    </section>
+
+    <section id="d-lessons" class="reveal">
+      <div class="sec-head"><span class="sec-num">D·3</span><h2 class="sec-title">John Deere — 핵심 실천 교훈</h2></div>
+      <h3>7. 핵심 실천 교훈 — 전통 산업이 따라 할 수 있는 것</h3>
+      <div class="verdict"><div class="label">John Deere 7대 실천 교훈</div><ol>
+        <li><strong>"인수 vs. 자체 개발"의 판단 기준.</strong> 컴퓨터 비전(Blue River, 6년 선행)·자율주행(Bear Flag, 검증 완료)은 인수, 연결 플랫폼(Operations Center)은 내부 구축. 5년 이상 걸릴 역량은 스타트업 파트너십→검증→인수 경로를 미리 설계하고, 데이터가 모이는 플랫폼 레이어는 직접 소유한다.</li>
+        <li><strong>인수 후 통합은 단계적으로.</strong> Blue River는 인수 후 6년간 Sunnyvale 독립 운영으로 상용화 달성, 공동창업자 퇴임 후 전사 통합. 인수한 AI 팀을 본사 문화에 즉시 흡수하지 말고 독립 P&amp;L·물리적 독립성을 유지하되, 데이터·인프라 레이어는 초기부터 연결한다.</li>
+        <li><strong>고객 가치를 수익 단위로 삼는다.</strong> See&amp;Spray 과금 단위는 에이커당 $1/$5 = "농가가 절감한 제초제 비용". Application Savings Guarantee("절감 없으면 무료")가 공급사·고객 인센티브를 정렬. "기술 구독"이 아닌 "성과 구독"으로 포지셔닝한다.</li>
+        <li><strong>기존 설치 기반(Installed Base)을 플랫폼 진입로로 활용.</strong> Retrofit 키트 전략은 신규 판매 없이 수십만 대 기반을 구독 수익으로 전환. 이미 배포된 제품·설비를 소프트웨어 업그레이드/센서 추가로 AI화하고, 신제품 판매와 기존 기반 전환을 병렬 추진한다.</li>
+        <li><strong>데이터 플라이휠을 의도적으로 설계한다.</strong> Operations Center → 현장 데이터 수집 → AI 모델 개선 → 더 나은 절감 → 더 많은 농가 유입 → 더 많은 데이터. Operations Center를 무료 제공해 데이터 유입을 극대화. AI 서비스 첫 레이어는 낮은 진입장벽으로 설계해 데이터를 먼저 축적한다.</li>
+        <li><strong>"2030년 완전 자율화"라는 내부 강제 함수(Forcing Function).</strong> 옥수수·대두 농가 완전 자율 생산 주기 목표 공개 선언이 R&amp;D·엔지니어링·제품 팀 방향을 하나로 수렴. 외부 공개 가능한 기술 마일스톤을 내부 로드맵의 수렴점으로 삼는다.</li>
+        <li><strong>전통 인력 재훈련을 병행한다.</strong> General Assembly 파트너십, 100명+ 임직원 소프트웨어 재훈련이 외부 채용만의 한계를 보완. 도메인 지식은 훈련하기 어렵고 코딩은 훈련 가능 — 기술 채용과 내부 재훈련을 이중 트랙으로 운영한다.</li>
+      </ol></div>
+
+      <h3>출처 (Sources)</h3>
+      <div class="src-group"><h4>John Deere — 12건</h4><div class="src-list">
+        <a href="https://www.prnewswire.com/news-releases/deere--company-completes-blue-river-technology-acquisition-300518014.html" target="_blank" rel="noopener">Deere — Blue River 인수 발표 (PR Newswire, 2017-09-06)</a>
+        <a href="https://www.deere.com/en/news/all-news/see-spray-herbicide-savings/" target="_blank" rel="noopener">John Deere — See&amp;Spray Herbicide Savings (2024, Self-Reported)</a>
+        <a href="https://www.precisionfarmingdealer.com/articles/6098-isu-precision-spraying-study-157-herbicide-savings-per-acre" target="_blank" rel="noopener">Iowa State / Precision Farming Dealer — $15.7 절감 (Sponsored-Study · Deere 후원)</a>
+        <a href="https://emerj.com/artificial-intelligence-at-john-deere/" target="_blank" rel="noopener">Emerj — AI at John Deere (기술 스택·플라이휠 분석)</a>
+        <a href="https://www.dtnpf.com/agriculture/web/ag/equipment/article/2024/01/11/john-deere-cto-hindman-talks-pricing" target="_blank" rel="noopener">DTN Progressive Farmer — CTO Hindman Pricing at CES 2024</a>
+        <a href="https://www.globalagtechinitiative.com/in-field-technologies/robotics-automation/john-deere-customers-use-see-spray-technology-across-five-million-acres-in-2025/" target="_blank" rel="noopener">Global Ag Tech — 2025 시즌 500만 에이커·3,100만 갤런 (Self-Reported)</a>
+        <a href="https://www.precisionfarmingdealer.com/articles/5056-technology-corner-autonomy-to-play-significant-role-in-deeres-target-recurring-revenue-goal" target="_blank" rel="noopener">Precision Farming Dealer — Leap Ambitions 10% 반복 수익·CFO Campbell</a>
+        <a href="https://roboticsandautomationnews.com/2025/07/03/exclusive-interview-john-deere-deepens-its-automation-strategy/92870/" target="_blank" rel="noopener">Robotics &amp; Automation News — Deere Automation Strategy (2025-07-03)</a>
+        <a href="https://agfundernews.com/bear-flag-robotics-john-deere-acquires-agfunder-portfolio-company-for-250m" target="_blank" rel="noopener">AgFunderNews — Bear Flag Robotics 인수 $250M (2021)</a>
+        <a href="https://agupdate.com/farmandranchguide/news/technology/article_973e8902-d6ae-11ef-8383-cf7544d0b11e.html" target="_blank" rel="noopener">AgUpdate — Autonomy Retrofit Kit 세부</a>
+        <a href="https://www.deere.com/en/technology-products/operations-center-pro-service/" target="_blank" rel="noopener">John Deere Operations Center PRO Service (구독 가격 $195~, Self-Reported)</a>
+        <a href="https://generalassemb.ly/blog/from-ag-to-ai-reimagining-tech-talent-at-john-deere/" target="_blank" rel="noopener">General Assembly Blog — From Ag to AI (재훈련 100명+)</a>
+      </div></div>
+    </section>
+
+    <!-- ============ PART E ============ -->
+    <section id="part-e" class="reveal">
+      <div class="sec-head"><span class="sec-num">E</span><h2 class="sec-title">Duolingo AX Playbook — "AI-first" 선언을 성장으로 연결한 법</h2></div>
+      <div class="callout key"><span class="ico">🔖</span><div><p>📅 작성일 2026-06-02 · 측정치·동향은 시점 의존적, 6~12개월 후 재검토 권장 · AX 실천 Playbook 시리즈 (파트 A 허브 참조)</p></div></div>
+
+      <h3>0. Executive Summary</h3>
+      <p class="lead">Duolingo는 2025년 4월 CEO Luis von Ahn의 "AI-first" 선언 이후, 약 1년 만에 일 활성 사용자(DAU) 50M 돌파·유료 구독자 11.5M·분기 매출 $271.7M(+41% YoY)을 달성했다. <span class="badge b-ok">Independently-Audited: SEC 8-K Q3 2025</span></p>
+      <p>핵심 레버리지는 두 가지다. 첫째, AI로 콘텐츠 생산 속도를 12년치 분량(100개 코스)을 1년 만에 복제(148개 코스 추가)하는 수준으로 높였다. <span class="badge b-warn">Self-Reported: CEO 발언, TechCrunch 2025-04-30</span> 둘째, GPT-4 기반 프리미엄 구독(Duolingo Max)을 통해 무료 사용자를 유료로 전환하는 BM (비즈니스 모델) 경로를 새로 만들었다. AI는 인력 대체가 아니라 <strong>콘텐츠 레버리지</strong>와 <strong>수익 전환</strong> 두 축을 동시에 강화하는 방식으로 작동했다.</p>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p>다만 "AI가 성장을 이끌었다"는 인과는 회사 측 자체 주장 수준이며, 독립적 검증이 없다. <span class="badge b-neutral">Uncertain</span> 재무 수치 자체는 SEC 공시로 신뢰할 수 있지만, 성장 원인이 AI인지 게이미피케이션 개선·마케팅·시장 수요인지 분리 측정되지 않았다.</p></div></div>
+
+      <h3>1. 출발점 — 왜 AI-first를 선언했나</h3>
+      <h4>1.1 구조적 병목</h4>
+      <p>Duolingo의 성장 방정식은 오랫동안 "더 많은 언어 × 더 많은 코스 = 더 많은 사용자"였다. 그러나 코스 제작은 철저히 인력 집약적이었다. 100개 코스를 만드는 데 12년이 걸렸다. 지구상 7,000개 언어 중 Duolingo가 커버하는 것은 40개 미만이었으며, 각 언어를 모든 인터페이스 언어(28개)로 제공하려면 수십 년이 필요한 상황이었다. <span class="badge b-warn">Self-Reported: CEO Luis von Ahn, TechCrunch 2025</span></p>
+      <h4>1.2 모바일 베팅의 선례</h4>
+      <p>von Ahn은 내부 메모에서 2013년 "모바일 퍼스트" 전환을 선례로 제시했다. 당시 회사는 데스크톱 중심에서 모바일 우선으로 방향을 틀었고, 결과적으로 현재 Duolingo 트래픽의 절대다수는 모바일에서 발생한다. <span class="badge b-warn">Self-Reported: CEO 메모, Entrepreneur 2025</span> 이 논리를 AI에 그대로 적용한 것이 2025년 선언의 배경이다.</p>
+      <h4>1.3 생성 AI의 기회창</h4>
+      <p>2023년 말~2024년 초 GPT-4 등 대형 언어 모델(LLM)의 콘텐츠 생성 품질이 임계점을 넘어섰다. Duolingo는 2024년 1월 계약직 10% 감축으로 이 전환을 처음 신호했고, 2025년 4월 전사 선언으로 공식화했다.</p>
+
+      <h3>2. 타임라인 — 어떻게 수행했나 (선언~Q3 2025)</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>시점</th><th>이벤트</th><th>신뢰도</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">2013</td><td>Birdbrain 간격 반복(spaced repetition) AI 최초 도입</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2020</td><td>Birdbrain v2 — 강화학습(RL) 기반 개인화 고도화</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">2023-Q4</td><td>계약직 번역가·작가 약 10% 감축, AI 콘텐츠 생성 전환 시작</td><td><span class="badge b-ok">Independently-Audited: TechCrunch 2024-01-09 자체취재</span></td></tr>
+          <tr><td class="tool">2024-01</td><td>CNN, WashPost, TechCrunch 일제 보도 — "AI로 계약직 대체" 논란 점화</td><td><span class="badge b-ok">Independently-Audited: 다수 언론 자체취재</span></td></tr>
+          <tr><td class="tool">2024-03</td><td>Duolingo Max 공식 출시(GPT-4 기반 Explain My Answer + Roleplay)</td><td><span class="badge b-warn">Self-Reported: Duolingo IR</span></td></tr>
+          <tr><td class="tool">2024-09</td><td>Duocon 2024 — Video Call with Lily 발표 (AI 대화 연습)</td><td><span class="badge b-warn">Self-Reported: Duolingo IR 보도자료</span></td></tr>
+          <tr><td class="tool">2024-10</td><td>두 번째 계약직 감축 — 작가 추가 해고</td><td><span class="badge b-ok">Independently-Audited: TechCrunch 보도</span></td></tr>
+          <tr><td class="tool">2025-01</td><td>Video Call, Android 확대 출시</td><td><span class="badge b-warn">Self-Reported: Duolingo IR</span></td></tr>
+          <tr><td class="tool">2025-04</td><td>CEO "AI-first" 전사 메모 배포 → 대중 논란 → 해명 메모 발표</td><td><span class="badge b-warn">Self-Reported + 언론 자체취재</span></td></tr>
+          <tr><td class="tool">2025-04~05</td><td>148개 AI 생성 코스 공개 발표 (12년치 100개 코스를 1년 만에 복제)</td><td><span class="badge b-warn">Self-Reported: CEO 발언</span></td></tr>
+          <tr><td class="tool">2025-Q1</td><td>유료 구독자 10.3M, 매출 $230.7M (+38% YoY)</td><td><span class="badge b-ok">Independently-Audited: SEC 8-K</span></td></tr>
+          <tr><td class="tool">2025-Q2</td><td>유료 구독자 10.9M (+37% YoY), 매출 $252.3M (+41% YoY)</td><td><span class="badge b-ok">Independently-Audited: SEC 8-K</span></td></tr>
+          <tr><td class="tool">2025-Q3</td><td>DAU 50.5M (+36%), 유료 구독자 11.5M (+34%), 매출 $271.7M (+41%)</td><td><span class="badge b-ok">Independently-Audited: SEC 8-K</span></td></tr>
+          <tr><td class="tool">2026-04</td><td>CEO, 성과 평가에서 "AI 활용 여부" 항목 철회 발표</td><td><span class="badge b-warn">Self-Reported: 팟캐스트 발언, Entrepreneur 2026</span></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>3. 조직 변화 — 채용 기준·성과 평가·계약직 구조</h3>
+      <h4>3.1 계약직 구조 변화</h4>
+      <p>Duolingo는 2023년 말~2024년 사이 번역가·작가 계약직을 AI로 교체했다. 각 팀에서 계약직 대부분이 해고되고, AI 생성 콘텐츠를 검토하는 "콘텐츠 큐레이터(content curator)" 1~2명만 남겼다. <span class="badge b-ok">Independently-Audited: TechCrunch, Washington Post, CNN 자체취재</span></p>
+      <p><strong>양면 기술</strong>: 회사는 정규직 해고가 없었다고 주장했다. 그러나 계약직은 법적으로 고용 보호가 약하며, 해고된 계약직 당사자들은 실질적인 직업 상실 경험을 언론에 증언했다. <span class="badge b-neutral">Uncertain: 피해 규모 종합 통계 없음</span> 브라이언 머천트(TechCrunch) 등 일부 기자들은 이를 "AI 일자리 위기의 상징 사례"로 규정했다.</p>
+      <h4>3.2 채용 기준 변화 (원래 계획 → 철회 부분)</h4>
+      <p>2025년 4월 CEO 메모의 원문 "5가지 구조적 제약(constructive constraints)":</p>
+      <ol>
+        <li>AI가 처리할 수 있는 업무에 대해 계약직 사용을 <strong>점진적으로 중단</strong></li>
+        <li>채용 시 AI 활용 능력을 <strong>채용 기준</strong>으로 반영</li>
+        <li>성과 평가에 AI 활용도를 <strong>반영</strong> (→ 2026년 4월 철회)</li>
+        <li>팀이 더 이상 자동화할 수 없음을 입증하지 못하면 <strong>인원 충원 불허</strong></li>
+        <li>기존 인력 중심 워크플로우를 재설계 — "처음부터 다시 만들어야 할 수 있다"</li>
+      </ol>
+      <p><span class="badge b-warn">Self-Reported: CEO 메모, Entrepreneur/Fortune/Slashdot 보도 교차 확인</span></p>
+      <h4>3.3 성과 평가 철회 배경</h4>
+      <p>2026년 4월, von Ahn은 팟캐스트에서 성과 평가 AI 활용 항목을 제거한 이유를 설명했다. 직원들이 "AI를 위한 AI 사용을 강요하냐"고 문제를 제기했고, 그 비판이 타당했다고 인정했다. 현재는 "직무 성과를 최대한 잘 내는 것"이 핵심 기준이며, AI는 그 수단 중 하나일 뿐이라는 입장이다. <span class="badge b-warn">Self-Reported: 팟캐스트 발언, Fortune 2026-04-13</span></p>
+      <h4>3.4 정규직 고용 유지 주장</h4>
+      <p>von Ahn은 해명 메모에서 "정규직 채용 속도는 이전과 동일하게 유지되고 있다"고 강조했다. 단, 이는 검증 불가능한 자체 주장이다. <span class="badge b-warn">Self-Reported</span></p>
+
+      <h3>4. 의사결정·거버넌스 — AI-first 선언과 논란 대응</h3>
+      <h4>4.1 원본 메모의 핵심 프레이밍</h4>
+      <p>von Ahn의 원본 메모 핵심 문장:</p>
+      <ul>
+        <li>"AI는 이미 일하는 방식을 바꾸고 있다. if/when이 아니라 now다."</li>
+        <li>"우리는 느리게 움직이며 기회를 놓치는 것보다, <strong>긴박하게 움직이며 소소한 품질 손실을 감수하는 쪽을 선택한다.</strong>"</li>
+        <li>AI 전환을 2013년 "모바일 베팅"에 비유</li>
+      </ul>
+      <p><span class="badge b-warn">Self-Reported: Entrepreneur, Decrypt 교차 확인</span></p>
+      <h4>4.2 논란과 대응 — 실패한 커뮤니케이션</h4>
+      <p>원본 메모는 계약직 해고 공포, "AI에게 일자리를 빼앗긴다"는 대중 반응을 촉발했다. Mixeternal 등의 분석은 이를 Shopify CEO의 AI-first 메모와 비교하며 "PR 실패 사례"로 분류했다. Shopify는 같은 메시지를 성장 스토리로 포장해 긍정적 반응을 이끌었지만, Duolingo는 비용 절감 신호로 읽혔다.</p>
+      <p>해명 메모에서 von Ahn은 "내가 잘 쓰지 못했다"고 직접 인정했다. 핵심 해명: "AI가 직원을 대체하는 것으로 보지 않는다. 채용은 이전과 같은 속도로 계속한다."</p>
+      <h4>4.3 거버넌스 패턴</h4>
+      <ul>
+        <li>CEO가 내부 메모를 통해 전략을 Top-Down으로 전달</li>
+        <li>직원 반발을 수용해 성과 평가 정책을 수정 → <strong>상향식 피드백이 정책 수정으로 이어진 사례</strong></li>
+        <li>계약직 구조 변경은 철회하지 않음 → 핵심 방향성은 유지</li>
+      </ul>
+    </section>
+
+    <section id="e-results" class="reveal">
+      <div class="sec-head"><span class="sec-num">E·2</span><h2 class="sec-title">Duolingo — Max·콘텐츠 파이프라인·Birdbrain·측정</h2></div>
+      <h3>5. 실행 디테일 — Duolingo Max·콘텐츠 생성 파이프라인·Birdbrain</h3>
+      <h4>5.1 Duolingo Max (프리미엄 AI 구독 티어)</h4>
+      <p>2024년 3월 출시. Super Duolingo 위에 AI 기능을 추가한 최상위 구독 티어.</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>기능</th><th>설명</th><th>기반 AI</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">Explain My Answer</td><td>오답 즉시 진단 — 왜 틀렸는지 맥락 설명 + 유사 연습 추천</td><td>GPT-4</td></tr>
+          <tr><td class="tool">Roleplay</td><td>적응형 대화 시뮬레이션, 학습자 수준에 따른 다이얼로그 트리 조정</td><td>GPT-4</td></tr>
+          <tr><td class="tool">Video Call with Lily</td><td>애니메이션 AI 튜터와 실시간 음성 대화 (Duocon 2024 발표, 2025-01 Android 확대)</td><td>GPT-4 (AI 스택 미공개)</td></tr>
+          <tr><td class="tool">DuoRadio</td><td>리스닝 이해 연습 (신규 코스에 포함)</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <p><span class="badge b-warn">Self-Reported: Duolingo IR, 블로그, chiefaiofficer.com</span></p>
+      <p>Max 침투율: 전체 사용자 대비 약 7% (Q2 2025 기준). <span class="badge b-warn">Self-Reported</span> 구독 매출이 전체의 83%(Q2 2025) <span class="badge b-ok">Independently-Audited: SEC 8-K</span>를 차지하며, Max 성장이 구독 매출 믹스 상승에 기여했다.</p>
+      <h4>5.2 콘텐츠 생성 AI 파이프라인</h4>
+      <p><strong>핵심 수치</strong>: 첫 100개 코스 → 12년 소요 / 다음 148개 코스 → 약 1년 소요. <span class="badge b-warn">Self-Reported: CEO von Ahn, TechCrunch 2025-04-30</span></p>
+      <p>파이프라인 방식 <span class="badge b-warn">Self-Reported</span>:</p>
+      <ol>
+        <li>학습 설계자(instructional designer)가 AI에게 전달할 <strong>구조화된 프롬프트 템플릿</strong> 작성 (언어 수준, 문법 포인트 등 파라미터 지정)</li>
+        <li>LLM이 이 템플릿을 채워 <strong>레슨 콘텐츠 초안</strong> 생성</li>
+        <li>기존에 만든 "베이스 코스 프레임워크"를 LLM이 <strong>28개 인터페이스 언어로 자동 현지화</strong></li>
+        <li>언어학자(linguist)·커리큘럼 전문가가 생성된 콘텐츠를 <strong>감수·검증</strong></li>
+      </ol>
+      <p>148개 신규 코스는 주로 Spanish, French, German, Italian, Japanese, Korean, Mandarin 7개 언어를 28개 인터페이스 언어 전체로 확장하는 데 집중했다.</p>
+      <p>생성 AI 비용 증가가 구독 마진을 약 120bp 압박했다는 점은 SEC에서 확인된다. <span class="badge b-ok">Independently-Audited: SEC Q4 2024 주주 서한</span></p>
+      <h4>5.3 Birdbrain — 개인화 AI 엔진</h4>
+      <p>Birdbrain은 Duolingo의 핵심 개인화 알고리즘이다. <span class="badge b-warn">Self-Reported: Duolingo 연구팀 공개 자료</span></p>
+      <ul>
+        <li><strong>기원</strong>: 2013년 간격 반복(half-life regression) 시스템으로 시작 — Duolingo의 최초 AI 프로젝트</li>
+        <li><strong>고도화</strong>: 2020년 강화학습 기반으로 전면 재설계</li>
+        <li><strong>핵심 메커니즘</strong>: 각 단어마다 "반감기(half-life)"를 추정 → 50% 확률로 잊어버릴 시점에 복습 트리거</li>
+        <li><strong>실시간 적응</strong>: 정답 여부·응답 속도·실수 패턴을 분석해 다음 레슨 난이도와 모듈 순서를 즉시 조정</li>
+        <li><strong>처리 규모</strong>: 하루 12억 5천만 개 연습 문제 개인화 <span class="badge b-warn">Self-Reported: buildmvpfast.com 인용</span></li>
+        <li><strong>응답 속도</strong>: 세션 생성기를 Scala로 재작성 후 750ms → 14ms 단축 <span class="badge b-warn">Self-Reported</span></li>
+        <li><strong>현황</strong>: 세션의 6~8%에 Birdbrain 개인화 적용 중 (점진적 확대) <span class="badge b-warn">Self-Reported</span></li>
+      </ul>
+
+      <h3>6. 측정 결과 — 어떻게 성공을 측정했나</h3>
+      <h4>6.1 핵심 지표 (SEC 공시 기준)</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>Q4 2024</th><th>Q1 2025</th><th>Q2 2025</th><th>Q3 2025</th><th>YoY 기준</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">DAU</td><td>40.5M</td><td>—</td><td>—</td><td>50.5M</td><td>+36% (Q3)</td></tr>
+          <tr><td class="tool">MAU</td><td>—</td><td>~130M</td><td>—</td><td>135.3M</td><td>+20% (Q3)</td></tr>
+          <tr><td class="tool">유료 구독자</td><td>—</td><td>10.3M</td><td>10.9M</td><td>11.5M</td><td>+34% (Q3)</td></tr>
+          <tr><td class="tool">매출</td><td>年 $748M</td><td>$230.7M</td><td>$252.3M</td><td>$271.7M</td><td>+41% (Q3)</td></tr>
+          <tr><td class="tool">구독 매출 비중</td><td>~81%</td><td>—</td><td>83%</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p><span class="badge b-ok">Independently-Audited: SEC 8-K 각 분기</span></p>
+      <h4>6.2 AI 제품 관련 지표</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>지표</th><th>수치</th><th>신뢰도</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">Duolingo Max 침투율</td><td>~7% (Q2 2025 기준)</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">구독 매출 증가 기여</td><td>"Max·패밀리 플랜 믹스 상승으로 구독자당 ARPU +2%"</td><td><span class="badge b-ok">Independently-Audited: SEC Q4 2024</span></td></tr>
+          <tr><td class="tool">생성 AI 비용으로 구독 마진 압박</td><td>約 120bp 감소</td><td><span class="badge b-ok">Independently-Audited: SEC Q4 2024</span></td></tr>
+          <tr><td class="tool">코스 생성 속도</td><td>12년→100코스 / 1년→148코스</td><td><span class="badge b-warn">Self-Reported</span></td></tr>
+          <tr><td class="tool">광고 CPM 향상</td><td>+15% YoY (AI 세그멘테이션)</td><td><span class="badge b-warn">Self-Reported: chiefaiofficer.com — 단일 출처</span> <span class="badge b-neutral">Uncertain</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>6.3 인과 라벨 주의</h4>
+      <p>"AI가 51% DAU 성장을 이끌었다"는 문장은 <strong>회사 측 주장</strong> 수준이다. <span class="badge b-warn">Self-Reported</span> 실제로는 다음 요인들이 복합 작용했을 가능성이 높다:</p>
+      <ul>
+        <li>게이미피케이션 강화 (스트릭, 리그 시스템)</li>
+        <li>글로벌 언어 학습 수요 증가</li>
+        <li>마케팅·브랜드 인지도</li>
+        <li>Duolingo Max라는 신규 수익 경로</li>
+      </ul>
+      <p>이 중 AI의 기여를 독립적으로 분리한 대조 실험(RCT) 자료는 공개되지 않았다. <span class="badge b-neutral">Uncertain</span></p>
+    </section>
+
+    <section id="e-lessons" class="reveal">
+      <div class="sec-head"><span class="sec-num">E·3</span><h2 class="sec-title">Duolingo — 핵심 실천 교훈</h2></div>
+      <h3>7. 핵심 실천 교훈 — 스타트업이 따라 할 수 있는 것</h3>
+      <h4>7.1 콘텐츠 레버리지 공식</h4>
+      <div class="callout key"><span class="ico">📐</span><div><p><strong>AI = 콘텐츠 생산 속도 × 확장 범위</strong></p></div></div>
+      <p>Duolingo의 사례에서 가장 명확한 교훈은 "AI로 인력을 줄인다"가 아니라 "AI로 기존 팀이 만들 수 없었던 규모의 콘텐츠를 만든다"는 방향이다. 148개 코스를 1년에 만든 것은 인원 감축이 아닌 <strong>생산 함수의 변환</strong>이다. <span class="badge b-warn">Self-Reported</span></p>
+      <p>적용 조건: 콘텐츠가 구조화·반복적이고 품질 검증 인력을 유지할 수 있을 때.</p>
+      <h4>7.2 기존 BM 위에 AI 프리미엄 레이어 얹기</h4>
+      <p>무료(광고) → 구독(Super) → AI 구독(Max)이라는 3단계 수익 계단은 기존 사용자 기반을 AI 수익으로 전환하는 검증된 구조다. AI 기능이 업셀 동기를 만들기 위해서는 <strong>무료 버전과 명확히 차별화된 가치</strong>가 필요하다. Explain My Answer와 Video Call이 그 역할을 했다.</p>
+      <h4>7.3 커뮤니케이션 실패에서 배우기</h4>
+      <p>von Ahn의 1차 메모는 기술적으로 정직했으나 PR 관점에서 실패했다. 같은 내용을 "AI로 우리 팀이 불가능했던 것을 가능하게 한다"는 성장 프레임으로 전달했다면 반응이 달랐을 것이다. <span class="badge b-warn">Self-Reported 분석: Mixternal 비교</span></p>
+      <div class="callout tip"><span class="ico">💡</span><div><p>교훈: AI-first 선언 시 <strong>인력 정책보다 임무 확장</strong>을 전면에 둘 것.</p></div></div>
+      <h4>7.4 AI 거버넌스는 실험·피드백·수정 사이클</h4>
+      <p>성과 평가에 AI 활용 항목을 넣었다가 직원 피드백으로 제거한 것은 <strong>정책 실험의 성공 사례</strong>이기도 하다. "AI를 어떻게 평가 기준에 넣을 것인가"는 아직 업계 전반에서 미해결 문제다. Duolingo의 시행착오 자체가 선례다.</p>
+      <h4>7.5 기술적 기반(Birdbrain)이 AI 제품의 신뢰도를 뒷받침</h4>
+      <p>Birdbrain은 2013년부터 축적된 학습 데이터와 모델이다. GPT-4를 외부에서 조달하더라도 내부에 개인화 모델이 있어야 제품 차별화가 유지된다. <strong>외부 AI + 내부 도메인 데이터/모델</strong>의 조합이 핵심이다.</p>
+      <h4>7.6 주의사항 — 이 케이스가 적용되지 않을 때</h4>
+      <ul>
+        <li>콘텐츠 생성이 구조화·반복적이지 않은 도메인</li>
+        <li>AI 생성 품질 감수 인력을 유지할 여력이 없는 스타트업</li>
+        <li>사용자 기반 없이 Max류 프리미엄 티어를 먼저 만드는 경우 (Duolingo는 ~5억 누적 다운로드 기반 위에 Max를 올렸다)</li>
+      </ul>
+
+      <h3>출처 (Sources)</h3>
+      <div class="src-group"><h4>Duolingo — 15건</h4><div class="src-list">
+        <a href="https://www.sec.gov/Archives/edgar/data/1562088/000156208825000039/q4fy24duolingo12-31x24shar.htm" target="_blank" rel="noopener">SEC Form 8-K Q4 FY2024 주주 서한 (Independently-Audited)</a>
+        <a href="https://www.sec.gov/Archives/edgar/data/0001562088/000156208825000098/q1fy25duolingo3-31x25press.htm" target="_blank" rel="noopener">SEC Form 8-K Q1 FY2025 실적 발표</a>
+        <a href="https://www.sec.gov/Archives/edgar/data/0001562088/000156208825000165/q2fy25duolingo6-30x25share.htm" target="_blank" rel="noopener">SEC Form 8-K Q2 FY2025 주주 서한</a>
+        <a href="https://www.sec.gov/Archives/edgar/data/0001562088/000162828025049514/q3fy25duolingo9-30x25share.htm" target="_blank" rel="noopener">SEC Form 8-K Q3 FY2025 주주 서한</a>
+        <a href="https://techcrunch.com/2024/01/09/duolingo-cut-10-of-its-contractor-workforce-as-the-company-embraces-ai/" target="_blank" rel="noopener">TechCrunch — 10% contractor cut (2024-01-09)</a>
+        <a href="https://techcrunch.com/2025/04/30/duolingo-launches-148-courses-created-with-ai-after-sharing-plans-to-replace-contractors-with-ai/" target="_blank" rel="noopener">TechCrunch — 148 AI courses (2025-04-30)</a>
+        <a href="https://techcrunch.com/2025/05/04/is-duolingo-the-face-of-an-ai-jobs-crisis/" target="_blank" rel="noopener">TechCrunch — AI jobs crisis? (2025-05-04)</a>
+        <a href="https://www.entrepreneur.com/business-news/duolingo-ceo-clarifies-ai-stance-after-backlash-read-memo/492141" target="_blank" rel="noopener">Entrepreneur — CEO Clarifies AI Stance (2025)</a>
+        <a href="https://www.entrepreneur.com/business-news/duolingos-ceo-changing-how-he-measures-employee-performance-backlash" target="_blank" rel="noopener">Entrepreneur — Performance Reviews Backlash (2026)</a>
+        <a href="https://fortune.com/2026/04/13/duolingo-ceo-luis-von-ahn-ai-usage-requirement-employee-performance-evaluations/" target="_blank" rel="noopener">Fortune — backs off AI usage eval (2026-04-13)</a>
+        <a href="https://blog.duolingo.com/video-call/" target="_blank" rel="noopener">Duolingo 공식 블로그 — Video Call with Lily</a>
+        <a href="https://chiefaiofficer.com/duolingos-ai-strategy-fuels-51-user-growth-and-1b-revenue/" target="_blank" rel="noopener">Chief AI Officer — AI Strategy Fuels 51% Growth</a>
+        <a href="https://decrypt.co/316847/duolingo-ai-first-ceo-luis-von-ahn" target="_blank" rel="noopener">Decrypt — AI-First Approach, von Ahn</a>
+        <a href="https://www.mixternal.com/p/ai-first-ceo-memos-duolingo-shopify-communication-lessons" target="_blank" rel="noopener">Mixternal — Duolingo vs. Shopify (분석)</a>
+        <a href="https://www.tomdaccord.com/blog/ai-and-duolingo" target="_blank" rel="noopener">Tom Daccord — Uncovering Birdbrain</a>
+      </div></div>
+      <div class="callout key"><span class="ico">🔄</span><div><p><strong>재검토 트리거</strong>: Duolingo 분기 실적(SEC 8-K) 발표 시, 또는 AI-first 정책 추가 변경 발표 시</p></div></div>
+    </section>
+
+    <!-- ============ PART F ============ -->
+    <section id="part-f" class="reveal">
+      <div class="sec-head"><span class="sec-num">F</span><h2 class="sec-title">Klarna 반면교사 — "AI로 700명 대체" 그 후</h2></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>
+        <p>📅 작성일 2026-06-02 · 측정치·동향은 시점 의존적, 6~12개월 후 재검토 권장 · AX 실천 Playbook 시리즈 (파트 A 허브 참조)</p>
+        <p>본 노트는 성공 사례가 아닌 <strong>반면교사</strong>입니다 — "하지 말 것"을 배우는 사례.</p>
+      </div></div>
+
+      <h3>0. Executive Summary — 무엇을 시도했고, 왜 실패했고, 무엇을 배우나</h3>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">기업</td><td>Klarna (스웨덴 핀테크, BNPL 서비스)</td></tr>
+          <tr><td class="tool">시도</td><td>고객지원 AI 봇으로 700명 FTE (전임직원) 분량 대체 주장, 40% 인력 감축</td></tr>
+          <tr><td class="tool">결과</td><td>고객 만족도 하락, CEO 공개 인정, 인간 상담원 재고용 역전</td></tr>
+          <tr><td class="tool">핵심 실패 원인</td><td>비용 절감이 1차 목표 → 품질이 후행 지표로 밀림</td></tr>
+          <tr><td class="tool">AX 레슨</td><td>인간 대체(replacement) ≠ 인간 증강(augmentation)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout key"><span class="ico">⚖️</span><div><p><strong>한 줄 요약</strong>: Klarna는 "AI가 700명 몫을 한다"는 자체 발표를 마케팅 홍보로 활용했지만, 실제로는 단순 1차 응대(L1) 볼륨만 처리했을 뿐 복잡·감정적 케이스에서 품질이 무너졌다. CEO가 공개 번복하고 재고용에 나선 이 사례는 AX 추진에서 "비용 효율"을 단독 KPI로 두면 어떤 일이 벌어지는지를 보여주는 교과서적 반면교사다.</p></div></div>
+
+      <h3>1. 출발점 — Klarna의 AI 야망 (왜 그렇게 공격적이었나)</h3>
+      <h4>1-1. 배경: 가치 폭락 후 수익성 압박</h4>
+      <p>Klarna는 2021년 456억 달러 기업가치로 유럽 최대 핀테크 타이틀을 달았지만, 2022년 금리 인상·BNPL 규제 강화로 기업가치가 67억 달러로 급락했다. <span class="badge b-ok">Independently-Audited</span> 수익성 회복과 IPO 준비가 경영진의 최우선 과제가 됐고, 비용 구조 개선에 강한 압력이 생겼다.</p>
+      <h4>1-2. OpenAI와의 파트너십</h4>
+      <ul>
+        <li><strong>2023년</strong>: CEO Sebastian Siemiatkowski가 OpenAI Sam Altman에게 "Klarna가 ChatGPT의 가장 좋아하는 실험 파트너가 되고 싶다(favorite guinea pig)"라고 제안 <span class="badge b-ok">Independently-Audited · Bloomberg/Fortune 취재</span></li>
+        <li><strong>2023년 말</strong>: OpenAI 기반 AI 고객지원 봇 개발 착수, 채용 전면 동결(hiring freeze) 선언</li>
+        <li>CEO는 자연 감소(natural attrition)가 연 15~20%에 달하므로 채용을 멈추기만 해도 규모가 줄어든다고 공개 설명 <span class="badge b-warn">Self-Reported · CNBC 2025-05</span></li>
+      </ul>
+      <h4>1-3. "AI-first" 선언의 의미</h4>
+      <p>Siemiatkowski는 Klarna를 "AI 네이티브 기업"으로 재정의하겠다는 비전을 내세웠다. 단순한 비용 절감이 아니라 AI를 핵심 경쟁 우위로 포지셔닝하는 내러티브였다 — 하지만 실행은 다른 방향으로 흘렀다.</p>
+
+      <h3>2. 실행 — 무엇을 했나 (타임라인)</h3>
+      <pre><code>2022-05   약 700명 구조조정 (전체 인력의 10%, AI와 무관한 거시경제 이유)
+           ─ 이 숫자가 나중에 "AI가 700명 대체"와 혼재되어 혼란 야기 [Uncertain]
+
+2023-12   채용 전면 동결 선언 + OpenAI 파트너십 공개
+           인력: ~5,000명 → 자연 감소 유도
+
+2024-01   OpenAI 기반 AI 고객지원 봇 글로벌 런칭
+
+2024-02-27 공식 보도자료 발표 [Self-Reported]:
+   • 1개월간 230만 건 대화 처리
+   • 전체 고객지원 채팅의 2/3(67%) 담당
+   • 35개 언어, 23개 시장
+   • 평균 응답 해결 시간: 11분 → 2분 미만
+   • "700명 FTE 분량 대체" 주장
+   • 2024년 예상 수익 개선: 4,000만 달러
+   • 반복 문의 25% 감소
+
+2025-05   CEO, Bloomberg 인터뷰에서 번복 [Independently-Audited]:
+   "비용이 너무 지배적인 평가 기준이 됐고, 결과적으로 품질이 낮아졌다"
+   인간 상담원 재고용 시작
+
+2025-09   Klarna NYSE IPO (9/10), 공모가 $40 상단 이상, 첫날 +30%
+           공모가 기준 시총 ~$15B / 개장가($52) 기준 ~$19.65B [Independently-Audited · 다수 매체]
+
+2025-10   Fortune/Bloomberg 인터뷰: CEO, "tech bros가 AI의 일자리 충격을
+           너무 순화해서 말하고 있다" 발언. 인력 7,000 → 3,000명 인정</code></pre>
+      <h4>2-1. "700명 대체" 주장의 실제 검증</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>항목</th><th>분류</th><th>실제 내용</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">"700 FTE 분량" 주장</td><td><span class="badge b-warn">Self-Reported</span></td><td>Klarna 보도자료에서만 발표, 독립 검증 없음</td></tr>
+          <tr><td class="tool">측정 방법론</td><td><span class="badge b-neutral">Uncertain</span></td><td>보도자료에 산출 근거 공개 안 됨</td></tr>
+          <tr><td class="tool">2022년 700명 해고와의 관계</td><td><span class="badge b-neutral">Uncertain</span></td><td>같은 숫자지만 다른 사건 — 의도적 연결인지 우연인지 불분명</td></tr>
+          <tr><td class="tool">2/3 채팅 처리</td><td><span class="badge b-warn">Self-Reported</span></td><td>볼륨 기준, 품질/해결률 기준 아님</td></tr>
+          <tr><td class="tool">4,000만 달러 수익 개선</td><td><span class="badge b-warn">Self-Reported</span></td><td>예상치, 실현 여부 독립 확인 안 됨</td></tr>
+          <tr><td class="tool">응답 시간 11분→2분</td><td><span class="badge b-warn">Self-Reported</span></td><td>내부 측정, 외부 검증 없음</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout key"><span class="ico">💬</span><div>
+        <p><strong>Pragmatic Engineer (Gergely Orosz) 분석</strong> <span class="badge b-ok">Independently-Audited</span>: "700명은 단일 시프트 기준이다. 24/7 운영을 위해서는 3배인 약 2,100개 L1 포지션이 소멸된다는 뜻이다."</p>
+        <p>Orosz는 또한 L1 고객지원 자동화 자체가 혁신적이지 않다고 지적했다 — 2008년 Citibank가 LLM 없이도 전화 지원의 95%를 자동화하고 7,000명 규모 콜센터를 폐쇄한 사례를 인용했다. Klarna의 진짜 성취는 "새로운 능력을 달성했다"가 아니라 "오래 해결 가능했던 문제를 새 기술로 해결했다"에 가깝다.</p>
+      </div></div>
+      <h4>2-2. 인력 변화 경로</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>시점</th><th>인원</th><th>경로</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">2022년 말</td><td>~5,527명</td><td>기준점 <span class="badge b-ok">Independently-Audited · Klarna IR</span></td></tr>
+          <tr><td class="tool">2024년 말</td><td>~3,422명</td><td>자연 감소 + 채용 동결 <span class="badge b-ok">Independently-Audited</span></td></tr>
+          <tr><td class="tool">2025년 5월 CEO 발표</td><td>~3,000명</td><td>"40% 감소" <span class="badge b-warn">Self-Reported · CNBC</span></td></tr>
+          <tr><td class="tool">Fortune 2025-10 보도</td><td>7,000→3,000</td><td>CEO 발언, 다른 기준점 사용 <span class="badge b-warn">Self-Reported</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><p>숫자 기준점이 인터뷰마다 다름: 5,527 기준 40% 감소면 ~3,300명; CEO가 언급하는 7,000명은 전성기 임시직 포함 추정치로 보임. 정확한 숫자는 불확실.</p></div></div>
+
+      <h3>3. 무엇이 틀렸나 — 실패 원인 분석</h3>
+      <h4>3-1. CEO의 공개 인정 (원문 인용)</h4>
+      <p><strong>2025년 5월 Bloomberg 인터뷰</strong> <span class="badge b-ok">Independently-Audited</span>:</p>
+      <blockquote>"As cost unfortunately seems to have been a too predominant evaluation factor when organizing this, what you end up having is lower quality."</blockquote>
+      <blockquote>"From a brand perspective, a company perspective, I just think it's so critical that you are clear to your customer that there will <strong>always</strong> be a human if you want."</blockquote>
+      <blockquote>"Really, investing in the quality of human support is the way of the future for us."</blockquote>
+      <p><strong>2025년 5월 CNBC</strong> <span class="badge b-ok">Independently-Audited</span>:</p>
+      <blockquote>"We probably over indexed a little bit on that and then in the last six months we have been trying to course correct."</blockquote>
+      <p>이 세 발언은 각각 (1) 비용 중심 KPI의 함정, (2) 인간 fallback의 필수성, (3) 과잉 투자 인정을 직접 언급한다.</p>
+      <h4>3-2. 품질 하락의 구체적 양상</h4>
+      <p><strong>초기 지표 (자체 보고)</strong>: 2024년 2월 런칭 직후 고객만족도 4.4/5 — 인간 상담원 4.2/5를 상회했다는 발표 <span class="badge b-warn">Self-Reported</span>.</p>
+      <p><strong>이후 하락</strong>:</p>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>실패 유형</th><th>상세</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">복잡 케이스 CSAT 저하</td><td>단순 L1 (배송 조회, 결제 일정)은 AI 충분; 다단계 분쟁·계정 문제에서 붕괴 <span class="badge b-ok">Independently-Audited · Poly.ai 분석</span></td></tr>
+          <tr><td class="tool">브랜드 톤 부재</td><td>"I apologize for the confusion", "feel free to let me know" 같은 GPT-generic 응답 → Klarna 브랜드 이질감 <span class="badge b-ok">Independently-Audited · Poly.ai</span></td></tr>
+          <tr><td class="tool">지연 경험</td><td>단순 FAQ에도 약 20초 응답 지연 → 사용자 이탈 <span class="badge b-ok">Independently-Audited · Poly.ai</span></td></tr>
+          <tr><td class="tool">행동 불가</td><td>답변은 하지만 환불 처리·정보 수정·결제 수행 불가 → 정보 제공만 하는 봇에 그침 <span class="badge b-ok">Independently-Audited · Poly.ai</span></td></tr>
+          <tr><td class="tool">감정·공감 부재</td><td>감정적으로 힘든 상황의 고객 상호작용에서 AI가 공감 제공 실패 <span class="badge b-ok">Independently-Audited · Solutions Review</span></td></tr>
+          <tr><td class="tool">컴플라이언스 위험</td><td>AI가 자율적으로 분쟁·계정 폐쇄 처리 시 규제 리스크 <span class="badge b-ok">Independently-Audited · Twig.so</span></td></tr>
+        </tbody>
+      </table></div>
+      <h4>3-3. 구조적 원인: 왜 이 함정에 빠졌나</h4>
+      <pre><code>비용 절감 압박 (IPO 전 수익성)
+        ↓
+"AI = 인력 대체" 프레임 채택
+        ↓
+볼륨 지표(처리 건수)를 성공 KPI로 설정
+        ↓
+품질 지표(CSAT·분쟁 해결률)는 후행 지표로 밀림
+        ↓
+단순 L1 케이스는 AI가 잘 처리 → 초기엔 지표 좋아 보임
+        ↓
+복잡 케이스 누적 → 고객 불만 증가 → 재문의율 상승
+        ↓
+CEO, 공개 번복</code></pre>
+      <div class="callout key"><span class="ico">🔑</span><div><p><strong>핵심 구조 문제</strong>: AI를 "비용 절감 도구"로 배치하면 평가 기준이 자연히 비용·볼륨으로 고정된다. 하지만 고객지원의 가치는 해결률·CSAT·재문의율·분쟁 처리 정확도다 — 이 지표들은 초기엔 안 보이다가 나중에 터진다.</p></div></div>
+      <h4>3-4. "볼륨 vs. 품질" 함정</h4>
+      <p>Klarna가 자체 보고한 지표 구조를 보면:</p>
+      <ul>
+        <li><strong>볼륨 (자랑)</strong>: 230만 건 처리, 응답시간 2분, 700명 분량</li>
+        <li><strong>품질 (측정 안 함)</strong>: 분쟁 해결 정확도, 감정 복잡 케이스 CSAT, 재문의율(반복 접촉), 에스컬레이션 비율</li>
+      </ul>
+      <p>볼륨 지표만으로 성공을 선언하면, 품질 저하는 사후에야 드러난다. 특히 고객지원은 "처리된 대화 수"가 아니라 "해결된 문제 수"로 성과를 측정해야 한다.</p>
+    </section>
+
+    <section id="f-antipatterns" class="reveal">
+      <div class="sec-head"><span class="sec-num">F·2</span><h2 class="sec-title">Klarna — 역전·안티패턴 8가지·대조점</h2></div>
+      <h3>4. 역전과 교훈 — 재고용, 그리고 AX 추진자가 배울 것</h3>
+      <h4>4-1. 재고용 역전 상세</h4>
+      <p><strong>2025년 5월</strong> 이후 Klarna는 인간 상담원 재고용을 시작했다. 방식이 기존과 다르다:</p>
+      <ul>
+        <li><strong>Uber 스타일 플렉시블 모델</strong>: 정규직 아닌 필요 시 로그인/로그아웃하는 원격 근무 구조 <span class="badge b-ok">Independently-Audited · Bloomberg</span></li>
+        <li><strong>타겟 채용군</strong>: 학생, 농촌 인구, 기존 Klarna 사용자 ("tons of Klarna users would enjoy working for us" — CEO Bloomberg 인터뷰)</li>
+        <li><strong>하이브리드 포지셔닝</strong>: "AI gives us speed. Talent gives us empathy. Together, we can deliver service that's fast when it should be, and empathetic and personal when it needs to be." — Klarna 대변인 Clare Nordstrom <span class="badge b-ok">Independently-Audited</span></li>
+      </ul>
+      <p>재고용 규모(FTE 수)는 공식 발표 없음 <span class="badge b-neutral">Uncertain</span>. 완전 복귀가 아닌 AI+인간 혼합 운영으로 방향 전환.</p>
+      <h4>4-2. IPO와의 관계</h4>
+      <p><strong>타임라인 연계</strong> <span class="badge b-ok">Independently-Audited · 다수 매체</span>:</p>
+      <ul>
+        <li>2025년 5월: Bloomberg 인터뷰에서 번복 인정</li>
+        <li>2025년 9월 10일: NYSE IPO (공모가 $40, 시총 ~$15B; 개장가 $52 기준 ~$19.65B; 첫날 +30%) — "196억 달러"는 개장가 기준 근사치이며 공모가 기준 시총($15B)과 구분 필요</li>
+        <li>2025년 10월: Fortune 인터뷰에서 "기술 CEO들이 AI 충격을 과소평가하고 있다" 발언</li>
+      </ul>
+      <p>해석 스펙트럼:</p>
+      <ol>
+        <li><strong>IPO를 위한 이미지 전환</strong>: 기관 투자자에게 "품질 중심 성장" 내러티브가 필요했을 수 있다</li>
+        <li><strong>진짜 교훈</strong>: 고객 불만이 실제로 드러나 사업적 판단으로 번복했을 수 있다</li>
+        <li><strong>양쪽 다</strong>: IPO 타이밍과 고객 품질 문제가 동시에 작용</li>
+      </ol>
+      <p>CX Network는 "IPO는 더 많은 이해관계자를 만들고, 고객 중심성이 다시 재무 성과만큼 중요해진다"고 분석했다 <span class="badge b-ok">Independently-Audited</span>.</p>
+
+      <h4>4-3. AX 추진자가 배울 안티패턴 목록</h4>
+      <p>아래는 Klarna 사례에서 직접 도출한 <strong>실행 수준의 안티패턴</strong>이다. 성공 사례의 "할 것" 목록과 반대 쌍으로 읽어야 한다.</p>
+
+      <div class="vrow bad"><div class="claim">❌ AP-1: 비용 절감을 1차 KPI로 설정</div>
+        <div class="detail">"AI 도입 비용 대비 FTE 절감 수"를 핵심 지표로 삼으면, 품질은 후행·후순위가 된다. <strong>Klarna 증거</strong>: CEO가 직접 "비용이 너무 지배적인 평가 기준이었다"고 인정. <strong>대신</strong>: 비용 절감은 부산물, 1차 KPI는 고객 해결률·CSAT·재문의율로 설계.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-2: 볼륨 지표로 품질을 대리 측정</div>
+        <div class="detail">"처리 건수 증가 = 성공"으로 보고서를 작성하면 품질 저하가 안 보인다. <strong>Klarna 증거</strong>: 230만 건 처리·응답시간 2분을 강조했지만 분쟁 해결 정확도·에스컬레이션 비율은 공개 안 함. <strong>대신</strong>: 처리 볼륨과 함께 완전 해결률(FCR, First Contact Resolution), 에스컬레이션 비율, 복잡 케이스 CSAT를 동시 추적.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-3: 인간 fallback 옵션을 제거하거나 숨김</div>
+        <div class="detail">고객이 "언제나 인간 상담원을 선택할 수 있다"는 신뢰를 잃으면 브랜드 손상이 누적된다. <strong>Klarna 증거</strong>: CEO 발언 — "고객에게 항상 인간이 옵션이 있다는 것을 명확히 하는 것이 브랜드에 결정적으로 중요하다." <strong>대신</strong>: 모든 AI 채널에서 언제든 인간 에스컬레이션 경로를 노출. 숨기는 것은 단기 비용 절감, 장기 브랜드 손상.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-4: L1 자동화 성공을 전체 대체 신호로 오해</div>
+        <div class="detail">단순 L1 케이스(배송 조회, FAQ) 자동화 성공 → "AI가 고객지원 전체를 대체할 수 있다"로 확대 해석. <strong>Klarna 증거</strong>: 초기 지표(4.4/5 CSAT)가 L1 단순 케이스 기준이었으나, 복잡 케이스·감정 케이스는 별도 측정 안 됨. <strong>대신</strong>: 자동화 범위를 케이스 유형별로 분류하고, 복잡도 티어(L1/L2/L3)별로 AI 적합성을 독립 검증.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-5: 자체 보고 수치를 외부에 독립 검증 없이 홍보</div>
+        <div class="detail">"700명 분량" 같은 임팩트 수치를 산출 방법론 공개 없이 홍보하면, 나중에 신뢰가 무너질 때 더 크게 역풍이 온다. <strong>Klarna 증거</strong>: 보도자료에 "700 FTE 분량" 산출 방법론 없음. Pragmatic Engineer 분석에서 24/7 기준으로 실제 2,100 포지션일 수 있다고 지적. <strong>대신</strong>: 임팩트 수치는 제3자 감사 또는 방법론 공개를 병행. 자체 주장과 독립 검증을 명확히 구분해서 커뮤니케이션.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-6: 감정·공감이 요구되는 채널을 AI 전담으로 전환</div>
+        <div class="detail">분쟁, 계정 문제, 금전 관련 불만은 고객이 감정적으로 취약한 상황이다. AI는 "맞는 답"을 줘도 "공감"을 주지 못한다. <strong>Klarna 증거</strong>: Solutions Review — "Klarna's AI layoffs exposed the missing piece: Empathy." <strong>대신</strong>: 티켓 감정 분류(sentiment tagging)로 고강도 감정 케이스를 자동 분류하여 인간 상담원으로 즉시 라우팅.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-7: 채용 동결을 AI 성공의 증거로 제시</div>
+        <div class="detail">채용 동결 + 자연 감소로 인력이 줄어드는 것은 AI 효율의 증거가 아니다. 인과관계와 상관관계의 혼동이다. <strong>Klarna 증거</strong>: CEO 스스로 인정 — "자연 감소가 연 15~20%이므로 채용만 멈춰도 규모가 줄어든다." <strong>대신</strong>: 인력 변화를 AI 효과로 귀인할 때는 AI 없이도 발생했을 변화(자연 감소, 사업 축소)를 분리.</div>
+      </div>
+      <div class="vrow bad"><div class="claim">❌ AP-8: 브랜드 아이덴티티가 없는 AI 응답 배포</div>
+        <div class="detail">Generic LLM 어조("저는 AI 어시스턴트입니다...", "불편을 드려서 죄송합니다")는 브랜드 이질감을 만든다. <strong>Klarna 증거</strong>: Poly.ai 분석 — "Responses sounded like generic GPT output rather than Klarna." <strong>대신</strong>: 브랜드 페르소나·톤 가이드라인을 AI 시스템 프롬프트에 명시. 런칭 전 브랜드 전문가 감수.</div>
+      </div>
+
+      <h4>4-4. AX 성공 사례와의 대조점</h4>
+      <div class="table-wrap"><table class="cmp">
+        <thead><tr><th>항목</th><th>Klarna (반면교사)</th><th>성공 사례 공통점</th></tr></thead>
+        <tbody>
+          <tr><td class="tool">AI 포지셔닝</td><td><span class="dot d-bad"></span>인간 대체(replacement)</td><td><span class="dot d-ok"></span>인간 증강(augmentation)</td></tr>
+          <tr><td class="tool">KPI 1순위</td><td><span class="dot d-bad"></span>비용 절감·FTE 감축</td><td><span class="dot d-ok"></span>고객가치·품질</td></tr>
+          <tr><td class="tool">측정 방식</td><td><span class="dot d-bad"></span>볼륨 지표 중심</td><td><span class="dot d-ok"></span>품질·해결률 중심</td></tr>
+          <tr><td class="tool">인간 역할</td><td><span class="dot d-bad"></span>제거 대상</td><td><span class="dot d-ok"></span>복잡 케이스 담당자</td></tr>
+          <tr><td class="tool">홍보 방식</td><td><span class="dot d-bad"></span>자체 수치 선제 공표</td><td><span class="dot d-ok"></span>제3자 검증 후 공유</td></tr>
+          <tr><td class="tool">실패 신호 포착</td><td><span class="dot d-bad"></span>사후, 여론 악화 후</td><td><span class="dot d-ok"></span>사전 가드레일·A/B 테스트</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>출처 (Sources)</h3>
+      <div class="src-group"><h4>Klarna — 11건</h4><div class="src-list">
+        <a href="https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/" target="_blank" rel="noopener">Klarna 공식 보도자료 2024-02-27 (Self-Reported, 700명 주장 원본)</a>
+        <a href="https://www.bloomberg.com/news/articles/2025-05-08/klarna-turns-from-ai-to-real-person-customer-service" target="_blank" rel="noopener">Bloomberg — Turns From AI to Real Person (2025-05-08, Independently-Audited)</a>
+        <a href="https://www.cnbc.com/2025/05/14/klarna-ceo-says-ai-helped-company-shrink-workforce-by-40percent.html" target="_blank" rel="noopener">CNBC — 40% workforce shrink (2025-05-14)</a>
+        <a href="https://www.fastcompany.com/91468582/klarna-tried-to-replace-its-workforce-with-ai" target="_blank" rel="noopener">Fast Company — tried to replace workforce with AI</a>
+        <a href="https://finance.yahoo.com/news/firing-700-humans-ai-klarna-173029838.html" target="_blank" rel="noopener">Yahoo Finance — Now Wants Them Back (Uber 모델)</a>
+        <a href="https://blog.pragmaticengineer.com/klarnas-ai-chatbot/" target="_blank" rel="noopener">Pragmatic Engineer — how revolutionary is it (2,100 포지션 재계산)</a>
+        <a href="https://poly.ai/blog/klarna-ai-customer-service-lessons" target="_blank" rel="noopener">Poly.ai — investing in more human agents (실패 양상)</a>
+        <a href="https://fortune.com/2025/10/10/klarna-ceo-sebastian-siemiatkowski-halved-workforce-says-tech-ceos-sugarcoating-ai-impact-on-jobs-mass-unemployment-warning/" target="_blank" rel="noopener">Fortune — "tech bros 과소평가" (2025-10-10, 7,000→3,000)</a>
+        <a href="https://www.cxnetwork.com/cx-experience/news/klarna-ipo-ai-cx" target="_blank" rel="noopener">CX Network — Klarna's IPO AI CX</a>
+        <a href="https://thenextweb.com/news/klarna-automation-fears-claim-ai-assistant-work-of-700-people" target="_blank" rel="noopener">The Next Web — claim AI work of 700 people</a>
+        <a href="https://mlq.ai/news/klarna-ceo-admits-aggressive-ai-job-cuts-went-too-far-starts-hiring-again-after-us-ipo/" target="_blank" rel="noopener">mlq.ai — admits AI job cuts went too far</a>
+      </div></div>
+      <div class="callout key"><span class="ico">🔖</span><div><p>이 노트는 파트 A 통합 가이드의 "안티패턴" 섹션 입력 자료다. 새로운 CEO 발언·실적 자료 등장 시 갱신 필요.</p></div></div>
+    </section>
+
+    <footer>
+      <p><strong>AX 실천 Playbook 시리즈</strong> · 6개 노트 통합 (A 허브 + B DBS + C Moderna + D John Deere + E Duolingo + F Klarna) · 60+ 출처 · 회색지대 라벨 검증</p>
+      <p>작성일 2026-06-02 · valid_until 2027-Q2 · 측정치·동향은 시점 의존적이므로 6~12개월 후 재검토 권장. 모든 수치는 부착된 신뢰도 라벨(Independently-Audited / Self-Reported / Sponsored-Study / Uncertain)과 함께 읽을 것.</p>
+    </footer>
+  </main>
+</div>
+<script>
+/* md-to-html theme behavior — inline this whole file into <script>. No external deps. */
+(function () {
+  // 1) theme toggle (respects system preference + persists)
+  var root = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches;
+  apply(saved || (sysDark ? 'dark' : 'light'));
+  function apply(t) { root.setAttribute('data-theme', t); if (btn) btn.textContent = (t === 'dark' ? '☀️' : '🌙'); }
+  if (btn) btn.addEventListener('click', function () {
+    var t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(t); try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+
+  // 2) scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (e) { e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
+  // 3) TOC scrollspy
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  if (links.length && 'IntersectionObserver' in window) {
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); l.removeAttribute('aria-current'); });
+          var a = map[en.target.id];
+          if (a) { a.classList.add('active'); a.setAttribute('aria-current', 'true'); }
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    document.querySelectorAll('main section[id]').forEach(function (s) { spy.observe(s); });
+  }
+})();
+</script>
+</body></html>

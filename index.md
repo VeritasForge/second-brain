@@ -233,10 +233,13 @@
 - [[ai-era-confluence-jira-alternatives]] — AI 시대 Confluence/JIRA 대체 도구 조사·검증 종합 (대체재 지형, Plane/Huly/Forgejo/Docmost/Backlog.md 비교, 라이선스 리스크, Forgejo 도입+MCP 기여 정정 추천, rl-verify 2회)
 - [[ai-native-engineer-role]] — AI Native Engineer 직군 완전 해부 (정의·6대 역량·Agent Wrangler 업무·기존 SWE/ML/AI Engineer 비교·한국 시장 무신사·그루우·연봉 프리미엄 20-30%, 11 출처 교차 검증)
 - [[ai-native-engineer-talk-outline]] — AI Native Engineer 발표 골격 (개발자 청중 20-30분 교육, 8슬롯 메시지+근거+화면+시간, 자가진단 10항목, 벤더/비-벤더 출처 규칙)
-- **AX(AI Transformation) 시리즈 3-노트** (`wiki/research/ax/`)
-  - [[01-ax-concept-vs-dx]] — AX 개념과 DX와의 관계 (양론 병기 + 회색지대 부록표 + 산업·정책 배경, 16 출처)
-  - [[02-ax-success-cases]] — JPMorgan/Maersk/Siemens/Microsoft 4사례 카테고리 (b)/(b)/(c)/(a) 분리, JPMorgan deep dive, induced 패턴 5건
-  - [[03-ax-process-framework]] — 6단계 framework + 백엔드 엔지니어 횡단 부록(DevOps→LLMOps→AI Platform Engineer) + RAND/Acemoglu/Evans/Marcus Anti-Pattern
+- **AX 실천 Playbook 시리즈** (`wiki/research/ax/`)
+  - [[00-ax-practice-guide]] — AX 실천 통합 가이드(허브): 5개 기업 cross-case 7대 공통패턴(데이터기반 선행/CEO 정량목표/증강>대체/플랫폼사고/스킬링병행/거버넌스선행/측정절제) + 4단계 로드맵(진단→설계→실행→측정) + 백엔드 엔지니어의 자리 + 우리 회사 적용 체크리스트
+  - [[dbs-bank]] — DBS Bank(금융·장기체계): 5년 체계로 SGD 1B (PURE 윤리·Data Chapter·ADA/ALAN, Forrester 독립검증, 10 출처)
+  - [[moderna]] — Moderna(바이오·AI-first 문화): HR+IT 통합, 750→3000 GPT 플랫폼, 역할별 교육, 고위험 Human-in-the-loop (12 출처)
+  - [[john-deere]] — John Deere(전통제조·BM전환): 트랙터 제조사→데이터·자율주행 플랫폼, See&Spray 성과 과금, Blue River 인수 (12 출처)
+  - [[duolingo]] — Duolingo(AI-first 앱): "AI-first" 선언→$1B, 콘텐츠 레버리지, Duolingo Max BM, SEC 공시 (15 출처)
+  - [[klarna-lessons]] — ⚠️ 반면교사: "AI로 700명 대체"→재고용 역전, 안티패턴 8가지 (11 출처)
 - [[4th-5th-industrial-revolution-deep-research]] — 4/5차 산업혁명 Deep Research
 - [[kick-cafe-research-detail]] — KICK 카페 리서치 상세 보고서
 - [[kick-market-factcheck-report]] — KICK 시장 팩트체크 리포트
