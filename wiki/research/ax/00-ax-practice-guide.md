@@ -52,17 +52,17 @@ valid_until: 2027-Q2
 |------|--------|----------|------------------|-------------|
 | **DBS Bank** | 디지털 뱅킹 경쟁 위기(2014~) | 데이터 플랫폼 선행 + 5년 체계 + 윤리 거버넌스 | AI 경제가치 SGD 1B (2025, 2년 조기) `[Independently-Audited · 감사 연차보고서]` | ADA(5.3PB) → ALAN(재사용) → 배포 12~15개월→2~3개월 |
 | **Moderna** | 코로나 이후 효율화 압박 | AI-first 문화 + HR·IT 통합 + 플랫폼 배포 | 2개월 750 GPT → 2025년 3,000+ GPT `[Self-Reported · 채택 지표(성과 아님)]` | "모두가 GPT를 만드는 플랫폼" + 역할별 교육 + 챔피언 네트워크 |
-| **John Deere** | 트랙터 하드웨어 마진 한계 | 핵심 AI 인수 + 데이터 플랫폼 자체 구축 + 성과 과금 | 2025 See&Spray 500만 에이커·3,100만 갤런 절감 `[Self-Reported]`, Iowa State 76% 절감 `[Sponsored-Study · Deere 후원]` | 제품 판매 → 에이커당 $1/$5 "성과 구독" BM 전환 |
-| **Duolingo** | 콘텐츠 생산 12년 병목 | AI-first 선언 + 콘텐츠 레버리지 + 프리미엄 BM | Q3 2025 매출 $271.7M +41% YoY `[Independently-Audited · SEC]` / 1년에 148개 코스 `[Self-Reported]` | "AI로 불가능했던 규모 생산" (정규직 해고 0, 단 계약직 일부 감축) + Duolingo Max |
-| **Klarna** ⚠️ | 비용 절감·IPO 준비 | AI로 인력 대체 (700 FTE 주장) | 240만 건 처리·응답 2분 `[Self-Reported]` → **고객 만족 하락 → 재고용 역전** (IPO 2025-09 후에도 품질 회귀) | 비용 1차 KPI의 함정 — 반면교사 |
+| **John Deere** | 트랙터 하드웨어 마진 한계 | 핵심 AI 인수 + 데이터 플랫폼 자체 구축 + 성과 과금 | 2025 See&Spray 500만 에이커·3,100만 갤런 절감 ``[Self-Reported]``, Iowa State 76% 절감 `[Sponsored-Study · Deere 후원]` | 제품 판매 → 에이커당 $1/$5 "성과 구독" BM 전환 |
+| **Duolingo** | 콘텐츠 생산 12년 병목 | AI-first 선언 + 콘텐츠 레버리지 + 프리미엄 BM | Q3 2025 매출 $271.7M +41% YoY `[Independently-Audited · SEC]` / 1년에 148개 코스 ``[Self-Reported]`` | "AI로 불가능했던 규모 생산" (정규직 해고 0, 단 계약직 일부 감축) + Duolingo Max |
+| **Klarna** ⚠️ | 비용 절감·IPO 준비 | AI로 인력 대체 (700 FTE 주장) | 240만 건 처리·응답 2분 ``[Self-Reported]`` → **고객 만족 하락 → 재고용 역전** (IPO 2025-09 후에도 품질 회귀) | 비용 1차 KPI의 함정 — 반면교사 |
 
 > 💡 **읽는 법**: 신뢰도는 라벨로 가른다. 
 >
-> - **`[Independently-Audited]`** — 제3 회계감사·공식 보고서(DBS 감사 연차보고서, Duolingo SEC 재무). 가장 높은 신뢰도이지만 **재무 지표일 뿐 "AI 기여 인과"는 검증 대상이 아님**.
-> - **`[Third-Party-Research]`** — 제3 기관 발표 연구(Harvard Business School, Forrester 케이스). 기관은 독립적이나 방법론(기업 협력, 자료 제공)에서 기업 의존성 있음.
-> - **`[Sponsored-Research]`** — 기업 후원 제3 기관 연구(John Deere + Iowa State 76% 절감 연구). 기관 평판은 있으나 후원 의존성 명시 필수.
-> - **`[Self-Reported]`** — 기업 공식 발표·자체 데이터(Moderna GPT 채택 수, Klarna 처리 건수). 최하 신뢰도이나 의도·진정성 신호.
-> - **`[Uncertain]`** — 신뢰도 판정 불명확(기업 주장 vs 독립 검증 경계 모호).
+> - **``[Independently-Audited]``** — 제3 회계감사·공식 보고서(DBS 감사 연차보고서, Duolingo SEC 재무). 가장 높은 신뢰도이지만 **재무 지표일 뿐 "AI 기여 인과"는 검증 대상이 아님**.
+> - **``[Third-Party-Research]``** — 제3 기관 발표 연구(Harvard Business School, Forrester 케이스). 기관은 독립적이나 방법론(기업 협력, 자료 제공)에서 기업 의존성 있음.
+> - **``[Sponsored-Research]``** — 기업 후원 제3 기관 연구(John Deere + Iowa State 76% 절감 연구). 기관 평판은 있으나 후원 의존성 명시 필수.
+> - **``[Self-Reported]``** — 기업 공식 발표·자체 데이터(Moderna GPT 채택 수, Klarna 처리 건수). 최하 신뢰도이나 의도·진정성 신호.
+> - **``[Uncertain]``** — 신뢰도 판정 불명확(기업 주장 vs 독립 검증 경계 모호).
 >
 > 모든 수치는 **"그렇게 주장했다 / 그 범위까지 검증됐다"**로 정확히 읽고, **기업 행동·조직 패턴**에서 배운다.
 >
@@ -147,9 +147,9 @@ valid_until: 2027-Q2
 
 | 기업 | 측정 체계 | 절제 |
 |------|----------|------|
-| DBS | 3범주(매출·비용·리스크) + 컨트롤 그룹 A/B + **연간보고서 공시** `[Independently-Audited]` | — |
-| Duolingo | DAU·구독·매출 SEC 공시 `[Independently-Audited]` | "AI가 성장을 이끌었다"는 인과는 `[Self-Reported]` |
-| Moderna | 주간 활성 사용자·GPT 수·부서별 채택률 | 채택률 ≠ 사업 성과, 인과 미입증 `[Uncertain]` 명시 |
+| DBS | 3범주(매출·비용·리스크) + 컨트롤 그룹 A/B + **연간보고서 공시** ``[Independently-Audited]`` | — |
+| Duolingo | DAU·구독·매출 SEC 공시 ``[Independently-Audited]`` | "AI가 성장을 이끌었다"는 인과는 ``[Self-Reported]`` |
+| Moderna | 주간 활성 사용자·GPT 수·부서별 채택률 | 채택률 ≠ 사업 성과, 인과 미입증 ``[Uncertain]`` 명시 |
 
 > **실천**: AI ROI를 매출·비용·리스크 3범주로 표준화하고 컨트롤 그룹과 비교하라. **단, "AI 채택률"과 "사업 성과"를 인과로 연결하지 마라** — 가장 흔한 과장이다. 채택은 입력 지표, 성과는 별도 측정.
 
@@ -282,19 +282,19 @@ valid_until: 2027-Q2
 
 | # | 케이스 | 분류 |
 |---|--------|------|
-| 1 | 기업 공식 발표·IR·보도자료 | `[Self-Reported]` |
-| 2 | 컨설팅·벤더가 기업과 공저한 case study | `[Self-Reported]` (수익 이해관계자 포함 시) |
-| 3 | 분석가가 vendor 비공개 데이터를 인용한 리포트 | `[Self-Reported]` |
-| 4 | 매체가 IR 자료를 paraphrase한 기사 | `[Self-Reported]` |
-| 5 | 기업 자체 측정(채택률·절감액 등) | `[Self-Reported]` |
-| 6 | 학계(**비-vendor 데이터**)·완전 독립 연구 | `[Independently-Audited]` |
-| 7 | 규제자·감사받은 공시 (SEC 8-K, 감사 연차보고서) — **단 재무 지표 한정, "AI 기여 인과"는 비검증** | `[Independently-Audited]` |
-| 8 | 저널리즘 자체취재 (소스 다수, CEO 직접 발언 교차) | `[Independently-Audited]` |
+| 1 | 기업 공식 발표·IR·보도자료 | ``[Self-Reported]`` |
+| 2 | 컨설팅·벤더가 기업과 공저한 case study | ``[Self-Reported]`` (수익 이해관계자 포함 시) |
+| 3 | 분석가가 vendor 비공개 데이터를 인용한 리포트 | ``[Self-Reported]`` |
+| 4 | 매체가 IR 자료를 paraphrase한 기사 | ``[Self-Reported]`` |
+| 5 | 기업 자체 측정(채택률·절감액 등) | ``[Self-Reported]`` |
+| 6 | 학계(**비-vendor 데이터**)·완전 독립 연구 | ``[Independently-Audited]`` |
+| 7 | 규제자·감사받은 공시 (SEC 8-K, 감사 연차보고서) — **단 재무 지표 한정, "AI 기여 인과"는 비검증** | ``[Independently-Audited]`` |
+| 8 | 저널리즘 자체취재 (소스 다수, CEO 직접 발언 교차) | ``[Independently-Audited]`` |
 | — | 기업이 **후원**한 학술·제3자 연구 (Iowa State John Deere 76%) | `[Sponsored-Study]` (독립성 부분 제한) |
-| — | 애널리스트가 기업 방법론을 *기술*(수치 독립 재계산 아님) (Forrester DBS) | 방법론 출처만 독립, 수치는 `[Self-Reported]` 수준 |
-| — | 단일·빈약 출처, 검증 어려운 주장 ("700명 대체") | `[Uncertain]` |
+| — | 애널리스트가 기업 방법론을 *기술*(수치 독립 재계산 아님) (Forrester DBS) | 방법론 출처만 독립, 수치는 ``[Self-Reported]`` 수준 |
+| — | 단일·빈약 출처, 검증 어려운 주장 ("700명 대체") | ``[Uncertain]`` |
 
-> 💡 본 시리즈의 핵심 원칙: **수치는 라벨과 함께 읽는다.** `[Self-Reported]`가 거짓이라는 뜻은 아니지만, 독립 검증이 없으므로 "그렇게 주장했다"로 받아들이고 **실천 패턴**에서 배운다.
+> 💡 본 시리즈의 핵심 원칙: **수치는 라벨과 함께 읽는다.** ``[Self-Reported]``가 거짓이라는 뜻은 아니지만, 독립 검증이 없으므로 "그렇게 주장했다"로 받아들이고 **실천 패턴**에서 배운다.
 
 ---
 
@@ -302,7 +302,7 @@ valid_until: 2027-Q2
 
 각 기업의 1차 출처는 해당 Playbook 노트 하단을 참조. 본 가이드는 5개 Playbook의 cross-case 합성이다.
 
-| Playbook | 출처 수 | 대표 `[Independently-Audited]` |
+| Playbook | 출처 수 | 대표 ``[Independently-Audited]`` |
 |----------|--------|-------------------------------|
 | [[dbs-bank]] | 10건 | 감사 연차보고서 공시 (Forrester는 방법론 기술, 수치 독립 재계산 아님) |
 | [[moderna]] | 12건 | HBS 케이스, CIO.com 독립 분석 |
@@ -310,7 +310,7 @@ valid_until: 2027-Q2
 | [[duolingo]] | 15건 | SEC 8-K 공시 |
 | [[klarna-lessons]] | 11건 | Bloomberg·CNBC·Pragmatic Engineer 자체취재 |
 
-**합계**: 60건 (5개 Playbook), 그 중 `[Independently-Audited]` 다수 포함.
+**합계**: 60건 (5개 Playbook), 그 중 ``[Independently-Audited]`` 다수 포함.
 
 ---
 
