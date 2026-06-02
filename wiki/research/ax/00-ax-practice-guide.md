@@ -56,7 +56,15 @@ valid_until: 2027-Q2
 | **Duolingo** | 콘텐츠 생산 12년 병목 | AI-first 선언 + 콘텐츠 레버리지 + 프리미엄 BM | Q3 2025 매출 $271.7M +41% YoY `[Independently-Audited · SEC]` / 1년에 148개 코스 `[Self-Reported]` | "AI로 불가능했던 규모 생산" (정규직 해고 0, 단 계약직 일부 감축) + Duolingo Max |
 | **Klarna** ⚠️ | 비용 절감·IPO 준비 | AI로 인력 대체 (700 FTE 주장) | 240만 건 처리·응답 2분 `[Self-Reported]` → **고객 만족 하락 → 재고용 역전** (IPO 2025-09 후에도 품질 회귀) | 비용 1차 KPI의 함정 — 반면교사 |
 
-> 💡 **읽는 법**: 신뢰도는 라벨로 가른다. `[Independently-Audited]`(DBS 감사 연차보고서·Duolingo SEC 재무)가 가장 높지만, 그조차 **재무 지표일 뿐 "AI 기여 인과"는 검증 대상이 아니다.** John Deere의 Iowa State 76%는 Deere 후원 연구(`[Sponsored-Study]`), Forrester의 DBS 케이스는 방법론 기술이지 수치 독립 재계산이 아니다. Moderna·Klarna 핵심 수치는 자기 보고(`[Self-Reported]`). 모든 수치는 "그렇게 주장했다 / 그 범위까지 검증됐다"로 정확히 읽고, **실천 패턴**에서 배운다.
+> 💡 **읽는 법**: 신뢰도는 라벨로 가른다. 
+>
+> - **`[Independently-Audited]`** — 제3 회계감사·공식 보고서(DBS 감사 연차보고서, Duolingo SEC 재무). 가장 높은 신뢰도이지만 **재무 지표일 뿐 "AI 기여 인과"는 검증 대상이 아님**.
+> - **`[Third-Party-Research]`** — 제3 기관 발표 연구(Harvard Business School, Forrester 케이스). 기관은 독립적이나 방법론(기업 협력, 자료 제공)에서 기업 의존성 있음.
+> - **`[Sponsored-Research]`** — 기업 후원 제3 기관 연구(John Deere + Iowa State 76% 절감 연구). 기관 평판은 있으나 후원 의존성 명시 필수.
+> - **`[Self-Reported]`** — 기업 공식 발표·자체 데이터(Moderna GPT 채택 수, Klarna 처리 건수). 최하 신뢰도이나 의도·진정성 신호.
+> - **`[Uncertain]`** — 신뢰도 판정 불명확(기업 주장 vs 독립 검증 경계 모호).
+>
+> 모든 수치는 **"그렇게 주장했다 / 그 범위까지 검증됐다"**로 정확히 읽고, **기업 행동·조직 패턴**에서 배운다.
 >
 > ⚠️ **표본 한계(생존자 편향)**: 5개 기업은 모두 *AX 성공 서사를 적극 공개·홍보한 영미권 대기업*이다. "조용히 실패·중단한 다수"와 한국·비영어권 기업은 구조적으로 관측되지 않는다. 패턴을 "성공 보장 공식"이 아니라 "관측된 성공 사례의 공통 조건"으로 읽어야 한다.
 

@@ -56,7 +56,7 @@ DBS Bank는 2014년 디지털 전환을 시작으로, 2019년 PURE 윤리 프레
 | **2023** | 외부 검증 시작 | Global Evident AI Index: AI 전략 리더십 세계 1위, 종합 10위 (아시아 은행 유일 Top 10) `[Independently-Audited]` |
 | **FY2023 말** | 누적 가치 공개 | 경제가치 SGD 3억 7,000만 달성 `[Self-Reported]` |
 | **2024** | 스케일 가속 | 1,500개+ AI 모델, 370개+ 유스케이스 배포; SGD 7억 5,000만~7억 8,000만 달성 `[Self-Reported]` |
-| **2024** | 학술 인정 | Harvard Business School: 아시아 은행 최초 AI 케이스스터디 "DBS' AI Journey" 발간 (저자: Feng Zhu 교수) `[Independently-Audited]` |
+| **2024** | 학술 인정 | Harvard Business School: 아시아 은행 최초 AI 케이스스터디 "DBS' AI Journey" 발간 (저자: Feng Zhu 교수) `[Third-Party-Research]` |
 | **2024~25** | CEO 승계 | 탄 수 샨(Tan Su Shan) 2024-08 Deputy CEO → 2025-03 CEO 취임 (굽타 2025-03-28 퇴임), AI 전략 연속성 유지 |
 | **2025** | 목표 조기 달성 | SGD 1B 달성 (2년 조기 달성), Global Finance: 세계 최고 AI 은행 선정 `[Independently-Audited]` |
 
@@ -234,7 +234,7 @@ DBS는 AI 경제가치를 **3가지 범주의 합산**으로 산출한다 `[Self
 
 - Tom Mouhsian(Forrester 애널리스트)이 DBS AI 여정 케이스스터디 보고서 발간 `[Independently-Audited]`
 - 보고서 제목: "DBS Bank's Billion-Dollar AI Dream — Realized" (2026년 1월 발간)
-- 검증 내용: Forrester는 DBS의 AI 역량 구축 방식, 고객·사업·임직원·주주에 대한 혜택을 분석; DBS의 **방법론** (컨트롤 그룹 비교, 3범주 가치 산출)을 케이스로 기술했으나, Forrester 자체의 독립 재계산은 공개 문서에서 확인되지 않음 `[Uncertain — 방법론 설명 vs 독립 재산 여부 불명확]`.
+- 검증 내용: Forrester는 DBS의 AI 역량 구축 방식, 고객·사업·임직원·주주에 대한 혜택을 분석; DBS의 **방법론** (컨트롤 그룹 비교, 3범주 가치 산출)을 케이스로 기술했으나, Forrester 자체의 독립 재계산은 공개 문서에서 확인되지 않음 `[Third-Party-Research]` (방법론 기술, 수치 독립 재산 불명확).
 
 ### 6-3. 정량 성과 (주요 수치)
 
@@ -261,7 +261,7 @@ DBS는 AI 경제가치를 **3가지 범주의 합산**으로 산출한다 `[Self
 | 월간 발송 넛지 수 (싱가포르) | 3,000만 건 | 3.5M 고객 대상 | `[Self-Reported]` |
 | 분석 고객 데이터 포인트 | 1만 5,000개/고객 | 100개 이상 AI/ML 알고리즘 활용 | `[Self-Reported]` |
 
-> **측정 방법**: A/B 테스트(AI 처리군 vs. 컨트롤군) + 고객 행동 종단 추적. 다만 실험 설계 세부(무작위 배정 방법, 추적 기간, 혼재 변수 통제)는 공개 문서에서 확인 불가 `[Uncertain]`.
+> **측정 방법**: A/B 테스트(AI 처리군 vs. 컨트롤군) + 고객 행동 종단 추적. 다만 실험 설계 세부(무작위 배정 방법, 추적 기간, 혼재 변수 통제)는 공개 문서에서 확인 불가 `[Uncertain]` (기업 발표 수치, 실험 방법론 세부 불명확).
 
 ### 6-5. 외부 인정 (독립 검증 성격)
 

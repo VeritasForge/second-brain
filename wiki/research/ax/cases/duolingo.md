@@ -15,11 +15,11 @@ valid_until: 2027-Q2
 
 ## 0. Executive Summary
 
-Duolingo는 2025년 4월 CEO Luis von Ahn의 "AI-first" 선언 이후, 약 1년 만에 일 활성 사용자(DAU) 50M 돌파·유료 구독자 11.5M·분기 매출 $271.7M(+41% YoY)을 달성했다. `[Independently-Audited: SEC 8-K Q3 2025]`
+Duolingo는 2025년 4월 CEO Luis von Ahn의 "AI-first" 선언 이후, 약 1년 만에 일 활성 사용자(DAU) 50M 돌파·유료 구독자 11.5M·분기 매출 $271.7M(+41% YoY)을 달성했다. `[Independently-Audited]` (SEC 8-K Q3 2025)
 
-핵심 레버리지는 두 가지다. 첫째, AI로 콘텐츠 생산 속도를 12년치 분량(100개 코스)을 1년 만에 복제(148개 코스 추가)하는 수준으로 높였다. `[Self-Reported: CEO 발언, TechCrunch 2025-04-30]` 둘째, GPT-4 기반 프리미엄 구독(Duolingo Max)을 통해 무료 사용자를 유료로 전환하는 BM (비즈니스 모델) 경로를 새로 만들었다. AI는 인력 대체가 아니라 **콘텐츠 레버리지**와 **수익 전환** 두 축을 동시에 강화하는 방식으로 작동했다.
+핵심 레버리지는 두 가지다. 첫째, AI로 콘텐츠 생산 속도를 12년치 분량(100개 코스)을 1년 만에 복제(148개 코스 추가)하는 수준으로 높였다. `[Self-Reported]` (CEO 발언, TechCrunch 2025-04-30) 둘째, GPT-4 기반 프리미엄 구독(Duolingo Max)을 통해 무료 사용자를 유료로 전환하는 BM (비즈니스 모델) 경로를 새로 만들었다. AI는 인력 대체가 아니라 **콘텐츠 레버리지**와 **수익 전환** 두 축을 동시에 강화하는 방식으로 작동했다.
 
-다만 "AI가 성장을 이끌었다"는 인과는 회사 측 자체 주장 수준이며, 독립적 검증이 없다. `[Uncertain]` 재무 수치 자체는 SEC 공시로 신뢰할 수 있지만, 성장 원인이 AI인지 게이미피케이션 개선·마케팅·시장 수요인지 분리 측정되지 않았다.
+다만 "AI가 성장을 이끌었다"는 인과는 회사 측 자체 주장 수준이며, 독립적 검증이 없다. `[Uncertain]` (재무 수치는 SEC 공시로 신뢰, 성장 원인 분리 측정 불명확). 성장 원인이 AI인지 게이미피케이션 개선·마케팅·시장 수요인지 인과 분리 불가능하다.
 
 ---
 
@@ -45,18 +45,18 @@ von Ahn은 내부 메모에서 2013년 "모바일 퍼스트" 전환을 선례로
 |------|--------|--------|
 | 2013 | Birdbrain 간격 반복(spaced repetition) AI 최초 도입 | `[Self-Reported]` |
 | 2020 | Birdbrain v2 — 강화학습(RL) 기반 개인화 고도화 | `[Self-Reported]` |
-| 2023-Q4 | 계약직 번역가·작가 약 10% 감축, AI 콘텐츠 생성 전환 시작 | `[Independently-Audited: TechCrunch 2024-01-09 자체취재]` |
-| 2024-01 | CNN, WashPost, TechCrunch 일제 보도 — "AI로 계약직 대체" 논란 점화 | `[Independently-Audited: 다수 언론 자체취재]` |
-| 2024-03 | Duolingo Max 공식 출시(GPT-4 기반 Explain My Answer + Roleplay) | `[Self-Reported: Duolingo IR]` |
-| 2024-09 | Duocon 2024 — Video Call with Lily 발표 (AI 대화 연습) | `[Self-Reported: Duolingo IR 보도자료]` |
-| 2024-10 | 두 번째 계약직 감축 — 작가 추가 해고 | `[Independently-Audited: TechCrunch 보도]` |
-| 2025-01 | Video Call, Android 확대 출시 | `[Self-Reported: Duolingo IR]` |
-| 2025-04 | CEO "AI-first" 전사 메모 배포 → 대중 논란 → 해명 메모 발표 | `[Self-Reported + 언론 자체취재]` |
-| 2025-04~05 | 148개 AI 생성 코스 공개 발표 (12년치 100개 코스를 1년 만에 복제) | `[Self-Reported: CEO 발언]` |
-| 2025-Q1 | 유료 구독자 10.3M, 매출 $230.7M (+38% YoY) | `[Independently-Audited: SEC 8-K]` |
-| 2025-Q2 | 유료 구독자 10.9M (+37% YoY), 매출 $252.3M (+41% YoY) | `[Independently-Audited: SEC 8-K]` |
-| 2025-Q3 | DAU 50.5M (+36%), 유료 구독자 11.5M (+34%), 매출 $271.7M (+41%) | `[Independently-Audited: SEC 8-K]` |
-| 2026-04 | CEO, 성과 평가에서 "AI 활용 여부" 항목 철회 발표 | `[Self-Reported: 팟캐스트 발언, Entrepreneur 2026]` |
+| 2023-Q4 | 계약직 번역가·작가 약 10% 감축, AI 콘텐츠 생성 전환 시작 | `[Third-Party-Research]` (TechCrunch 2024-01-09) |
+| 2024-01 | CNN, WashPost, TechCrunch 일제 보도 — "AI로 계약직 대체" 논란 점화 | `[Third-Party-Research]` (다수 언론 자체취재) |
+| 2024-03 | Duolingo Max 공식 출시(GPT-4 기반 Explain My Answer + Roleplay) | `[Self-Reported]` (Duolingo IR) |
+| 2024-09 | Duocon 2024 — Video Call with Lily 발표 (AI 대화 연습) | `[Self-Reported]` (Duolingo IR) |
+| 2024-10 | 두 번째 계약직 감축 — 작가 추가 해고 | `[Third-Party-Research]` (TechCrunch) |
+| 2025-01 | Video Call, Android 확대 출시 | `[Self-Reported]` (Duolingo IR) |
+| 2025-04 | CEO "AI-first" 전사 메모 배포 → 대중 논란 → 해명 메모 발표 | `[Self-Reported]` (메모) / `[Third-Party-Research]` (언론 보도) |
+| 2025-04~05 | 148개 AI 생성 코스 공개 발표 (12년치 100개 코스를 1년 만에 복제) | `[Self-Reported]` (CEO 발언) |
+| 2025-Q1 | 유료 구독자 10.3M, 매출 $230.7M (+38% YoY) | `[Independently-Audited]` (SEC 8-K) |
+| 2025-Q2 | 유료 구독자 10.9M (+37% YoY), 매출 $252.3M (+41% YoY) | `[Independently-Audited]` (SEC 8-K) |
+| 2025-Q3 | DAU 50.5M (+36%), 유료 구독자 11.5M (+34%), 매출 $271.7M (+41%) | `[Independently-Audited]` (SEC 8-K) |
+| 2026-04 | CEO, 성과 평가에서 "AI 활용 여부" 항목 철회 발표 | `[Self-Reported]` (팟캐스트) |
 
 ---
 
@@ -64,9 +64,9 @@ von Ahn은 내부 메모에서 2013년 "모바일 퍼스트" 전환을 선례로
 
 ### 3.1 계약직 구조 변화
 
-Duolingo는 2023년 말~2024년 사이 번역가·작가 계약직을 AI로 교체했다. 각 팀에서 계약직 대부분이 해고되고, AI 생성 콘텐츠를 검토하는 "콘텐츠 큐레이터(content curator)" 1~2명만 남겼다. `[Independently-Audited: TechCrunch, Washington Post, CNN 자체취재]`
+Duolingo는 2023년 말~2024년 사이 번역가·작가 계약직을 AI로 교체했다. 각 팀에서 계약직 대부분이 해고되고, AI 생성 콘텐츠를 검토하는 "콘텐츠 큐레이터(content curator)" 1~2명만 남겼다. `[Third-Party-Research]` (TechCrunch, Washington Post, CNN 자체취재)
 
-**양면 기술**: 회사는 정규직 해고가 없었다고 주장했다. 그러나 계약직은 법적으로 고용 보호가 약하며, 해고된 계약직 당사자들은 실질적인 직업 상실 경험을 언론에 증언했다. `[Uncertain: 피해 규모 종합 통계 없음]` 브라이언 머천트(TechCrunch) 등 일부 기자들은 이를 "AI 일자리 위기의 상징 사례"로 규정했다.
+**양면 기술**: 회사는 정규직 해고가 없었다고 주장했다. 그러나 계약직은 법적으로 고용 보호가 약하며, 해고된 계약직 당사자들은 실질적인 직업 상실 경험을 언론에 증언했다. `[Uncertain]` (피해 규모 종합 통계 없음). 브라이언 머천트(TechCrunch) 등 일부 기자들은 이를 "AI 일자리 위기의 상징 사례"로 규정했다. `[Third-Party-Research]` (다양한 관점의 언론 평가)
 
 ### 3.2 채용 기준 변화 (원래 계획 → 철회 부분)
 
