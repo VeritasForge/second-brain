@@ -258,6 +258,7 @@
 
 ### security
 - [[00-aws-iam-study-guide]] — AWS IAM 학습 가이드 (시리즈 허브 페이지)
+- [[idor-concept-explainer]] — IDOR (Insecure Direct Object Reference) Concept Deep Dive (인가 검증 누락, 공격 벡터 6종, 수평/수직 권한 상승, 예방 기법, CVE 사례)
 - [[01-aws-iam-user-concept-explainer]] — AWS IAM User Deep Dive
 - [[02-aws-iam-group-concept-explainer]] — AWS IAM Group Deep Dive
 - [[03-aws-iam-policy-concept-explainer]] — AWS IAM Policy Deep Dive

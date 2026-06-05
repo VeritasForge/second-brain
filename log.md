@@ -2,6 +2,15 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-06-05] update | IDOR 문서 RLS 방어 기법 추가
+- updated: [[idor-concept-explainer]] — PostgreSQL RLS(Row-Level Security)를 IDOR 예방 기법으로 추가: 7-5 신규 섹션(동작 원리·SQL 예시·방어 범위 표), 요약 매트릭스 RLS 행 추가, 면접 Q&A 1개 추가("RLS로 IDOR 완전 방지 가능한가")
+
+## [2026-06-05] update | IDOR 문서 rl-verify 검증 반영
+- updated: [[idor-concept-explainer]] — rl-verify 3 Iteration 수렴 후 7개 항목 수정: ①한줄 요약에 "direct object reference" 조건 추가 ②"대표 하위 유형"→"대표적 예시 중 하나" ③Python FLA 주의 주석 추가 ④CVE-2025-27507 설명 정확화(LDAP) ⑤RAGFlow CVE-2025-25282 번호 기재 ⑥HackerOne 번호 제거+[Unverifiable] ⑦간접 참조 맵 scale-out 주의사항 추가
+
+## [2026-06-04] create | IDOR (Insecure Direct Object Reference) Concept Deep Dive
+- created: [[idor-concept-explainer]] — IDOR 개념 정리. 인증 vs 인가 구분, 공격 벡터 6종(URL/쿼리/POST바디/폼필드/파일경로/쿠키), 수평/수직 권한 상승, 취약/안전 코드 예제(Node.js/Python), 실제 CVE 사례(CVE-2025-27507 외), 예방 기법(서버사이드 인가·UUID·간접참조맵), OWASP A01:2025 분류. Deep Research 3단계 프로토콜 적용, 출처 5건 교차 검증.
+
 ## [2026-06-02] restructure | AX 시리즈 재제작 — 개념·회의론 → 실천 Playbook
 사용자 피드백("문서들이 AX 성공 사례·실천 위주가 아니다")으로 AX 시리즈 완전 재제작. 개념·DX비교·회의론 중심을 폐기하고 "성공 회사가 어떻게 했는가" 실천 Playbook으로 전환.
 - deleted: 01-ax-concept-vs-dx, 02-ax-success-cases, 03-ax-process-framework — 개념·회의론(falsification gate·Acemoglu/RAND 등) 중심 3-노트 폐기 (사용자 명시 삭제).
