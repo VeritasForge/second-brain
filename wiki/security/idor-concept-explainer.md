@@ -197,7 +197,7 @@ def get_order(request, order_id):
 | **CVE-2025-27507** — ZITADEL Admin API IDOR | LDAP 설정 변경을 통한 계정 탈취 | 9.0 |
 | **CVE-2025-13526** — WordPress OneClick Chat to Order (≤1.0.8) | 다른 고객 주문 정보 열람 (이름/이메일/주소), 비인증 접근 가능 | 7.5 |
 | **CVE-2024-28320** — Hospital Management System | 환자 데이터 읽기/수정 | 7.6 |
-| **CVE-2024-46528** — KubeSphere | 저권한 사용자의 클러스터·노드·계정 정보 무단 접근 | 8.0 |
+| **CVE-2024-46528** — KubeSphere | 저권한 사용자의 클러스터·노드·계정 정보 무단 접근 | 4.9 |
 | **CVE-2025-25282** — RAGFlow | 크로스 테넌트 사용자 목록 열람 및 계정 추가 | 8.1 |
 | HackerOne — Shopify | 보조 플로우에서 인가 검증 누락 `[Unverifiable]` | - |
 
