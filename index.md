@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-05-28
+> 최종 갱신: 2026-06-09
 
 ## 문서 목록
 
@@ -177,6 +177,7 @@
 - [[http2-concept-explainer]] — HTTP/2 Concept Deep Dive (binary frame, multiplexing, HPACK, Rapid Reset)
 - [[http2-perspective-grpc-and-ecosystem]] — HTTP/2 관점 gRPC + 생태계 (APNs, Web Push, K8s, Envoy xDS)
 - [[http3-quic-concept-explainer]] — HTTP/3 + QUIC Concept Deep Dive (UDP+TLS1.3, 0-RTT, connection migration, QPACK)
+- [[nat-and-nat-server]] — NAT & NAT Server Deep Dive (검증 반영판: SNAT/DNAT·3종 분류·Huawei nat server·헤어핀·CGNAT RFC 6598 vs RFC 1918, rl-verify P0/P1/P2 교정)
 - [[why-http1-1-still-dominates]] — 왜 HTTP/1.1이 여전히 주류인가 (CDN edge↔origin, L4 LB, 디버깅, 기업망)
 
 ### develop/os

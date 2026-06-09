@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-06-09] create | NAT & NAT Server Concept Deep Dive (검증 반영판)
+- created: [[nat-and-nat-server]] — concept-explainer 8섹션 리포트를 rl-verify(Tier 3, 4관점 RESEARCHER/CONTRARIAN/ARCHITECT/SIMPLIFIER + 1차 출처 교차검증)로 검증·교정한 반영판. **핵심 골격 "틀린 인과 0건" 확인**, P0 1건·P1 2건·P2 7건 교정. 주요 교정: ①(P0) 100.64.0.0/10은 RFC 1918 사설이 아니라 **RFC 6598 Shared Address Space**(CGNAT 가입자 측 주소, "사설처럼"·인과·biconditional 오류 정정) ②(P1) "NAT=상태 기억"→PAT/Dynamic은 stateful·**Static은 stateless**로 한정 ③(P1) "일반 SNAT" 예시(3344→50001)는 포트 변환하므로 **정확히는 PAT** ④RFC 2663(NAT 전체 용어)/3022(RFC 1631 obsolete) 관계 ⑤포트 ~64K는 **per-5-tuple**(고갈은 동일 목적지 집중 시) ⑥별점 제거→출처 기반 ⑦"20년·사실상 표준" 완화(실제 IANA 고갈 2011, IETF 표준화) ⑧방화벽 부수효과 정밀화 ⑨Dynamic vs PAT 고갈 ⑩5-tuple·체크섬·TTL·conntrack 생명주기·reverse-DNAT·hairpin 심화 ⑪Cisco 헤어핀 "플랫폼·버전 의존" 단서. NAT Server=Huawei `nat server`(=DNAT/포트포워딩) 벤더 표기는 본문에 이미 있어 False-alarm. 검증 산출물: docs/demiurge/rl-verify/nat-nat-server/. develop/network.
+
 ## [2026-06-05] update | IDOR 문서 RLS 방어 기법 추가
 - updated: [[idor-concept-explainer]] — PostgreSQL RLS(Row-Level Security)를 IDOR 예방 기법으로 추가: 7-5 신규 섹션(동작 원리·SQL 예시·방어 범위 표), 요약 매트릭스 RLS 행 추가, 면접 Q&A 1개 추가("RLS로 IDOR 완전 방지 가능한가")
 
