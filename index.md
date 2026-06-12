@@ -184,6 +184,7 @@
 - [[atomic-mutex-semaphore-qa-deep-dive]] — Atomic/Mutex/Semaphore 심화 Q&A Deep Dive
 - [[gnu-stow-concept-deep-dive]] — GNU Stow Deep Dive
 - [[posix-newline-at-end-of-file]] — POSIX 파일 끝 Newline 원칙
+- [[shell-dash-prefix-directory]] — 쉘에서 `-`로 시작하는 디렉토리 탐색 문제 (`--` 옵션, `./` 접두사, Claude Code 경로 인코딩)
 - [[unix-atomic-mutex-semaphore-deep-dive]] — Atomic Operations (원자적 연산) Deep Dive
 
 ### develop/performance
