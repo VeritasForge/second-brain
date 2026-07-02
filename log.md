@@ -2,6 +2,12 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-07-03] create | MSA(Microservices Architecture) Shared Database 안티패턴 Concept Deep Dive
+- created: [[msa-shared-database-antipattern]] — N개 마이크로서비스가 하나의 DB를 공유하는 구조의 실존 여부·안티패턴 판정·Database per Service와의 트레이드오프를 8섹션으로 정리. 핵심: Shared DB는 "분산 모놀리스"를 만드는 안티패턴이지만, 모놀리스→MSA 전환 과도기(Strangler Fig)·PoC·소규모 팀에서는 로드맵 있는 한시적 타협으로 정당화 가능. 완화책은 스키마/계정 분리, read-only 제한, Saga(분산 트랜잭션)+CQRS(크로스 서비스 조회) 조합. microservices.io/AWS 공식 문서 + Hacker News 커뮤니티 토론 교차 검증. develop/architecture.
+
+## [2026-07-01] create | Claude Code 스킬에서 경로·설정을 환경변수로 빼는 표준 방법
+- created: [[skill-env-var-config]] — SKILL.md 본문의 `$VAR`는 확장 안 됨(스킬=지시문). 권장 표준은 settings.json `env` 정의 → 스킬이 Bash로 `${OBSIDIAN_VAULT:-기본값}` 읽기 + 폴백. 하드코딩은 anti-pattern. save-obsi 스킬을 이 방식으로 리팩터링한 사례 포함. develop/claude-code.
+
 ## [2026-06-12] create | 쉘에서 `-`로 시작하는 디렉토리 탐색 문제
 - created: [[shell-dash-prefix-directory]]
 

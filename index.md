@@ -71,6 +71,7 @@
 - [[hexagonal-architecture-concept-deep-dive]] — Hexagonal Architecture (Ports & Adapters) Deep Dive
 - [[layered-architecture-comprehensive]] — Layered Architecture Comprehensive
 - [[layered-architecture-concept-deep-dive]] — Layered Architecture Deep Dive
+- [[msa-shared-database-antipattern]] — MSA에서 N개 MS가 DB를 공유하는 Shared Database 패턴 (안티패턴 여부, Database per Service와 트레이드오프, Strangler Fig 전환기 정당화 조건, Saga/CQRS 완화책)
 - [[rate-limit-and-client-ip]] — Rate-Limit 설계 & 클라이언트 IP 추출 종합 (재전송 쿨다운·이메일/IP 한도·Resend fallback, XFF 위조 방어·"오른쪽에서 N번째" 규칙·Vercel x-real-ip 우선·IPv6 /64·헬퍼 함수)
 - [[restful-architecture-concept-deep-dive]] — RESTful Architecture Deep Dive
 - [[url-mention-unfurling]] — URL Mention (Unfurling) Concept Deep Dive — OGP/Twitter Card/oEmbed 비교, SSRF 가드, Python 구현 4종 (BeautifulSoup/safe-sync/async+Redis/linkpreview)
@@ -91,6 +92,7 @@
 - [[ouroboros-workflow-overview]] — Ouroboros 워크플로우 전체 흐름
 - [[computer-use-mcp-server]] — Computer-Use MCP Server Deep Dive (Claude Code 빌트인 GUI 자동화)
 - [[skill-edd-tdd-best-practices]] — Skill 검증/리뷰 TDD/EDD Best Practice
+- [[skill-env-var-config]] — 스킬에서 경로·설정을 하드코딩 대신 환경변수(settings.json env + Bash 읽기 + 폴백)로 빼는 표준 방법
 - [[vercel-skills-and-workflow-integration]] — Vercel 스킬 3종(react-best-practices/composition-patterns/react-native) + Superpowers·Plan Mode 워크플로우 연계 가이드
 
 ### develop/database
