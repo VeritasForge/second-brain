@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-07-06] create | PWA(Progressive Web App) 아키텍처 종합 정리
+- created: [[pwa-architecture-overview]] — 대화형 Q&A로 진행된 PWA 아키텍처 심층 정리. (1) **Service Worker**: "모듈/인스턴스"가 아니라 브라우저가 origin당 관리하는 이벤트 기반 백그라운드 스레드임을 정정, origin(프로토콜+호스트+포트)과 scope의 관계, "브라우저 닫혀도 코드가 계속 동작한다"는 오해를 Push Service의 wake-up 구조로 정정(Android/데스크톱/iOS 지속성 차이), skipWaiting/clients.claim 업데이트 라이프사이클. (2) **설치 가능성**: Web App Manifest 조건(Service Worker는 필수 아님, MDN 원문 확인) + 플랫폼별 "설치"의 실체 — Android WebAPK(서버가 실시간 컴파일해 조용히 설치, WebView 아닌 Chrome 그대로 렌더링)·데스크톱(chrome_pwa_launcher.exe 하드링크, 새 실행파일 없음)·iOS Web Clip(plist XML 한 장, Web.app 컨테이너) — 및 TWA vs WebAPK(자동 vs 개발자 수동 빌드+Play Console 심사) 구분. (3) **웹 푸시**: Service Worker+Push API+Notification API 3분할 구조, VAPID, 클라이언트/SW/서버(web-push) 전체 코드, 권한 UX 안티패턴(90% 거부 데이터), 도달률(웹 33% vs 네이티브 95%+). (4) **데이터 저장**: Cache Storage(Request↔Response 쌍, 비동기, SW에서만) vs localStorage/sessionStorage(문자열, 동기, SW 접근 불가) vs IndexedDB 비교, 캐싱 전략 3종, App Shell 패턴, 브라우저 로컬 디스크의 origin별 물리적 저장 구조. (5) **TWA vs React Native/Flutter**: TWA는 iOS 미지원(Apple Guideline 4.2.2)이 결정적 한계, 호스트 앱↔웹 콘텐츠 간 진짜 네이티브 브리지 부재(URL 파라미터/Intent뿐) vs RN/Flutter의 Platform Channel. (6) PWA/TWA를 쓰는 이유가 "백그라운드 처리 필요시"로 좁게 오해되기 쉬움을 앱스토어 회피/크로스플랫폼/SEO 등 다축 이유로 정정. MDN/web.dev/Chromium/Android Developers 등 11개 공식 출처 교차검증(deep-research 3단계 프로토콜 2회 적용). develop/fe.
+
 ## [2026-07-03] create | MSA(Microservices Architecture) Shared Database 안티패턴 Concept Deep Dive
 - created: [[msa-shared-database-antipattern]] — N개 마이크로서비스가 하나의 DB를 공유하는 구조의 실존 여부·안티패턴 판정·Database per Service와의 트레이드오프를 8섹션으로 정리. 핵심: Shared DB는 "분산 모놀리스"를 만드는 안티패턴이지만, 모놀리스→MSA 전환 과도기(Strangler Fig)·PoC·소규모 팀에서는 로드맵 있는 한시적 타협으로 정당화 가능. 완화책은 스키마/계정 분리, read-only 제한, Saga(분산 트랜잭션)+CQRS(크로스 서비스 조회) 조합. microservices.io/AWS 공식 문서 + Hacker News 커뮤니티 토론 교차 검증. develop/architecture.
 
