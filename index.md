@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-07-06
+> 최종 갱신: 2026-07-08
 
 ## 문서 목록
 
@@ -234,6 +234,9 @@
 ### mac-os
 - [[macbook-lid-close-sleep-prevention]] — MacBook 덮개 닫기 수면 방지
 
+### product-management
+- [[lean-startup-product-dev-workflow-deep-research]] — 린 스타트업 맥락의 "아이디어 → PRD → 개발" 표준 워크플로우 Deep Research (BML, OST, PR/FAQ, RICE/ICE, Shape Up, Stage-Gate, MVP/Prototype/PoC 구분, rl-verify 2라운드 검증 완료 — 파이프라인 순서 자기모순 등 4건 오류 수정)
+
 ### research
 - [[ai-era-confluence-jira-alternatives]] — AI 시대 Confluence/JIRA 대체 도구 조사·검증 종합 (대체재 지형, Plane/Huly/Forgejo/Docmost/Backlog.md 비교, 라이선스 리스크, Forgejo 도입+MCP 기여 정정 추천, rl-verify 2회)
 - [[ai-native-engineer-role]] — AI Native Engineer 직군 완전 해부 (정의·6대 역량·Agent Wrangler 업무·기존 SWE/ML/AI Engineer 비교·한국 시장 무신사·그루우·연봉 프리미엄 20-30%, 11 출처 교차 검증)
@@ -245,6 +248,7 @@
   - [[john-deere]] — John Deere(전통제조·BM전환): 트랙터 제조사→데이터·자율주행 플랫폼, See&Spray 성과 과금, Blue River 인수 (12 출처)
   - [[duolingo]] — Duolingo(AI-first 앱): "AI-first" 선언→$1B, 콘텐츠 레버리지, Duolingo Max BM, SEC 공시 (15 출처)
   - [[klarna-lessons]] — ⚠️ 반면교사: "AI로 700명 대체"→재고용 역전, 안티패턴 8가지 (11 출처)
+- [[evaluation-criteria-priority-frameworks]] — "필수(Blocker)/핵심(Major)/참고(Minor)" 평가기준 표현의 기원과 정식 대응 프레임워크(MoSCoW, RFC 2119, Weighted Decision Matrix, 벤더 평가 스코어카드) 조사
 - [[4th-5th-industrial-revolution-deep-research]] — 4/5차 산업혁명 Deep Research
 - [[kick-cafe-research-detail]] — KICK 카페 리서치 상세 보고서
 - [[kick-market-factcheck-report]] — KICK 시장 팩트체크 리포트
@@ -287,7 +291,7 @@
 > 태그는 flat하게 사용 (계층 없음). 아래 그룹핑은 관리 편의용.
 
 ### 영역
-ai-engineering, develop, gen-ai, algorithm, security, research, career
+ai-engineering, develop, gen-ai, algorithm, security, research, career, product-management
 
 ### 세부주제
-claude-code, cli, rag, agent, llm, transformer, token, git, database, frontend, architecture, go, python, k8s, obsidian, knowledge-management, oauth, sso, oidc, saml, auth0, okta, keycloak, testing, performance, docker, react, nextjs, deep-learning, video, tpm, ddd, clean-architecture, hexagonal, interview
+claude-code, cli, rag, agent, llm, transformer, token, git, database, frontend, architecture, go, python, k8s, obsidian, knowledge-management, oauth, sso, oidc, saml, auth0, okta, keycloak, testing, performance, docker, react, nextjs, deep-learning, video, tpm, ddd, clean-architecture, hexagonal, interview, lean-startup, prd, mvp
