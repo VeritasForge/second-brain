@@ -74,6 +74,7 @@
 - [[msa-shared-database-antipattern]] — MSA에서 N개 MS가 DB를 공유하는 Shared Database 패턴 (안티패턴 여부, Database per Service와 트레이드오프, Strangler Fig 전환기 정당화 조건, Saga/CQRS 완화책)
 - [[rate-limit-and-client-ip]] — Rate-Limit 설계 & 클라이언트 IP 추출 종합 (재전송 쿨다운·이메일/IP 한도·Resend fallback, XFF 위조 방어·"오른쪽에서 N번째" 규칙·Vercel x-real-ip 우선·IPv6 /64·헬퍼 함수)
 - [[restful-architecture-concept-deep-dive]] — RESTful Architecture Deep Dive
+- [[temporal-workflow-orchestration-comprehensive]] — Temporal 워크플로우 오케스트레이션 엔진 완전 정리 (Durable Execution, SAGA Orchestration/Process Manager, 보상 트랜잭션, Workflow ID·Persistence, Task Queue vs 외부 브로커, 비동기 Activity 완료, Heartbeat 4대 목적, 동기/비동기 결합도 트레이드오프, 배달 서비스 Python 종합 예제)
 - [[url-mention-unfurling]] — URL Mention (Unfurling) Concept Deep Dive — OGP/Twitter Card/oEmbed 비교, SSRF 가드, Python 구현 4종 (BeautifulSoup/safe-sync/async+Redis/linkpreview)
 - [[video-upscaling-service-architecture]] — Video Upscaling Service Architecture
 
@@ -185,6 +186,7 @@
 
 ### develop/os
 - [[atomic-mutex-semaphore-qa-deep-dive]] — Atomic/Mutex/Semaphore 심화 Q&A Deep Dive
+- [[ghostty-font-config]] — Ghostty 터미널 폰트 설정 방법 (font-family, font-size, Nerd Font)
 - [[gnu-stow-concept-deep-dive]] — GNU Stow Deep Dive
 - [[posix-newline-at-end-of-file]] — POSIX 파일 끝 Newline 원칙
 - [[shell-dash-prefix-directory]] — 쉘에서 `-`로 시작하는 디렉토리 탐색 문제 (`--` 옵션, `./` 접두사, Claude Code 경로 인코딩)
