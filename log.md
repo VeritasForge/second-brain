@@ -2,6 +2,9 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-07-14] create | Next.js 라우트 그룹 (Route Group) 정리
+- created: [[nextjs-route-groups]] — 이 레포의 `app/(auth)`, `app/(main)` 구조를 계기로 Next.js App Router 라우트 그룹 개념을 Q&A로 심화 정리. (1) **정의**: 괄호 폴더는 URL에 안 나타나면서 하위 페이지들끼리 레이아웃을 공유시키는 조직화 장치임을 실제 `layout.tsx` 코드 대조로 확인 (`(auth)`=껍데기 레이아웃, `(main)`=Sidebar+MobileNav, `proxy.ts` 인증 게이트 경계선 겸함). (2) **일반 폴더와의 차이**: `auth/`(괄호 없음)로도 레이아웃 분리는 되지만 URL에 `/auth`가 강제로 남는다는 점 — 짧은 URL(`/login`)을 원하면 괄호 문법이 필수임을 비교표로 정리. (3) **흔한 오해 정정**: "라우팅을 묶는다"가 아니라 "URL에 안 남기고 폴더만 묶는다"는 정확한 프레이밍으로 교정. (4) **심화 기능 3종**: ① Multiple Root Layouts — 그룹마다 완전히 다른 `<html>`/`<body>`(언어·스크립트·폰트)가 필요할 때만 쓰는 이유를 마케팅 랜딩페이지+로그인 앱 예시와 "중첩 레이아웃이 못 하는 것" 비교표로 설명, ② `loading.tsx`/`error.tsx`/`template.tsx`도 그룹 단위로 스코프됨, ③ 서로 다른 그룹이 같은 URL을 만들면 빌드 에러 나는 이름 충돌 규칙. develop/fe.
+
 ## [2026-07-12] create | Ghostty 터미널 폰트 설정 방법
 - created: [[ghostty-font-config]] — Claude Code CLI 자체에는 폰트 설정이 없고 터미널 에뮬레이터(Ghostty)가 담당한다는 결론에서 출발. Ghostty 설정 파일(`~/.config/ghostty/config`) 위치와 macOS 레거시 경로 충돌 주의사항, `font-family`/`font-size` 키-값 설정법과 fallback 폰트 다중 지정, `ghostty +list-fonts`로 설치 폰트 확인, `Cmd+Shift+,` 실시간 리로드, 아이콘 깨짐 시 Nerd Font 전환 팁, 고해상도 디스플레이 소수점 font-size 팁 정리. develop/os.
 

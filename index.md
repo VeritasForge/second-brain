@@ -1,7 +1,7 @@
 # Den Index
 
 > 이 파일은 LLM이 자동 관리합니다. 수동 편집하지 마세요.
-> 최종 갱신: 2026-07-08
+> 최종 갱신: 2026-07-14
 
 ## 문서 목록
 
@@ -110,6 +110,7 @@
 - [[kakao-maps-viewport-control-deep-dive]] — Kakao Maps Viewport (isPanto/center/panTo) Deep Dive
 - [[modern-web-architecture-bff-ssr-spa-vite-seo]] — 현대 웹 아키텍처 BFF/SSR/SPA/Vite/SEO
 - [[nextjs-performance-and-swr-concepts]] — Next.js 페이지가 느린 이유와 핵심 개념 정리 (use client, fetch waterfall, SWR, Server Component, Event Loop, 처방 매트릭스 + Vercel 룰 매핑)
+- [[nextjs-route-groups]] — Next.js 라우트 그룹 (Route Group) 정리: (auth)/(main) 폴더 구조, URL 미노출 레이아웃 공유, 일반 폴더와의 URL 차이, Multiple Root Layouts 사용 이유·예시, loading/error/template 스코핑, URL 충돌 규칙
 - [[pwa-architecture-overview]] — PWA(Progressive Web App) 아키텍처 종합 정리 (Service Worker 라이프사이클·origin/scope, 설치 메커니즘 WebAPK/TWA/Web Clip, Web Push, Cache Storage/IndexedDB, TWA vs React Native/Flutter)
 - [[react-hydration-ssr-deep-dive]] — React Hydration & SSR Deep Dive
 - [[react-server-components-rsc-deep-dive]] — React Server Components (RSC) Deep Dive
