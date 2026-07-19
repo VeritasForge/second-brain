@@ -2,6 +2,12 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-07-20] update | NLP 심화(토큰화·BPE, 도메인특화모델, 유즈케이스별 모델) Chapter 7 추가
+- updated: [[ai-ml-dl-transformer-llm-introduction]] — rl-verify로 사실 검증을 마친 NLP 개념 설명을 병합. 신규 Chapter 7(7.1 불용어·BPE 알고리즘 단계별 예시, 7.2 도메인특화모델 Build/Fine-tune/Borrow, 7.3 유즈케이스별 실제 사용 모델) 전체 추가. 4.5절에 Post-LN/Pre-LN 심화 Q&A, 5.6절에 GPT-1 원논문 제목("...Language Understanding by Generative Pre-Training") 관련 Q&A 삽입 — 기존 문서의 잔차연결+정규화 구조는 이미 정확했으므로 "오류 정정"이 아닌 순수 보강. 참고논문 4개(Sennrich BPE, Radford GPT-1, Liu RoBERTa, Xiong Pre-LN) 및 nlp/tokenization 태그 추가. gen-ai.
+
+## [2026-07-15] create | PRD (Product Requirements Document) 개념·템플릿·작성 가이드
+- created: [[prd-templates-and-writing-guide]] — PRD의 정의·탄생 배경("What, not How" 원칙)부터 시작해, 4가지 템플릿 유형(Amazon PR/FAQ, Atlassian/Aha.io/Product School식 표준 멀티섹션, Lean 원페이저, ChatPRD 등 AI-네이티브)을 실제 구조까지 교차 검증(WebSearch 12회 + WebFetch 4회, 출처 15개+)해 비교 정리. BRD/FRD/SRS와의 역할 차이 매트릭스, 흔한 실수·안티패턴(해결책을 문제처럼 서술, 체크박스 나열, 범위외 미명시 등)과 Before/After 예시, 단계별 "잘 쓰는 법" 실전 가이드, 2026년 AI PRD 도구 트렌드(고객 근거 통합 여부가 핵심 차별점)까지 포함. product-management.
+
 ## [2026-07-14] create | Next.js 라우트 그룹 (Route Group) 정리
 - created: [[nextjs-route-groups]] — 이 레포의 `app/(auth)`, `app/(main)` 구조를 계기로 Next.js App Router 라우트 그룹 개념을 Q&A로 심화 정리. (1) **정의**: 괄호 폴더는 URL에 안 나타나면서 하위 페이지들끼리 레이아웃을 공유시키는 조직화 장치임을 실제 `layout.tsx` 코드 대조로 확인 (`(auth)`=껍데기 레이아웃, `(main)`=Sidebar+MobileNav, `proxy.ts` 인증 게이트 경계선 겸함). (2) **일반 폴더와의 차이**: `auth/`(괄호 없음)로도 레이아웃 분리는 되지만 URL에 `/auth`가 강제로 남는다는 점 — 짧은 URL(`/login`)을 원하면 괄호 문법이 필수임을 비교표로 정리. (3) **흔한 오해 정정**: "라우팅을 묶는다"가 아니라 "URL에 안 남기고 폴더만 묶는다"는 정확한 프레이밍으로 교정. (4) **심화 기능 3종**: ① Multiple Root Layouts — 그룹마다 완전히 다른 `<html>`/`<body>`(언어·스크립트·폰트)가 필요할 때만 쓰는 이유를 마케팅 랜딩페이지+로그인 앱 예시와 "중첩 레이아웃이 못 하는 것" 비교표로 설명, ② `loading.tsx`/`error.tsx`/`template.tsx`도 그룹 단위로 스코프됨, ③ 서로 다른 그룹이 같은 URL을 만들면 빌드 에러 나는 이름 충돌 규칙. develop/fe.
 

@@ -239,6 +239,7 @@
 
 ### product-management
 - [[lean-startup-product-dev-workflow-deep-research]] — 린 스타트업 맥락의 "아이디어 → PRD → 개발" 표준 워크플로우 Deep Research (BML, OST, PR/FAQ, RICE/ICE, Shape Up, Stage-Gate, MVP/Prototype/PoC 구분, rl-verify 2라운드 검증 완료 — 파이프라인 순서 자기모순 등 4건 오류 수정)
+- [[prd-templates-and-writing-guide]] — PRD 개념·형식(Amazon PR/FAQ, Atlassian, Aha.io, Product School, AI-네이티브)·필수 구성요소·안티패턴·잘 쓰는 법 정리
 
 ### research
 - [[ai-era-confluence-jira-alternatives]] — AI 시대 Confluence/JIRA 대체 도구 조사·검증 종합 (대체재 지형, Plane/Huly/Forgejo/Docmost/Backlog.md 비교, 라이선스 리스크, Forgejo 도입+MCP 기여 정정 추천, rl-verify 2회)

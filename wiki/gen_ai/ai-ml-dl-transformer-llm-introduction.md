@@ -1,7 +1,7 @@
 ---
 created: 2026-03-12
 source: claude-code
-tags: [ai, machine-learning, deep-learning, transformer, llm, neural-network, attention, rlhf]
+tags: [ai, machine-learning, deep-learning, transformer, llm, neural-network, attention, rlhf, nlp, tokenization]
 ---
 
 # AI 개론: Machine Learning에서 LLM까지 — 소프트웨어 엔지니어를 위한 가이드
@@ -53,6 +53,11 @@ Chapter 6. 2024-2025 최신 동향
   6.2 Reasoning Models (DeepSeek R1, OpenAI o1)
   6.3 MoE (Mixture of Experts)
   6.4 Context Window 확장과 RAG
+
+Chapter 7. NLP 심화 — 자연어처리의 핵심 기법과 실전 모델
+  7.1 토큰화 심화: 불용어와 BPE 알고리즘
+  7.2 도메인 특화 모델: Build / Fine-tune / Borrow
+  7.3 NLP 유즈케이스별 실제 사용 모델
 ```
 
 ---
@@ -2323,6 +2328,17 @@ position 2: [sin(2), cos(2), sin(0.02), cos(0.02), ...] = [0.91, -0.42, 0.02, 1.
 >
 > 비유: Self-Attention = 🎨 빨강+파랑+노랑을 비율대로 섞기(혼합), FFN = 🔥 섞은 물감을 가열해서 새로운 색을 만들기(화학 변화). Transformer 1개 층 = Self-Attention(관계 파악 + 혼합) + FFN(비선형 변환). 이걸 96번 반복하는 것이 GPT/Claude다.
 
+> **Q&A — Layer Normalization은 항상 잔차연결(Add) "뒤"에 오나? (Post-LN vs Pre-LN)**
+>
+> 원 논문(2017)의 방식(`LayerNorm(x + Sublayer(x))`, 위 다이어그램의 "Add & Norm")을 **Post-LN**이라 부른다. 그런데 GPT-2(2019) 이후 현대 LLM 대부분은 정규화를 서브레이어 **앞**에 두는 **Pre-LN**(`x + Sublayer(LayerNorm(x))`) 방식을 쓴다.
+>
+> ```
+> Post-LN (원 논문, 2017):        Pre-LN (GPT-2 이후, 2019~):
+> x → Sublayer → Add(+x) → LN     x → LN → Sublayer → Add(+x)
+> ```
+>
+> 왜 바뀌었나? Post-LN은 레이어를 깊게 쌓을수록(예: GPT-3의 96층) 학습 초반 그래디언트가 불안정해져서 **warm-up(학습률을 서서히 올리는 절차)이 필수**였다. Pre-LN은 그래디언트가 레이어 깊이와 무관하게 안정적으로 유지되어, 아주 깊은 모델도 더 안정적으로 학습할 수 있다. 이 차이는 Xiong et al.(2020)이 평균장 이론으로 이론적으로 정당화했다.
+
 #### 구체적 예시 — "I love you" → "나는 너를 사랑해" 번역 과정
 
 ```
@@ -3157,6 +3173,10 @@ Encoder-Decoder (T5):
 >
 > 왜 이 구조가 이겼는가: 모델 규모를 키우면 이해력(Encoding)도 충분히 좋아지고, 거기에 생성(Decoding)까지 가능하니 — **"하나로 다 되는 쪽"**이 결국 승리한 것이다. BERT 계열은 이해력은 뛰어나지만 생성을 못하는 구조적 한계가 있었고, Encoder-Decoder는 두 모듈을 따로 관리하는 복잡성이 스케일링에 불리했다.
 
+> **Q&A — "Decoder=생성 전용"이라 이해해도 되나?**
+>
+> 정확히는 아니다. GPT의 시초 논문 제목 자체가 **"Improving Language *Understanding* by Generative Pre-Training"**(Radford et al., 2018)이다. Decoder-Only 구조로 자연어추론(NLI)·질의응답 같은 전형적 "이해" 태스크에서 SOTA를 낸 것이 GPT 계열의 출발점이었다. 즉 Decoder-Only는 처음부터 "생성 전용"이 아니라 "이해도 생성으로 할 수 있다"는 것을 증명하며 시작된 구조다 — 바로 위에서 설명한 "이해도 생성의 부분집합으로 처리 가능"이라는 문장이 GPT의 역사적 출발점과 정확히 일치한다.
+
 #### GPT, Claude, Gemini — 같은 Transformer인데 왜 성능이 다른가?
 
 Pre-training 데이터(인터넷 텍스트)는 대부분 겹친다. 그렇다면 차이의 원인은 무엇인가?
@@ -3386,6 +3406,129 @@ RAG 있음: 질문 → Vector DB에서 관련 문서 검색
 
 ---
 
+## Chapter 7. NLP 심화 — 자연어처리의 핵심 기법과 실전 모델
+
+> **Chapter 6 → 7 전환:** 지금까지는 LLM이라는 "범용 엔진"이 어떻게 만들어지고 작동하는지를 다뤘다. 이번 장에서는 이 엔진이 가장 오래, 가장 많이 쓰인 분야인 **NLP(Natural Language Processing, 자연어 처리)**로 좁혀서, 텍스트를 다루는 실전 기법과 산업 현장에서 실제로 어떤 모델을 쓰는지를 살펴본다.
+
+### 7.1 토큰화 심화: 불용어와 BPE 알고리즘
+
+#### 불용어(Stopword) — 언제 필요하고 언제 필요 없나
+
+2.4에서 텍스트의 Feature Engineering 예시로 "불용어 제거"를 잠깐 언급했다(TF-IDF, n-gram과 함께). 여기서는 이걸 조금 더 깊이 판다.
+
+**불용어**는 `the`, `is`, `은/는/이/가`처럼 의미 전달에 큰 역할을 안 하는 빈출 단어다.
+
+```
+원문: "The cat is sitting on the mat"
+        ↓ 불용어 제거 (the, is, on 제거)
+결과: "cat sitting mat"
+```
+
+> **Q&A — Transformer 시대에도 불용어 제거를 하나?**
+>
+> 트랜스포머 인코더를 파인튜닝해서 분류/추출을 하는 태스크에서는 오히려 불용어를 제거하면 성능이 떨어지는 경우가 많다(-0.4~-1.9 포인트 하락 사례 보고됨). **어텐션(Chapter 4.2)이 문맥 전체를 스스로 학습**하기 때문에, `is`나 `the` 같은 단어도 시제·구조 판단에 쓰일 수 있다.
+>
+> 하지만 아래 상황에서는 2025-2026년 현재도 표준 관행이다:
+>
+> | 상황 | 이유 |
+> |---|---|
+> | 검색엔진 인덱싱(BM25/Elasticsearch) | 인덱스 크기·속도 최적화 — 지금도 기본 analyzer에 포함 |
+> | 저자원 언어 | 사전학습 트랜스포머가 부족한 언어는 경량 통계 모델에 여전히 도움 |
+> | 온디바이스 경량 모델 | fastText, bag-of-words 등에서 여전히 유효 |
+> | 토큰 예산 절약 | 컨텍스트 윈도우가 제한된 상황에서 긴 문서를 LLM에 넣기 전 전처리 |
+>
+> 즉 "요즘은 안 쓴다"가 아니라 **"트랜스포머 인코더 파인튜닝 분류 태스크에서는 이점이 줄지만, 그 밖에는 여전히 쓰인다"**가 정확하다.
+
+#### BPE(Byte Pair Encoding) 알고리즘 손으로 따라가기
+
+5.3절에서 "BPE(Byte Pair Encoding) 같은 알고리즘이 학습 코퍼스에서 자주 등장하는 문자 조합을 자동으로 찾아 토큰으로 등록한다"고 언급했다. 실제로 병합이 어떻게 일어나는지 손으로 따라가보자.
+
+BPE는 원래 **1994년 Philip Gage가 제안한 데이터 압축 알고리즘**이었다. 2015년 Sennrich et al.이 이 "자주 붙어 나오는 것을 하나로 합친다"는 핵심 아이디어를 NLP 토큰화에 응용했다.
+
+**목표**: 코퍼스에 `low`(5회), `lower`(2회), `newest`(6회), `widest`(3회)라는 단어가 있을 때, 효율적인 서브워드 사전을 만든다.
+
+```
+Step 0. 모든 단어를 글자 단위로 쪼갠다 (단어 끝에 </w> 표시)
+
+  l o w </w>          (5회)
+  l o w e r </w>       (2회)
+  n e w e s t </w>     (6회)
+  w i d e s t </w>     (3회)
+
+Step 1. 가장 자주 붙어 나오는 "글자 쌍"을 찾는다
+  'e'+'s' 쌍 = newest(6) + widest(3) = 9회 ← 최다!
+  → 병합: e s → es
+
+  n e w es t </w>
+  w i d es t </w>
+
+Step 2. 다시 가장 빈번한 쌍을 찾는다
+  'es'+'t' 쌍 = 9회 → 병합: es t → est
+
+  n e w est </w>
+  w i d est </w>
+
+Step 3. 반복
+  'l'+'o' 쌍 = low(5) + lower(2) = 7회 → 병합: l o → lo
+```
+
+이 과정을 원하는 사전 크기가 될 때까지 반복한다. GPT-4는 이렇게 만들어진 사전을 약 10만 개(5.3절에서 언급한 그 vocabulary) 갖고 있다.
+
+```
+단어 단위 토큰화        글자 단위 토큰화        BPE (부분단어 단위)
+────────────────    ────────────────    ────────────────
+"lowest" 통째로 1개    l-o-w-e-s-t (6개)    low + est (2개)
+사전 크기 매우 큼       사전 크기 매우 작음      적절한 균형
+처음 보는 단어 처리 X   느리고 문맥 파악 어려움  처음 보는 단어도 조각내서 처리 가능
+```
+
+> **소프트웨어 엔지니어를 위한 비유:** BPE ≈ 문자열 압축의 **런렝스 인코딩(Run-Length Encoding)** 사고방식과 비슷하다 — 자주 반복되는 패턴을 찾아 하나의 심볼로 치환한다. 다만 BPE는 압축률이 아니라 "언어 모델이 다루기 좋은 어휘 단위"를 만드는 게 목적이다. `lowest`라는 처음 보는 단어도 이미 배운 `low`+`est` 조각으로 쪼개 처리할 수 있다 — Chapter 5.4에서 다룬 "vocabulary는 고정되어 있고, 그 안에서 고른다"는 원리가 바로 이 사전 덕분에 성립한다.
+
+### 7.2 도메인 특화 모델: Build / Fine-tune / Borrow
+
+법률·금융·의료 같은 전문 분야는 범용 LLM보다 도메인 특화 모델이 더 정확하고 규정 준수에 유리한 경우가 많다. 도메인 특화 모델을 만드는 방법은 3가지로 나뉜다.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                도메인 특화 모델 만들기 3가지 방법             │
+├─────────────────────────────────────────────────────────┤
+│  Build (구축)                                            │
+│  도메인 코퍼스로 사전학습(pretrain)                        │
+│  예: BioBERT(의료), FinBERT(금융), LegalBERT(법률)         │
+│                                                          │
+│  Fine-tune (미세조정)                                     │
+│  공개된 범용 모델(예: 범용 BERT)에 도메인 라벨 데이터로 추가학습│
+│                                                          │
+│  Borrow/Prompt (차용)                                     │
+│  GPT/Gemini 같은 초거대 LLM을 그대로 프롬프트로 활용         │
+│  (추가 학습 없음)                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+| 선택지 | 특징 |
+|--------|------|
+| **Build** | 도메인 전용 어휘(7.1절의 BPE 사전이 도메인에 맞게 새로 만들어짐) 포함, 성능 최고지만 GPU·전문인력·대규모 코퍼스 필요 |
+| **Fine-tune** | 빠르고 저렴, 다만 도메인 전문 어휘가 사전에 없으면 학습 효율 저하 |
+| **Borrow** | 가장 빠른 배포, 다만 정확도 상한이 있고 비용·응답속도 부담 |
+
+> **실무에서 "도메인 특화 모델"이라 부를 때 흔히 가리키는 것**은 GPT/Gemini 같은 초거대 생성형 LLM을 파인튜닝한 것이 아니라, **BERT급 인코더 모델(4.5절의 Encoder-Only 계열)을 도메인 코퍼스로 사전학습한 것**이다. 다만 이 3분류가 실무의 모든 경우를 완전히 나눠 담지는 못한다 — 예를 들어 **RAG(6.4절)**처럼 파라미터를 전혀 건드리지 않고 검색으로 도메인 지식을 주입하는 방식은 이 3분류 중 어디에도 깔끔히 속하지 않는 사실상의 4번째 방법이다. 또한 최근에는 GPT/Gemini API의 파인튜닝 기능으로 도메인 특화를 하는 사례도 늘고 있어, "실무=Build가 표준"이라는 말은 시점·커뮤니티에 따라 다르게 받아들여야 한다.
+
+### 7.3 NLP 유즈케이스별 실제 사용 모델
+
+5.6절에서 "GPT/BERT/Claude가 왜 다른가"를 아키텍처·학습방법 관점에서 다뤘다면, 여기서는 "실제 산업 현장에서 어떤 태스크에 어떤 모델을 쓰는지"를 살펴본다.
+
+| 유즈케이스 | 실제 사용 모델 | 선택 이유 |
+|------------|---------------|-----------|
+| **고객 서비스 챗봇** | BERT(Encoder-Only, 4.5절) 기반 의도 분류기 + LLM(Decoder-Only) 응답 생성 | 의도 분류·티켓 라우팅은 BERT가 빠르게 응답(수십 ms)하고 확신도 점수로 설명 가능. 답변 생성만 LLM이 담당 — "경쟁"이 아니라 파이프라인 내 역할 분담. 다만 2025-2026년은 소형 경량 LLM(SLM) 하나가 분류+생성을 동시 처리하는 하이브리드 라우팅 방향으로도 진화 중 |
+| **계약서/문서 분석** | spaCy 커스텀 NER(개체명 인식) + 법률 전용 NER | 일반 NER은 원고·피고·조항·판례 같은 법률 고유 개체를 인식 못해 도메인 특화 필요 |
+| **감정 분석** | RoBERTa(정확도 우선) 또는 DistilBERT(속도 우선) | RoBERTa는 BERT보다 10배(160GB vs 16GB) 많은 데이터로 학습돼 성능이 더 좋지만, DistilBERT는 경량화로 속도가 2배 빠르고 정확도는 거의 동일 |
+| **헬스케어 상담** | 규칙기반 스크립트(CBT/DBT 콘텐츠) + ML, 최신 버전은 LLM 통합 하이브리드 | 안전성이 중요한 도메인이라 임상의가 승인한 규칙 엔진이 핵심 골격을 이루고, 최근 LLM이 보조 역할로 결합되는 추세 |
+| **사기 탐지** | 하이브리드 모델(NER + 감정분석 + 텍스트분류 + RNN/LSTM/CNN) — 실사례로 파인튜닝된 BERT 활용 | 정형 거래 데이터 + 비정형 텍스트를 함께 봐야 해서 여러 기법을 조합. 실서비스에서는 범용 LLM보다 파인튜닝된 BERT를 택하는 경우가 많음(속도·비용·설명가능성) |
+
+> **공통 패턴**: 5개 유즈케이스 모두에서 "생성형 LLM 단독"보다는 **BERT 계열 인코더 모델(4.5절의 Encoder-Only)을 핵심 판단 엔진으로 쓰고, 필요 시 LLM을 답변 생성 등 보조 역할로 조합**하는 구조가 자주 관찰된다. 이는 5.6절에서 다룬 "Decoder-Only가 이해+생성을 모두 할 수 있다"는 사실과 모순되지 않는다 — **할 수 있다는 것**과 **그게 항상 가장 빠르고 저렴한 선택이라는 것**은 다른 이야기다. 지연시간·설명가능성·비용이 중요한 태스크에서는 여전히 작고 빠른 Encoder 모델이 실전에서 선택되는 경우가 많다.
+
+---
+
 ## 부록: AI 역사 타임라인 한눈에 보기
 
 ```
@@ -3427,6 +3570,10 @@ RAG 있음: 질문 → Vector DB에서 관련 문서 검색
 ### 핵심 논문
 - Vaswani et al. (2017) — [Attention Is All You Need](https://arxiv.org/abs/1706.03762) (Transformer 원본 논문)
 - Kaplan et al. (2020) — Scaling Laws for Neural Language Models
+- Sennrich et al. (2015) — [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909) (BPE 원 논문)
+- Radford et al. (2018) — [Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf) (GPT-1 원 논문)
+- Liu et al. (2019) — [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692)
+- Xiong et al. (2020) — [On Layer Normalization in the Transformer Architecture](https://arxiv.org/abs/2002.04745) (Pre-LN/Post-LN 분석)
 
 ### 추천 학습 자료
 - [The Illustrated Transformer (Jay Alammar)](https://jalammar.github.io/illustrated-transformer/) — Transformer 시각화 설명
