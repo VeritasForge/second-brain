@@ -2,6 +2,15 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-07-23] create | PRD 작성 실전 체크리스트 (실제 사내 PRD 리뷰·재작성 기반)
+- created: [[prd-writing-checklist]] — 실제 사내 AI Agent PRD(세무상담 라우팅 에이전트)를 처음부터 끝까지 리뷰·재작성하는 과정에서 도출한 실전 적용 기준 정리. [[prd-templates-and-writing-guide]](외부 리서치 기반 개념/템플릿 참고서)와는 성격이 달라(이 문서는 외부 출처 없이 실제 문서 리뷰 대화에서 도출) 별도 파일로 분리하고 상호 링크. 핵심 내용: ① 컴포넌트 명칭 사용 기준 — "외부에 이미 존재하는 실체(Payroll Agent)"는 유지, "이 PRD가 새로 발명한 내부 구조(Router/Task Agent)"는 순화 ② timeout/fail-closed/API/로직/kill switch 등 엔지니어링 용어 순화표, 단 recall처럼 순화하면 다른 지표와 혼동되는 전문용어는 정확한 용어+쉬운 병기 유지 ③ recall/precision/accuracy 각각이 무엇을 측정하는지와 이 프로젝트가 recall+취소율(precision 대리지표)을 쓰고 accuracy를 안 쓰는 이유 ④ Acceptance Criteria는 조건부 규칙만 Given/When/Then, 불변식·지표 게이트는 서술 유지 ⑤ 문서 분량 실측 결과 핵심 제품 서사가 15%뿐이었던 사례 기반 장황함 방지 원칙 ⑥ 리스크(오너+기한 필수) 작성 기준. 마지막에 10개 항목 종합 체크리스트 포함. product-management.
+
+## [2026-07-22] update | PRD의 AI/Agent 제품 특수 원칙 추가 (PRD-ERD What/How 경계)
+- updated: [[prd-templates-and-writing-guide]] — 실제 사내 AI Agent PRD(세무상담 라우팅 에이전트) 리뷰 과정에서 나온 질문 — "PRD에 엔지니어링 내용이 이렇게 많이 들어가는 게 맞는가"를 계기로, §6 인접 문서와의 차이 섹션 끝에 "AI/Agent 제품 특수 원칙" 신규 하위 섹션 추가. 핵심: 전통적 PRD=What/ERD(FRD·FSD와 동일 역할군)=How 경계가 AI 제품에선 예외를 가짐 — AI는 확률적이라 "성능 임계치"(예: 분류 정확도 90% 이상)와 "에스컬레이션 트리거"(예: 모호한 입력 시 사람에게 확인)는 겉보기엔 기술 수치여도 PRD의 What에 속하고, 그 임계치를 계산하는 라벨링 스키마·평가 파이프라인과 내부 상태 추적 로직만 ERD로 이동해야 함을 Plane Blog·Ainna AI PRD 가이드 원문으로 검증. 용어 범례에 ERD 추가, Sources 21~22번 추가. product-management.
+
+## [2026-07-22] update | PRD 목차 항목별 내용·깊이 가이드 확장 (Figma/Notion/실무자 사례 추가)
+- updated: [[prd-templates-and-writing-guide]] — 기존 문서가 "템플릿 이름·목차 나열" 수준이었던 4️⃣ 섹션을, 각 목차 항목별 "담을 내용|깊이 기준|필수/선택|흔한 실수" 표로 확장(Amazon PR/FAQ·Atlassian 5섹션·Aha.io 9섹션·Product School 13섹션 원문 재확인, WebSearch 7회+WebFetch/Playwright 9회 2차 조사). 신규 발견 3건 추가: ① Figma의 Problem/Solution Alignment/Launch Readiness 3섹션 구조(Product Review 회의와 결합) ② Notion 공식 가이드의 "모든 PRD 공통 5속성"(Context/Goals/Constraints/Assumptions/Dependencies) 기준 템플릿 간 매핑표 ③ 실무자(Alex Debecker) 사례 — 섹션마다 깊이를 균등하지 않게 배분하는 실전 원칙. "잘 쓰는 법" 8번째 원칙과 "흔한 실수" 7번째 행(타부서 의존성 누락) 추가, 출처 5건 신규(Reforge, Notion, Coda/Figma, 실무 블로그 2). product-management.
+
 ## [2026-07-20] update | NLP 심화(토큰화·BPE, 도메인특화모델, 유즈케이스별 모델) Chapter 7 추가
 - updated: [[ai-ml-dl-transformer-llm-introduction]] — rl-verify로 사실 검증을 마친 NLP 개념 설명을 병합. 신규 Chapter 7(7.1 불용어·BPE 알고리즘 단계별 예시, 7.2 도메인특화모델 Build/Fine-tune/Borrow, 7.3 유즈케이스별 실제 사용 모델) 전체 추가. 4.5절에 Post-LN/Pre-LN 심화 Q&A, 5.6절에 GPT-1 원논문 제목("...Language Understanding by Generative Pre-Training") 관련 Q&A 삽입 — 기존 문서의 잔차연결+정규화 구조는 이미 정확했으므로 "오류 정정"이 아닌 순수 보강. 참고논문 4개(Sennrich BPE, Radford GPT-1, Liu RoBERTa, Xiong Pre-LN) 및 nlp/tokenization 태그 추가. gen-ai.
 
