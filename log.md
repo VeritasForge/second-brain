@@ -2,6 +2,16 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-08-07] create | AWS VPC 네트워킹 아키텍처 종합 정리
+
+- created: [[aws-vpc-networking-deep-dive]] — concept-explainer + deep-research 프로토콜과 AWS 공식 문서(AWS Knowledge MCP) 검증을 거쳐 신규 작성. 대화가 VPC 기초 질문에서 시작해 여러 정정 라운드를 거치며 심화된 내용을 목차 구조로 재배치. 핵심 내용: ① Public/Private Subnet 정의와 ECS Fargate+ALB 기반 Hello World API 아키텍처 ② VPC Peering vs Transit Gateway 비교와 "VPC 10개 미만" 권장 근거(n(n-1)/2 완전연결 수식, quota 50/125) ③ VPC Endpoint(Gateway/Interface)로 NAT을 대체할 수 있는 조건 — AWS 서비스 트래픽만 가능, 외부 SaaS 호출은 여전히 NAT 필요 ④ Lambda VPC 모드의 정확한 네트워킹 모델(Hyperplane ENI)과 "API Gateway 트리거 여부와 VPC 모드는 독립적 축"이라는 오해 정정 ⑤ SQS/SNS는 VPC 모드가 없고 VPC Endpoint(발행 방향)만 존재한다는 일반화 ⑥ SNS는 private HTTP(S) 엔드포인트로 직접 push할 수 없다는 공식 제약(Lambda/SQS 구독은 Invoke/SendMessage API라 예외)과, 이를 사용자의 실제 2022~23년 MSA 브로커 경험(SQS 없이 SNS→서비스 직결, 서비스가 private subnet)과 대조 검증한 결과 — ALB/NLB가 실제 진입점이고 컴퓨트만 private subnet이었던 것으로 확인. 전체를 관통하는 원칙("Public Subnet 진입점 없이는 아무것도 Private Subnet으로 들어올 수 없다")으로 마무리. develop.
+
+## [2026-08-05] update | Terraform Core·terraform init 오해 정정 보강
+- updated: [[terraform-concept-deep-dive]] — 대화 중 사용자 질문(`terraform init`이 `git init`처럼 skeleton을 생성해주는지, Terraform Core가 무엇인지) 계기로 두 부분 보강. ① 섹션 2에 "Terraform Core ↔ Provider 관계" 소절 신규 추가 — HashiCorp 공식 문서(`how-terraform-works`) 원문 확인 기반, Core의 5대 책임(설정 해석/State 관리/Resource Graph 구성/Plan 실행/RPC 통신)과 Provider가 별도 프로세스로 실행되며 RPC(원격 프로시저 호출)로 통신하는 구조 설명 ② 섹션 3의 `terraform init` 단계에 "`git init`과 달리 코드 skeleton을 생성하지 않으며, `.tf`가 이미 존재한다고 가정한다"는 흔한 오해 정정 콜아웃 추가, 공식 문서(`cli/commands/init`) 원문 인용. Sources 15~16번, Research Metadata 후속 보강 항목 추가. develop.
+
+## [2026-08-05] create | Terraform Concept Deep Dive 신규 작성
+- created: [[terraform-concept-deep-dive]] — vault 내 Terraform 전용 개념 문서 부재를 확인한 후 concept-explainer + deep-research 프로토콜로 신규 작성. 핵심 내용: ① HCL/Provider/State/Plan-Apply 아키텍처와 동작 흐름 ② Terraform vs OpenTofu vs Pulumi vs AWS CDK 비교 매트릭스 ③ 2023년 8월 BSL(Business Source License) 라이선스 전환과 OpenTofu 포크 배경(Open Terraform Manifesto, Linux Foundation 편입, 2024년 4월 cease-and-desist 분쟁)을 타임라인으로 정리 ④ 2025년 2월 IBM의 HashiCorp 인수 ⑤ state 관리 안티패턴(로컬 저장, 잠금 미적용, 모놀리식 state, 콘솔 수동 변경). 검증 과정에서 WebSearch AI 요약이 제시한 Terraform 최신 버전(1.15.2/1.15.4, 2026-05)을 GitHub 공식 릴리즈 페이지 직접 확인으로 v1.15.8(2026-07-08)로 정정했고, "IBM 인수 후 38% 사용자 이탈 의향"·"OpenTofu 연 300% 성장/1000만 다운로드" 수치는 원문 재확인 결과 출처·방법론이 불명확해 미검증으로 표시. develop.
+
 ## [2026-07-23] create | PRD 작성 실전 체크리스트 (실제 사내 PRD 리뷰·재작성 기반)
 - created: [[prd-writing-checklist]] — 실제 사내 AI Agent PRD(세무상담 라우팅 에이전트)를 처음부터 끝까지 리뷰·재작성하는 과정에서 도출한 실전 적용 기준 정리. [[prd-templates-and-writing-guide]](외부 리서치 기반 개념/템플릿 참고서)와는 성격이 달라(이 문서는 외부 출처 없이 실제 문서 리뷰 대화에서 도출) 별도 파일로 분리하고 상호 링크. 핵심 내용: ① 컴포넌트 명칭 사용 기준 — "외부에 이미 존재하는 실체(Payroll Agent)"는 유지, "이 PRD가 새로 발명한 내부 구조(Router/Task Agent)"는 순화 ② timeout/fail-closed/API/로직/kill switch 등 엔지니어링 용어 순화표, 단 recall처럼 순화하면 다른 지표와 혼동되는 전문용어는 정확한 용어+쉬운 병기 유지 ③ recall/precision/accuracy 각각이 무엇을 측정하는지와 이 프로젝트가 recall+취소율(precision 대리지표)을 쓰고 accuracy를 안 쓰는 이유 ④ Acceptance Criteria는 조건부 규칙만 Given/When/Then, 불변식·지표 게이트는 서술 유지 ⑤ 문서 분량 실측 결과 핵심 제품 서사가 15%뿐이었던 사례 기반 장황함 방지 원칙 ⑥ 리스크(오너+기한 필수) 작성 기준. 마지막에 10개 항목 종합 체크리스트 포함. product-management.
 

@@ -58,6 +58,7 @@
 - [[architecture-comprehensive-comparison]] — 4대 아키텍처 종합 비교
 - [[aws-eventbridge-lambda-batch-stack]] — Python + EventBridge + Lambda + AWS Batch 스택 의사결정 트리 (Scheduler vs Rules, Lambda 생략 옵션, Fargate vs EC2 Spot, CDK/SAM/Terraform 비교)
 - [[aws-sns-sqs-dlq-comparison]] — AWS SNS vs SQS DLQ 비교 (EDA 기반 MSA 메시지 전달 보장)
+- [[aws-vpc-networking-deep-dive]] — AWS VPC 네트워킹 아키텍처 종합 정리 (Public/Private Subnet, ECS Fargate+ALB Hello World 아키텍처, VPC Peering vs Transit Gateway, VPC Endpoint의 NAT 대체 조건, Lambda VPC 모드 오해 정정, SNS의 Private Subnet 전달 제약과 실제 브로커 패턴 검증)
 - [[sli-slo-sla-guide]] — SLI, SLO, SLA 서비스 신뢰성 지표 체계
 - [[solid-principles-complete-guide]] — SOLID 원칙 완전 정복 (정의, 예제, 관계, 실무 적용)
 - [[architecture-integrated-comparison]] — 4대 아키텍처 통합 비교 (DDD, Layered, Clean, Hexagonal)
@@ -75,6 +76,7 @@
 - [[rate-limit-and-client-ip]] — Rate-Limit 설계 & 클라이언트 IP 추출 종합 (재전송 쿨다운·이메일/IP 한도·Resend fallback, XFF 위조 방어·"오른쪽에서 N번째" 규칙·Vercel x-real-ip 우선·IPv6 /64·헬퍼 함수)
 - [[restful-architecture-concept-deep-dive]] — RESTful Architecture Deep Dive
 - [[temporal-workflow-orchestration-comprehensive]] — Temporal 워크플로우 오케스트레이션 엔진 완전 정리 (Durable Execution, SAGA Orchestration/Process Manager, 보상 트랜잭션, Workflow ID·Persistence, Task Queue vs 외부 브로커, 비동기 Activity 완료, Heartbeat 4대 목적, 동기/비동기 결합도 트레이드오프, 배달 서비스 Python 종합 예제)
+- [[terraform-concept-deep-dive]] — Terraform Concept Deep Dive (HCL/Provider/State/Plan-Apply 아키텍처, OpenTofu 포크 배경과 BSL 라이선스 분쟁, IBM의 HashiCorp 인수, Pulumi/AWS CDK 비교, state 관리 안티패턴)
 - [[url-mention-unfurling]] — URL Mention (Unfurling) Concept Deep Dive — OGP/Twitter Card/oEmbed 비교, SSRF 가드, Python 구현 4종 (BeautifulSoup/safe-sync/async+Redis/linkpreview)
 - [[video-upscaling-service-architecture]] — Video Upscaling Service Architecture
 
