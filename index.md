@@ -224,6 +224,7 @@
 - [[slack-socket-mode-vs-http]] — Slack Socket Mode vs HTTP Deep Dive
 
 ### gen_ai
+- [[a2a-protocol-agent-to-agent-deep-dive]] — A2A (Agent2Agent) Protocol 개념·아키텍처·MCP/ACP 비교 Deep Dive
 - [[ai-ml-dl-transformer-llm-introduction]] — AI 개론: Machine Learning에서 LLM까지
 - [[claude-code-core-components-deep-research]] — Claude Code 핵심 구성 요소 완전 분석
 - [[evaluator-optimizer-pattern-deep-research]] — Evaluator-Optimizer 패턴 Deep Research

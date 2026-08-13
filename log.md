@@ -2,6 +2,14 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-08-12] update | A2A Discovery 메커니즘 상세 보강 (organize 병합)
+
+- updated: [[a2a-protocol-agent-to-agent-deep-dive]] — "Client Agent가 Remote Agent의 Agent Card를 첫 조회하는 방법"과 "Discovery를 생략하고 URL만으로 직접 호출 가능한지"에 대한 후속 질문·조사 내용을 organize 스킬로 병합. 3️⃣ 아키텍처 섹션에 신규 소제목 "🔍 Discovery 상세 메커니즘" 추가: ① Well-Known URI 방식의 표준 경로(`/.well-known/agent-card.json`, RFC 8615 기반)와 조회 절차 ② 인증된 확장 카드(Authenticated Extended Card, v1.0부터 `GetExtendedAgentCard`로 메서드명 변경) 흐름 ③ "Discovery(선택) vs Invocation(필수)" 2계층 모델로 Direct Configuration이 스펙상 정식 허용된 생략 경로임을 GitHub 공식 문서 원문(`docs/topics/agent-discovery.md`)으로 확인, 단 URL 외 전송방식/메서드계약/인증방식 3가지가 추가로 필요함을 표로 정리. 7️⃣ 주의점에 "공개 카드 자체의 노출 위험"(인증 없이 조회 가능한 `/.well-known/agent-card.json`에 민감정보를 넣으면 안 되는 이유) 보강. Sources 3건(a2a-protocol.org agent-discovery, GitHub 원문, a2aprotocol.ai 확장 카드 워크플로우) 및 Research Metadata 갱신(WebSearch 8→11, WebFetch 4→8). gen-ai.
+
+## [2026-08-12] create | A2A (Agent2Agent) Protocol 개념 Deep Dive
+
+- created: [[a2a-protocol-agent-to-agent-deep-dive]] — vault에 A2A Protocol 전용 문서 부재를 확인(기존 [[genai-rag-agent-llm-workflow-concepts]]에 1줄 언급만 존재)한 후 concept-explainer + deep-research 프로토콜(WebSearch 7회 + WebFetch 4회, 출처 10개)로 신규 작성. 핵심 내용: ① A2A 정의·탄생 배경(2025-04-09 Google 발표 → 2025-06-23 Linux Foundation 기증 → 2026-04 v1.0 정식 릴리스, 150+ 조직 지지) ② Agent Card/Task/Message/Artifact/Skill 5대 구성 요소와 Task 상태 머신(submitted/working/input-required/auth-required/completed/failed/canceled/rejected) ③ 전송 계층(HTTP+JSON-RPC 2.0/REST/gRPC/SSE)과 인증 방식(API Key/OAuth 2.0/OIDC/mTLS) ④ MCP(수직: agent→tool)와 A2A(수평: agent↔agent)의 역할 차이 및 상호 보완 관계, ACP가 2025-08 A2A 프로젝트로 흡수된 배경 ⑤ N² 확장성 문제·신뢰 메커니즘 미흡·통합 관측성 도구 부재 등 실무 비판(N² 연결 문제, Tool Squatting, Agent Card Context Poisoning) ⑥ "150개 조직 지지"와 "실제 90일+ 프로덕션 운영"의 차이를 지적하는 신중론까지 균형 있게 포함. gen-ai.
+
 ## [2026-08-07] create | AWS VPC 네트워킹 아키텍처 종합 정리
 
 - created: [[aws-vpc-networking-deep-dive]] — concept-explainer + deep-research 프로토콜과 AWS 공식 문서(AWS Knowledge MCP) 검증을 거쳐 신규 작성. 대화가 VPC 기초 질문에서 시작해 여러 정정 라운드를 거치며 심화된 내용을 목차 구조로 재배치. 핵심 내용: ① Public/Private Subnet 정의와 ECS Fargate+ALB 기반 Hello World API 아키텍처 ② VPC Peering vs Transit Gateway 비교와 "VPC 10개 미만" 권장 근거(n(n-1)/2 완전연결 수식, quota 50/125) ③ VPC Endpoint(Gateway/Interface)로 NAT을 대체할 수 있는 조건 — AWS 서비스 트래픽만 가능, 외부 SaaS 호출은 여전히 NAT 필요 ④ Lambda VPC 모드의 정확한 네트워킹 모델(Hyperplane ENI)과 "API Gateway 트리거 여부와 VPC 모드는 독립적 축"이라는 오해 정정 ⑤ SQS/SNS는 VPC 모드가 없고 VPC Endpoint(발행 방향)만 존재한다는 일반화 ⑥ SNS는 private HTTP(S) 엔드포인트로 직접 push할 수 없다는 공식 제약(Lambda/SQS 구독은 Invoke/SendMessage API라 예외)과, 이를 사용자의 실제 2022~23년 MSA 브로커 경험(SQS 없이 SNS→서비스 직결, 서비스가 private subnet)과 대조 검증한 결과 — ALB/NLB가 실제 진입점이고 컴퓨트만 private subnet이었던 것으로 확인. 전체를 관통하는 원칙("Public Subnet 진입점 없이는 아무것도 Private Subnet으로 들어올 수 없다")으로 마무리. develop.
