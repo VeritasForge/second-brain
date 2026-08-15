@@ -2,6 +2,14 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-08-15] update | Mutation Testing 노트에 실무 적용 판단 섹션 추가
+
+- updated: [[mutation-testing-deep-dive]] — 개인 전역 CLAUDE.md의 `[Happy]`/`[Boundary]`/`[Error]` 테스트 카테고리 규칙을 coverage 툴로 대체할 수 있는지에 대한 이전 논의를 "실무 적용" 섹션으로 추가. 카테고리별 coverage 대체 가능 여부 표(`[Error]`는 branch coverage로 대부분 대체 가능, `[Boundary]`는 같은 분기의 다른 값 구분 불가로 대체 불가), 대안 비교표(A. 순수 coverage / B. branch coverage+mutation testing 병행(추천) / C. 완전 삭제)를 포함. develop.
+
+## [2026-08-15] create | Mutation Testing 개념 정리
+
+- created: [[mutation-testing-deep-dive]] — superpowers TDD(Test-Driven Development) 스킬 및 사용자 CLAUDE.md의 Happy/Boundary/Error 테스트 카테고리 규칙이 중복인지 논의하던 중, 대안으로 언급된 coverage 툴 vs mutation testing 비교 대화를 정리해 신규 작성. 핵심 내용: ① mutation testing의 정의 — "테스트가 실행됐는가"가 아니라 "테스트가 실제로 버그를 잡아내는가"를 검증 ② 동작 원리(mutant 생성 → 테스트 재실행 → killed/survived 판정) ③ `email=None` 레거시 계정 시나리오로 line/branch coverage 100%여도 버그가 남을 수 있음을 예시로 검증 ④ coverage 종류별(line/branch/mutation) 비교표, 언어별 도구(mutmut, Stryker, go-mutesting, PIT) 정리. vault 내 기존 [[spring-di-bean-test-deep-dive]]에 PIT/pitest 한 줄 언급만 있던 것을 계기로 별도 심화 노트로 분리. develop.
+
 ## [2026-08-12] update | A2A Discovery 메커니즘 상세 보강 (organize 병합)
 
 - updated: [[a2a-protocol-agent-to-agent-deep-dive]] — "Client Agent가 Remote Agent의 Agent Card를 첫 조회하는 방법"과 "Discovery를 생략하고 URL만으로 직접 호출 가능한지"에 대한 후속 질문·조사 내용을 organize 스킬로 병합. 3️⃣ 아키텍처 섹션에 신규 소제목 "🔍 Discovery 상세 메커니즘" 추가: ① Well-Known URI 방식의 표준 경로(`/.well-known/agent-card.json`, RFC 8615 기반)와 조회 절차 ② 인증된 확장 카드(Authenticated Extended Card, v1.0부터 `GetExtendedAgentCard`로 메서드명 변경) 흐름 ③ "Discovery(선택) vs Invocation(필수)" 2계층 모델로 Direct Configuration이 스펙상 정식 허용된 생략 경로임을 GitHub 공식 문서 원문(`docs/topics/agent-discovery.md`)으로 확인, 단 URL 외 전송방식/메서드계약/인증방식 3가지가 추가로 필요함을 표로 정리. 7️⃣ 주의점에 "공개 카드 자체의 노출 위험"(인증 없이 조회 가능한 `/.well-known/agent-card.json`에 민감정보를 넣으면 안 되는 이유) 보강. Sources 3건(a2a-protocol.org agent-discovery, GitHub 원문, a2aprotocol.ai 확장 카드 워크플로우) 및 Research Metadata 갱신(WebSearch 8→11, WebFetch 4→8). gen-ai.

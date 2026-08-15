@@ -42,6 +42,7 @@
 - [[engineering-taste-concept]] — "Taste" 엔지니어링 심미안/판단력의 정체 (Jobs 1995→Graham 2002→Karpathy AI시대 계보, taste≠skill, 트레이드오프 판단, product/outcome taste, 훈련법, 8 출처)
 - [[greenfield-project]] — 그린필드 프로젝트 개념
 - [[kotlin-vs-go]] — Kotlin vs Go 언어 비교 + Kotlin 핵심 기능 (null safety, data class, JDSL)
+- [[mutation-testing-deep-dive]] — Mutation Testing 완전 정복 (동작 원리, coverage 비교, mutant/killed/survived, 언어별 도구, TDD 테스트 카테고리 규칙과의 실무 적용 판단)
 - [[nvim-buffer-concept]] — Neovim 버퍼 개념 (버퍼 vs 윈도우 vs 탭)
 - [[spring-aop-complete-guide]] — Spring AOP 완전 가이드 (프록시, AspectJ, 위빙, 면접 Q&A)
 - [[spring-di-bean-test-deep-dive]] — Spring 핵심 완전 정복 (IoC, DI, Bean, 테스트, TDD)
