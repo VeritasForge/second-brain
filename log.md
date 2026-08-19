@@ -2,6 +2,18 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-08-19] create | 루브릭(Rubric) 개념 정리
+
+- created: [[rubric-evaluation-criteria]] — `ce-resolve-pr-feedback` 스킬의 `evaluation-rubric.md`를 계기로 "루브릭"이 무엇인지 짚어본 대화를 정리. 핵심 내용: ① 어원(라틴어 rubrica → 20세기 교육 채점 기준표 → 최근 LLM-as-judge로 전이)과 AI 고유 용어가 아니라는 정정 ② 에세이 채점 루브릭 예시로 구체화 ③ `ce-resolve-pr-feedback`의 판정(verdict: fixed/not-addressing/declined/replied/needs-human)과 교육 루브릭의 대응 관계 ④ Golden Set과의 관계 — "골든 셋은 루브릭 통과작"이라는 사용자 프레이밍을 구축 단계(맞음)와 평가 단계(방향 반대, 루브릭이 골든 셋을 참조)로 나눠 정정, Reference 기반/Rubric 기반/혼합 3가지 채점 방식 다이어그램 ⑤ 업무 카드 자동 생성 워크플로우 사례로 생성 전 기준(템플릿/스키마/Acceptance Criteria)과 생성 후 기준(rubric)을 구분 ⑥ 최종 판별 규칙 — "판정 대상이 이미 존재해야 rubric". ai-engineering.
+
+## [2026-08-17] create | Gemini API vs Vertex AI 응답 품질 차이 Fact-Check
+
+- created: [[gemini-api-vs-vertex-ai-response-quality-factcheck]] — 중단된 Claude Code Workflow를 이어받아 Gemini Developer API(AI Studio)와 Vertex AI의 응답 품질 차이에 관한 7개 주장을 15개 관점으로 재검증. 이미지 258↔1,806토큰은 특정 GitHub 로그로 확인되지만 공식 원인·보편성이 없어 Confirmed→Likely로 조정, AI Studio 품질 우위 포럼 보고는 존재하나 설정 미통제·선택 편향·반대 사례로 플랫폼 전체 우열은 Uncertain, 샘플링 기본값은 양쪽이 사실상 같아 차이 원인 가설을 미검증으로 판정. Safety probability/severity 차이, 일반 모델 호출의 Search grounding opt-in, 동일 weights 미보장, DOJ FastSearch 자료의 정확한 범위(소비자 Gemini 앱 vs 제3자 Vertex grounding)를 정리하고 실제 세금 문서 A/B 평가 프로토콜 포함. 기존 [[vertex-ai-gemini-agent-migration-deep-research]]와 양방향 링크. gen-ai.
+
+## [2026-08-15] create | Gemini API → Vertex AI 전환 Deep Research
+
+- created: [[vertex-ai-gemini-agent-migration-deep-research]] — Gemini API(Google AI Studio)를 직접 호출해 AI Agent를 개발해온 팀이 Vertex AI 경유 호출로 전환할지 검토하기 위한 실무 조사. 5개 독립 리서치 에이전트(핵심 기술 차이/SDK 마이그레이션/Agent 개발 프레임워크/엔터프라이즈 보안·비용·관측성/실무 마이그레이션 경험) 병렬 조사 후 교차검증·종합. 핵심 발견: ① "Vertex AI"가 2026-04-22 Google Cloud Next '26에서 "Gemini Enterprise Agent Platform"으로 리브랜딩(API 엔드포인트·IAM 역할명·SDK 패키지명은 하위호환 유지) ② AI Studio 표준 API 키가 2026-09부터 전면 거부(서비스 계정 결합 키만 허용) ③ SDK는 `google-generativeai`(2025-11-30 지원 종료)→`google-genai` 통합 SDK로 전환, `vertexai=True`→`enterprise=True` 파라미터 리브랜딩(레거시 여전히 동작) ④ 독립 벤치마크상 AI Studio가 Vertex AI보다 latency 실측 우위(통념과 반대) ⑤ ADK(Agent Development Kit)/Agent Studio(구 Agent Builder)/Agent Runtime(구 Agent Engine)/A2A/MCP 프레임워크 지형과 역할 구분. IAM 최소권한·Workload Identity Federation·VPC-SC·CMEK·비용 최적화(Context Caching/Batch API/Provisioned Throughput)·관측성(OpenTelemetry) best practice와 Python 코드 예제(SDK 초기화/스트리밍/함수 호출/ADK+MCP 연동) 포함. gen-ai.
+
 ## [2026-08-15] update | Mutation Testing 노트에 실무 적용 판단 섹션 추가
 
 - updated: [[mutation-testing-deep-dive]] — 개인 전역 CLAUDE.md의 `[Happy]`/`[Boundary]`/`[Error]` 테스트 카테고리 규칙을 coverage 툴로 대체할 수 있는지에 대한 이전 논의를 "실무 적용" 섹션으로 추가. 카테고리별 coverage 대체 가능 여부 표(`[Error]`는 branch coverage로 대부분 대체 가능, `[Boundary]`는 같은 분기의 다른 값 구분 불가로 대체 불가), 대안 비교표(A. 순수 coverage / B. branch coverage+mutation testing 병행(추천) / C. 완전 삭제)를 포함. develop.

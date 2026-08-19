@@ -14,6 +14,7 @@
 - [[ralph-playbook-korean-translation]] — The Ralph Playbook 한국어 번역 및 정리
 - [[ralph-superpowers-compund]] — Ralph Loop + Superpowers + Compound Engineering 조합 가이드
 - [[rl-verify-vs-ouroboros-analysis]] — rl-verify vs Ouroboros 비교 분석 및 온톨로지 심층 탐구
+- [[rubric-evaluation-criteria]] — 루브릭(Rubric) 개념 정리: 교육 평가 용어의 어원과 LLM-as-judge로의 전이, Golden Set과의 관계(구축 단계 vs 평가 단계), 생성 기준(템플릿/DoD) vs 평가 기준(rubric) 구분
 - [[simultaneous-interpretation-service]] — 동시통역 서비스 Deep Research (ASR/NMT/TTS 파이프라인, Cascaded vs E2E, 한국어 SOV 어순 이슈)
 - [[study-ouroboros]] — Ouroboros: 명세 우선 AI 개발 엔진 스터디
 
@@ -229,6 +230,7 @@
 - [[ai-ml-dl-transformer-llm-introduction]] — AI 개론: Machine Learning에서 LLM까지
 - [[claude-code-core-components-deep-research]] — Claude Code 핵심 구성 요소 완전 분석
 - [[evaluator-optimizer-pattern-deep-research]] — Evaluator-Optimizer 패턴 Deep Research
+- [[gemini-api-vs-vertex-ai-response-quality-factcheck]] — Gemini Developer API(AI Studio)와 Vertex AI의 응답 품질 차이 7개 주장 Fact-Check: 이미지 토큰화·샘플링 기본값·Safety·Search grounding·동일 weights·DOJ FastSearch 스코프 검증
 - [[genai-rag-agent-llm-workflow-concepts]] — GenAI 핵심 개념 Deep Research 리포트
 - [[google-ai-studio-to-claude-code-migration]] — Google AI Studio to Claude Code 마이그레이션
 - [[llm-token-system-and-transformer-architecture]] — LLM 토큰 시스템과 Transformer 아키텍처
@@ -236,6 +238,7 @@
 - [[multi-agent-orchestration-concrete-scenarios]] — Multi-Agent Orchestration 시나리오
 - [[openclaw-project-architecture-analysis]] — OpenClaw 프로젝트 분석
 - [[superpowers-project-architecture-analysis]] — Superpowers 프로젝트 분석
+- [[vertex-ai-gemini-agent-migration-deep-research]] — Gemini API(AI Studio)→Vertex AI 전환 실무 Deep Research: 리브랜딩(Gemini Enterprise Agent Platform)·인증/SDK 마이그레이션(google-genai, vertexai=True→enterprise=True)·ADK/Agent Runtime/A2A/MCP 프레임워크·보안·비용·관측성 best practice·Python 코드 예제
 - [[video-super-resolution-deep-learning-analysis]] — Video Super-Resolution 딥러닝 분석
 
 ### mac-os
