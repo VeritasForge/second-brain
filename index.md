@@ -189,6 +189,9 @@
 - [[nat-and-nat-server]] — NAT & NAT Server Deep Dive (검증 반영판: SNAT/DNAT·3종 분류·Huawei nat server·헤어핀·CGNAT RFC 6598 vs RFC 1918, rl-verify P0/P1/P2 교정)
 - [[why-http1-1-still-dominates]] — 왜 HTTP/1.1이 여전히 주류인가 (CDN edge↔origin, L4 LB, 디버깅, 기업망)
 
+### develop/observability
+- [[dd-trace-id-vs-correlation-id]] — dd.trace_id vs correlation_id: Datadog 예약 속성 확인(이름 충돌 없음)과 분산 트레이싱-비즈니스 상관관계 ID의 의미적 겹침/역할 분담 분석 (트레이스의 3가지 구조적 한계 — 시간 역행 불가, 재시도 단절, SQS/SNS 큐 경계 전파 한계)
+
 ### develop/os
 - [[atomic-mutex-semaphore-qa-deep-dive]] — Atomic/Mutex/Semaphore 심화 Q&A Deep Dive
 - [[ghostty-font-config]] — Ghostty 터미널 폰트 설정 방법 (font-family, font-size, Nerd Font)

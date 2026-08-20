@@ -2,6 +2,10 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-08-20] create | dd.trace_id vs correlation_id
+
+- created: [[dd-trace-id-vs-correlation-id]] — tax-agent 저장소의 `consult-task-engine`/`consult-task-orchestrator` 로깅에 correlation_id를 도입하기로 하던 중, Datadog APM의 `dd.trace_id`와 의미가 겹치지 않는지에 대한 논의를 정리. 핵심 내용: ① Datadog 공식 문서로 확인한 예약 속성(`host`/`source`/`status`/`service`/`trace_id`/`message` 6개)과 `ddtrace`가 자동 주입하는 `dd.*` 필드 — `correlation_id`라는 이름 자체는 충돌하지 않음(단, 접두사 없는 `trace_id`는 피해야 함) ② 진짜 질문인 "의미적 겹침"에는 정직하게 답변 — APM이 잘 계측된 단일 실행 안에서는 실제로 중복이라고 인정 ③ 트레이스가 구조적으로 못 하는 세 가지(시간을 못 거슬러 올라감, 재시도 시 트레이스 단절, SQS/SNS 큐 경계에서 전파 안 됨 — Datadog 자체 GitHub 이슈로 확인)를 correlation_id가 메꾸는 방식 정리 ④ "현미경(dd.trace_id, 실행 1건 내부) vs 책갈피(correlation_id, 여러 실행에 걸친 업무 단위)" 역할 분담 다이어그램. develop.
+
 ## [2026-08-19] create | 루브릭(Rubric) 개념 정리
 
 - created: [[rubric-evaluation-criteria]] — `ce-resolve-pr-feedback` 스킬의 `evaluation-rubric.md`를 계기로 "루브릭"이 무엇인지 짚어본 대화를 정리. 핵심 내용: ① 어원(라틴어 rubrica → 20세기 교육 채점 기준표 → 최근 LLM-as-judge로 전이)과 AI 고유 용어가 아니라는 정정 ② 에세이 채점 루브릭 예시로 구체화 ③ `ce-resolve-pr-feedback`의 판정(verdict: fixed/not-addressing/declined/replied/needs-human)과 교육 루브릭의 대응 관계 ④ Golden Set과의 관계 — "골든 셋은 루브릭 통과작"이라는 사용자 프레이밍을 구축 단계(맞음)와 평가 단계(방향 반대, 루브릭이 골든 셋을 참조)로 나눠 정정, Reference 기반/Rubric 기반/혼합 3가지 채점 방식 다이어그램 ⑤ 업무 카드 자동 생성 워크플로우 사례로 생성 전 기준(템플릿/스키마/Acceptance Criteria)과 생성 후 기준(rubric)을 구분 ⑥ 최종 판별 규칙 — "판정 대상이 이미 존재해야 rubric". ai-engineering.
