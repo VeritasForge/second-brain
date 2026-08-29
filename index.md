@@ -244,6 +244,9 @@
 - [[vertex-ai-gemini-agent-migration-deep-research]] — Gemini API(AI Studio)→Vertex AI 전환 실무 Deep Research: 리브랜딩(Gemini Enterprise Agent Platform)·인증/SDK 마이그레이션(google-genai, vertexai=True→enterprise=True)·ADK/Agent Runtime/A2A/MCP 프레임워크·보안·비용·관측성 best practice·Python 코드 예제
 - [[video-super-resolution-deep-learning-analysis]] — Video Super-Resolution 딥러닝 분석
 
+### legal
+- [[corporate-liquidation-tax-filing]] — 법인 폐업·해산·청산 상태별 세무 신고의무 정리 (폐업신고 vs 상법상 해산·청산 구분, 미청산 법인의 계속 신고의무 세목·기한, 청산 절차와 청산소득·의제배당 과세, 미신고 리스크와 홈택스·위택스 확인 방법)
+
 ### mac-os
 - [[macbook-lid-close-sleep-prevention]] — MacBook 덮개 닫기 수면 방지
 

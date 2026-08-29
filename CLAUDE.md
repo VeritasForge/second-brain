@@ -24,6 +24,7 @@ Den/
 │   ├── algorithm/
 │   ├── career/
 │   ├── research/
+│   ├── legal/
 │   └── mac-os/
 ├── index.md         # 전체 문서 카탈로그
 ├── log.md           # 시간순 변경 이력 (append-only)
@@ -41,7 +42,7 @@ Typical workflow after note changes: `/wrap` → `/commit`
 
 Uses Conventional Commits with vault-specific scopes:
 - Types: `feat`, `fix`, `docs`, `refactor`, `chore`
-- Scopes: `gen-ai`, `develop`, `algorithm`, `research`, `security`, `mac-os`, `docs`, `config`, `vault`
+- Scopes: `gen-ai`, `develop`, `algorithm`, `research`, `security`, `legal`, `mac-os`, `docs`, `config`, `vault`
 - Example: `feat(gen-ai): add RAG agent workflow concepts note`
 
 ## Document Separation Rules
@@ -61,6 +62,7 @@ Uses Conventional Commits with vault-specific scopes:
 - **research/**: market research, industry analysis, deep research reports
 - **security/**: AWS IAM (User, Group, Policy, Role), Nginx audit, TPM, OAuth, SSO, financial API security
 - **career/**: job analysis, interview Q&A
+- **legal/**: Korean corporate tax and commercial law (business closure, dissolution, liquidation)
 - **mac-os/**: macOS configuration
 
 ## Vault 운영
