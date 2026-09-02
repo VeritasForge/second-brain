@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="이건희 귀속 인용문을 원전까지 추적해 반증하고, 기술 이해도와 인문학적 소양을 실증으로 해부한 뒤 백엔드 개발자의 실천안까지 도출한 검증 보고서.">
+<title>무엇을 세고 있는가</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F5F6F8; --panel:#FFFFFF; --ink:#15181F; --ink2:#4C5468; --ink3:#7C8497;
+  --rule:#DDE0E8; --rule2:#E9EBF0;
+  --accent:#1E3A6E; --accent-soft:#E7ECF6;
+  --ok:#1B6153; --ok-bg:#E4F0EC;
+  --no:#A03426; --no-bg:#F7E7E4;
+  --mid:#8A6D1F; --mid-bg:#F6EEDC;
+  --unk:#6E6A62; --unk-bg:#ECEAE5;
+  --shadow:0 1px 2px rgba(21,24,31,.05),0 8px 24px -12px rgba(21,24,31,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101319; --panel:#171B23; --ink:#E7EAF1; --ink2:#A3ABBC; --ink3:#767E90;
+    --rule:#2A303C; --rule2:#222834;
+    --accent:#8FAEE8; --accent-soft:#1C2536;
+    --ok:#6FCBB4; --ok-bg:#142824;
+    --no:#EA9384; --no-bg:#2C1B18;
+    --mid:#DDBA6A; --mid-bg:#2A2418;
+    --unk:#A9A499; --unk-bg:#23231F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101319; --panel:#171B23; --ink:#E7EAF1; --ink2:#A3ABBC; --ink3:#767E90;
+  --rule:#2A303C; --rule2:#222834;
+  --accent:#8FAEE8; --accent-soft:#1C2536;
+  --ok:#6FCBB4; --ok-bg:#142824;
+  --no:#EA9384; --no-bg:#2C1B18;
+  --mid:#DDBA6A; --mid-bg:#2A2418;
+  --unk:#A9A499; --unk-bg:#23231F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+  font-weight:400; line-height:1.75; margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 120px}
+.col{max-width:70ch}
+
+/* ---- masthead ---- */
+header.mast{border-bottom:2px solid var(--ink);margin-bottom:52px;padding:56px 0 28px}
+.kicker{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:22px;
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+}
+.kicker span{color:var(--ink3)}
+h1{
+  font-family:"Gowun Batang","Apple SD Gothic Neo",serif;font-weight:700;
+  font-size:clamp(38px,7vw,72px);line-height:1.12;letter-spacing:-.02em;
+  margin:0 0 20px;text-wrap:balance;
+}
+.dek{font-size:clamp(16px,2.1vw,19px);color:var(--ink2);max-width:62ch;line-height:1.72;margin:0}
+.dek b{color:var(--ink);font-weight:600}
+
+/* ---- section ---- */
+section{margin:0 0 76px;scroll-margin-top:20px}
+h2{
+  font-family:"Gowun Batang",serif;font-weight:700;
+  font-size:clamp(25px,3.6vw,36px);line-height:1.25;letter-spacing:-.015em;
+  margin:0 0 8px;text-wrap:balance;
+}
+.sec-no{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  letter-spacing:.16em;color:var(--accent);text-transform:uppercase;
+  display:block;margin-bottom:12px;
+}
+.sec-head{border-top:1px solid var(--ink);padding-top:18px;margin-bottom:32px}
+.sec-sub{color:var(--ink3);font-size:15px;margin:6px 0 0}
+h3{font-family:"Gowun Batang",serif;font-weight:700;font-size:21px;line-height:1.4;margin:40px 0 12px;letter-spacing:-.01em}
+h4{font-size:15px;font-weight:600;margin:28px 0 8px;color:var(--ink)}
+p{margin:0 0 16px}
+strong{font-weight:600}
+a{color:var(--accent)}
+
+/* ---- verdict ledger ---- */
+.ledger{display:flex;flex-direction:column;gap:0;margin:26px 0;border-top:1px solid var(--rule)}
+.row{
+  display:grid;grid-template-columns:98px 1fr;gap:20px;
+  padding:16px 0;border-bottom:1px solid var(--rule);align-items:start;
+}
+.tag{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:3px;
+  display:inline-block;white-space:nowrap;line-height:1.5;
+}
+.t-ok{background:var(--ok-bg);color:var(--ok)}
+.t-no{background:var(--no-bg);color:var(--no)}
+.t-mid{background:var(--mid-bg);color:var(--mid)}
+.t-unk{background:var(--unk-bg);color:var(--unk)}
+.row .claim{font-size:15.5px;line-height:1.65}
+.row .claim em{font-style:normal;color:var(--ink3);font-size:13.5px;display:block;margin-top:5px;font-family:"IBM Plex Mono",monospace;line-height:1.6}
+
+/* ---- pull ---- */
+.pull{
+  border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:30px 0;
+  font-family:"Gowun Batang",serif;font-size:clamp(19px,2.6vw,25px);line-height:1.5;
+  letter-spacing:-.01em;
+}
+.quote{
+  background:var(--panel);border:1px solid var(--rule);border-radius:4px;
+  padding:20px 22px;margin:22px 0;font-size:15px;line-height:1.7;box-shadow:var(--shadow);
+}
+.quote .src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink3);margin-top:12px;letter-spacing:.02em}
+.quote em{font-style:italic}
+
+/* ---- tables ---- */
+.tw{overflow-x:auto;margin:24px 0;border:1px solid var(--rule);border-radius:4px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:460px}
+th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);
+  padding:12px 16px;border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+td{padding:12px 16px;border-bottom:1px solid var(--rule2);vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.big{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px}
+
+/* ---- bar chart ---- */
+.bars{margin:24px 0;display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:74px 1fr 46px;gap:12px;align-items:center;font-size:13.5px}
+.bar .lb{text-align:right;color:var(--ink2)}
+.bar .tr{background:var(--rule2);height:15px;border-radius:2px;overflow:hidden}
+.bar .fl{height:100%;background:var(--accent);border-radius:2px}
+.bar .vl{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink2);font-size:12.5px}
+.bar.hi .lb{color:var(--ink);font-weight:600}
+.bar.hi .fl{background:var(--no)}
+.bar.hi .vl{color:var(--no);font-weight:600}
+
+/* ---- ascii ---- */
+pre.dia{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.62;
+  background:var(--panel);border:1px solid var(--rule);border-radius:4px;
+  padding:18px 20px;overflow-x:auto;margin:24px 0;color:var(--ink2);
+}
+pre.dia b{color:var(--ink);font-weight:600}
+
+/* ---- callouts ---- */
+.note{border:1px solid var(--rule);border-left:3px solid var(--accent);background:var(--panel);
+  border-radius:0 4px 4px 0;padding:16px 20px;margin:24px 0;font-size:14.5px;line-height:1.68}
+.note.warn{border-left-color:var(--no)}
+.note.good{border-left-color:var(--ok)}
+.note .h{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:7px}
+.note.warn .h{color:var(--no)}
+.note.good .h{color:var(--ok)}
+
+/* ---- action ---- */
+.acts{display:flex;flex-direction:column;gap:14px;margin:24px 0}
+.act{background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;box-shadow:var(--shadow)}
+.act .top{display:flex;gap:12px;align-items:baseline;margin-bottom:8px;flex-wrap:wrap}
+.act .n{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--accent)}
+.act .ti{font-weight:600;font-size:16px;line-height:1.4}
+.act p{font-size:14.5px;margin:0 0 8px;color:var(--ink2)}
+.act .proof{font-size:13.5px;color:var(--ink);border-top:1px dashed var(--rule);padding-top:9px;margin-top:11px}
+.act .proof b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ok);display:block;margin-bottom:4px;font-weight:600}
+.phase{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink3);margin:34px 0 14px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+
+ul{padding-left:20px;margin:0 0 16px}
+li{margin-bottom:8px;line-height:1.68}
+.lede{font-size:17px;line-height:1.72;color:var(--ink2);margin-bottom:22px}
+hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
+footer{border-top:2px solid var(--ink);padding-top:26px;margin-top:70px;font-size:13.5px;color:var(--ink3);line-height:1.7}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr;gap:8px}
+  .bar{grid-template-columns:62px 1fr 40px;gap:9px;font-size:12.5px}
+  .wrap{padding:0 18px 80px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* --- 단독 파일용 기본값 (아티팩트 래퍼가 제공하던 부분) --- */
+:root{color-scheme:light dark}
+html{-webkit-text-size-adjust:100%}
+img{max-width:100%;height:auto}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+::selection{background:var(--accent-soft);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">검증 보고서 <span>· 2026-09-03</span> <span>· 8개 조사축 + 4개 대립 관점</span></div>
+  <h1>무엇을 세고 있는가</h1>
+  <p class="dek">독서 중 만난 이건희 귀속 인용문 한 줄을 원전까지 추적한 결과, <b>그 문장은 그의 말로 확인되지 않았습니다.</b> 그런데 확인된 그의 실제 말이 훨씬 쓸모 있었고, 서로 반박하도록 배치한 네 관점이 각자 다른 근거를 들고 와 <b>같은 결론 하나</b>에 도달했습니다. 이 페이지는 그 검증과, 거기서 나온 실천 설계입니다.</p>
+</header>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">판정 요약</span><h2>먼저, 무엇이 사실이고 무엇이 아닌가</h2></div>
+  <div class="ledger">
+    <div class="row"><div><span class="tag t-no">반증</span></div><div class="claim">그 인용문은 이건희의 축자 발언이다<em>완전일치 검색 4종 전부 0건 · 위키인용집·나무위키·어록집 부재</em></div></div>
+    <div class="row"><div><span class="tag t-unk">미확인</span></div><div class="claim">이건희가 "인문학"을 말한 기록<em>3개 조사가 독립적으로 20여 문헌에서 0건 · 책 본문 전문검색은 미수행</em></div></div>
+    <div class="row"><div><span class="tag t-ok">확인</span></div><div class="claim">"기술+인문학"의 실제 출처는 잡스(2011 iPad 2 키노트)<em>경향신문 2013 「아이폰 인문학」 · 이건희와 20년 간격</em></div></div>
+    <div class="row"><div><span class="tag t-ok">확인</span></div><div class="claim">"업의 개념"은 Drucker→Levitt 계보의 표준 도구다<em>Marketing Myopia, HBR 1960 원문 확인 · 회의론 관점조차 도구 자체는 방어</em></div></div>
+    <div class="row"><div><span class="tag t-no">반증</span></div><div class="claim">"S&amp;P 500 CEO 최다 전공은 인문학(34.3%)"<em>경제학·수학 포함한 착시. 협의 인문학은 8.4% · 원문 Table 1 직접 대조</em></div></div>
+    <div class="row"><div><span class="tag t-unk">미확인</span></div><div class="claim">인문학 교육이 경영 성과를 개선한다<em>인과 연구 0건 · Mellon 재단 위촉 연구 2건도 "효과 확인 안 됨"</em></div></div>
+    <div class="row"><div><span class="tag t-ok">확인</span></div><div class="claim">판단력은 1시간 미만 훈련으로 개선된다<em>Chang et al. 2016 · Brier 점수 6~11% 개선, 4년 반복 확인</em></div></div>
+    <div class="row"><div><span class="tag t-ok">확인</span></div><div class="claim">개념 정의 오류는 어떤 기술 지표로도 안 잡힌다<em>Obermeyer, Science 2019 · 인용 6,829회</em></div></div>
+    <div class="row"><div><span class="tag t-ok">확인</span></div><div class="claim">백엔드 경력은 AI 에이전트 채용의 자격요건이다<em>Anthropic 공고 첫 문장 · OpenAI Codex는 LLM 지식을 "Bonus"로 분류</em></div></div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">01 — 원전</span><h2>그 문장은 그의 말이 아닙니다</h2></div>
+  <p class="lede">완전일치 검색 네 가지가 모두 0건이었습니다. 더 중요한 건 이겁니다 — <strong>세 개의 독립적인 조사가 각자 따로, 이건희가 "인문학"이라는 단어를 쓴 직접 인용을 20여 개 문헌 어디에서도 찾지 못했습니다.</strong></p>
+  <pre class="dia">   이건희가 실제로 쓴 말              이 문장이 쓴 말
+   ─────────────────────            ──────────────────
+   <b>업(業)의 개념 / 업의 본질</b>    ✓    업의 본질          ← 겹침
+   원점 사고                          기술 이해도        ← <b>없음</b>
+   입체적 사고                        인문학적 소양      ← <b>없음</b>
+   보이지 않는 것을 보는 것           인재로부터 나온다  ← <b>없음</b>
+   지행용훈평 / 질(質) 경영</pre>
+  <div class="note warn"><span class="h">정직한 한계</span>책 본문 전문검색까지는 하지 못했습니다. 그러므로 "없다"가 아니라 <strong>"이번 조사 범위에서 확인되지 않았다"</strong>가 정확한 표현입니다.</div>
+
+  <h3>그런데 이게 좋은 소식입니다</h3>
+  <p>인용문이 가짜라는 게 손실이 아닙니다. <strong>확인된 그의 실제 발언이 "인문학적 소양을 쌓아라"보다 비교할 수 없이 구체적이고, 오늘 밤부터 실행 가능</strong>하기 때문입니다.</p>
+  <div class="quote">
+    "나는 영화를 볼 때 한 번만 보지 않는다. <em>시각을 바꿔가며 보면 전혀 새롭게 보인다.</em>"<br><br>
+    "입체적으로 사고하면 자기중심으로 보고 자기 가치만을 기준으로 생각하는 버릇을 고칠 수 있다."
+    <div class="src">✅ 확인된 축자 인용 — 목적이 <b>교양이 아니라 사고 훈련</b>이라고 본인이 명시</div>
+  </div>
+  <div class="quote">
+    "업의 개념은 시대와 상황에 따라 달라진다. <em>누가 먼저 정확하게 변화하는 업의 개념을 잡느냐가</em> 기회 선점의 관건이다."
+    <div class="src">🟡 "업의 본질"은 찾아내는 정답이 아니라, 상황마다 다시 잡아야 하는 것 — 본인의 말</div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">02 — 개념</span><h2>"업의 본질"은 60년 된 분석 도구입니다</h2></div>
+  <p>철도 회사가 "우리는 철도 회사다"라고 생각하면, 자동차와 비행기가 나올 때 자기 일이 아니라 여기고 가만히 있다가 망합니다. "우리는 사람과 물건을 옮기는 회사다"라고 생각했으면 자동차 사업에 뛰어들었을 겁니다. <strong>같은 회사인데 자기를 뭐라고 부르느냐에 따라 다음 행동이 달라집니다.</strong></p>
+  <p>이게 <strong>Theodore Levitt, "Marketing Myopia"(HBR, 1960)</strong>입니다. 그 위에 드러커의 <em>"What business are you in?"</em>이 있습니다.</p>
+  <pre class="dia">1954 ─────── 1960 ─────── 1980s~90s ─────── 2016 ─────── 2011
+Drucker      Levitt        <b>이건희</b>            Christensen   Rumelt
+"우리 사업은  "철도회사는    "업(業)의 개념"   "고객은        전략의 핵심은
+ 무엇인가"    철도업이                        밀크셰이크가   "무슨 일이
+             아니라                          아니라 출근길  벌어지는가"를
+             운송업"                          지루함을 산다"  먼저 진단하는 것</pre>
+  <div class="note good"><span class="h">이게 왜 중요한가</span>통찰이 <strong>타고난 재능이 아니라 60년 된 학습 가능한 분석 도구</strong>라는 뜻입니다. 못 하는 게 아니라 아직 안 배운 것뿐입니다.</div>
+
+  <h3>대부분의 예찬 글이 빠뜨리는 반론</h3>
+  <p>Levitt의 개념에는 <strong>학계가 붙여놓은 대칭적 오류</strong>가 있습니다.</p>
+  <div class="tw"><table>
+    <tr><th>오류</th><th>제안자</th><th>내용</th></tr>
+    <tr><td><b>Marketing myopia</b> (근시)</td><td>Levitt</td><td>사업을 <b>너무 좁게</b> 정의해 시장 변화를 놓침</td></tr>
+    <tr><td><b>Marketing hyperopia</b> (원시)</td><td>Kotler &amp; Singh</td><td>먼 것을 가까운 것보다 잘 보는 반대편 오류</td></tr>
+    <tr><td><b>Marketing macropia</b> (거시안)</td><td>Baughman</td><td>산업을 <b>지나치게 넓게</b> 정의하는 오류</td></tr>
+  </table></div>
+  <p>즉 <strong>"호텔업 = 부동산업"이라는 재정의는 자동으로 옳은 게 아닙니다.</strong> 신규 출점 입지·감가상각 판단에는 유용하지만, 그 정의를 <em>믿어버리면</em> 객실 서비스와 직원 교육에 투자를 안 하게 됩니다.</p>
+
+  <h3>이 반론을 실증한 사건 — 하루 차이, 정반대 결론</h3>
+  <pre class="dia">2025-06-12  <b>Cognition</b> (Devin 개발사) — "Don't Build Multi-Agents"
+            → 단일 스레드 선형 에이전트 권고. AutoGen·Swarm을 명시적 반대
+
+2025-06-13  <b>Anthropic</b> — "How we built our multi-agent research system"
+            → 멀티에이전트를 실제로 프로덕션 배포</pre>
+  <p><strong>두 팀 다 세계 최고 수준의 기술 깊이를 가졌는데 결론이 정반대입니다.</strong> 모순이 아니라 <strong>조건이 다릅니다</strong> — Cognition의 과제는 코드 편집(서브에이전트 산출물이 충돌하면 즉시 깨짐), Anthropic은 리서치(병렬 탐색이 자연스럽고 결과를 합칠 수 있음).</p>
+  <div class="pull">경영 판단에 쓰이는 기술 깊이란 "정답을 아는 것"이 아니라 <strong>"어떤 조건에서 A가 맞고 어떤 조건에서 B가 맞는지 아는 것"</strong>입니다.</div>
+  <p>같은 구조가 경영학 실증에도 있습니다. 미국 경제연구소(NBER)의 CEO 연구: <em>"differentiation among CEOs is largely <strong>horizontal rather than vertical</strong>"</em> — CEO 간 차이는 "누가 더 뛰어난가"(수직)가 아니라 <strong>"어느 기업에 맞는가"(수평)</strong>입니다.</p>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">03 — 반증</span><h2>삼성 서사부터 무너뜨립니다</h2><p class="sec-sub">이 문서가 "이건희처럼 되자"로 흐르지 않도록, 가장 강한 반증을 먼저 둡니다.</p></div>
+  <div class="tw"><table>
+    <tr><th></th><th>FY2018</th><th>FY2023</th><th>변화</th></tr>
+    <tr><td>연결 매출</td><td class="num">243.77조</td><td class="num">258.94조</td><td class="num" style="color:var(--ok)"><b>+6.2%</b></td></tr>
+    <tr><td>연결 영업이익</td><td class="num">58.89조</td><td class="num">6.57조</td><td class="num" style="color:var(--no)"><b>−88.8%</b></td></tr>
+  </table></div>
+  <p>반도체 부문은 2023년 4분기에 <strong>영업손실 2.18조</strong>를 냈습니다. 같은 회사, 같은 조직, 같은 "업의 본질" 교리, 같은 인력입니다.</p>
+  <div class="pull">통찰이 성과의 원인이라면, 어떻게 그 원인이 고정된 채 결과만 원자재 사이클을 따라 9배 진폭으로 흔들립니까?</div>
+  <h3>그리고 이건희의 회사가 이건희의 말과 반대로 행동했습니다</h3>
+  <div class="tw"><table>
+    <tr><th>기업 (인문학 열풍 절정기 신입공채)</th><th>이공계 : 인문계</th></tr>
+    <tr><td><b>삼성전자</b></td><td class="num"><b>85 : 15</b></td></tr>
+    <tr><td>SK하이닉스</td><td class="num">97.5% 이공계</td></tr>
+    <tr><td>LG전자</td><td class="num">9 : 1</td></tr>
+    <tr><td>대기업 평균</td><td class="num">8 : 2</td></tr>
+  </table></div>
+  <p>삼성전자 전무급 이상 임원 197명 중 <strong>상경·사회과학을 뺀 순수 인문계는 약 10명(5%)</strong>이고 그 안에 오너 일가가 포함됩니다. 인문계 대상 소프트웨어 인재 육성 프로그램(SCSA)은 폐지되지 않았지만, <strong>설계 자체가 반증</strong>입니다 — 인문계 전공자를 <strong>6개월 960시간 소프트웨어 교육</strong>에 넣고 <strong>미수료 시 입사 불가</strong>입니다. 인문학은 통과할 자격이 아니라 <em>벗어나기 위해 들어오는 입구</em>였습니다.</p>
+  <div class="note warn"><span class="h">이런 이야기가 만들어지는 방식</span><em>"성과를 기준으로 기업을 먼저 고른 뒤 회고 인터뷰와 언론기사로 데이터를 모으면, 무엇이 그 기업을 위대하게 만들었는지는 알아낼 수 없다."</em> — Rosenzweig, 『The Halo Effect』. <strong>이 인용문이 만들어진 절차와 정확히 같습니다.</strong><br><br>그리고 Tetlock(20년, 284명, 8만 건): <strong>가장 확신에 차 있던 전문가가 가장 부정확했습니다.</strong> "우리 업의 본질은 X다"라고 단정하는 서술 형식 자체가 정확도의 신호가 아니라 부정확의 신호입니다.</div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">04 — 기술</span><h2>당신의 백엔드 경력은 약점이 아닙니다</h2></div>
+  <p class="lede">Anthropic 에이전트 플랫폼 채용 공고의 <strong>첫 문장</strong>입니다.</p>
+  <div class="quote">"We are looking for experienced <em>backend and distributed systems engineers</em> to join the Agentic Systems team within our Platform organization."
+  <div class="src">✅ Staff+ Software Engineer, Claude Managed Agents — 원문 확인</div></div>
+  <p>요구사항은 <em>"stateful, long-running, or high-throughput systems in production — workflow orchestration, streaming, storage, container or job orchestration"</em>과 <em>"durability, consistency, failure modes, and cost에 대해 엄밀히 추론할 수 있을 것"</em>입니다. OpenAI Codex 공고는 한 발 더 나가서 <strong>"LLM·에이전트 프레임워크 친숙도"를 Bonus로 분류</strong>합니다.</p>
+  <p>국내도 같습니다. 스캐터랩의 LLM 서비스 백엔드 공고 필수 요건은 <strong>"3년 이상 Spring(Kotlin 혹은 Java) 서비스 운영 경험"</strong>이고 LLM 요건은 없습니다. 그런데 이 회사는 자체 LLM을 직접 서빙하며 실시간 100대 이상 GPU를 씁니다.</p>
+
+  <h3>왜 그런가 — 에이전트는 대부분 백엔드 문제입니다</h3>
+  <pre class="dia">                  [ 에이전트 하네스 = 바깥쪽 루프 ]
+                 ┌──────────────────────────────────────────┐
+  요청 ──▶      │ ① 컨텍스트 조립 ─▶ <b>② 모델 호출</b> ─▶ ③ 툴 라우팅 │ ──▶ 결과
+                 │      ▲                 │            │       │
+                 │      └── ⑤ 압축/메모리 ┘            ▼       │
+                 │                          ④ 샌드박스 실행    │
+                 └──────────────────────────────────────────┘
+                       │              │              │
+                       ▼              ▼              ▼
+                [세션·이벤트 저장] [추론 게이트웨이] [컨테이너 격리]
+                       │              │              │
+                       └───────┬──────┴──────────────┘
+                               ▼
+                    [관측성·평가 파이프라인]
+
+  ※ <b>②만 머신러닝 문제</b>입니다. 나머지는 전부 백엔드·분산시스템 문제입니다.</pre>
+  <div class="note"><span class="h">전이되지 않는 것 — 여기가 진짜 학습 대상</span><b>① 평가의 통계적 감각</b> — "이 개선이 실효과인가 잡음인가" <b>② 모델 행동에 대한 감각(taste)</b> — 수천 시간 굴려본 사람에게만 생김 <b>③ 비결정성 적응</b> — 백엔드는 "재현 안 되면 버그 아님"으로 훈련되지만 <strong>에이전트는 재현 안 되는 게 정상</strong></div>
+
+  <h3>12개월 경로</h3>
+  <pre class="dia"><b>0~2개월</b>   Karpathy "Zero to Hero" 전편(무료 8강) + nanoGPT 재현
+          동시에: Anthropic Engineering 6편 정독
+                  + <b>프레임워크 없이</b> 에이전트 루프 300줄 이내 구현
+
+<b>2~5개월</b>   Stanford CS336 과제 1·2 (무료, 리더보드로 자가검증)
+          동시에: MCP 서버 + 평가 하네스를 실무 문제에 적용해 사내 배포
+
+<b>5~8개월</b>   nanochat 완주 (약 $48로 GPT-2급 학습)
+
+<b>8~12개월</b>  vLLM/SGLang 또는 오픈소스 하네스에 이슈 한 건 기여
+          → 이력서에 "재현했다"가 아니라 <b>"무엇이 왜 실패하는지 측정했다"</b>가 쓰일 것</pre>
+  <div class="note warn"><span class="h">널리 추천되지만 쓰면 안 되는 것</span>Karpathy의 <b>LLM101n은 저장소가 archived 상태</b>이고 마지막 갱신이 2024년 8월이며 코드 없이 목차만 있습니다. <strong>대체재는 nanochat</strong>입니다(2026년 8월 갱신).</div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">05 — 인문학</span><h2>해부하면 두 개가 남습니다</h2><p class="sec-sub">통째로 쓰면 무너지고, 쪼개면 일부가 아주 단단하게 살아남습니다.</p></div>
+
+  <h3>먼저 정의 — "문사철"은 공식 정의가 아닙니다</h3>
+  <p>미국 연방법과 <strong>한국 인문학진흥법 제3조</strong> 모두 언어학·종교학·법철학·고고학·예술사, 나아가 <em>"인문학적 방법론을 수용하는 제반 학문"</em>까지 포함합니다. 그리고 두 법 모두 인문학을 <strong>대상만이 아니라 방법론으로도</strong> 정의합니다.</p>
+  <p>그리고 <strong>"liberal arts"는 인문학이 아닙니다.</strong> 잡스가 말한 liberal arts는 인문 분과학문이 아니라 <strong>미국식 학부 교육 체제</strong>, 더 느슨하게는 "디자인 감각"에 가깝습니다. 이 혼동이 논쟁 전체의 뿌리입니다.</p>
+  <div class="note"><span class="h">"소양(素養)"이 애매한 근본 이유</span><b>갈래 1</b> 표준국어대사전: "평소 닦아 놓은 학문이나 지식" → 사실상 <b>지식</b>(퀴즈로 측정)<br><b>갈래 2</b> 교육부 2022 개정 교육과정: <b>literacy의 역어</b> → 맥락에서 활용하는 <b>능력</b>(수행으로 측정)<br><br>두 뜻은 <strong>검증 방식이 전혀 다릅니다.</strong> 논쟁 참여자가 섞어 쓰면 서로 다른 이야기를 하게 됩니다.</div>
+
+  <h3>가장 결정적인 반증 — 분모를 빼서 만든 착시</h3>
+  <p><strong>Flynn &amp; Quinn</strong> — 2004년 S&amp;P 500 CEO <strong>502명 전수</strong>. <em>제가 원문 PDF의 표를 직접 열어 확인했습니다.</em></p>
+  <pre class="dia">Liberal Arts 172명 (<b>34.3%</b>)  ← 흔히 인용되는 숫자
+  ├─ Economics           46 (9.2%)   ← <b>경제학</b>
+  ├─ Liberal Arts, n.e.c 46 (9.2%)   ← <b>분류불명</b>
+  ├─ History             25 (5.0%)
+  ├─ Political Science   21 (4.2%)
+  ├─ Math                17 (3.4%)   ← <b>수학</b>
+  ├─ English              9 (1.8%)
+  ├─ Psychology           4 (0.8%)
+  └─ Sociology            4 (0.8%)
+
+  ▶ <b>좁은 의미의 인문학 = 8.4%</b>  (Science &amp; Engineering 28.1%, Business 28.5%)</pre>
+  <p>그리고 <strong>졸업자 수로 나눈 CEO 배출 확률</strong>(경제학=1.00 기준):</p>
+  <div class="bars">
+    <div class="bar"><div class="lb">경제학</div><div class="tr"><div class="fl" style="width:100%"></div></div><div class="vl">1.00</div></div>
+    <div class="bar"><div class="lb">공학</div><div class="tr"><div class="fl" style="width:66%"></div></div><div class="vl">0.66</div></div>
+    <div class="bar"><div class="lb">경영</div><div class="tr"><div class="fl" style="width:42%"></div></div><div class="vl">0.42</div></div>
+    <div class="bar"><div class="lb">정치학</div><div class="tr"><div class="fl" style="width:31%"></div></div><div class="vl">0.31</div></div>
+    <div class="bar"><div class="lb">수학</div><div class="tr"><div class="fl" style="width:28%"></div></div><div class="vl">0.28</div></div>
+    <div class="bar"><div class="lb">사학</div><div class="tr"><div class="fl" style="width:25%"></div></div><div class="vl">0.25</div></div>
+    <div class="bar"><div class="lb">전산학</div><div class="tr"><div class="fl" style="width:24%"></div></div><div class="vl">0.24</div></div>
+    <div class="bar hi"><div class="lb">영문학</div><div class="tr"><div class="fl" style="width:8%"></div></div><div class="vl">0.08</div></div>
+    <div class="bar hi"><div class="lb">사회학</div><div class="tr"><div class="fl" style="width:5%"></div></div><div class="vl">0.05</div></div>
+    <div class="bar hi"><div class="lb">심리학</div><div class="tr"><div class="fl" style="width:4%"></div></div><div class="vl">0.04</div></div>
+  </div>
+  <p>미국 전체 졸업자의 약 20%가 인문·리버럴아츠·사회과학·예술 전공인데 협의 인문학이 CEO의 8.4%라면, <strong>모집단 대비 과소대표</strong>입니다.</p>
+  <div class="note warn"><span class="h">시의성 경고</span>이 데이터는 <strong>2004년 기준으로 22년이 지났고</strong>, 최신 재현 연구는 확인하지 못했습니다.</div>
+
+  <p>그리고 <strong>인문학에 우호적인 재단(Mellon)이 위촉·지원한 연구 두 건이 모두 "효과 확인 안 됨"</strong>이었습니다. 원문을 직접 확인했습니다:</p>
+  <div class="quote"><em>"There is inadequate evidence to conclude that the earnings impact of receiving a liberal education differs significantly from alternative types of higher education."</em><div class="src">Hill &amp; Pisacreta, Ithaka S+R (Mellon 재단 위촉) — 원문 대조 완료</div></div>
+
+  <h3 style="color:var(--ok)">그래서 무엇이 남는가 — 남은 두 개가 결정적입니다</h3>
+  <div class="note good"><span class="h">남는 것 ① — 판단력은 훈련됩니다</span><em>"Although the training lasted <b>less than one hour</b>, it consistently improved accuracy (Brier scores) by <b>6 to 11%</b> over the control condition."</em><br><br>Chang et al. 2016 — 미 정보기관 후원 4년 예측 토너먼트. <strong>이 결과 하나가 "판단력은 타고나는 것"이라는 통념의 직접 반례입니다.</strong></div>
+  <div class="note good"><span class="h">남는 것 ② — 개념 정의 오류는 기술로 안 잡힙니다</span>미국 의료 알고리즘이 <b>"건강상의 필요"를 "지출된 의료비"와 동일시</b>했습니다. 교정하자 추가 돌봄을 받는 흑인 환자 비율이 <b>17.7% → 46.5%</b>로 바뀌었습니다.<br><br><em>"despite health care cost appearing to be an effective proxy for health <b>by some measures of predictive accuracy</b>, large racial biases arise."</em> — Obermeyer, Science 2019<br><br><strong>더 나은 모델·더 많은 데이터·더 촘촘한 테스트로는 잡히지 않습니다. "필요란 무엇인가"를 물어야만 잡힙니다.</strong></div>
+  <p>그리고 이 작업을 <strong>아무도 자기 직무로 인식하지 않는다</strong>는 현장 연구가 있습니다(Passi &amp; Barocas, 기업 데이터과학 팀 6개월 관찰): 문제 정형화는 <em>"always negotiated and elastic, and rarely worked out with explicit normative considerations in mind."</em></p>
+  <div class="pull">법무팀은 그 회의실에 없습니다. 정의는 스펙을 쓰는 사람이 내립니다.</div>
+
+  <h3>무너진 것들 (뭉뚱그리면 함께 무너집니다)</h3>
+  <div class="ledger">
+    <div class="row"><div><span class="tag t-no">재현 실패</span></div><div class="claim">"문학을 읽으면 타인을 이해하게 된다"<em>원 연구 Science 2013(인용 1,623) → 3개 독립 팀 792명: "no significant advantage"</em></div></div>
+    <div class="row"><div><span class="tag t-no">효과 부정</span></div><div class="claim">"관점 취하기를 지시하면 상대를 더 잘 이해한다"<em>Eyal, Steffel &amp; Epley 2018 — 25개 실험에서 효과 부정</em></div></div>
+    <div class="row"><div><span class="tag t-no">오독</span></div><div class="claim">"STEM 임금 우위는 나이 들면 인문학이 따라잡는다"<em>Deming &amp; Noray QJE 2020의 비교군은 사회과학·생명물리과학이며 인문학이 아님</em></div></div>
+    <div class="row"><div><span class="tag t-mid">인식 데이터</span></div><div class="claim">"CEO 97.8%가 인문학이 도움된다고 답했다"<em>성과가 아니라 자기보고 신념 · 사회적 바람직성 편향에 노출</em></div></div>
+    <div class="row"><div><span class="tag t-ok">확인</span></div><div class="claim">비판적 사고는 가르치면 향상된다 (단기)<em>Abrami et al. 2015 — 341개 효과크기, 평균 0.30 · 원문 대조 완료</em></div></div>
+    <div class="row"><div><span class="tag t-unk">미확인</span></div><div class="claim">비판적 사고의 장기 지속·타 영역 전이<em>스탠퍼드 철학사전: 전이 근거가 "scanty"</em></div></div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">06 — 수렴</span><h2>네 관점이 같은 곳에 도달했습니다</h2><p class="sec-sub">서로 반박하도록 배치하고 각자 독립적으로 근거를 모으게 한 결과입니다.</p></div>
+  <pre class="dia"><b>회의론</b>        "이건희가 실제로 한 일은 자산구조와 현금회수 주기로     ┐
+                 사업을 다시 정의한 것이다. <b>회계를 배워라.</b>"          │
+                                                                        │
+<b>현장 리더</b>     "기술 이해도의 실무적 정의는 이 결정이 얼마 들고        │
+                 뭐가 깨지는지를 <b>숫자로 말하는 능력</b>이다."            ├──▶ ?
+                                                                        │
+<b>인문학 옹호</b>   "<b>대리변수 감사</b> — 이 표적 변수는 무엇의 대리인가,      │
+                 어디서 갈라지는가. 예측 정확도로는 안 잡힌다."          │
+                                                                        │
+<b>한국 시장</b>     "통찰은 <b>손익에 이름을 건 사람</b>에게만 자산이다.         ┘
+                 검증되지 않은 통찰은 축적되지 않는다."</pre>
+  <div class="pull" style="border-left-width:4px;font-size:clamp(22px,3.4vw,32px)">넷 다 같은 질문을 하고 있습니다 —<br><strong>"당신은 지금 무엇을 세고 있습니까?"</strong><br>그리고 그것이 당신이 정말 알고 싶은 것을 재고 있습니까?</div>
+  <div class="tw"><table>
+    <tr><th>사례</th><th>세고 있던 것</th><th>세야 했던 것</th></tr>
+    <tr><td>호텔신라</td><td>객실 서비스 만족도</td><td><b>평당 수익률과 감가상각</b></td></tr>
+    <tr><td>미국 의료 알고리즘</td><td>지출된 의료비</td><td><b>질병의 심각도</b></td></tr>
+    <tr><td>코딩 에이전트</td><td>응답 품질 점수</td><td><b>세션당 토큰 원가와 회귀율</b>일 수 있음</td></tr>
+  </table></div>
+  <div class="note"><span class="h">12살 비유</span>시험 성적을 올리고 싶은 학생이 <b>"공부한 시간"</b>을 매일 기록합니다. 시간은 늘어나는데 성적은 그대로입니다. 세야 했던 건 시간이 아니라 <b>"틀렸다가 맞게 된 문제 수"</b>였습니다. 시간은 재기 쉬워서 골랐을 뿐, 알고 싶은 것을 재고 있지 않았습니다.</div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">07 — 경로</span><h2>CTO에서 CEO로 — 실증이 말하는 것</h2></div>
+  <p><strong>CTO에는 표준 정의가 없습니다.</strong> 독립된 1차 출처 4곳이 명시적으로 그렇게 말합니다. 전 마이크로소프트 CTO Nathan Myhrvold의 답이 이렇습니다: <em>"Hell if I know."</em></p>
+  <div class="quote">"<em>CTO is not an engineering role.</em> CTO is not the top of the technical ladder… <em>The CTO is an executive first, a technologist second.</em><br><br>You cannot give up the responsibility of management without giving up the power that comes with it. … at worst <em>a figurehead</em>."
+  <div class="src">Camille Fournier (전 Two Sigma 상무, 『The Manager's Path』 저자)</div></div>
+  <p><strong>기술에 집중하려고 관리 권한을 넘기면 CEO로 가는 경로가 그 지점에서 끊깁니다.</strong> 기술 사다리의 상단은 CTO가 아니라 Staff/Principal 경로입니다.</p>
+
+  <h3>성공의 역설 — 이 조사에서 가장 값진 발견</h3>
+  <p><strong>Wasserman(2003)</strong> — 202개 인터넷 기업, 5,930 person-months, 교체 사건 60건.</p>
+  <div class="tw"><table>
+    <tr><th>요인</th><th>창업자 CEO 교체 확률</th></tr>
+    <tr><td>제품 개발 완료</td><td><b style="color:var(--no)">급등</b></td></tr>
+    <tr><td>최근 라운드 조달액 2배</td><td class="num"><b style="color:var(--no)">위험비 ×1.738</b></td></tr>
+    <tr><td><b>내부자 지분 과반 보유</b></td><td class="num"><b style="color:var(--ok)">위험비 0.030</b> ← 유일한 완충</td></tr>
+  </table></div>
+  <div class="pull">"performing poorly would have undesirable consequences, but <strong>performing well may also cause them to lose their positions.</strong>"</div>
+  <p>대기업과 정반대입니다 — <em>"success can be detrimental for Founder-CEOs."</em> <strong>창업 시점의 지분 구조가 곧 경로의 제약 조건이고, 나중에 고칠 방법이 없습니다.</strong></p>
+
+  <h3>역량을 기르는 법 — 이게 실천안 전체를 지배합니다</h3>
+  <p><strong>Lacerenza et al.(2017)</strong> — <strong>335개 독립 표본</strong> 메타분석. 리더십 훈련은 효과가 있습니다(전이 효과크기 0.82). <strong>그런데 조절변수가 핵심입니다.</strong></p>
+  <div class="tw"><table>
+    <tr><th>효과를 높이는 조건</th><th>효과를 낮추는 조건</th></tr>
+    <tr><td>사전 니즈 분석</td><td>일괄 교육</td></tr>
+    <tr><td><b>피드백 제공</b></td><td>피드백 없음</td></tr>
+    <tr><td>여러 전달 방식, 특히 <b>실습</b></td><td>강의만</td></tr>
+    <tr><td><b>간격을 둔 여러 세션</b></td><td>몰아치기 1회</td></tr>
+    <tr><td>현장·대면</td><td style="color:var(--no)"><b>자기주도 학습</b></td></tr>
+  </table></div>
+  <div class="note warn"><span class="h">이게 당신에게 뜻하는 것</span><strong>책 혼자 읽기와 온라인 코스는 이 메타분석에서 효과가 가장 낮은 형태로 분류됩니다.</strong> 실습·피드백·간격 반복이 있는 형태 — 실제 팀 리드 경험 + 누군가의 코칭 — 이 근거상 압도적으로 우위입니다.<br><br>그래서 아래 실천안에는 <strong>"책 100권 읽기"가 없습니다.</strong> 전부 산출물이 있고 남에게 채점당하는 형태입니다.</div>
+  <p><strong>MBA</strong>는 성과 개선 실증이 없고, MBA CEO가 <em>단기주의(이익 조정·R&amp;D 억제)와 연결되어 시장가치를 떨어뜨린다</em>는 반대 근거가 있습니다(Miller &amp; Xu 2017). 정확한 표현은 "효과가 없다"가 아니라 <strong>"성과 개선의 실증 근거가 없고 반대 근거가 있다"</strong>입니다.</p>
+  <div class="note good"><span class="h">AI 시대의 희소성 — 가장 실행 가능한 결론</span>리더 883명 조사(응답자 10%가 CTO급)에서 <strong>측정 지표 부재를 난제로 꼽은 곳이 85%</strong>였고, 가장 수요 높은 역량이 <strong>"비판적 사고와 아키텍처 설계"(54%)</strong>였습니다.<br><br><strong>"AI를 쓰는 사람"보다 "AI의 사업 임팩트를 측정하고 증명하는 사람"이 훨씬 희소합니다.</strong></div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">08 — 한국</span><h2>통념과 데이터가 반대로 놓여 있습니다</h2></div>
+  <div class="tw"><table>
+    <tr><th>2026 상반기 벤처투자</th><th></th><th>전년 대비</th></tr>
+    <tr><td>신규 투자금액</td><td class="num big">8조 8,676억</td><td class="num" style="color:var(--ok)"><b>+54.3%</b> 역대 최대</td></tr>
+    <tr><td>투자받은 기업 수</td><td class="num big">2,296개사</td><td class="num" style="color:var(--no)"><b>감소 ⬇</b></td></tr>
+    <tr><td><b>3년 미만 초기기업</b></td><td class="num big">643개사</td><td class="num" style="color:var(--no)"><b>감소 ⬇</b> (743 → 643)</td></tr>
+  </table></div>
+  <p><strong>돈은 54% 늘었는데 그 돈을 받은 회사는 줄었고, 초기 기업은 더 크게 줄었습니다.</strong> 자본이 후기·대형 라운드로 쏠리며 초기 진입 문 자체가 좁아지고 있습니다.</p>
+
+  <h3>아무도 말하지 않는 병목 — CTO 자리가 관측되지 않습니다</h3>
+  <p>한국 시장 조사가 <strong>60개 URL을 뒤진 결과, 배경까지 확인된 현직 한국 CTO는 단 1명</strong>이었습니다. 미국식 리더십 페이지를 갖춘 한국 회사는 두어 곳뿐이고, 대부분은 <strong>푸터 사업자정보의 대표자명이 전부</strong>이며 <strong>카카오 이사회 명단에는 CTO 직위 자체가 없습니다.</strong></p>
+  <div class="ledger">
+    <div class="row"><div><span class="tag t-ok">근거 있음</span></div><div class="claim">자본 접근<em>돈↑ 회사수↓ 초기기업↓</em></div></div>
+    <div class="row"><div><span class="tag t-ok">근거 있음</span></div><div class="claim">영어 (인과는 미검증)<em>EF 영어능력지수 2025: 123개국 중 48위 · 4개 스킬 중 말하기 489점이 최저</em></div></div>
+    <div class="row"><div><span class="tag t-mid">부분 근거</span></div><div class="claim">학벌<em>확인 12명 중 11명이 서울대·KAIST·연세대. 단 표본이 "위키에 문서가 있을 만큼 유명해진 사람" · 반례: 업스테이지 김성훈 = 구미전자공고 → 대구대</em></div></div>
+    <div class="row"><div><span class="tag t-no">근거 없음</span></div><div class="claim">네트워크(인맥)<em>검증 데이터를 전혀 찾지 못함 — 가장 자주 언급되는데 근거가 0</em></div></div>
+    <div class="row"><div><span class="tag t-ok">신규 관측</span></div><div class="claim">CTO 자리의 비가시성<em>아무도 말하지 않는데 직접 관측됨</em></div></div>
+  </div>
+
+  <h3>검증된 사례들의 공통점 — 학벌도 인문학도 아닙니다</h3>
+  <div class="tw"><table>
+    <tr><th>사람</th><th>회사 공식 페이지에 적힌 것</th></tr>
+    <tr><td><b>안익진</b> 몰로코 CEO</td><td>YouTube 영상 수익성 예측 시스템 개발, Android Data팀 창립</td></tr>
+    <tr><td><b>남세동</b> 보이저엑스 대표</td><td>세이클럽, <b>B612 앱(다운로드 3억 건)</b></td></tr>
+    <tr><td><b>김성훈</b> 업스테이지 대표</td><td>검색엔진 '까치네'</td></tr>
+    <tr><td><b>김택진</b> 엔씨 대표</td><td>아래아한글 공동개발</td></tr>
+    <tr><td><b>안철수</b> 안랩 창업자</td><td>V3 (1988년 국내 최초 백신 직접 개발)</td></tr>
+  </table></div>
+  <div class="pull">"어느 회사에서 무슨 일을 했다"가 아니라 <strong>"무엇을 만들었다"</strong>입니다. 회사가 리더십을 공개하지 않는 시장에서는, 평판이 회사 밖에서 형성되어야만 관측됩니다.</div>
+
+  <h3>그럼 문은 어디에 있나 — B2B입니다</h3>
+  <p><strong>국내에서 LLM을 처음부터 학습하는 조직은 6곳</strong>이고, <strong>최신 최대 모델(LG 750B, 업스테이지 250B)이 from-scratch에서 기존 가중치 재활용으로 옮겨가는 중</strong>입니다. 여기에 커리어를 통째로 걸면 안 됩니다.</p>
+  <p>반면 "AI Agent로 실제 매출을 내는" 국내 기업의 실체는 <strong>B2B 엔터프라이즈 SaaS</strong>였습니다. 채널톡은 <strong>246,938개사</strong>가 쓰고 에이전트가 <strong>128만 건 이상</strong>을 해결했으며 <strong>채용 44건</strong>이 열려 있습니다. 그중 눈에 띄는 자리가 <strong>Forward Deployed Engineer</strong> — 고객사에 직접 들어가 AI 전환을 수행하는 역할이고, <strong>백엔드 + 도메인 이해 + 고객 대면</strong>의 조합입니다.</p>
+  <div class="note"><span class="h">"몇 년차에 CTO"는 잘못된 질문</span>수집 표본(N=9)은 <b>전원 창업자 출신</b>이고 "회사 다니다 승진해서 CTO가 된 사람"은 <b>0명</b>입니다. 김성훈·장병규는 직함을 <b>0년 만에</b> 얻었습니다 — 자기가 만든 회사니까요. 김창한은 CTO 직함을 3년 만에 얻고도 <b>상장사 CEO까지 20년</b>이 걸렸습니다.<br><br><strong>CTO는 연차로 도달하는 자리가 아니라 조직을 만들면 붙는 이름입니다.</strong></div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">09 — 실천</span><h2>그래서 무엇을 할 것인가</h2><p class="sec-sub">전부 산출물이 있고 남에게 채점당하는 형태입니다. 혼자 읽고 끝나는 항목은 없습니다.</p></div>
+
+  <div class="phase">이번 주 — 비용 0, 리스크 0</div>
+  <div class="acts">
+    <div class="act">
+      <div class="top"><span class="n">01</span><span class="ti">추정 로그를 시작한다 ⭐</span></div>
+      <p>작업 착수 전 개인 문서에 세 줄: <b>예상 소요 / 예상 비용 / 깨질 것 같은 것 3가지.</b> 완료 후 실측과 대조합니다. 공유 안 해도 됩니다. 건당 15분, 주 1건.</p>
+      <p style="font-size:13.5px">통찰력은 사후 서사가 아니라 <b>사전 적중률</b>로만 검증됩니다. 초반 3개월 오차는 처참할 겁니다 — 그게 정상이고, 남에게 안 보여주는 게 요령입니다.</p>
+      <div class="proof"><b>6~12개월 뒤 증명되는 것</b>"저는 지난 1년간 47건을 추정했고 중앙값 오차가 ±X%입니다." — 이 문장을 말할 수 있는 백엔드 개발자는 거의 없습니다.</div>
+    </div>
+    <div class="act">
+      <div class="top"><span class="n">02</span><span class="ti">프레임워크 없이 에이전트 하나</span></div>
+      <p>LangChain 없이 300줄 이내로 에이전트 루프 + 툴 호출 + 재시도. 주말 2회.</p>
+      <div class="proof"><b>증명되는 것</b>기술 이해도 2단계 → 3단계 진입. 그리고 "프레임워크가 무엇을 감추고 있는지" 아는 상태.</div>
+    </div>
+    <div class="act">
+      <div class="top"><span class="n">03</span><span class="ti">자기 스톡옵션과 자본구조를 읽는다 ⭐</span></div>
+      <p>우선청산권 배수, 참가 여부, 총 발행주식수. 모르면 재무팀에 묻습니다. 1회 3시간.</p>
+      <p style="font-size:13.5px">이 조사에서 가장 아픈 사례 — 어느 CTO가 <b>2% 지분을 받고도 우선청산권 누적 구조 때문에 2억 달러 이상 엑싯이 아니면 자기 몫이 사실상 0원</b>이라는 계산을 뒤늦게 하고 회사를 떠났습니다.</p>
+      <div class="proof"><b>증명되는 것</b>"내 지분이 얼마짜리 엑싯에서 얼마가 되는지" 계산할 수 있는 상태. CEO가 목표라면 이게 1순위입니다.</div>
+    </div>
+  </div>
+
+  <div class="phase">이번 분기 — 남이 대신 해줄 수 없는 경험</div>
+  <div class="acts">
+    <div class="act">
+      <div class="top"><span class="n">04</span><span class="ti">온콜에 자원하고 장애 지휘를 맡는다 ⭐</span></div>
+      <p>장애 시 <b>직접 로그를 보거나 고치지 않습니다.</b> 상황 파악·역할 배정·결정·소통만 합니다.</p>
+      <p style="font-size:13.5px">위임은 책으로 안 배워집니다. 그런데 <b>업계 표준 교범이 위임을 규칙으로 강제하는 유일한 자리</b>가 여기입니다 — PagerDuty 교범 원문: <em>"You should not be performing any actions or remediations… Those tasks should be delegated"</em> / <em>"deep technical knowledge not required."</em></p>
+      <p style="font-size:13.5px"><b>요령</b> — "나는 오늘 키보드를 안 만진다"를 사전에 팀에 선언하면 강제됩니다. <b>⚠️ 한국 위계에서는</b> 교범의 "필요하면 CEO도 통화에서 내보낸다"가 그대로 작동하지 않을 수 있으니 조직 온도를 먼저 재세요.</p>
+      <div class="proof"><b>증명되는 것</b>"장애 N건을 지휘했고, 그중 제가 직접 코드를 만진 건 0건입니다."</div>
+    </div>
+    <div class="act">
+      <div class="top"><span class="n">05</span><span class="ti">자사 LLM 기능에 평가 세트를 붙인다 ⭐</span></div>
+      <p>입력 30~50건 + 기대 결과 + 자동 채점 + CI 연결 + 회귀 알림. 최초 2주, 이후 주 2시간.</p>
+      <p style="font-size:13.5px">개발자 설문에서 AI 최대 불만이 <b>"거의 맞는데 아닌 것"(66%)</b>이고, 리더의 <b>85%가 "AI 영향을 측정할 지표가 없다"</b>고 답했습니다. <b>희소성이 정확히 여기 있습니다.</b></p>
+      <p style="font-size:13.5px"><b>요령</b> — 초기엔 "테스트 만드느라 늦다"는 압박이 옵니다. <b>첫 회귀를 잡아낸 순간 논쟁이 끝납니다</b> — 그 사건을 반드시 기록해 두세요.</p>
+      <div class="proof"><b>증명되는 것</b>"우리 LLM 기능의 회귀를 배포 전에 잡는 체계를 제가 만들었습니다."</div>
+    </div>
+    <div class="act">
+      <div class="top"><span class="n">06</span><span class="ti">주간 사고 훈련 — 인문학 파트는 이것입니다</span></div>
+      <p>책을 읽는 게 아니라 <b>매주 산출물을 만들고 채점받습니다.</b> 총 2.5시간.</p>
+      <ul style="font-size:14px;margin-top:10px">
+        <li><b>화 30분 · 개념 수술</b> — 실무 용어 1개: 정의 → <b>내가 만든 반례</b> → 수정된 정의. 반례를 못 만들면 그 주는 실패로 기록</li>
+        <li><b>수 45분 · 반대 입장 서술</b> — 내가 반대하는 결정을 <b>지지하는</b> 글 500자 → 실제 지지자에게 "빠진 게 있나?" 확인. 추가된 논점 수가 점수(적을수록 좋음)</li>
+        <li><b>목 30분 · 유추 감사</b> — 이번 주 쓴 비유의 유사점/차이점 2열. <b>차이점이 유사점보다 적으면 그 비유는 철회</b></li>
+        <li><b>금 30분 · 대리변수 감사</b> — 표적변수 → 그게 대리하는 진짜 개념 → <b>둘이 갈라지는 집단</b></li>
+        <li><b>금 15분 · 예측 로그</b> — 불확실한 결정 3개를 확률로 기록 → 분기말 Brier 점수</li>
+      </ul>
+      <div class="proof"><b>하지 말 것</b>"고전 100권" 목록(산출물·채점 없음) · 요약본 대체(개념의 미세한 분할이 소실되는 지점이 정확히 훈련 대상) · <b>혼자 하는 반대 입장 서술</b>(외부 판정자 없으면 자기 확증)</div>
+    </div>
+  </div>
+
+  <div class="phase">6~12개월 — 앞의 것이 재료가 되어야 가능</div>
+  <div class="acts">
+    <div class="act">
+      <div class="top"><span class="n">07</span><span class="ti">기술부채 1건을 "비용·리스크 한 장"으로 승인받는다</span></div>
+      <p>문제 → 지금 안 하면 드는 비용(장애 시간·개발 지연 시수) → 3가지 선택지와 각각의 가격 → 권고안.</p>
+      <div class="proof"><b>증명되는 것</b>"저는 기술부채 상환을 제안해서 승인받고 완주한 적이 있습니다." 거절당해도 자산입니다 — 왜 거절됐는지 알게 되는 것이 다음 제안을 통과시킵니다.</div>
+    </div>
+    <div class="act">
+      <div class="top"><span class="n">08</span><span class="ti">분기 1회, 6페이지 서사 메모</span></div>
+      <p>PPT 금지, 완전한 문장. <b>최소 3명에게 찢어달라고 돌린 뒤 다시 씁니다.</b> 분기당 20시간.</p>
+      <p style="font-size:13.5px">베조스가 메모가 나쁜 원인을 진단한 방식이 결정적입니다 — "교양 부족"이 아니라 <b>"소요 시간에 대한 잘못된 기대"</b>. <em>"you can improve results through the simple act of teaching scope – that a great memo probably should take a week or more."</em></p>
+      <p style="font-size:13.5px">폴 그레이엄: <em>"Putting ideas into words is a severe test."</em> 이 검사를 안 받으면 <em>"never have fully formed ideas, but also never realize it."</em></p>
+      <div class="proof"><b>⚠️ 주의</b>분기 1회 이상 하지 마세요 — 빈도를 높이면 질이 무너져 역효과입니다.</div>
+    </div>
+    <div class="act">
+      <div class="top"><span class="n">09</span><span class="ti">관측 가능한 자산 하나를 회사 밖에 만든다 ⭐</span></div>
+      <p>②에서 만든 에이전트를 공개하거나, 추정 로그에서 얻은 것을 글로 쓰거나, 컨퍼런스 발표 지원.</p>
+      <div class="proof"><b>한국 시장에서 특히</b>CTO 자리가 관측되지 않는 시장이고, 검증된 사례들의 공통점이 "무엇을 만들었다"였습니다. <b>평판이 회사 밖에서 형성되어야만 관측됩니다.</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">10 — 자원</span><h2>실존 확인된 것만</h2><p class="sec-sub">2026년 9월 3일에 실제로 페이지를 열어 확인했습니다.</p></div>
+  <div class="note warn"><span class="h">⏰ 시급 — 이번 달 마감</span><b>KOCW(대학 공개강의) 서비스 종료</b> — 2026년 12월 30일 완전 종료, <b>신규 수강신청 마감 2026년 9월 30일</b>. 들을 강의가 있다면 이번 달 안에 신청하고, 수강확인증은 종료 전 내려받으세요.<br><br><b>⚠️ 도메인 하이재킹</b> — 과거 '데이터야놀자' 공식 도메인이 현재 <b>암호화폐 카지노 사이트</b>로 바뀌어 있습니다. 접속·공유 금지.</div>
+
+  <h3>사람 — 지금 갈 수 있는 곳</h3>
+  <p><strong>AWSKRUG</strong>(AWS 한국 사용자 모임) — 멤버 <strong>12,165명</strong>, 심사 없음, 참가비 5천~1.5만원, <strong>주 단위로 여러 소모임</strong>. 서울에서 다음 주에 갈 수 있는 사실상 유일한 정기 접점입니다.</p>
+  <p><strong>다음 개최일이 확정 공지된 컨퍼런스는 두 개뿐</strong>입니다 — AWS Summit Seoul(2026-05-20~21, 무료), PyCon Korea(2026-08-15~17).</p>
+  <div class="tw"><table>
+    <tr><th>오래된 통념</th><th>실제</th></tr>
+    <tr><td>"DEVIEW에 가라"</td><td>단독 브랜드는 2023년이 마지막. <b>DAN</b>에 흡수</td></tr>
+    <tr><td>"삼성 SDC에 가라"</td><td><b>2025년 한국·미국 모두 미개최</b></td></tr>
+    <tr><td>"토스 SLASH에 가라"</td><td>직군 통합형 <b>토스 메이커스 컨퍼런스</b>로 변경</td></tr>
+    <tr><td>"인프콘에 가라"</td><td><b>2025년 공식 휴년</b>, 2026년 재개 예고</td></tr>
+    <tr><td>"한국CTO클럽에 가입해라"</td><td><b>그 명칭의 조직을 찾지 못함.</b> 대신 <b>with CTO</b>(스타트업 CTO 비영리 모임, 무료)가 실존</td></tr>
+  </table></div>
+
+  <h4>온라인으로 배울 수 있는 실존 인물 — 경로 정합성 순</h4>
+  <ul>
+    <li><b>이동욱(향로) — 인프랩 CTO</b> · <b>당신 경로와 가장 가까운 국내 1차 자료.</b> 백엔드 → CTO, AI 네이티브 조직 전환 실전 기록 (2026-08 갱신 확인)</li>
+    <li><b>조성문 — Chartmetric CEO, 전 실리콘밸리 VC</b> · <b>개발자 출신 CEO. CTO→CEO 구간의 드문 1차 자료</b> (2026-08 갱신 확인)</li>
+  </ul>
+  <div class="quote">"<em>좋을때는 직접 얘기하고, 안좋을때는 대표/HR 뒤로 숨는 리더에게 누가 신뢰를 줄 수 있겠나.</em>"<br><br>"효율이 좋아진 것과 효과가 좋아진 것은 다른 얘기임. … 이 규모에서 지금까지 증명된 건 예전 성과를 더 적은 사람으로 낼 수 있다까지고, <em>더 큰 성과를 낸다는 사례는 아직 못 봤음.</em>"
+  <div class="src">이동욱(향로), 인프랩 CTO — 위 실천 항목 04·06과 직접 이어집니다</div></div>
+
+  <h3>책 — 지금 단계 순</h3>
+  <div class="tw"><table>
+    <tr><th>책</th><th>왜</th></tr>
+    <tr><td><b>개발자를 넘어 기술 리더로 가는 길</b><br>(타냐 라일리, 디코딩 2023)</td><td>⭐ <b>지금 단계에 가장 맞음</b> — 전문성을 유지하면서 영향력을 넓히는 경로</td></tr>
+    <tr><td><b>좋은 전략 나쁜 전략</b><br>(리처드 럼멜트, 센시오 2019)</td><td>⭐ 목표 나열(나쁜 전략)과 진짜 전략을 가르는 안목 — <b>"업의 본질" 질문의 현대판</b></td></tr>
+    <tr><td><b>하드씽</b> (벤 호로위츠, 2021)</td><td>CEO가 목표라면 필수. 해고·자금난·조직 붕괴를 미화 없이</td></tr>
+    <tr><td><b>추측과 논박</b> (칼 포퍼, 민음사 2001)</td><td><b>반증가능성</b> — "어떤 증거가 나오면 이 주장을 틀렸다고 인정할 것인가". AI 성능 주장 검증에 그대로 씁니다</td></tr>
+    <tr><td><b>논증의 기술</b> (앤서니 웨스턴, 필맥 2019)</td><td>짧은 실전 규칙집. <b>회의에서 나온 주장의 허점을 즉시 짚는 체크리스트</b></td></tr>
+    <tr><td><b>슈퍼 예측</b> (테틀록, 알키 2017)</td><td>⭐ 실천 항목 01의 이론적 배경</td></tr>
+    <tr><td><b>노이즈</b> (카너먼 외, 김영사 2022)</td><td>채용·평가 절차 표준화에 직접 쓰임</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--ink3)"><b>절판 확인:</b> 『세븐 파워』 · 『디지털 트랜스포메이션 엔진』(Accelerate) · 『과학적 발견의 논리』 · 『결정, 흔들리지 않고 마음먹은 대로』 — 전자책·중고·원서로 찾으세요.</p>
+
+  <h3>무료 강의</h3>
+  <ul>
+    <li><b>Think Again I~IV</b> (Coursera / Duke, 무료 수강) — ⭐ <b>I부터 시작.</b> 논증 식별·분석·재구성. 34.1만명</li>
+    <li><b>Model Thinking</b> (Coursera / 미시간) — ⭐ <b>다중 모델 사고. "업의 재정의"와 정확히 같은 근육</b></li>
+    <li><b>MIT OCW 24.241 Logic I</b> — 완전 무료, <b>해답 포함 문제집이 있어 독학 가능</b></li>
+    <li><b>Death</b> (Open Yale, Shelly Kagan) — 완전 무료 26강. <b>한 주제를 26강 내내 논증으로 파고드는 "철학적 집요함"의 실물 견본</b></li>
+    <li><b>Hugging Face AI Agents Course / LLM Course</b> — 완전 무료, 수료증</li>
+    <li><b>Stanford CS336</b> · <b>Karpathy Zero to Hero</b> · <b>부스트코스</b>(네이버, 무료)</li>
+  </ul>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">11 — 함정</span><h2>이 조언을 잘못 실행하는 7가지 방법</h2></div>
+  <div class="tw"><table>
+    <tr><th></th><th>함정</th><th>왜 함정인가</th></tr>
+    <tr><td class="num">1</td><td>인문학 독서 목록을 만들고 체크한다</td><td>산출물도 채점도 없습니다. 메타분석에서 <b>"자기주도 학습"은 효과가 가장 낮은 형태</b></td></tr>
+    <tr><td class="num">2</td><td>"우리 업의 본질은 X다"라고 단정한다</td><td>가장 확신에 찬 전문가가 가장 부정확했습니다. <b>단정하는 형식 자체가 부정확의 신호</b></td></tr>
+    <tr><td class="num">3</td><td>인문학을 경영 도구로 읽는다</td><td>도구화된 인문학은 인문학도 도구도 아니게 됩니다. <b>아무 도움이 안 될 각오로</b> 읽으세요</td></tr>
+    <tr><td class="num">4</td><td>정교한 하네스에 애착을 갖는다</td><td>"assumptions go stale as models improve" — 정성 들일수록 버리기 어려워집니다</td></tr>
+    <tr><td class="num">5</td><td>좋은 아키텍처 본능으로 조기 추상화한다</td><td><b>백엔드 출신 최대의 함정.</b> 에이전트 영역은 6개월마다 전제가 바뀌어 회수 전에 폐기됩니다</td></tr>
+    <tr><td class="num">6</td><td>기술 깊이를 직관 과신으로 바꾼다</td><td>Anthropic조차 "우리 평가가 사용자가 보고한 저하를 포착하지 못했다"고 인정했습니다</td></tr>
+    <tr><td class="num">7</td><td>기존 제품 개선 프레임에 갇힌다</td><td>구글이 트랜스포머를 발표하고도 검색 개선에 쓰는 동안 새 카테고리를 놓쳤고, <b>논문 공저자 8명 전원이 퇴사</b>했습니다</td></tr>
+  </table></div>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">12 — 한계</span><h2>이 조사가 못 한 것</h2></div>
+  <div class="note warn"><span class="h">🔴 조작 사건 1건</span>리더십 경로를 조사한 축이 <b>"한국 기술 리더 23인"의 이름·직책·경력·URL·인용문을 전부 지어냈고</b>, 이후 스스로 신고했습니다. 즉시 격리했고, 이 페이지에는 <b>회사 공식 페이지로 확인된 인물만</b> 실었습니다.<br><br>이 사건 때문에 <b>가장 결정적인 수치 세 건(CEO 전공 분포표와 배출확률표, Mellon 결론문, 비판적 사고 메타분석 341개 효과크기)은 제가 원문 파일을 직접 열어 재검증</b>했습니다. 셋 다 실재했습니다.</div>
+  <div class="note"><span class="h">❌ 제 조사 지시에 있던 전제 오류 3건</span>에이전트가 잡아냈습니다. Werner Vogels의 "A Day in the Life of a CTO"는 <b>존재하지 않고</b>(사이트맵 447개 URL 전수 확인), Martin Fowler 본인이 쓴 CTO 글도 <b>없으며</b>(사이트 1,241개 항목 전수 확인), "한국CTO클럽"이라는 조직도 <b>찾지 못했습니다.</b></div>
+  <h4>판정 불가로 남긴 것 (억지로 채우지 않았습니다)</h4>
+  <ul style="font-size:14.5px">
+    <li><b>인문학 교육이 경영 성과를 개선하는가</b> → 인과 연구 <b>0건</b>. 단, 부재 증명은 검색 범위에 의존합니다</li>
+    <li><b>CTO → CEO 전환의 실패 요인</b> → 이 주제를 정면으로 다룬 연구·조사 없음</li>
+    <li><b>기술 창업자 CEO vs 사업 창업자 CEO 성과 비교</b> → 서구권 대규모 비교 연구가 <b>존재하지 않는 것으로 보임</b></li>
+    <li><b>잡스 2011년 발언의 영어 축자 문구</b> → 2차 출처 2곳이 일치하나 1차 영상·공식 트랜스크립트 미확보</li>
+    <li><b>"창업자 CEO 60%가 4년 내 교체"</b> → 원문 미확인. <b>이 수치를 인용하지 마세요</b></li>
+    <li><b>한국 CTO 직책·경로 통계</b> → 회사들이 공개하지 않아 관측 불가</li>
+  </ul>
+  <p style="font-size:14.5px;color:var(--ink3)"><b>조사 제약</b> — 웹 검색 예산이 중반에 소진되어 후반부는 URL을 직접 지정해 여는 방식으로만 진행했습니다. 새 출처를 <b>발견</b>하는 힘이 크게 약해졌고, 커버리지가 전 구간에 균일하지 않습니다.</p>
+</section>
+
+<section class="col">
+  <div class="sec-head"><span class="sec-no">결론</span><h2>세 문장으로 줄이면</h2></div>
+  <div class="acts">
+    <div class="act"><div class="top"><span class="n">01</span></div><p style="font-size:16px;color:var(--ink)"><b>그 인용문은 이건희의 말이 아닙니다.</b> 하지만 그가 실제로 한 말이 훨씬 쓸모 있습니다 — <b>"시각을 바꿔가며 여러 번 본다"</b>는 교양이 아니라 사고 훈련이고, 오늘 밤부터 할 수 있습니다.</p></div>
+    <div class="act"><div class="top"><span class="n">02</span></div><p style="font-size:16px;color:var(--ink)"><b>"업의 본질"의 실무적 정체는 "지금 내가 세고 있는 숫자가 내가 알고 싶은 것을 재고 있는가"를 되묻는 능력</b>이며, 신비한 재능이 아니라 채점 가능한 훈련입니다. 서로 적대적인 네 관점이 각자 다른 근거로 여기에 도달했습니다.</p></div>
+    <div class="act"><div class="top"><span class="n">03</span></div><p style="font-size:16px;color:var(--ink)"><b>당신의 백엔드 경력은 극복할 약점이 아니라, Anthropic 채용 공고 첫 문장이 호명하는 자격요건입니다.</b> 부족한 것은 둘뿐입니다 — 모델 내부에 대한 손 감각(3~6개월)과, <b>품질을 수치로 만드는 평가 설계</b>(리더의 85%가 못 하고 있다고 답한 바로 그것).</p></div>
+  </div>
+</section>
+
+<footer>
+  <p><b>조사 구성</b> — 8개 조사축(원전 검증 / 기술 깊이 / 인문학 개념 / 리더십 경로 / 리소스 큐레이션)과 4개 대립 관점(회의론 / 현장 CTO / 인문학 옹호 / 한국 시장)을 서로 반박하도록 병렬 배치. 각 관점이 자기 주장을 스스로 꺾은 사례 4건이 신뢰의 근거이고, 조작 1건이 한계의 근거입니다.</p>
+  <p style="margin-top:14px"><b>확신도 표기</b> — <span class="tag t-ok">확인</span> 독립 출처 2개 이상 원문 확인 · <span class="tag t-mid">부분</span> 신뢰할 만한 1개 출처 · <span class="tag t-unk">미확인</span> 검증 출처를 찾지 못함 · <span class="tag t-no">반증</span> 사실과 다름이 확인됨</p>
+  <p style="margin-top:14px">전체 근거·출처 목록과 상세 서술은 볼트 노트 <code>wiki/research/business-essence-tech-and-humanities.md</code>에 있습니다.</p>
+</footer>
+
+</div>
+
+</body>
+</html>

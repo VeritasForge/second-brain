@@ -259,6 +259,7 @@
 - [[ai-era-confluence-jira-alternatives]] — AI 시대 Confluence/JIRA 대체 도구 조사·검증 종합 (대체재 지형, Plane/Huly/Forgejo/Docmost/Backlog.md 비교, 라이선스 리스크, Forgejo 도입+MCP 기여 정정 추천, rl-verify 2회)
 - [[ai-native-engineer-role]] — AI Native Engineer 직군 완전 해부 (정의·6대 역량·Agent Wrangler 업무·기존 SWE/ML/AI Engineer 비교·한국 시장 무신사·그루우·연봉 프리미엄 20-30%, 11 출처 교차 검증)
 - [[ai-native-engineer-talk-outline]] — AI Native Engineer 발표 골격 (개발자 청중 20-30분 교육, 8슬롯 메시지+근거+화면+시간, 자가진단 10항목, 벤더/비-벤더 출처 규칙)
+- [[business-essence-tech-and-humanities]] — 업의 본질·기술 이해도·인문학적 소양 종합 검증 (이건희 인용문 원전 미확인 판정, "기술+인문학"의 실제 출처는 잡스, Levitt Marketing Myopia 계보와 재정의의 대칭적 오류, CEO 전공 배출확률 영문학 0.08 vs 경제학 1.00, Mellon 위촉 연구 2건 효과 미확인, 인문학적 소양 8개 하위능력 조작적 정의, 리더십 훈련 메타분석에서 자기주도 학습이 최약, 성공의 역설(Wasserman), 한국 벤처투자 돈↑·회사수↓, CTO 자리 비가시성, 백엔드 경력이 Anthropic 공고 첫 줄 — 8축 병렬조사 + 페르소나 경합, 에이전트 조작 1건 적발·격리). 읽기용 HTML 리포트 `business-essence-tech-and-humanities.html` 동봉
 - **AX 실천 Playbook 시리즈** (`wiki/research/ax/`)
   - [[00-ax-practice-guide]] — AX 실천 통합 가이드(허브): 5개 기업 cross-case 7대 공통패턴(데이터기반 선행/CEO 정량목표/증강>대체/플랫폼사고/스킬링병행/거버넌스선행/측정절제) + 4단계 로드맵(진단→설계→실행→측정) + 백엔드 엔지니어의 자리 + 우리 회사 적용 체크리스트
   - [[dbs-bank]] — DBS Bank(금융·장기체계): 5년 체계로 SGD 1B (PURE 윤리·Data Chapter·ADA/ALAN, Forrester 독립검증, 10 출처)
