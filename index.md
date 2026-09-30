@@ -191,6 +191,7 @@
 
 ### develop/observability
 - [[dd-trace-id-vs-correlation-id]] — dd.trace_id vs correlation_id: Datadog 예약 속성 확인(이름 충돌 없음)과 분산 트레이싱-비즈니스 상관관계 ID의 의미적 겹침/역할 분담 분석 (트레이스의 3가지 구조적 한계 — 시간 역행 불가, 재시도 단절, SQS/SNS 큐 경계 전파 한계)
+- [[sqs-cloudwatch-metrics-guide]] — Amazon SQS CloudWatch 지표 12종 해설: 상태/사건 지표 구분, Age vs Visible 관계, NotVisible vs GroupsWithInflight, EmptyReceives 해석, FIFO 중복 제거·지연 전송, 소비자 증설 판단, 알람 권장안
 
 ### develop/os
 - [[atomic-mutex-semaphore-qa-deep-dive]] — Atomic/Mutex/Semaphore 심화 Q&A Deep Dive
