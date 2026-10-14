@@ -2,6 +2,10 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-10-14] create | 관리형 RAG 검색 서비스 비교: Vertex AI Search(현 Agent Search)와 대안들
+
+- created: [[managed-rag-search-services-comparison]] — 관리형 RAG 검색 서비스를 완전 관리형·검색 엔진형·부품형 세 유형으로 나누고, 다섯 단계 관리 범위·과금 구조·한국어 법령 검색 관점(형태소 분석, 조문 단위 chunk, 한국 리전의 저장/처리 구분)·애널리스트와 커뮤니티 평가로 비교. 주장 91개를 독립 출처/1차 자료 2종으로 재검증해 정정 반영(Agent Search 월 10만 쿼리 $135, Bedrock userContext 누락 시 0건, OpenSearch 관리형 nori는 선택형 plugin, Gartner Leader 6곳 등). OpenSearch 3.9.0에서 nori + delimiter chunking 예제 실측(max_chunk_limit 기본 100 함정). 회사 고유 내용은 일반화. ai-engineering.
+
 ## [2026-10-14] create | Kubernetes 파드 CPU·메모리 지표 읽는 법: request, limit, 사용률
 
 - created: [[k8s-pod-cpu-memory-request-limit]] — SigNoz 파드 목록의 CPU/Mem Req·Limit Usage 컬럼이 실제 사용량 하나를 request·limit 두 기준선으로 나눈 비율임을 검산으로 확인. 보장(request 이하)·경합(request~limit, 노드 붐빌 때 request 비율 분배)·throttling(limit 도달) 구간 구분과 대응 차이, limit은 노드를 나눈 몫이 아닌 독립 상한(overcommit 허용, 메모리는 위험), request 증가 시 Pending·rolling update 추가 자리·replica 곱, manifest 단계 검증 한계(조각남·시점 차이)와 ResourceQuota·dry-run·cluster-capacity·progressDeadlineSeconds, 평균값과 100ms CFS 주기 함정. develop/k8s.

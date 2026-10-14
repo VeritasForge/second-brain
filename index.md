@@ -10,6 +10,7 @@
 - [[claude-code-plugin-hooks-system]] — Claude Code Plugin Hooks System Deep Dive
 - [[feature-engineering-overview]] — Feature Engineering 개요
 - [[lost-in-the-middle-deep-dive-verified]] — Lost in the Middle 검증 완료판
+- [[managed-rag-search-services-comparison]] — 관리형 RAG 검색 서비스 비교: Vertex AI Search(현 Agent Search), Bedrock KB, OpenAI·Gemini File Search, Azure AI Search, Elastic, OpenSearch, Vespa, Cohere를 다섯 단계(chunking~reranking) 관리 범위·과금·한국어 법령 검색(nori, 한국 리전)·시장 평가로 비교, 주장 91개 확신도 검증, OpenSearch 조문 단위 예제 실측
 - [[ouroboros-vs-compound-superpowers-comparison]] — Ouroboros vs Compound vs Superpowers 심층 비교 분석
 - [[ralph-playbook-korean-translation]] — The Ralph Playbook 한국어 번역 및 정리
 - [[ralph-superpowers-compund]] — Ralph Loop + Superpowers + Compound Engineering 조합 가이드
