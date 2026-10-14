@@ -177,6 +177,7 @@
 - [[07-kotlin-project-structure-and-tooling]] — Kotlin 프로젝트 구조와 도구
 
 ### develop/k8s
+- [[k8s-pod-cpu-memory-request-limit]] — 파드 CPU·메모리 지표 읽는 법: request·limit 의미, SigNoz Req/Limit Usage 컬럼, 보장·경합·throttling 구간, limit overcommit, request 증가와 Pending, 배포 전 검증 한계, 평균값·100ms 주기 함정
 - [[tutorial]] — K8s Hello World 실무형 튜토리얼
 
 ### develop/network
@@ -191,6 +192,7 @@
 
 ### develop/observability
 - [[dd-trace-id-vs-correlation-id]] — dd.trace_id vs correlation_id: Datadog 예약 속성 확인(이름 충돌 없음)과 분산 트레이싱-비즈니스 상관관계 ID의 의미적 겹침/역할 분담 분석 (트레이스의 3가지 구조적 한계 — 시간 역행 불가, 재시도 단절, SQS/SNS 큐 경계 전파 한계)
+- [[signoz-otel-apm-architecture]] — SigNoz + OpenTelemetry Python APM 아키텍처: span·metric 개념, API/SDK(Provider⊃Processor⊃Exporter)/계측 패키지/자동 로더 구분, sitecustomize·entry point·wrapt 바꿔치기 동작(실제 소스·재현), k8s Operator 주입(init container·PYTHONPATH), 자동 계측 한계(aiobotocore·LLM·큐 경계), 전역 provider 공유 충돌, SigNoz Services RED·CloudWatch 별도 경로·대시보드·알람·권한, P99·Apdex·샘플링·cardinality·임계값 원칙
 - [[sqs-cloudwatch-metrics-guide]] — Amazon SQS CloudWatch 지표 12종 해설: 상태/사건 지표 구분, Age vs Visible 관계, NotVisible vs GroupsWithInflight, EmptyReceives 해석, FIFO 중복 제거·지연 전송, 소비자 증설 판단, 알람 권장안
 
 ### develop/os

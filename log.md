@@ -2,6 +2,14 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-10-14] create | Kubernetes 파드 CPU·메모리 지표 읽는 법: request, limit, 사용률
+
+- created: [[k8s-pod-cpu-memory-request-limit]] — SigNoz 파드 목록의 CPU/Mem Req·Limit Usage 컬럼이 실제 사용량 하나를 request·limit 두 기준선으로 나눈 비율임을 검산으로 확인. 보장(request 이하)·경합(request~limit, 노드 붐빌 때 request 비율 분배)·throttling(limit 도달) 구간 구분과 대응 차이, limit은 노드를 나눈 몫이 아닌 독립 상한(overcommit 허용, 메모리는 위험), request 증가 시 Pending·rolling update 추가 자리·replica 곱, manifest 단계 검증 한계(조각남·시점 차이)와 ResourceQuota·dry-run·cluster-capacity·progressDeadlineSeconds, 평균값과 100ms CFS 주기 함정. develop/k8s.
+
+## [2026-10-02] create | SigNoz와 OpenTelemetry로 구성하는 Python 서비스 APM 아키텍처
+
+- created: [[signoz-otel-apm-architecture]] — OTel 신호(span·metric·log)와 패키지 5종(API·SDK·Exporter·계측·자동 로더)을 구분하고, 자동 계측을 실제 소스(opentelemetry-instrumentation 0.66b0·SDK 1.45.0)로 추적: sitecustomize → initialize() → entry point → wrapt 바꿔치기(httpx·asyncpg·FastAPI), console exporter 재현. k8s OTel Operator 주입(init container cp, PYTHONPATH 접두·접미, 기본 OTEL_* 값)을 Operator 소스로 확인하고 OTel 없는 venv에서 재현 — Operator 패키지가 앱 site-packages보다 먼저 로드됨. OTel Collector=Datadog Agent 대응, 직접 전송 vs Agent 경유, OTLP·ClickHouse. 자동 계측 한계(aiobotocore가 _make_api_call 덮어씀, LLM SDK, 큐 경계 trace), Langfuse 전역 provider 공유로 생기는 두 충돌. SigNoz Services RED(진입점 span 기준)·워커 함정·Breakdown 부재·CloudWatch 별도 경로(One-Click은 Cloud 전용)·대시보드 JSON·알람(채널/규칙 분리, 코드 관리)·역할(Editor, custom role은 Enterprise). 운영 원칙: P50·P90·P99와 꼬리 증폭, Apdex 부적합 조건, 샘플링, cardinality, 임계값·판정 창. 회사·도메인 고유 내용은 일반화. develop/observability.
+
 ## [2026-09-30] create | Amazon SQS CloudWatch 지표 해설: 의미, 관계, 모니터링 방법
 
 - created: [[sqs-cloudwatch-metrics-guide]] — SQS 지표 12종을 상태 지표(Approximate…, Maximum)와 사건 지표(NumberOf…, Sum)로 나눠 해설. Age(대기 시간)와 Visible(대기 건수)의 차이와 FIFO 그룹 막힘, NotVisible>GroupsWithInflight가 뜻하는 소비 규칙 위반(콘솔 폴링 등), EmptyReceives는 호출 수라 소비자 수와 대응하지 않음, FIFO 중복 제거(5분 창·성공 응답 후 미전달·삭제 후에도 기억), 지연 전송 용도와 FIFO 메시지별 지연 불가, 소비자 증설 판단 순서, Terraform 알람·CLI·boto3 예제. develop/observability.
