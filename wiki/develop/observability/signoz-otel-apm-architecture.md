@@ -96,20 +96,36 @@ created: 2026-10-02
 ## 2. 전체 그림: 앱에서 SigNoz 화면까지
 
 ```
- ┌──────────────────── 앱 클러스터 ────────────────────┐        ┌──────── 관측 클러스터 ────────┐
- │  ┌──── 파드 (Python 프로세스 하나) ──────────────┐   │        │                               │
- │  │  우리 코드 / 자동 계측(httpx·FastAPI·asyncpg) │   │        │                               │
- │  │        │            │            │          │   │        │                               │
- │  │    Tracer        Meter        Logger         │   │ OTLP   │  OTel Collector (SigNoz판)    │
- │  │        ▼            ▼            ▼          │   │ /HTTP  │        │ 가공·중계             │
- │  │  TracerProvider MeterProvider LoggerProvider │───┼───────▶│        ▼                      │
- │  │        └──────── OTLP Exporter ───────┘      │   │ (4318) │  ClickHouse (저장)            │
- │  └──────────────────────────────────────────────┘   │        │        ▲                      │
- │  stdout·stderr 로그 ──▶ 노드 로그 수집 agent ────────┼───────▶│  query-service (조회)         │
- └──────────────────────────────────────────────────────┘        │        ▲                      │
-                                                                 │  SigNoz 화면·알람 ──▶ Slack   │
- AWS CloudWatch (SQS·RDS 지표) ──── 별도 수집 경로 ──────────────▶│                               │
-                                                                 └───────────────────────────────┘
+┌─ 앱 클러스터 ────────────────────────────────────────────┐
+│ ┌─ 파드 (Python 프로세스 하나) ──────────────────┐       │
+│ │ 우리 코드 / 자동 계측(httpx·FastAPI·asyncpg)   │       │
+│ │      │               │               │         │       │
+│ │    Tracer          Meter           Logger      │       │
+│ │      ▼               ▼               ▼         │       │
+│ │ TracerProvider  MeterProvider  LoggerProvider  │       │
+│ │      └───────── OTLP Exporter ───────┘         │       │
+│ │                      │                         │       │
+│ └──────────────────────┬─────────────────────────┘       │
+│                        │ OTLP/HTTP (4318)                │
+│                        │                                 │
+│                        │     stdout·stderr 로그          │
+│                        │       └─▶ 노드 로그 수집 agent  │
+│                        │                  │ 로그         │
+└────────────────────────┬──────────────────┬──────────────┘
+                         │                  │      AWS CloudWatch (SQS·RDS 지표)
+                         │                  │         │ 별도 수집 경로(10.4절)
+┌─ 관측 클러스터 ────────┬──────────────────┬─────────┬────┐
+│                        ▼                  ▼         ▼    │
+│   ┌──────────────────────────────────────────────────┐   │
+│   │ OTel Collector (SigNoz판): 받기·가공·중계        │   │
+│   └─────────────────────┬────────────────────────────┘   │
+│                         ▼                                │
+│                ClickHouse (저장)                         │
+│                         ▲ 읽기                           │
+│                query-service (조회)                      │
+│                         ▲                                │
+│                SigNoz 화면·알람 ──▶ Slack                │
+└──────────────────────────────────────────────────────────┘
 ```
 
 이 문서는 이 그림의 각 구간을 차례로 설명합니다.
@@ -156,7 +172,7 @@ trace_id = 4bf9…   (한 요청 전체)
 ├─ [worker] POST http://api-server/process          CLIENT   0.0s ─────────────────── 9.2s
 │   └─ [api-server] POST /process                    SERVER    0.1s ───────────────── 9.1s
 │        ├─ [api-server] pipeline.run                INTERNAL   0.1s ──────────────── 9.0s
-│        │    ├─ POST https://…/generateContent      CLIENT      0.2s ──── 3.1s     ← LLM 1번째
+│        │    ├─ POST https://…/generateContent      CLIENT      0.2s ──── 3.1s       ← LLM 1번째
 │        │    ├─ POST https://…/generateContent      CLIENT             3.2s ── 5.9s  ← LLM 2번째
 │        │    └─ POST https://…/generateContent      CLIENT                   6.0s ─ 8.9s
 │        └─ (응답 직렬화)
@@ -171,7 +187,7 @@ trace_id = 4bf9…   (한 요청 전체)
  worker (CLIENT span 생성)                          api-server
    httpx 요청 헤더에 자동으로 실음:
    traceparent: 00-4bf92f35…-00f067aa…-01  ───────▶ FastAPI 계측이 헤더를 읽음
-                  └ trace_id ┘ └ 부모 span_id ┘        → 같은 trace_id로 SERVER span 생성
+                  └ trace_id ┘ └ 부모 span_id ┘     → 같은 trace_id로 SERVER span 생성
 ```
 
 HTTP는 헤더가 있어서 자동 계측이 알아서 이어 줍니다. 반면 **큐 메시지에는 누가 이 값을 실어 주지 않으면** trace가 끊깁니다(8.2절).
@@ -208,14 +224,14 @@ API 호출 한 건이 503으로 끝났다고 해 보겠습니다.
  사건: worker → api-server POST /process, 0.02초, 503
 
  Span 으로 남기면                          Metric 으로 남기면
- ┌──────────────────────────────┐        ┌────────────────────────────────────────┐
- │ trace_id=…  span_id=…         │        │ http.client 지연 히스토그램             │
- │ name=POST /process            │        │   {server=api-server, status=503}       │
- │ duration=0.02s                │        │   0~0.05초 구간 카운트 += 1             │
- │ status_code=503  status=ERROR │        │ (주기마다 구간별 누적값만 전송)          │
- │ 부모: 작업 처리 span           │        └────────────────────────────────────────┘
- └──────────────────────────────┘
- → "이 작업이 왜 실패했나"                  → "지난 1시간 503 비율이 몇 %인가"
+ ┌────────────────────────────────┐        ┌────────────────────────────────────┐
+ │ trace_id=…  span_id=…          │        │ http.client 지연 히스토그램        │
+ │ name=POST /process             │        │   {server=api-server, status=503}  │
+ │ duration=0.02s                 │        │   0~0.05초 구간 카운트 += 1        │
+ │ status_code=503  status=ERROR  │        │ (주기마다 구간별 누적값만 전송)    │
+ │ 부모: 작업 처리 span           │        └────────────────────────────────────┘
+ └────────────────────────────────┘
+ → "이 작업이 왜 실패했나"                 → "지난 1시간 503 비율이 몇 %인가"
 ```
 
 | 구분           | Span                             | Metric                |
@@ -241,23 +257,23 @@ API 호출 한 건이 503으로 끝났다고 해 보겠습니다.
 ### 4.1 다섯 종류의 패키지
 
 ```
- ┌─────────────────────────── 파이썬 프로세스 하나 ───────────────────────────┐
- │  ⑤ 자동 로더 (opentelemetry-instrumentation + distro)                      │
- │     파이썬 시작 시 실행 → ③ SDK 조립 + ④ 계측 패키지들 실행                  │
- │            │                                │                              │
- │            ▼                                ▼                              │
- │  ④ 계측 패키지 (instrumentation-httpx, -fastapi, -asyncpg …)                │
+ ┌──────────────────────────── 파이썬 프로세스 하나 ─────────────────────────────┐
+ │  ⑤ 자동 로더 (opentelemetry-instrumentation + distro)                         │
+ │     파이썬 시작 시 실행 → ③ SDK 조립 + ④ 계측 패키지들 실행                   │
+ │            │                                │                                 │
+ │            ▼                                ▼                                 │
+ │  ④ 계측 패키지 (instrumentation-httpx, -fastapi, -asyncpg …)                  │
  │     httpx·FastAPI·asyncpg 함수를 바꿔치기 → 호출될 때마다 ① API로 span 생성   │
- │            │                                                               │
- │            ▼                                                               │
+ │            │                                                                  │
+ │            ▼                                                                  │
  │  ① API (opentelemetry-api)  ← 우리 코드가 직접 span을 만들 때도 여기를 씀     │
- │            │                                                               │
- │            ▼                                                               │
- │  ③ SDK (opentelemetry-sdk)                                                 │
- │     TracerProvider ─▶ BatchSpanProcessor ─▶ ② Exporter ──────────────────────┼─▶ Collector
- │     MeterProvider  ─▶ PeriodicExportingMetricReader ─▶ ② Exporter            │
- │     LoggerProvider ─▶ BatchLogRecordProcessor ─▶ ② Exporter                 │
- └────────────────────────────────────────────────────────────────────────────┘
+ │            │                                                                  │
+ │            ▼                                                                  │
+ │  ③ SDK (opentelemetry-sdk)                                                    │
+ │     TracerProvider ─▶ BatchSpanProcessor ─▶ ② Exporter ───────────────────────┼─▶ Collector
+ │     MeterProvider  ─▶ PeriodicExportingMetricReader ─▶ ② Exporter             │
+ │     LoggerProvider ─▶ BatchLogRecordProcessor ─▶ ② Exporter                   │
+ └───────────────────────────────────────────────────────────────────────────────┘
    ② Exporter 의 종류: OTLP Exporter(Collector로 보냄), Console Exporter(터미널에 찍음) 등
 ```
 
@@ -305,15 +321,15 @@ os.environ.setdefault(OTEL_EXPORTER_OTLP_PROTOCOL, "grpc")   # ← distro 의 �
 SDK가 프로세스 안에서 하는 일은 다음과 같습니다.
 
 ```
- ┌─────────────────── 앱 파드 (Python 프로세스 하나) ───────────────────┐
- │  우리 코드: with tracer.start_as_current_span("job.run"):           │
- │     ▼                                                                │
- │  TracerProvider ── span 끝남 ──▶ BatchSpanProcessor                   │
- │                                   │ 메모리 큐에 쌓아 둠                │
- │                                   │ 백그라운드 스레드가 몇 초마다 묶음 전송│
- │                                   ▼                                  │
- │                                OTLP Exporter ──────────────────────────┼──▶ Collector
- └──────────────────────────────────────────────────────────────────────┘
+ ┌─────────────────────── 앱 파드 (Python 프로세스 하나) ───────────────────────┐
+ │  우리 코드: with tracer.start_as_current_span("job.run"):                    │
+ │     ▼                                                                        │
+ │  TracerProvider ── span 끝남 ──▶ BatchSpanProcessor                          │
+ │                                   │ 메모리 큐에 쌓아 둠                      │
+ │                                   │ 백그라운드 스레드가 몇 초마다 묶음 전송  │
+ │                                   ▼                                          │
+ │                                OTLP Exporter ────────────────────────────────┼──▶ Collector
+ └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 - span을 기록하는 호출은 **메모리에 레코드를 만드는 일**뿐이라 빠릅니다. 네트워크 전송은 백그라운드 스레드가 따로 합니다.
@@ -329,8 +345,8 @@ OTel API는 SDK가 등록되기 전까지 **아무 일도 하지 않도록(no-op
                                                    │
                          SDK(TracerProvider + Exporter)가 등록돼 있나?
                          ├─ 아니요 → NonRecordingSpan: 기록도 전송도 안 함 (no-op)
-                         └─ 예    → span 기록 → OTLP Exporter → Collector
-                                        ↑
+                         └─ 예     → span 기록 → OTLP Exporter → Collector
+                                          ↑
                           이 부분은 코드가 아니라 배포 설정이 채운다
                           (Operator 주입, 또는 SDK 초기화 + 엔드포인트 환경변수)
 ```
@@ -378,24 +394,24 @@ provider: ProxyTracerProvider | meter provider: _ProxyMeterProvider
 
 ```
  [앱 SDK] ──OTLP──▶ [SigNoz OTel Collector] ──▶ [ClickHouse] ◀── [query-service] ◀── SigNoz 화면
-                     = OTel Collector의 SigNoz판      (저장)          (조회)
+                     = OTel Collector의 SigNoz판   (저장)            (조회)
 ```
 
 Datadog과 1:1로 맞추면 다음과 같습니다. **OTel SDK는 Datadog Agent가 아니라 Datadog의 트레이싱 라이브러리(`ddtrace`)에 해당하고, Agent 역할은 OTel Collector가 맡습니다.**
 
 ```
- ┌──────────── Datadog ────────────┐        ┌──────────── OTel + SigNoz ────────────┐
- │ [앱 프로세스]                     │        │ [앱 프로세스]                           │
- │   우리 코드                       │        │   우리 코드                             │
- │     ▼                            │        │     ▼                                  │
- │   ddtrace (tracer + 버퍼 + 전송)  │  ⇔     │   OTel API → OTel SDK                  │
- │     │ localhost                  │        │     │ OTLP/HTTP                         │
- │     ▼                            │        │     ▼                                  │
- │ [노드 데몬] Datadog Agent         │  ⇔     │ [수집기] OTel Collector                 │
- │     │ (배치·샘플링·태그 보강)       │        │     │ (배치·샘플링·속성 가공)             │
- │     ▼                            │        │     ▼                                  │
- │ [SaaS] Datadog 백엔드             │  ⇔     │ [백엔드] SigNoz (저장소 + 화면)          │
- └──────────────────────────────────┘        └────────────────────────────────────────┘
+ ┌───────────── Datadog ─────────────┐        ┌───────── OTel + SigNoz ──────────┐
+ │ [앱 프로세스]                     │        │ [앱 프로세스]                    │
+ │   우리 코드                       │        │   우리 코드                      │
+ │     ▼                             │        │     ▼                            │
+ │   ddtrace (tracer + 버퍼 + 전송)  │   ⇔    │   OTel API → OTel SDK            │
+ │     │ localhost                   │        │     │ OTLP/HTTP                  │
+ │     ▼                             │        │     ▼                            │
+ │ [노드 데몬] Datadog Agent         │   ⇔    │ [수집기] OTel Collector          │
+ │     │ (배치·샘플링·태그 보강)     │        │     │ (배치·샘플링·속성 가공)    │
+ │     ▼                             │        │     ▼                            │
+ │ [SaaS] Datadog 백엔드             │   ⇔    │ [백엔드] SigNoz (저장소 + 화면)  │
+ └───────────────────────────────────┘        └──────────────────────────────────┘
 ```
 
 | 역할                        | Datadog                   | OTel + SigNoz      | 어디서 도나        |
@@ -412,10 +428,10 @@ OTel에서는 두 구조를 모두 쓸 수 있습니다.
 ```
  직접 전송                                         Agent 경유 (Datadog과 같은 구조)
  [앱 파드: OTel SDK]                               [앱 파드: OTel SDK]
-      │ OTLP/HTTP (네트워크를 건넘)                       │ 같은 노드 (가까움)
-      ▼                                                ▼
- 관측 클러스터의 OTel Collector                     [같은 노드: OTel Collector (DaemonSet)]
-      ▼                                                ▼
+      │ OTLP/HTTP (네트워크를 건넘)                     │ 같은 노드 (가까움)
+      ▼                                                 ▼
+ 관측 클러스터의 OTel Collector                    [같은 노드: OTel Collector (DaemonSet)]
+      ▼                                                 ▼
  SigNoz                                            관측 클러스터의 OTel Collector → SigNoz
 ```
 
@@ -435,7 +451,7 @@ OTel에서는 두 구조를 모두 쓸 수 있습니다.
 ```
  span 표:  | 시각 | 서비스 | 엔드포인트 | 상태 | 소요 시간 | trace_id | … (컬럼 수십 개)
 
- 행 단위 저장 (PostgreSQL 등)            열 단위 저장 (ClickHouse)
+ 행 단위 저장 (PostgreSQL 등)              열 단위 저장 (ClickHouse)
  [시각,서비스,엔드포인트,상태,시간,…]      [시각, 시각, 시각, …]
  [시각,서비스,엔드포인트,상태,시간,…]      [서비스, 서비스, 서비스, …]
  [시각,서비스,엔드포인트,상태,시간,…]      [소요 시간, 소요 시간, …]   ← 이 열만 읽으면 됨
@@ -759,11 +775,11 @@ spec:
 Operator의 Python 이미지는 OTel 패키지 묶음을 `/autoinstrumentation`(glibc용)과 `/autoinstrumentation-musl`(Alpine용)에 담은 `busybox` 이미지입니다. 묶음에 들어 있는 exporter는 `otlp_proto_http`뿐이라서, 전송 방식을 gRPC로 지정하면 `Requested component 'otlp_proto_grpc' not found` 오류로 초기화에 실패할 수 있습니다.
 
 ```
- ┌──────────── Operator 몫 (파드가 뜨기 전) ────────────┐   ┌────────── 파이썬 몫 (프로세스 안) ──────────┐
- │ 패키지 파일 복사 + PYTHONPATH + OTEL_* 환경변수        │──▶│ sitecustomize → initialize()               │
- │ = "pip install" 과 "opentelemetry-instrument" 대행     │   │   ├ SDK 조립 (Provider·Processor·Exporter)   │
- └──────────────────────────────────────────────────────┘   │   └ 계측 패키지 실행 (함수 바꿔치기)          │
-                                                            └────────────────────────────────────────────┘
+ ┌─────────── Operator 몫 (파드가 뜨기 전) ────────────┐   ┌────────── 파이썬 몫 (프로세스 안) ──────────┐
+ │ 패키지 파일 복사 + PYTHONPATH + OTEL_* 환경변수     │──▶│ sitecustomize → initialize()                │
+ │ = "pip install" 과 "opentelemetry-instrument" 대행  │   │   ├ SDK 조립 (Provider·Processor·Exporter)  │
+ └─────────────────────────────────────────────────────┘   │   └ 계측 패키지 실행 (함수 바꿔치기)        │
+                                                           └─────────────────────────────────────────────┘
 ```
 
 ### 7.3 파드가 뜨는 순서
@@ -840,11 +856,11 @@ status = 200
 **② Operator가 넣은 패키지가 앱 패키지보다 먼저 로드됩니다.** 재현 환경의 `sys.path` 순서입니다.
 
 ```
-   otel-auto-instrumentation-python/opentelemetry/instrumentation/auto_instrumentation   ← PYTHONPATH 접두
+   otel-auto-instrumentation-python/opentelemetry/instrumentation/auto_instrumentation    ← PYTHONPATH 접두
    (현재 폴더)                                                                            ← 빈 기존 PYTHONPATH
-   otel-auto-instrumentation-python                                                     ← PYTHONPATH 접미
+   otel-auto-instrumentation-python                                                       ← PYTHONPATH 접미
    …/lib/python3.14 (표준 라이브러리)
-   app-image/lib/python3.14/site-packages                                               ← 앱 venv (맨 뒤)
+   app-image/lib/python3.14/site-packages                                                 ← 앱 venv (맨 뒤)
 SDK 로드 위치 = otel-auto-instrumentation-python/opentelemetry/sdk/trace/__init__.py
 ```
 
@@ -909,7 +925,7 @@ Operator Python 이미지의 `requirements.txt`(main 브랜치)에 들어 있는
 
 ```
  ④ 처리 span만 추가 (소비자 레포만 수정)
-    trace A: [producer] POST … → SQS 발행            ← 따로 끊긴 trace
+    trace A: [producer] POST … → SQS 발행             ← 따로 끊긴 trace
     trace B: [worker] job.run ─┬─ SELECT …            ← 처리 과정은 한 묶음으로 보임
                                ├─ POST /process → [api-server] …
                                └─ POST external-api
@@ -986,12 +1002,12 @@ async def run_one(target_id: int, handler) -> None:
 **나중에 span을 추가하면 정보가 덧붙습니다.** 새 span은 같은 trace 안에서 부모가 되고, 자동으로 생기던 span이 그 아래 자식으로 붙습니다. 이미 만든 대시보드를 다시 만들 필요는 없습니다.
 
 ```
- 자동 계측만                             처리 span 추가 후
+ 자동 계측만                            처리 span 추가 후
  trace A: SELECT …                      trace: job.run (9.2s)    ← 새로 생김
  trace B: POST /process → api-server …    ├─ SELECT …            (0.1s)
  trace C: POST external-api               ├─ POST /process → api-server … (8.5s)
  trace D: INSERT …                        ├─ POST external-api   (0.3s)
- (따로따로 흩어짐)                          └─ INSERT …            (0.1s)
+ (따로따로 흩어짐)                        └─ INSERT …            (0.1s)
 ```
 
 ---
@@ -1015,7 +1031,7 @@ else:
 
 ```
  앱 span ─┬─▶ Langfuse processor (Langfuse span만 골라서) ─▶ Langfuse
-          └─▶ Operator OTLP exporter (전부)             ─▶ SigNoz   ← Langfuse span 포함
+          └─▶ Operator OTLP exporter (전부)               ─▶ SigNoz   ← Langfuse span 포함
 ```
 
 Langfuse span에는 `langfuse.observation.input`·`langfuse.observation.output` 속성이 붙습니다. 루트 span이라면 API 요청 원본 전체가, LLM 호출 span이라면 모델에 보낸 프롬프트와 모델 응답이 들어갑니다. 이 값은 **SigNoz의 로그가 아니라 trace 화면**에서 span을 눌렀을 때 나오는 속성 목록에 보이고, ClickHouse의 trace 테이블에 저장됩니다. 대화 전체가 문자열 하나로 들어가면 span 하나가 커져 저장 용량에도 영향을 줍니다.
@@ -1031,16 +1047,16 @@ Langfuse span에는 `langfuse.observation.input`·`langfuse.observation.output` 
 **절반은 자동이고, 절반은 직접 만들어야 합니다.** span으로 얻는 RED는 SigNoz의 **내장 Services 화면**이 자동으로 보여 주고, 클라우드 지표와 업무 지표는 **대시보드를 직접 구성**해야 합니다.
 
 ```
- ┌─ 경로 A: 자동 계측 span (코드 불필요) ────────────────────────────────────────┐
+ ┌─ 경로 A: 자동 계측 span (코드 불필요) ───────────────────────────────────────────┐
  │  앱 ──httpx/FastAPI/asyncpg 패치──▶ span ──OTLP──▶ SigNoz ──▶ Services 화면 RED  │
- └──────────────────────────────────────────────────────────────────────────────┘
- ┌─ 경로 B: 코드로 적는 span·metric (코드 필요) ──────────────────────────────────┐
- │  앱 ──tracer/meter API──▶ 작업 span, 업무 Counter, in_flight Gauge ──▶ SigNoz   │
- └──────────────────────────────────────────────────────────────────────────────┘
- ┌─ 경로 C: 클라우드 지표 (앱 코드와 무관, 인프라 설정 필요) ──────────────────────┐
+ └──────────────────────────────────────────────────────────────────────────────────┘
+ ┌─ 경로 B: 코드로 적는 span·metric (코드 필요) ────────────────────────────────────┐
+ │  앱 ──tracer/meter API──▶ 작업 span, 업무 Counter, in_flight Gauge ──▶ SigNoz    │
+ └──────────────────────────────────────────────────────────────────────────────────┘
+ ┌─ 경로 C: 클라우드 지표 (앱 코드와 무관, 인프라 설정 필요) ───────────────────────┐
  │  SQS·RDS ──(AWS가 직접 측정)──▶ CloudWatch ──?──▶ SigNoz                         │
  │                                              └ 이 화살표를 따로 놓아야 함        │
- └──────────────────────────────────────────────────────────────────────────────┘
+ └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 "SigNoz가 span에서 metric을 만든다"는 말은 **경로 A와 B에만** 해당합니다.
@@ -1068,7 +1084,7 @@ HTTP 서버는 요청을 받는 SERVER span이 진입점이라 문제가 없습�
    POST  (httpx)                           job.run        ← 작업 한 번의 RED
    SELECT (asyncpg)                        ingest.handle
    INSERT (asyncpg)                      External Calls: api-server, external-api
-   … 뒤섞여 나옴 (확인 필요)                Database Calls: SELECT, INSERT …
+   … 뒤섞여 나옴 (확인 필요)             Database Calls: SELECT, INSERT …
 ```
 
 ### 10.3 Breakdown(구간별 시간 분석)
@@ -1120,12 +1136,12 @@ UI에서 만든 대시보드는 **JSON으로 내보내고 가져올 수 있습�
 SigNoz에서 알림은 **"어디로 보낼지"(채널)**와 **"언제 보낼지"(규칙)**가 분리되어 있습니다. 둘 다 UI에서 관리할 수 있고, 자체 호스팅에서도 같습니다(Slack 채널은 v0.5.0 이상).
 
 ```
- ┌─ Notification Channel (어디로) ─┐        ┌─ Alert Rule (언제) ─────────────────────┐
- │  이름: myservice-prd            │ ◀───── │ "큐 Age > 700초"                         │
- │  종류: Slack                    │  선택   │ "API 503 1건 이상"                       │
- │  Webhook: https://hooks.slack…  │ ◀───── │ "error 로그 5분 3건 이상"                 │
- └─────────────────────────────────┘        └────────────────────────────────────────┘
-        한 채널을 여러 규칙이 함께 씀            규칙이 울리면 → 선택한 채널의 Slack 으로 게시
+ ┌─ Notification Channel (어디로) ──┐        ┌─ Alert Rule (언제) ────────┐
+ │  이름: myservice-prd             │ ◀───── │ "큐 Age > 700초"           │
+ │  종류: Slack                     │  선택  │ "API 503 1건 이상"         │
+ │  Webhook: https://hooks.slack…   │ ◀───── │ "error 로그 5분 3건 이상"  │
+ └──────────────────────────────────┘        └────────────────────────────┘
+        한 채널을 여러 규칙이 함께 씀        규칙이 울리면 → 선택한 채널의 Slack 으로 게시
 ```
 
 | 대상          | UI 위치 (문서 기준)                                                      | 가능한 작업                                                                                         |
@@ -1176,7 +1192,7 @@ SigNoz 문서(Roles)의 기본 역할입니다.
  요청 100건을 빠른 순으로 정렬
  ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂▃▃▃▅▅▇█
  └──────── 50번째 ────────┘            │    │
-          P50 (중앙값)                  P90  P99
+          P50 (중앙값)                P90  P99
    "보통 요청은 이 정도"           "10건에 1건" "100건에 1건 (꼬리)"
 ```
 
@@ -1268,15 +1284,15 @@ metric에 속성을 붙이면 **속성 값 조합 하나하나가 별도의 시�
 span이 SigNoz에 닿기까지 필요한 것을 층별로 나누면 다음과 같습니다.
 
 ```
- ④ SigNoz 백엔드·Collector (관측 클러스터)             ← 플랫폼 팀
+ ④ SigNoz 백엔드·Collector (관측 클러스터)                       ← 플랫폼 팀
         ▲ OTLP/HTTP
- ③ 네트워크 경로 (앱 클러스터 → 관측 클러스터)          ← 플랫폼 팀
+ ③ 네트워크 경로 (앱 클러스터 → 관측 클러스터)                   ← 플랫폼 팀
         ▲
  ② Operator 설치 + Instrumentation (클러스터·네임스페이스당 1회) ← 플랫폼 팀
         ▲
- ①' Deployment annotation·환경변수 (서비스마다)         ← 배포 매니페스트 소유 팀
+ ①' Deployment annotation·환경변수 (서비스마다)                  ← 배포 매니페스트 소유 팀
         ▲
- ① 코드: 직접 span·metric 기록                         ← 개발 팀
+ ① 코드: 직접 span·metric 기록                                   ← 개발 팀
 ```
 
 | 층                         | 작업                                                                                                     | 담당                                |

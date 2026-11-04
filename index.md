@@ -299,6 +299,8 @@
 - [[06-aws-iam-architecture-and-integration]] — AWS IAM 4요소 유기적 결합 Deep Research
 - [[oauth1-concept-explainer]] — OAuth 1.0 Deep Dive
 - [[oauth2-concept-explainer]] — OAuth 2.0 Deep Dive
+- [[oauth2-oauth21-oidc-primer]] — OAuth 2.0·2.1·OpenID Connect 입문서 (주니어 대상, 두 서비스 간 계정 연동 사례, grant_type·PKCE·토큰·id_token 검증, SPA·BFF·네이티브 앱, 확장 표준, 공격 원리와 방어, 2.1 변경점, 체크리스트)
+- [[oauth-state-vs-code-verifier]] — OAuth state와 code_verifier 비교 (막는 공격·검사 주체·검사 시점, CSRF와 세션 탈취의 차이, PKCE의 부수적 CSRF 방어, 제휴사 연동에서 state를 사용자 조회 키로 쓰는 사례, nonce 구분)
 - [[security-audit-nginx]] — Nginx 보안 검토
 - [[solo-developer-financial-api-security]] — 1인 개발자 금융 API 보안 전략
 - [[sso-concept-explainer]] — SSO (Single Sign-On) Deep Dive

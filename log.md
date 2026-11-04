@@ -2,6 +2,27 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-11-04] update | OAuth state와 code_verifier 비교 문서의 회사 식별 정보 제거
+
+- updated: [[oauth-state-vs-code-verifier]] — 특정 회사·서비스명과 도메인을 일반 OAuth 용어(클라이언트 앱, ID 제공자, 인증 서버, client.example)로 바꿈. 1장의 ASCII 도식은 mermaid 시퀀스 다이어그램으로 교체. security.
+- updated: [[oauth2-oauth21-oidc-primer]] — 회사·서비스명, 도메인, 내부 문서 제목을 일반 용어(클라이언트 앱, IdP 서비스, 인증 서버, example 도메인)로 바꿈. 16장의 진행 상태·일정 서술은 일반 점검 항목으로 고쳐 씀. security.
+
+## [2026-11-03] create | OAuth state와 code_verifier 비교
+
+- created: [[oauth-state-vs-code-verifier]] — 두 서비스 사이의 계정 연동 동선을 검토하며 헷갈린 state와 code_verifier의 차이를 따로 정리. 막는 공격의 방향, 검사 주체와 시점, CSRF가 세션 탈취가 아닌 이유, PKCE의 부수적 CSRF 방어(RFC 9700), state를 relay/info 조회 키로 쓰는 연동 사례, nonce 구분. [[oauth2-oauth21-oidc-primer]]와 연결. security.
+
+## [2026-11-03] create | OAuth 2.0·2.1·OpenID Connect 입문서
+
+- created: [[oauth2-oauth21-oidc-primer]] — 두 서비스 간 인증 연동 논의를 정리한 뒤 원문 대조와 독립 리뷰로 오류를 고치고, 빠진 주제(인가 오류, 동의 화면, 토큰 폐기·조회, 세션·로그아웃, SPA·BFF, 네이티브 앱, 확장 표준, 공격 35가지의 원리와 방어, 체크리스트)를 보강한 18장 + 부록 2개 입문서. OAuth 2.1은 초안 17판 기준. 보류 중인 연동 결정 5건은 결정 사항으로 다루지 않음. 기존 [[oauth2-concept-explainer]]는 그대로 두고 링크로 연결. security.
+
+## [2026-10-23] update | SigNoz·OTel APM 문서의 나머지 다이어그램 정렬 수정
+
+- updated: [[signoz-otel-apm-architecture]] — 한글 두 칸 폭 때문에 테두리가 어긋난 상자 다이어그램 7개(span·metric 비교, 패키지 구성, SDK 내부, Datadog 비교, Operator·파이썬 몫, 수집 경로 A·B·C, 알림 채널·규칙)를 화면 폭 기준으로 다시 그림. 상자 없는 그림 13곳은 열이 어긋난 화살표·주석·두 번째 열의 위치만 맞춤(내용은 그대로). develop/observability.
+
+## [2026-10-22] update | SigNoz·OTel APM 문서의 전체 그림 다이어그램 정렬 수정
+
+- updated: [[signoz-otel-apm-architecture]] — 2절 "전체 그림" ASCII 다이어그램이 한글 두 칸 폭 때문에 테두리가 어긋나던 것을 화면 폭 기준으로 다시 그림. 좌우 배치를 위아래(앱 클러스터 → 관측 클러스터)로 바꾸고, 로그 수집 agent와 CloudWatch 경로가 query-service·화면이 아니라 OTel Collector로 들어가도록 화살표를 바로잡음. develop/observability.
+
 ## [2026-10-14] create | 관리형 RAG 검색 서비스 비교: Vertex AI Search(현 Agent Search)와 대안들
 
 - created: [[managed-rag-search-services-comparison]] — 관리형 RAG 검색 서비스를 완전 관리형·검색 엔진형·부품형 세 유형으로 나누고, 다섯 단계 관리 범위·과금 구조·한국어 법령 검색 관점(형태소 분석, 조문 단위 chunk, 한국 리전의 저장/처리 구분)·애널리스트와 커뮤니티 평가로 비교. 주장 91개를 독립 출처/1차 자료 2종으로 재검증해 정정 반영(Agent Search 월 10만 쿼리 $135, Bedrock userContext 누락 시 0건, OpenSearch 관리형 nori는 선택형 plugin, Gartner Leader 6곳 등). OpenSearch 3.9.0에서 nori + delimiter chunking 예제 실측(max_chunk_limit 기본 100 함정). 회사 고유 내용은 일반화. ai-engineering.
