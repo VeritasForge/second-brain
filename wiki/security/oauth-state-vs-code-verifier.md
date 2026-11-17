@@ -30,23 +30,30 @@ Authorization Code + PKCE 흐름에는 브라우저를 거치는 구간과 서�
 ```mermaid
 sequenceDiagram
     autonumber
+    actor U as 사용자
     participant B as 브라우저
     participant C as 클라이언트 서버
     participant A as 인증 서버
 
-    Note over C: state, code_verifier 생성<br/>code_challenge = SHA-256(code_verifier)<br/>state와 code_verifier를 세션에 저장
-
     rect rgba(59, 130, 246, 0.25)
-    Note over B,A: ① 로그인 시작 (브라우저 경유)
-    C->>B: authorize URL로 리다이렉트
-    B->>A: state 원문 + code_challenge(해시)
+    Note over U,A: ① 로그인 시작 (브라우저 경유)
+    U->>B: 클라이언트 앱에서 "IdP 계정으로 연결" 버튼 클릭
+    B->>C: 연결 시작 요청 (클라이언트 앱 세션 쿠키 포함)
+    Note over C: state, code_verifier 생성<br/>code_challenge = SHA-256(code_verifier)<br/>state와 code_verifier를 사용자 세션에 저장
+    C->>B: authorize URL로 리다이렉트 (302)
+    B->>A: authorize 요청: state 원문 + code_challenge(해시)
     Note right of A: code_verifier 원문은<br/>클라이언트 서버 밖으로 나가지 않음
+    A->>B: 로그인 페이지 응답
+    B->>U: 로그인 화면 표시
+    U->>B: 아이디와 비밀번호 입력
+    B->>A: 로그인 정보 제출
+    A->>A: 인증 성공, code 발급<br/>code와 code_challenge, state를 서로 묶어 보관
     end
 
     rect rgba(34, 197, 94, 0.22)
-    Note over B,A: ② callback (브라우저 경유)
-    A->>B: 로그인 후 callback URL로 리다이렉트
-    B->>C: code + state 원문
+    Note over U,C: ② callback (브라우저 경유)
+    A->>B: callback URL로 리다이렉트 (302)
+    B->>C: code + state 원문 (세션 쿠키 자동 첨부)
     C->>C: ✅ state가 세션 값과 같은지 비교
     end
 
@@ -55,6 +62,8 @@ sequenceDiagram
     C->>A: code + code_verifier 원문
     A->>A: ✅ SHA-256(code_verifier)가 code_challenge와 같은지 비교
     A->>C: 토큰 발급
+    C->>B: 연결 완료 화면 응답
+    B->>U: "계정 연결 완료" 표시
     end
 ```
 

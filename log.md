@@ -2,6 +2,10 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-11-17] create | 사내 Wi-Fi(802.1X)에 리눅스 서버 연결하기
+
+- created: [[wifi-8021x-linux-server-and-nac]] — 유선으로 운영하던 Ubuntu 서버를 사내 Wi-Fi로 옮기려던 사례를 따라가며 정리한 독립 참고 문서. IP와 MAC이 둘 다 필요한 이유, ARP, DHCP와 주소 고정, ping 기준 상대, 802.1X(PEAP·MSCHAPv2·RADIUS)와 CA 인증서 서명 검증, NAC와 ZTNA, netplan 설정·연결 스크립트, 인증은 통과했으나 접근 제어로 통신이 차단된 원인의 진단 기법. 회사 식별 정보는 대체 값으로 익명화. develop/network.
+
 ## [2026-11-04] update | OAuth state와 code_verifier 비교 문서의 회사 식별 정보 제거
 
 - updated: [[oauth-state-vs-code-verifier]] — 특정 회사·서비스명과 도메인을 일반 OAuth 용어(클라이언트 앱, ID 제공자, 인증 서버, client.example)로 바꿈. 1장의 ASCII 도식은 mermaid 시퀀스 다이어그램으로 교체. security.
