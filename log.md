@@ -2,6 +2,10 @@
 
 > 추가 전용 (append-only). LLM이 자동 관리합니다.
 
+## [2026-11-25] create | 데이터 엔지니어 직무 이해: 역할, DBA와의 차이, DW 모델링, AI Agent용 데이터, 채용 판단 기준
+
+- created: [[data-engineer-role-dba-dw-kb-guide]] — 데이터 엔지니어의 역할을 묻는 대화를 독립 참고 문서로 정리. 핵심 업무와 기술 스택, DBA와의 담당 구간 차이, DW 모델링을 데이터 엔지니어가 하는 이유와 Star Schema·grain·SCD 예제(PostgreSQL), DW는 수치 전용이 아니라 정형 데이터 저장소라는 정정, AI Agent KB용 비정형 문서의 저장 위치, DW 데이터를 RAG에 넣지 않는 주된 이유가 embedding의 숫자 약점이 아니라 top-k 검색으로는 집계가 불가능한 구조라는 점, 데이터 엔지니어 채용 판단 요소 6가지. [[managed-rag-search-services-comparison]]와 연결. 새 카테고리 develop/data-engineering.
+
 ## [2026-11-17] create | 사내 Wi-Fi(802.1X)에 리눅스 서버 연결하기
 
 - created: [[wifi-8021x-linux-server-and-nac]] — 유선으로 운영하던 Ubuntu 서버를 사내 Wi-Fi로 옮기려던 사례를 따라가며 정리한 독립 참고 문서. IP와 MAC이 둘 다 필요한 이유, ARP, DHCP와 주소 고정, ping 기준 상대, 802.1X(PEAP·MSCHAPv2·RADIUS)와 CA 인증서 서명 검증, NAC와 ZTNA, netplan 설정·연결 스크립트, 인증은 통과했으나 접근 제어로 통신이 차단된 원인의 진단 기법. 회사 식별 정보는 대체 값으로 익명화. develop/network.

@@ -101,6 +101,9 @@
 - [[skill-env-var-config]] — 스킬에서 경로·설정을 하드코딩 대신 환경변수(settings.json env + Bash 읽기 + 폴백)로 빼는 표준 방법
 - [[vercel-skills-and-workflow-integration]] — Vercel 스킬 3종(react-best-practices/composition-patterns/react-native) + Superpowers·Plan Mode 워크플로우 연계 가이드
 
+### develop/data-engineering
+- [[data-engineer-role-dba-dw-kb-guide]] — 데이터 엔지니어 직무 이해: 핵심 업무(수집·저장·변환·오케스트레이션·품질), DBA와의 차이(OLTP vs OLAP), DW 모델링 주체와 Star Schema·grain·SCD(실행 가능한 SQL), AI Agent KB 데이터의 저장 위치, DW 데이터를 RAG에 넣지 않는 이유(top-k 검색 vs 전체 집계), 데이터 엔지니어 채용 판단 요소 6가지
+
 ### develop/database
 - [[advisory-lock-vs-for-update-vs-redlock]] — Advisory Lock · SELECT FOR UPDATE · Redis Redlock 동시성 제어 비교
 - [[database-cardinality-deep-dive]] — 카디널리티 (Cardinality) Deep Dive
